@@ -1,0 +1,122 @@
+<h2 class="auth-title" [innerHTML]="page.data.title"></h2>
+<p class="auth-sub-title" [innerHTML]="page.data.desc"></p>
+
+<form class="form" [formGroup]="formGroup" (ngSubmit)="submit()">
+    <div class="form-group">
+        <pc-input
+            [isInvalid]="hasError(control('email'))"
+            [errors]="errors('email')"
+            [errorsTranslate]="pageErrors"
+        >
+            <p class="input-title" [innerHTML]="page.data.emailTitle"></p>
+
+            <div class="input-label">
+                <div class="icons">
+                    <button
+                        type="button"
+                        class="btn-clear"
+                        *ngIf="hasValue(control('email'))"
+                        (click)="clear(control('email'))"
+                    >
+                        <svg
+                            class="btn-clear-img"
+                            width="20"
+                            height="20"
+                            viewBox="0 0 20 20"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <path
+                                fill-rule="evenodd"
+                                clip-rule="evenodd"
+                                d="M17.5 10C17.5 14.1421 14.1421 17.5 10 17.5C5.85786 17.5 2.5 14.1421 2.5 10C2.5 5.85786 5.85786 2.5 10 2.5C14.1421 2.5 17.5 5.85786 17.5 10ZM10 11.4146L7.3741 14.0405L5.95989 12.6263L8.58579 10.0004L5.95923 7.37381L7.37345 5.9596L10 8.58615L12.6266 5.9596L14.0408 7.37381L11.4142 10.0004L14.0401 12.6263L12.6259 14.0405L10 11.4146Z"
+                            />
+                        </svg>
+                    </button>
+                </div>
+                <input
+                    class="input"
+                    id="email"
+                    formControlName="email"
+                    [ngClass]="{
+                        error: hasError(control('email'))
+                    }"
+                    type="email"
+                    tabindex="1"
+                    autocomplete="off"
+                    #email
+                />
+                <label
+                    for="email"
+                    class="placeholder"
+                    *ngIf="!hasValue(control('email'))"
+                    [innerHTML]="page.data.emailPlaceholder"
+                ></label>
+            </div>
+        </pc-input>
+    </div>
+
+    <div class="form-group">
+        <p class="input-title">
+            <span class="text" [innerHTML]="page.data.uplinerTitle"></span>
+            <app-form-prompt
+                [dropdownText]="page.data.uplinerDesc"
+                [icon]="icon"
+                [tultipDark]="tultipDark"
+            ></app-form-prompt>
+        </p>
+
+        <div class="input-label">
+            <input
+                class="medium"
+                id="registerFormId"
+                type="text"
+                formControlName="uplinerId"
+                tabindex="2"
+                [attr.disabled]="'true'"
+            />
+
+            <div class="icons" *ngIf="">
+                <button class="btn-clear" type="button">
+                    <svg
+                        class="btn-clear-img"
+                        width="20"
+                        height="20"
+                        viewBox="0 0 20 20"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <path
+                            fill-rule="evenodd"
+                            clip-rule="evenodd"
+                            d="M17.5 10C17.5 14.1421 14.1421 17.5 10 17.5C5.85786 17.5 2.5 14.1421 2.5 10C2.5 5.85786 5.85786 2.5 10 2.5C14.1421 2.5 17.5 5.85786 17.5 10ZM10 11.4146L7.3741 14.0405L5.95989 12.6263L8.58579 10.0004L5.95923 7.37381L7.37345 5.9596L10 8.58615L12.6266 5.9596L14.0408 7.37381L11.4142 10.0004L14.0401 12.6263L12.6259 14.0405L10 11.4146Z"
+                        />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="form-button">
+        <button
+            class="btn-submit"
+            type="submit"
+            [disabled]="!hasValue(control('email')) || isSubmitted"
+            [class.loading]="isSubmitted"
+        >
+            <app-btn-loader
+                [isSubmitted]="isSubmitted"
+                [isAuth]="true"
+            ></app-btn-loader>
+
+            <span>{{ page.data.btnSubmit }}</span>
+        </button>
+    </div>
+    <div class="form-bottom">
+        <p class="text">
+            {{ page.data.btnLoginText }}
+            <a routerLink="/login" class="btn-link">
+                {{ page.data.btnLoginLink }}
+            </a>
+        </p>
+    </div>
+</form>

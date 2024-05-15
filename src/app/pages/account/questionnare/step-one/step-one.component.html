@@ -1,0 +1,128 @@
+<form class="form" [formGroup]="formGroup" (ngSubmit)="submit()">
+    <div #form class="form__content">
+        <div class="form-item step1" formGroupName="userDetail">
+            <pc-input
+                [isInvalid]="hasError(control('fullName', 'userDetail'))"
+                [errors]="errors('fullName')"
+                [errorsTranslate]="pageErrors"
+            >
+                <label class="label">
+                    {{ page.data.form.nameTitle
+                    }}<app-form-prompt
+                        [icon]="icon"
+                        [dropdownText]="page.data.form.requireText"
+                    ></app-form-prompt>
+                </label>
+
+                <div
+                    class="description"
+                    [innerHTML]="page.data.form.nameDesc"
+                ></div>
+                <div class="input-label">
+                    <input
+                        [ngClass]="{
+                            error: hasError(control('fullName', 'userDetail'))
+                        }"
+                        class="input"
+                        type="text"
+                        name="name"
+                        [placeholder]="page.data.form.placeholder"
+                        formControlName="fullName"
+                    />
+                </div>
+            </pc-input>
+        </div>
+        <div class="form-item step1">
+            <pc-input
+                [isInvalid]="hasError(control('telegram'))"
+                [errors]="errors('telegram')"
+                [errorsTranslate]="pageErrors"
+            >
+                <label class="label"
+                    >{{ page.data.form.telegramTitle
+                    }}<app-form-prompt
+                        [icon]="icon"
+                        [dropdownText]="page.data.form.requireText"
+                    ></app-form-prompt>
+                </label>
+                <div
+                    class="description"
+                    [innerHTML]="page.data.form.telegramDesc"
+                ></div>
+                <div class="input-label">
+                    <input
+                        [ngClass]="{
+                            error: hasError(control('telegram'))
+                        }"
+                        class="input"
+                        type="text"
+                        name="telegram"
+                        [placeholder]="page.data.form.placeholder"
+                        formControlName="telegram"
+                    />
+                </div>
+            </pc-input>
+        </div>
+        <!-- <div class="form-item">
+            <pc-input
+                [isInvalid]="hasError(control('phone'))"
+                [errors]="errors('phone')"
+                [errorsTranslate]="pageErrors"
+            >
+                <label class="label"
+                    >{{ page.data.form.phoneTitle
+                    }}<app-form-prompt
+                        [icon]="icon"
+                        [dropdownText]="page.data.form.requireText"
+                    ></app-form-prompt
+                ></label>
+                <div
+                    class="description"
+                    [innerHTML]="page.data.form.phoneDesc"
+                ></div>
+                <pc-input-phone
+                    [control]="control('phone')"
+                    [items]="countries | sort : 'order'"
+                    [isInvalid]="hasError(control('phone'))"
+                    [notFoundText]="page.data.form.notFound"
+                    [placeholder]="page.data.form.search"
+                    [initialValue]="me.phone"
+                ></pc-input-phone>
+            </pc-input>
+        </div> -->
+        <div class="form-item step1" #countySelect>
+            <pc-input
+                [isInvalid]="hasError(control('country', 'userDetail'))"
+                [errors]="errors('country')"
+                [errorsTranslate]="pageErrors"
+            >
+                <label class="label"
+                    >{{ page.data.form.countryTitle
+                    }}<app-form-prompt
+                        [icon]="icon"
+                        [dropdownText]="page.data.form.requireText"
+                    ></app-form-prompt
+                ></label>
+                <div
+                    class="description"
+                    [innerHTML]="page.data.form.countryDesc"
+                ></div>
+                <pc-input-select-typed
+                    [control]="control('country', 'userDetail')"
+                    [items]="countries | sort : 'order'"
+                    [isInvalid]="hasError(control('country', 'userDetail'))"
+                    [notFoundText]="page.data.form.notFound"
+                    [placeholderSelect]="page.data.form.select"
+                    [placeholderSearch]="page.data.form.search"
+                ></pc-input-select-typed>
+            </pc-input>
+        </div>
+    </div>
+    <div class="buttons step1">
+        <button
+            type="submit"
+            class="btn next"
+            [innerHTML]="page.data.form.btnSubmit"
+        ></button>
+    </div>
+</form>

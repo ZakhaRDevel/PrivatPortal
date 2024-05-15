@@ -1,0 +1,213 @@
+@import "~src/assets/scss/mixins";
+@import "~src/assets/scss/variables";
+
+.required {
+    position: relative;
+
+    &.active {
+        .dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translate(4px, 0);
+        }
+    }
+
+    .icon {
+        padding: 0 4px 0 4px;
+        color: #56c6ad;
+        cursor: pointer;
+
+        @media (hover: hover) {
+            &:hover {
+                & ~ .dropdown {
+                    opacity: 1;
+                    visibility: visible;
+                    transform: translate(4px, 0);
+                    pointer-events: none;
+                }
+            }
+        }
+    }
+
+    .dropdown {
+        display: block;
+        opacity: 0;
+        visibility: hidden;
+        background: #676767;
+        white-space: nowrap;
+        transform: translate(4px, 15px);
+        transition: opacity 0.25s, max-height 0.25s, visibility 0.25s,
+            transform 0.3s;
+        box-shadow: 10px 14px 30px rgba(0, 0, 0, 0.4);
+        border-radius: 10px;
+        height: auto;
+        padding: 12px 18px;
+        word-wrap: break-word;
+
+        position: absolute;
+        top: 22px;
+        left: -23px;
+
+        z-index: 2;
+
+        &.reverse {
+            @media only screen and (max-width: $tablet) {
+                left: -120px;
+
+                svg {
+                    left: 119px;
+                }
+            }
+        }
+
+        svg {
+            position: absolute;
+            top: -7px;
+            left: 21px;
+            z-index: 2;
+            fill: #676767;
+        }
+
+        .text {
+            display: block;
+            font: 400 12px $font-family-primary;
+            color: $font-color-default;
+            line-height: 18px;
+        }
+    }
+}
+
+.required {
+    &.dark {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 20px;
+
+        &.active {
+            .dropdown {
+                transform: translate(0, 10px);
+            }
+        }
+
+        .icon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #36b8bc;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            color: #153438;
+            font-size: 12px;
+
+            @media (hover: hover) {
+                &:hover {
+                    & ~ .dropdown {
+                        transform: translate(2px, 7px);
+                    }
+                }
+            }
+        }
+
+        .dropdown {
+            display: flex;
+            max-width: 228px;
+            width: max-content;
+            padding: 16px 18px;
+            background: #385d69;
+            transform: translate(2px, 15px);
+            box-shadow: 15px 18px 18px rgba(0, 0, 0, 0.54);
+            white-space: normal;
+
+            @media only screen and (max-width: $small) {
+                left: -78px;
+            }
+
+            svg {
+                left: 23px;
+                fill: #385d69;
+
+                @media only screen and (max-width: $small) {
+                    display: none;
+                }
+            }
+
+            .text {
+                display: inline-block;
+                max-width: 192px;
+                font: 400 13px $font-family-primary;
+                margin: 0;
+
+            }
+        }
+    }
+}
+
+.required {
+    &.telegram_check {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 20px;
+
+        &.active {
+            .dropdown {
+                transform: translate(0, 10px);
+            }
+        }
+
+        .icon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #56c6ad;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            color: #fff;
+            font-size: 12px;
+
+            @media (hover: hover) {
+                &:hover {
+                    & ~ .dropdown {
+                        transform: translate(0, 7px);
+                    }
+                }
+            }
+        }
+
+        .dropdown {
+            width: 254px;
+            white-space: inherit;
+            padding: 12px 18px;
+            background: #676767;
+            transform: translate(0, 15px);
+            box-shadow: 10px 14px 30px rgba(0, 0, 0, 0.4);
+            left: -146px;
+            top: 27px;
+
+            @media only screen and (max-width: $small) {
+                left: -119px;
+                top: 13px;
+            }
+
+            @media only screen and (max-width: 345px) {
+                left: -100px;
+            }
+
+            svg {
+                left: 148px;
+                fill: #676767;
+
+                @media only screen and (max-width: $small) {
+                    display: none;
+                }
+            }
+
+            .text {
+                color: #fff;
+            }
+        }
+    }
+}

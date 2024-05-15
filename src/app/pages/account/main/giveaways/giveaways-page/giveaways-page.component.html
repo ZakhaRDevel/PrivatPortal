@@ -1,0 +1,832 @@
+<section class="hero">
+    <div class="hero__wrapper">
+        <div class="content">
+            <h1 class="title" [innerHTML]="page.data.title">
+                Приглашайте друзей.<br />
+                Зарабатывайте баллы.<br />
+                Участвуйте в бесплатных<br />
+                розыгрышах призов вместе.
+            </h1>
+
+            <button
+                class="btn-rules"
+                (click)="scrollToElem(rules, isMobile ? 63 : 136)"
+            >
+                {{ rulesTitle }}
+                <svg
+                    class="icon-right"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 20 20"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <path
+                        d="M10 0C4.49 0 0 4.49 0 10C0 15.51 4.49 20 10 20C15.51 20 20 15.51 20 10C20 4.49 15.51 0 10 0ZM11.58 10.48L9.57999 12.89C9.42999 13.07 9.22 13.16 9 13.16C8.83 13.16 8.65999 13.11 8.51999 12.99C8.20999 12.73 8.16001 12.26 8.42001 11.94L10.03 10L8.42001 8.06C8.16001 7.74 8.20999 7.27 8.51999 7.01C8.83999 6.74 9.31999 6.79 9.57999 7.11L11.58 9.52C11.81 9.8 11.81 10.2 11.58 10.48Z"
+                    />
+                </svg>
+            </button>
+        </div>
+        <div class="info">
+            <div class="card">
+                <img
+                    src="assets/img/pages/giveaways/card.png"
+                    alt=""
+                    class="card_1"
+                />
+                <img
+                    src="assets/img/pages/giveaways/card.png"
+                    alt=""
+                    class="card_2"
+                />
+                <img
+                    src="assets/img/pages/giveaways/card.png"
+                    alt=""
+                    class="card_3"
+                />
+            </div>
+            <div class="info__head">
+                <div class="info__head-left">
+                    <p class="title" [innerHTML]="page.data.scores">
+                        Всего баллов
+                    </p>
+                    <p class="value">{{ statistic.tickets * 10 }}</p>
+                </div>
+                <div class="info__head-right">
+                    <p class="title" [innerHTML]="page.data.tickets">
+                        Ваши билеты
+                    </p>
+                    <p class="value">
+                        {{ statistic.tickets }}
+                        <span class="small" [innerHTML]="page.data.ticketsDesc"
+                            >(1 билет = 10 баллов)</span
+                        >
+                    </p>
+                </div>
+            </div>
+            <!-- <div class="info__ref">
+            <p class="info__ref-title" [innerHTML]="page.data.refLink">
+                Реферальная ссылка
+            </p>
+
+            <div class="info__ref-input">
+                <p class="link">{{ link }}</p>
+
+                <app-btn-copy
+                    [type]="'type_3'"
+                    [copyId]="'giveaways_ref'"
+                    [copyText]="link"
+                    [copiedStr]="pageGeneral.data?.reflink?.copied"
+                ></app-btn-copy>
+
+                <div class="prompt" [innerHTML]="page.data.refDesc">
+                    За каждого друга, вступившего в PRIVAT Club по вашей ссылке,
+                    вы оба получите по 10 баллов (1 билет).
+                </div>
+            </div>
+        </div> -->
+
+            <div class="info__ref">
+                <p
+                    class="info__ref-title"
+                    [innerHTML]="page.data.refLink"
+                    (mouseenter)="toggleRefDropdown(true)"
+                    (mouseleave)="toggleRefDropdown(false)"
+                >
+                    Реферальная ссылка
+                </p>
+
+                <div class="info__ref-wrapper">
+                    <div
+                        class="link-content"
+                        (mouseenter)="toggleRefDropdown(true)"
+                        (mouseleave)="toggleRefDropdown(false)"
+                    >
+                        <button
+                            class="btn-copy-link"
+                            (click)="copyString(link)"
+                        >
+                            {{ link }}
+                        </button>
+
+                        <div
+                            class="dropdown"
+                            [class.active]="isRefDropdownActive"
+                        >
+                            <span class="text" [innerHTML]="page.data.refDesc">
+                            </span>
+                        </div>
+                    </div>
+                    <button class="btn-copy" (click)="copyHandler(link)">
+                        <svg
+                            class="icon"
+                            width="20"
+                            height="22"
+                            viewBox="0 0 20 22"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <path
+                                d="M10.9154 3.66667C10.9154 3.90978 11.0119 4.14294 11.1839 4.31485C11.3558 4.48676 11.5889 4.58333 11.832 4.58333H15.4675C15.4 3.98812 15.1388 3.43158 14.7241 2.99933L12.6304 0.836917C12.1724 0.372669 11.5648 0.0855933 10.9154 0.0265833V3.66667ZM9.08203 3.66667V0H5.41536C4.20024 0.00145554 3.03529 0.484808 2.17607 1.34403C1.31684 2.20326 0.833487 3.3682 0.832031 4.58333V13.75C0.833487 14.9651 1.31684 16.1301 2.17607 16.9893C3.03529 17.8485 4.20024 18.3319 5.41536 18.3333H10.9154C12.1305 18.3319 13.2954 17.8485 14.1547 16.9893C15.0139 16.1301 15.4972 14.9651 15.4987 13.75V6.41667H11.832C11.1027 6.41667 10.4032 6.12694 9.88749 5.61121C9.37176 5.09549 9.08203 4.39601 9.08203 3.66667ZM14.582 22H6.33203C6.08892 22 5.85576 21.9034 5.68385 21.7315C5.51194 21.5596 5.41536 21.3264 5.41536 21.0833C5.41536 20.8402 5.51194 20.6071 5.68385 20.4352C5.85576 20.2632 6.08892 20.1667 6.33203 20.1667H14.582C15.3114 20.1667 16.0109 19.8769 16.5266 19.3612C17.0423 18.8455 17.332 18.146 17.332 17.4167V7.33333C17.332 7.09022 17.4286 6.85706 17.6005 6.68515C17.7724 6.51324 18.0056 6.41667 18.2487 6.41667C18.4918 6.41667 18.725 6.51324 18.8969 6.68515C19.0688 6.85706 19.1654 7.09022 19.1654 7.33333V17.4167C19.1639 18.6318 18.6806 19.7967 17.8213 20.656C16.9621 21.5152 15.7972 21.9985 14.582 22Z"
+                            />
+                        </svg>
+
+                        <span
+                            class="dropdown"
+                            [class.active]="isCopiedActive"
+                            [innerHTML]="pageGeneral.data.reflink.copied"
+                        >
+                        </span>
+                    </button>
+                </div>
+            </div>
+            <div class="info__bottom">
+                <button class="btn-green" (click)="openModalBanner()">
+                    <span class="icon-left">
+                        <img
+                            src="assets/img/pages/giveaways/icon-friend.svg"
+                            alt="alt"
+                        />
+                    </span>
+                    {{ page.data.inviteFriends }}
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="giveaways">
+    <div class="giveaways__container">
+        <div class="buttons">
+            <button
+                class="btn-anchor"
+                (click)="scrollToElem(review, 130)"
+                [innerHTML]="page.data.review"
+                data-scrollspy-id="section1"
+                [class.active]="activeTab === 'review'"
+            >
+                Обзор
+            </button>
+            <button
+                class="btn-anchor"
+                (click)="scrollToElem(accordion, 136)"
+                [innerHTML]="page.data.nearestGiveaway"
+                data-scrollspy-id="section2"
+                [class.active]="activeTab === 'accordion'"
+            >
+                Ближайшие розыгрыши
+            </button>
+            <button
+                class="btn-anchor"
+                (click)="scrollToElem(history, 136)"
+                [innerHTML]="page.data.history"
+                data-scrollspy-id="section3"
+                [class.active]="activeTab === 'history'"
+            >
+                История
+            </button>
+        </div>
+
+        <div class="block review" #review data-scrollspy id="section1">
+            <div class="block__head">
+                <div class="wrap">
+                    <div class="icon-title">
+                        <img
+                            src="assets/img/pages/giveaways/icon-title-1.svg"
+                            alt="alt"
+                        />
+                    </div>
+
+                    <h2 class="h2" [innerHTML]="page.data.review">Обзор</h2>
+                </div>
+            </div>
+
+            <div class="block__container">
+                <div class="statistics">
+                    <div class="statistics__item">
+                        <div class="head">
+                            <p class="title" [innerHTML]="page.data.prizes">
+                                Ваш выигрыш
+                            </p>
+
+                            <div class="info">
+                                <button class="btn-info">
+                                    <div class="icon-info">
+                                        <div class="icon-default">
+                                            <img
+                                                src="assets/img/icons/icon-info-orange.svg"
+                                                alt="alt"
+                                            />
+                                        </div>
+                                        <div class="icon-active">
+                                            <img
+                                                src="assets/img/icons/icon-info-orange-hover.svg"
+                                                alt="alt"
+                                            />
+                                        </div>
+                                    </div>
+                                </button>
+
+                                <div class="dropdown">
+                                    <p
+                                        class="text"
+                                        [innerHTML]="page.data.prizesDesc"
+                                    >
+                                        Общая сумма призов, выигранных вами
+                                        лично.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <p class="value">
+                            {{ +statistic.affiliateData.prizeSum }} USD
+                        </p>
+                    </div>
+                    <div class="statistics__item">
+                        <div class="head">
+                            <p class="title" [innerHTML]="page.data.refPrizes">
+                                Всего выиграно рефералами
+                            </p>
+
+                            <div class="info">
+                                <button class="btn-info">
+                                    <div class="icon-info">
+                                        <div class="icon-default">
+                                            <img
+                                                src="assets/img/icons/icon-info-orange.svg"
+                                                alt="alt"
+                                            />
+                                        </div>
+                                        <div class="icon-active">
+                                            <img
+                                                src="assets/img/icons/icon-info-orange-hover.svg"
+                                                alt="alt"
+                                            />
+                                        </div>
+                                    </div>
+                                </button>
+
+                                <div class="dropdown w334">
+                                    <p
+                                        class="text"
+                                        [innerHTML]="page.data.refPrizesDesc"
+                                    >
+                                        Сумма призов, выигранная всеми вашими
+                                        рефералами вместе взятыми.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <p class="value">
+                            {{ +statistic.affiliateData.refPrizeSum }} USD
+                        </p>
+                    </div>
+                    <div class="statistics__item">
+                        <div class="head">
+                            <p class="title" [innerHTML]="page.data.refFee">
+                                Реферальная комиссия
+                            </p>
+
+                            <div class="info">
+                                <button class="btn-info">
+                                    <div class="icon-info">
+                                        <div class="icon-default">
+                                            <img
+                                                src="assets/img/icons/icon-info-orange.svg"
+                                                alt="alt"
+                                            />
+                                        </div>
+                                        <div class="icon-active">
+                                            <img
+                                                src="assets/img/icons/icon-info-orange-hover.svg"
+                                                alt="alt"
+                                            />
+                                        </div>
+                                    </div>
+                                </button>
+
+                                <div class="dropdown w346">
+                                    <p
+                                        class="text"
+                                        [innerHTML]="page.data.refFeeDesc"
+                                    >
+                                        Сумма, начисленная вам от выигрышей
+                                        ваших рефералов в соответствии с
+                                        правилами проведения розыгрышей.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <p class="value">
+                            {{ +statistic.affiliateData.affiliateSum }} USD
+                        </p>
+                    </div>
+                    <div class="statistics__item">
+                        <div class="head">
+                            <p class="title" [innerHTML]="page.data.balance">
+                                Баланс Призового счета
+                            </p>
+
+                            <div class="info">
+                                <button class="btn-info">
+                                    <div class="icon-info">
+                                        <div class="icon-default">
+                                            <img
+                                                src="assets/img/icons/icon-info-orange.svg"
+                                                alt="alt"
+                                            />
+                                        </div>
+                                        <div class="icon-active">
+                                            <img
+                                                src="assets/img/icons/icon-info-orange-hover.svg"
+                                                alt="alt"
+                                            />
+                                        </div>
+                                    </div>
+                                </button>
+
+                                <div class="dropdown w242 last">
+                                    <p
+                                        class="text"
+                                        [innerHTML]="page.data.balanceDesc"
+                                    >
+                                        Сумма на вашем Призовом счете, доступная
+                                        для вывода.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <p class="value">{{ +statistic.balance }} USD</p>
+
+                        <button
+                            class="btn-withdraw"
+                            (click)="openModalWithdraw()"
+                        >
+                            <span class="icon-left">
+                                <svg
+                                    width="16"
+                                    height="15"
+                                    viewBox="0 0 16 15"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <path
+                                        fill-rule="evenodd"
+                                        clip-rule="evenodd"
+                                        d="M12.441 5.11144H3.55208V13.4448C3.55208 13.887 3.72764 14.3109 4.04042 14.6231C4.35264 14.9359 4.77653 15.1114 5.21875 15.1114H10.7743C11.2165 15.1114 11.6404 14.9359 11.9526 14.6231C12.2654 14.3109 12.441 13.887 12.441 13.4448V5.11144ZM7.44097 7.32644C7.09319 7.4131 6.79819 7.5931 6.59931 7.86088C6.43542 8.08144 6.32986 8.36477 6.32986 8.72644C6.32986 9.44255 6.82486 9.80588 7.51208 10.0064C7.76097 10.0787 8.03542 10.132 8.27431 10.212C8.34819 10.237 8.41764 10.2637 8.47819 10.2987C8.51542 10.3203 8.55208 10.3431 8.55208 10.3931C8.55208 10.6142 8.38431 10.6992 8.19986 10.7242C7.86542 10.7692 7.46375 10.6687 7.19597 10.4881C6.94208 10.3164 6.59653 10.3837 6.42486 10.6375C6.25319 10.892 6.32042 11.2375 6.57486 11.4092C6.81708 11.5725 7.12153 11.697 7.44097 11.7692V11.7781C7.44097 12.0848 7.68986 12.3337 7.99653 12.3337C8.30042 12.3337 8.54764 12.0892 8.55208 11.7864C8.61097 11.7725 8.66875 11.7559 8.72375 11.7364C9.26931 11.5437 9.66319 11.1231 9.66319 10.3931C9.66319 9.67699 9.16819 9.31366 8.48097 9.1131C8.23208 9.04033 7.95764 8.98699 7.71875 8.90699C7.64486 8.88255 7.57542 8.85533 7.51486 8.82088C7.47764 8.79921 7.44097 8.77588 7.44097 8.72644C7.44097 8.50255 7.60931 8.41422 7.79542 8.3881C8.12708 8.34199 8.52431 8.44088 8.7893 8.62644C9.04097 8.80199 9.38764 8.74033 9.56319 8.48866C9.73875 8.23755 9.67708 7.89088 9.42597 7.71533C9.18153 7.54421 8.87375 7.41422 8.55208 7.33921V7.33366C8.55208 7.02699 8.30319 6.7781 7.99653 6.7781C7.69264 6.7781 7.44486 7.0231 7.44097 7.32644ZM2.44097 5.11144H0.21875V6.7781C0.21875 7.69866 0.964861 8.44477 1.88542 8.44477H2.44097V5.11144ZM15.7743 5.11144H13.5521V8.44477H14.1076C15.0282 8.44477 15.7743 7.69866 15.7743 6.7781V5.11144ZM15.7743 4.00033V2.33366C15.7743 1.4131 15.0282 0.666992 14.1076 0.666992H1.88542C0.964861 0.666992 0.21875 1.4131 0.21875 2.33366V4.00033H15.7743ZM11.8854 2.88921H12.9965C13.3032 2.88921 13.5521 2.64033 13.5521 2.33366C13.5521 2.02699 13.3032 1.7781 12.9965 1.7781H11.8854C11.5787 1.7781 11.3299 2.02699 11.3299 2.33366C11.3299 2.64033 11.5787 2.88921 11.8854 2.88921Z"
+                                    />
+                                </svg>
+                            </span>
+
+                            <span
+                                class="text"
+                                [innerHTML]="page.data.btnWithdrawal"
+                                >Вывести средства</span
+                            >
+                        </button>
+                    </div>
+                </div>
+
+                <div class="rules" #rules>
+                    <h4 class="rules__title">
+                        <div class="icon-left">
+                            <img
+                                src="assets/img/pages/giveaways/icons-manual.svg"
+                                alt="alt"
+                            />
+                        </div>
+                        {{ page.data.rulesTitle }}
+                    </h4>
+
+                    <p class="rules__text" [innerHTML]="page.data.rulseDesc">
+                        В розыгрышах участвуют все члены PRIVAT Club, у которых
+                        есть минимум 1 билет (10 баллов). Каждый друг,
+                        вступивший в клуб по вашей реферальной ссылке, приносит
+                        вам 10 баллов. Чем больше билетов участвует в розыгрыше,
+                        тем больше шансов выиграть один из призов.
+                        <br />
+                        <br />
+                        Участие в розыгрышах проводится на безвозмездной основе.
+                        Это означает, что вы не платите ни цента, но каждый раз
+                        у вас есть шанс выиграть денежные призы и ценные
+                        подарки. Один участник может выиграть только 1 раз в
+                        одном розыгрыше.
+                        <br />
+                        <br />
+                        Для каждого розыгрыша устанавливается от 10 до 30
+                        призовых мест. В описании каждого розыгрыша указаны
+                        минимальные условия, которые необходимо выполнить для
+                        получения призов. Победители определяются рэндомно по
+                        истечении таймера.
+                        <br />
+                        <br />
+                        Таблица с ID победителей публикуется во вкладке
+                        розыгрыша сразу после распределения призов. Все призы
+                        сразу же доступны к выводу в стейблкоинах USDT, USDC,
+                        DAI. Минимальная сумма вывода составляет $10. Комиссия
+                        за вывод отсутствует, получатель платит только комиссию
+                        за газ.
+                        <br />
+                        <br />
+                        35% от выигранного денежного приза зачисляется в пользу
+                        вышестоящего партнера (аплайнера) в качестве реферальной
+                        комиссии. Победитель получает оставшиеся 65% от суммы
+                        приза.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="block accordion" id="section2">
+            <div class="block__head" #accordion>
+                <div class="wrap">
+                    <div class="icon-title">
+                        <img
+                            src="assets/img/pages/giveaways/icon-title-2.svg"
+                            alt="alt"
+                        />
+                    </div>
+
+                    <h2 class="h2" [innerHTML]="page.data.nearestGiveaway">
+                        Ближайшие розыгрыши
+                    </h2>
+                </div>
+
+                <a
+                    routerLink="history"
+                    [target]="isMobile ? '_self' : '_blank'"
+                    class="btn-archive"
+                >
+                    <span class="icon-left">
+                        <img
+                            src="assets/img/pages/giveaways/icon-archive.svg"
+                            alt="alt"
+                        />
+                    </span>
+
+                    <span class="text" [innerHTML]="page.data.archive">
+                        Архив розыгрышей
+                    </span>
+                </a>
+            </div>
+
+            <div class="block__container">
+                <div class="accordion">
+                    <ng-container *ngFor="let item of giveaways; let i = index">
+                        <div class="accordion__item">
+                            <app-accordion-item
+                                [giveaway]="item"
+                                [isActive]="
+                                    giveaways.length >= 1 &&
+                                    i === giveaways.length - 1
+                                        ? true
+                                        : false
+                                "
+                                *ngIf="now.isBefore(item.fullEndDate)"
+                                [page]="pageItem"
+                                [pageErrors]="pageErrors"
+                                [pageGeneral]="pageGeneral"
+                                [tickets]="statistic.tickets"
+                                [me]="me"
+                                [currentTickets]="
+                                    item.userGiveaways
+                                        | findValue
+                                            : ['user', 'id']
+                                            : me.id
+                                            : 'tickets'
+                                "
+                                (onCreateEvent)="onCreate($event, item)"
+                            >
+                            </app-accordion-item>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+
+        <div class="block awards" #history data-scrollspy id="section3">
+            <div class="block__head">
+                <div class="wrap">
+                    <div class="icon-title">
+                        <img
+                            src="assets/img/pages/giveaways/icon-title-3.svg"
+                            alt="alt"
+                        />
+                    </div>
+
+                    <h2 class="h2" [innerHTML]="page.data.myRewords">
+                        Мои награды
+                    </h2>
+                </div>
+            </div>
+
+            <div class="block__container">
+                <div class="filter">
+                    <ng-select
+                        class="days__select"
+                        [items]="dateFilter"
+                        [(ngModel)]="selectedDateFilter"
+                        bindLabel="days"
+                        [clearable]="false"
+                        [searchable]="false"
+                        dropdownPosition="bottom"
+                        [placeholder]="datePlaceholder"
+                        (change)="onDateChange()"
+                        #selectDate
+                    >
+                        <ng-template ng-label-tmp let-item="item">
+                            <span class="title">
+                                {{
+                                    page.data.periodDays
+                                        | replace : { number: item.days }
+                                }}
+                            </span>
+                        </ng-template>
+                        <ng-template #option ng-option-tmp let-item="item">
+                            <span class="title"
+                                >{{
+                                    page.data.periodDays
+                                        | replace : { number: item.days }
+                                }}
+                            </span>
+                        </ng-template>
+                        <ng-template ng-footer-tmp>
+                            <button
+                                class="btn-more"
+                                (click)="openModal({ modalId: 'modalDate' })"
+                                [innerHTML]="page.data.selectPeriod"
+                            >
+                                Выбрать период
+                            </button>
+                        </ng-template>
+                    </ng-select>
+
+                    <div class="lines">
+                        <label class="label" [innerHTML]="page.data.showStrings"
+                            >Показать строки</label
+                        >
+                        <ng-select
+                            class="lines__select"
+                            dropdownPosition="bottom"
+                            [clearable]="false"
+                            [searchable]="false"
+                            [(ngModel)]="config.itemsPerPage"
+                            [items]="itemsPerPage"
+                            (change)="filter()"
+                            ><ng-template ng-label-tmp let-item="item">
+                                <span class="title">
+                                    {{ item }}
+                                </span>
+                            </ng-template>
+                            <ng-template #option ng-option-tmp let-item="item">
+                                <span class="title">{{ item }} </span>
+                            </ng-template>
+                        </ng-select>
+                    </div>
+                </div>
+                <div class="table">
+                    <div class="table__head">
+                        <div class="table__row">
+                            <div
+                                class="table__cell table__cell-1"
+                                [innerHTML]="page.data.colId"
+                            >
+                                ID
+                            </div>
+                            <div
+                                class="table__cell table__cell-2"
+                                [innerHTML]="page.data.colDate"
+                            >
+                                Дата начисления
+                            </div>
+                            <div
+                                class="table__cell table__cell-3"
+                                [innerHTML]="page.data.colAmount"
+                            >
+                                Сумма награды
+                            </div>
+                            <div
+                                class="table__cell table__cell-4"
+                                [innerHTML]="page.data.colType"
+                            >
+                                Тип награды
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table__body">
+                        <div
+                            class="table__row"
+                            *ngFor="let item of data | paginate : config"
+                        >
+                            <div class="table__cell table__cell-1">
+                                <span class="id">{{
+                                    "#" + item.customId
+                                }}</span>
+                            </div>
+                            <div class="table__cell table__cell-2">
+                                <span>{{ item.fullCreatedDate }}</span>
+                                <button
+                                    type="button"
+                                    class="btn"
+                                    (click)="
+                                        openModalDetails(
+                                            '#' + item.customId,
+                                            item.fullCreatedDate,
+                                            item.data.amount,
+                                            item.transactionType.description,
+                                            item
+                                        )
+                                    "
+                                >
+                                    <div class="dots">
+                                        <img
+                                            src="assets/img/icons/btn-dots.svg"
+                                            alt="dots"
+                                        />
+                                    </div>
+                                </button>
+                            </div>
+
+                            <div class="table__cell table__cell-3">
+                                <span>{{ item.data.amount }} USD</span>
+                            </div>
+                            <div class="table__cell table__cell-4">
+                                <span>{{
+                                    item.transactionType.description
+                                        | replace
+                                            : {
+                                                  place: item.data.place,
+                                                  giveaway:
+                                                      item.data.giveaway?.title,
+                                                  referralId:
+                                                      item.data.refferalId,
+                                                  amount: item.data.refAmount
+                                              }
+                                }}</span>
+                            </div>
+                        </div>
+
+                        <div class="no_referrals" *ngIf="!data.length">
+                            <img
+                                class="no_referrals-image"
+                                src="assets/img/pages/referals/no-ref.png"
+                                alt=""
+                            />
+                            <span class="no_referrals-text">{{
+                                noData ? page.data.empty : page.data.searchEmpty
+                            }}</span>
+                            <button
+                                type="button"
+                                class="no_referrals-button"
+                                (click)="openModalBanner()"
+                                [innerHTML]="page.data.inviteFriends"
+                            >
+                                Пригласить друзей
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pagination" *ngIf="config.totalItems > data.length">
+                    <pagination-template
+                        #p="paginationApi"
+                        [id]="config.id"
+                        [maxSize]="
+                            p.getCurrent() < 5 ||
+                            p.getCurrent() > p.getLastPage() - 4
+                                ? 7
+                                : 9
+                        "
+                        (pageChange)="pageChange($event)"
+                        (pageBoundsCorrection)="pageChange($event)"
+                    >
+                        <div class="custom-pagination">
+                            <div class="wrapper">
+                                <button
+                                    type="button"
+                                    class="link pagination-prev"
+                                    *ngIf="isMobile || !p.isFirstPage()"
+                                    (click)="p.previous()"
+                                    [class.disabled]="p.isFirstPage()"
+                                >
+                                    <svg
+                                        width="6"
+                                        height="10"
+                                        viewBox="0 0 6 10"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <path
+                                            class="icon"
+                                            fill-rule="evenodd"
+                                            clip-rule="evenodd"
+                                            d="M5.70721 0.293154C5.89468 0.480916 6 0.735542 6 1.00104C6 1.26653 5.89468 1.52116 5.70721 1.70892L2.41421 5.00605L5.70721 8.30317C5.88937 8.49201 5.99017 8.74492 5.98789 9.00745C5.98561 9.26997 5.88044 9.5211 5.69503 9.70674C5.50962 9.89238 5.25881 9.99768 4.99661 9.99996C4.73442 10.0022 4.48182 9.90132 4.29321 9.71894L0.293213 5.71393C0.105743 5.52617 0.000426833 5.27154 0.00042681 5.00605C0.000426786 4.74055 0.105742 4.48592 0.293213 4.29816L4.29321 0.293154C4.48074 0.105448 4.73505 1.10585e-07 5.00021 8.74041e-08C5.26538 6.42227e-08 5.51968 0.105448 5.70721 0.293154Z"
+                                        />
+                                    </svg>
+                                </button>
+                                <div class="links">
+                                    <div *ngFor="let page of p.pages">
+                                        <button
+                                            type="button"
+                                            class="link"
+                                            [class.ellips]="
+                                                page.label === '...'
+                                            "
+                                            (click)="p.setCurrent(page.value)"
+                                            *ngIf="
+                                                p.getCurrent() !== page.value &&
+                                                !isMobile
+                                            "
+                                        >
+                                            <span>{{ page.label }}</span>
+                                        </button>
+                                        <a
+                                            class="link"
+                                            [class.current]="
+                                                p.getCurrent() === page.value
+                                            "
+                                            *ngIf="
+                                                p.getCurrent() === page.value &&
+                                                !isMobile
+                                            "
+                                        >
+                                            <span>{{ page.label }}</span>
+                                        </a>
+                                    </div>
+                                    <input
+                                        #input
+                                        (change)="
+                                            +input.value > 1
+                                                ? p.setCurrent(+input.value)
+                                                : p.setCurrent(1)
+                                        "
+                                        [(ngModel)]="config.currentPage"
+                                        class="link input-mobile"
+                                        type="text"
+                                        min="1"
+                                        (focus)="input.value = null"
+                                        onlyNumber
+                                        inputmode="numeric"
+                                    />
+                                </div>
+                                <a
+                                    class="link pagination-next"
+                                    *ngIf="!p.isLastPage() || isMobile"
+                                    (click)="p.next()"
+                                    [class.disabled]="p.isLastPage()"
+                                >
+                                    <svg
+                                        width="6"
+                                        height="10"
+                                        viewBox="0 0 6 10"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <path
+                                            class="icon"
+                                            fill-rule="evenodd"
+                                            clip-rule="evenodd"
+                                            d="M0.292787 9.70685C0.105316 9.51908 0 9.26446 0 8.99896C0 8.73347 0.105316 8.47884 0.292787 8.29108L3.58579 4.99396L0.292787 1.69683C0.110629 1.50799 0.00983372 1.25508 0.0121121 0.992552C0.0143906 0.730027 0.11956 0.4789 0.304968 0.29326C0.490376 0.10762 0.741189 0.00231912 1.00339 3.78498e-05C1.26558 -0.00224342 1.51818 0.0986775 1.70679 0.281064L5.70679 4.28607C5.89426 4.47383 5.99957 4.72846 5.99957 4.99396C5.99957 5.25945 5.89426 5.51408 5.70679 5.70184L1.70679 9.70685C1.51926 9.89455 1.26495 10 0.999786 10C0.734622 10 0.480314 9.89455 0.292787 9.70685Z"
+                                        />
+                                    </svg>
+                                </a>
+                            </div>
+                            <div
+                                class="lenght"
+                                [innerHTML]="
+                                    page.data.pages
+                                        | replace : { pages: p.getLastPage() }
+                                "
+                            >
+                                из {{ p.getLastPage() }}
+                            </div>
+                        </div>
+                    </pagination-template>
+                </div>
+
+                <div class="buttons" *ngIf="data.length">
+                    <button
+                        type="button"
+                        class="btn"
+                        (click)="openModalBanner()"
+                        [innerHTML]="page.data.inviteFriends"
+                    >
+                        Пригласить друзей
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<app-modal-window id="modalDate">
+    <app-date-picker
+        [page]="pageGeneral"
+        (onAdd)="onPeriodChange($event)"
+        [me]="me"
+    ></app-date-picker>
+</app-modal-window>

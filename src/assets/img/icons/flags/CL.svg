@@ -1,0 +1,16 @@
+<svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+<mask id="mask0_1_12337" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="26" height="26">
+<circle cx="13" cy="13" r="13" fill="#634848"/>
+</mask>
+<g mask="url(#mask0_1_12337)">
+<mask id="mask1_1_12337" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="-2" y="-1" width="36" height="28">
+<rect x="-2" y="-0.5" width="36" height="27" fill="white"/>
+</mask>
+<g mask="url(#mask1_1_12337)">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M-2 -0.5H13.75V15.25H-2V-0.5Z" fill="#3D58DB"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M13.75 -2.75H34V15.25H13.75V-2.75Z" fill="#F7FCFF"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M-2 15.25H34V26.5H-2V15.25Z" fill="#E31D1C"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M5.89521 10.5067L1.61608 13.0621L3.72789 8.71412L-0.0117188 5.89014L4.30545 5.84391L5.9341 1.98828L6.98274 5.84391L11.069 5.86317L7.96105 8.62524L9.57495 13.0621L5.89521 10.5067Z" fill="#F7FCFF"/>
+</g>
+</g>
+</svg>

@@ -1,0 +1,300 @@
+<ng-container *ngIf="typeSelect === 'home'">
+    <div class="lang-desctop">
+        <ng-select
+            [items]="langList"
+            class="select scrollSelector scrollSelectorDark"
+            bindLabel="code"
+            (change)="setLang($event)"
+            [searchable]="false"
+            [clearable]="false"
+            [(ngModel)]="currentLang"
+            [isOpen]="openSelect"
+            [class.showDropdownPanel]="showDropdownPanel"
+            customScrollDetector
+            dropdownPosition="bottom"
+            [scrollSelectors]="['.scrollSelector .ng-dropdown-panel-items']"
+        >
+            <ng-template #option ng-option-tmp let-item="item">
+                <div class="item">
+                    <span class="icon-left">
+                        <svg
+                            width="20"
+                            height="20"
+                            viewBox="0 0 20 20"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <path
+                                d="M19.25 9.99977C19.25 12.3198 18.39 14.4598 16.97 16.0698C15.55 17.6998 13.57 18.8298 11.33 19.1398C10.9 19.2098 10.46 19.2398 10 19.2398C9.54 19.2398 9.11 19.2098 8.67 19.1398C6.43 18.8298 4.45 17.6998 3.03 16.0698C1.61 14.4598 0.75 12.3198 0.75 9.99977C0.75 7.67977 1.61 5.53977 3.03 3.92977C4.45 2.29977 6.43 1.16977 8.67 0.859766C9.1 0.789766 9.54 0.759766 10 0.759766C10.46 0.759766 10.89 0.789766 11.33 0.859766C13.57 1.16977 15.55 2.29977 16.97 3.92977C18.39 5.53977 19.25 7.67977 19.25 9.99977Z"
+                                stroke-width="1.5"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            />
+                            <path
+                                d="M9.67 19.1496C9.03 18.4796 6 15.1696 6 9.99961C6 4.82961 9.03 1.51961 9.67 0.849609"
+                                stroke-width="1.5"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            />
+                            <path
+                                d="M10.3281 19.1496C10.9681 18.4796 13.9981 15.1696 13.9981 9.99961C13.9981 4.82961 10.9681 1.51961 10.3281 0.849609"
+                                stroke-width="1.5"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            />
+                            <path
+                                d="M0.75 10H19.25"
+                                stroke-width="1.5"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            />
+                        </svg>
+                    </span>
+                    <div class="name">
+                        {{ item.extCode | uppercase }}
+                    </div>
+                </div>
+            </ng-template>
+            <ng-template ng-label-tmp let-item="item">
+                <div class="item">
+                    <span class="icon-left">
+                        <svg
+                            width="20"
+                            height="20"
+                            viewBox="0 0 20 20"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <path
+                                d="M19.25 9.99977C19.25 12.3198 18.39 14.4598 16.97 16.0698C15.55 17.6998 13.57 18.8298 11.33 19.1398C10.9 19.2098 10.46 19.2398 10 19.2398C9.54 19.2398 9.11 19.2098 8.67 19.1398C6.43 18.8298 4.45 17.6998 3.03 16.0698C1.61 14.4598 0.75 12.3198 0.75 9.99977C0.75 7.67977 1.61 5.53977 3.03 3.92977C4.45 2.29977 6.43 1.16977 8.67 0.859766C9.1 0.789766 9.54 0.759766 10 0.759766C10.46 0.759766 10.89 0.789766 11.33 0.859766C13.57 1.16977 15.55 2.29977 16.97 3.92977C18.39 5.53977 19.25 7.67977 19.25 9.99977Z"
+                                stroke-width="1.5"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            />
+                            <path
+                                d="M9.67 19.1496C9.03 18.4796 6 15.1696 6 9.99961C6 4.82961 9.03 1.51961 9.67 0.849609"
+                                stroke-width="1.5"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            />
+                            <path
+                                d="M10.3281 19.1496C10.9681 18.4796 13.9981 15.1696 13.9981 9.99961C13.9981 4.82961 10.9681 1.51961 10.3281 0.849609"
+                                stroke-width="1.5"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            />
+                            <path
+                                d="M0.75 10H19.25"
+                                stroke-width="1.5"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            />
+                        </svg>
+                    </span>
+                    <div class="name">
+                        {{ item.extCode | uppercase }}
+                    </div>
+                </div>
+            </ng-template>
+        </ng-select>
+    </div>
+
+    <div class="lang-mobile" [class.auth]="authClass">
+        <button class="btn-lang" (click)="openMenuLang()">
+            <span class="icon-left">
+                <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 20 20"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <path
+                        d="M19.25 9.99977C19.25 12.3198 18.39 14.4598 16.97 16.0698C15.55 17.6998 13.57 18.8298 11.33 19.1398C10.9 19.2098 10.46 19.2398 10 19.2398C9.54 19.2398 9.11 19.2098 8.67 19.1398C6.43 18.8298 4.45 17.6998 3.03 16.0698C1.61 14.4598 0.75 12.3198 0.75 9.99977C0.75 7.67977 1.61 5.53977 3.03 3.92977C4.45 2.29977 6.43 1.16977 8.67 0.859766C9.1 0.789766 9.54 0.759766 10 0.759766C10.46 0.759766 10.89 0.789766 11.33 0.859766C13.57 1.16977 15.55 2.29977 16.97 3.92977C18.39 5.53977 19.25 7.67977 19.25 9.99977Z"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    />
+                    <path
+                        d="M9.67 19.1496C9.03 18.4796 6 15.1696 6 9.99961C6 4.82961 9.03 1.51961 9.67 0.849609"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    />
+                    <path
+                        d="M10.3281 19.1496C10.9681 18.4796 13.9981 15.1696 13.9981 9.99961C13.9981 4.82961 10.9681 1.51961 10.3281 0.849609"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    />
+                    <path
+                        d="M0.75 10H19.25"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    />
+                </svg>
+            </span>
+
+            {{ currentLang.extCode | uppercase }}
+
+            <span class="icon-right">
+                <img src="assets/img/icons/arrow-green-right.svg" alt="alt" />
+            </span>
+        </button>
+
+        <div
+            class="bg-overlay menu__overlay"
+            [class.show]="hiddenMenuService.name === 'menu_lang'"
+        >
+            <div class="bg-overlay-close" (click)="closeMenuLang()"></div>
+
+            <div
+                class="menu__wrap"
+                [class.show]="hiddenMenuService.name === 'menu_lang'"
+            >
+                <div class="menu__lang">
+                    <div class="head">
+                        <button
+                            class="btn-close-menu"
+                            (click)="closeMenuLang()"
+                        >
+                            <img
+                                src="assets/img/icons/icon-close.svg"
+                                alt="close"
+                            />
+                        </button>
+                    </div>
+                    <p class="list-title">{{ langSwitch }}</p>
+
+                    <ul class="list">
+                        <overlay-scrollbars class="list__wrap">
+                            <li
+                                class="list__item"
+                                *ngFor="let item of langList"
+                            >
+                                <button
+                                    class="btn-set-lang"
+                                    [class.active]="
+                                        item.code === currentLang.code
+                                    "
+                                    (click)="setLang(item)"
+                                >
+                                    {{ item.title }}
+                                </button>
+                            </li>
+                        </overlay-scrollbars>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-container>
+
+<ng-container *ngIf="typeSelect === 'account'">
+    <ng-select
+        [items]="langList"
+        class="select lang-account desktop scrollSelector scrollSelectorDashboardLang"
+        bindLabel="name"
+        (change)="setLang($event)"
+        [searchable]="false"
+        [clearable]="false"
+        [(ngModel)]="currentLang"
+        [isOpen]="openSelect"
+        [class.showDropdownPanel]="showDropdownPanel"
+        customScrollDetector
+        dropdownPosition="bottom"
+        [scrollSelectors]="['.scrollSelector .ng-dropdown-panel-items']"
+    >
+        <ng-template #option ng-option-tmp let-item="item">
+            <div class="item">
+                <div class="icon">
+                    <img [src]="item.logo" alt="alt" />
+                </div>
+
+                <span class="title">{{ item.title }}</span>
+            </div>
+        </ng-template>
+        <ng-template ng-label-tmp let-item="item">
+            <div class="item">
+                <div class="icon">
+                    <img [src]="item.logo" alt="alt" />
+                </div>
+
+                <span class="title">{{ item.title }}</span>
+
+                <span class="arrow">
+                    <svg
+                        width="8"
+                        height="4"
+                        viewBox="0 0 8 4"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <path
+                            class="path"
+                            fill-rule="evenodd"
+                            clip-rule="evenodd"
+                            d="M0 0L8 0L3.894 4L0 0Z"
+                        />
+                    </svg>
+                </span>
+            </div>
+        </ng-template>
+    </ng-select>
+
+    <div class="lang-account mobile">
+        <button class="btn-lang" (click)="openAccountMenuLang()">
+            <div class="lang-icon">
+                <div class="lang-icon-border"></div>
+                <img [src]="currentLang.logo" alt="flag"/>
+            </div>
+
+            <span class="title">{{ currentLang.title }}</span>
+
+            <span class="arrow">
+                <svg
+                    width="8"
+                    height="4"
+                    viewBox="0 0 8 4"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <path
+                        class="path"
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M0 0L8 0L3.894 4L0 0Z"
+                    />
+                </svg>
+            </span>
+        </button>
+        <div
+            class="lang__overlay"
+            [class.show]="hiddenMenuService.subMenuName === 'menu_lang'"
+            (click)="closeAccountMenuLang()"
+        ></div>
+        <div
+            class="lang__block"
+            [class.show]="hiddenMenuService.subMenuName === 'menu_lang'"
+        >
+            <div class="list__wrap">
+                <overlay-scrollbars class="list">
+                    <button
+                        class="list__item"
+                        *ngFor="let item of langList"
+                        (click)="setLang(item)"
+                        [class.active]="item.code === currentLang.code"
+                    >
+                        <span class="lang-icon">
+                            <span class="lang-icon-border"></span>
+                            <img [src]="item.logo" alt="flag" />
+                        </span>
+
+                        <span class="title">{{ item.title }}</span>
+                    </button>
+                </overlay-scrollbars>
+            </div>
+        </div>
+    </div>
+</ng-container>

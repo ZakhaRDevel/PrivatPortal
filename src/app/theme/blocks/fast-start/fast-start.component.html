@@ -1,0 +1,99 @@
+<section
+    class="start"
+    [class.sidebar]="isSidebar"
+    [class.active]="hiddenMenuService.name === 'dashboard_start'"
+>
+    <h3 class="h3" [innerHTML]="page.data.quickStart.quickStart"></h3>
+
+    <button class="btn-close" (click)="toggleMenu('dashboard_start')"></button>
+
+    <div class="list">
+        <overlay-scrollbars class="scrollhost">
+            <div class="list__item">
+                <div class="list__item-header">
+                    <img
+                        class="icon"
+                        src="assets/img/pages/dashboard/auth.svg"
+                        alt=""
+                    />
+                    <span
+                        class="title"
+                        [innerHTML]="page.data.quickStart.quickStart2fa"
+                    ></span>
+                </div>
+
+                <div
+                    class="list__item-content"
+                    [innerHTML]="page.data.quickStart.quickStart2faDesc"
+                ></div>
+
+                <div class="list__item-footer">
+                    <img src="assets/img/icons/icon-arrow-right.svg" alt="" />
+                    <span
+                        (click)="navigate('/acc/settings')"
+                        class="text"
+                        [innerHTML]="page.data.quickStart.quickStartBtn"
+                    ></span>
+                </div>
+            </div>
+
+            <div class="list__item">
+                <div class="list__item-header">
+                    <img
+                        class="icon"
+                        src="assets/img/pages/dashboard/wallet.svg"
+                        alt=""
+                    />
+                    <span
+                        class="title"
+                        [innerHTML]="page.data.quickStart.quickStartWallets"
+                    ></span>
+                </div>
+
+                <div
+                    class="list__item-content"
+                    [innerHTML]="page.data.quickStart.quickStartWalletsDesc"
+                ></div>
+
+                <div class="list__item-footer">
+                    <img src="assets/img/icons/icon-arrow-right.svg" alt="" />
+                    <span
+                        (click)="navigate('/acc/settings')"
+                        class="text"
+                        [innerHTML]="page.data.quickStart.quickStartBtn"
+                        >Продолжить</span
+                    >
+                </div>
+            </div>
+
+            <div class="list__item">
+                <div class="list__item-header">
+                    <img
+                        class="icon"
+                        src="assets/img/pages/dashboard/megaphone.svg"
+                        alt=""
+                    />
+                    <span
+                        class="title"
+                        [innerHTML]="page.data.quickStart.quickStartRef"
+                    >
+                    </span>
+                </div>
+
+                <div
+                    class="list__item-content"
+                    [innerHTML]="page.data.quickStart.quickStartRefDesc"
+                ></div>
+
+                <div class="list__item-footer">
+                    <img src="assets/img/icons/icon-arrow-right.svg" alt="" />
+                    <a
+                        routerLink="/acc/referrals"
+                        class="text"
+                        [innerHTML]="page.data.quickStart.quickStartBtn"
+                    ></a>
+                </div>
+            </div>
+        </overlay-scrollbars>
+    </div>
+</section>

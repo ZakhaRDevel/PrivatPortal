@@ -1,0 +1,171 @@
+@import "~src/assets/scss/variables";
+
+::ng-deep {
+    .modal_transaction_details {
+        @media only screen and (max-width: $tablet) {
+            background: #f3f5fa;
+        }
+    }
+}
+
+.dialog {
+    overflow: hidden;
+    padding: 30px 0;
+    display: flex;
+    justify-content: center;
+    transform: scale(1);
+    animation-duration: 0.3s;
+    animation-name: dialog;
+    transition: transform 0.3s;
+    &.closing {
+        transform: scale(0);
+    }
+    @media only screen and (max-width: $tablet) {
+        padding: 64px 0;
+        height: 100%;
+    }
+    @keyframes dialog {
+        from {
+            transform: scale(0);
+        }
+        to {
+            transform: scale(1);
+        }
+    }
+    &__wrap {
+        width: 470px;
+        background: #ffffff;
+        border-radius: 10px;
+        @media only screen and (max-width: $tablet) {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            background: #f3f5fa;
+            padding: 0 10px;
+            border-radius: 0;
+        }
+    }
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 24px 30px;
+        border-bottom: 1px solid #f2f3f5;
+        @media only screen and (max-width: $tablet) {
+            padding: 28px 10px 16px;
+        }
+        &-title {
+            color: $color-font-1;
+            font-weight: 600;
+            font-size: 20px;
+            @media only screen and (max-width: $tablet) {
+                color: #54657e;
+            }
+        }
+
+        &-btn {
+            display: flex;
+            align-items: center;
+
+            .btn-close {
+                position: relative;
+                width: 18px;
+                height: 18px;
+                @media only screen and (max-width: $tablet) {
+                    margin-top: -20px;
+                }
+
+                &:hover {
+                    &::after {
+                        @media only screen and (min-width: $tablet) {
+                            transform: rotate(-45deg);
+                            background-color: #56c6ad;
+                        }
+                    }
+
+                    &::before {
+                        @media only screen and (min-width: $tablet) {
+                            transform: rotate(45deg);
+                            background-color: #56c6ad;
+                        }
+                    }
+                }
+
+                &::before,
+                &::after {
+                    content: "";
+                    width: 2px;
+                    height: 25px;
+                    background-color: $color-font-dark-grey;
+                    position: absolute;
+                    left: 9px;
+                    top: -3px;
+                    z-index: 1;
+                    transform: rotate(-45deg);
+                    border-radius: 10px;
+                    transition: transform 0.3s linear,
+                        background-color 0.3s linear;
+                    @media only screen and (max-width: $tablet) {
+                        background-color: #333;
+                    }
+                }
+
+                &::after {
+                    transform: rotate(45deg);
+                }
+            }
+        }
+    }
+
+    &__body {
+        padding: 14px 30px;
+        @media only screen and (max-width: $tablet) {
+            overflow: auto;
+            background: #fff;
+            border-radius: 8px;
+            padding: 8px 15px;
+        }
+        &-row {
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+
+            .title {
+                color: #727a89;
+                font: 400 14px $font-family-primary;
+            }
+
+            .value {
+                display: flex;
+                align-items: center;
+                color: #1f2328;
+                font: 500 14px $font-family-primary;
+            }
+
+            .icon-left {
+                width: 22px;
+                height: 22px;
+                border-radius: 50%;
+                overflow: hidden;
+                display: inline-block;
+                margin-right: 8px;
+            }
+
+            .icon-link {
+                display: flex;
+                margin-left: 10px;
+                svg {
+                    fill: rgba(129, 137, 148, 1);
+                    transition: fill 0.3s;
+
+                    &:hover {
+                        fill: $color-font-dark-grey !important;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,252 @@
+<div class="giveaways-history">
+    <div class="giveaways-history__header">
+        <div class="title" [innerHTML]="pageMain.data.title">
+            Архив розыгрышей
+        </div>
+        <div class="search">
+            <img
+                class="icon"
+                src="assets/img/icons/quest_search.svg"
+                alt="search"
+            />
+            <input
+                [placeholder]="pageMain.data.searchPlaceholder"
+                class="input"
+                type="text"
+                class="input"
+                [(ngModel)]="search"
+            />
+            <button
+                (click)="onSearch()"
+                class="btn"
+                type="button"
+                [innerHTML]="pageMain.data.search"
+            >
+                Поиск
+            </button>
+        </div>
+    </div>
+    <div class="giveaways-history__wrapper">
+        <div class="archive">
+            <div class="archive__filter">
+                <ng-select
+                    class="days__select"
+                    [items]="categories"
+                    [(ngModel)]="selectedDateFilter"
+                    bindLabel="type"
+                    [clearable]="false"
+                    [searchable]="false"
+                    dropdownPosition="bottom"
+                    (change)="filters()"
+                >
+                    <ng-template ng-label-tmp let-item="item">
+                        <span class="title">
+                            {{ item.title }}
+                        </span>
+                    </ng-template>
+                    <ng-template #option ng-option-tmp let-item="item">
+                        <span class="title">{{ item.title }} </span>
+                    </ng-template>
+                </ng-select>
+                <div class="period" *ngIf="!isMobile">
+                    <button
+                        type="button"
+                        class="period__item"
+                        (click)="onPerionSet('a')"
+                    >
+                        <input
+                            class="input"
+                            type="radio"
+                            name="period"
+                            id="all"
+                            checked
+                        />
+                        <label
+                            class="label"
+                            for="all"
+                            [innerHTML]="pageMain.data.allTime"
+                            >Все время</label
+                        >
+                    </button>
+                    <button
+                        type="button"
+                        class="period__item"
+                        (click)="onPerionSet('w')"
+                    >
+                        <input
+                            class="input"
+                            type="radio"
+                            name="period"
+                            id="week"
+                        />
+                        <label
+                            class="label"
+                            for="week"
+                            [innerHTML]="pageMain.data.week"
+                            >Эта неделя</label
+                        >
+                    </button>
+                    <button
+                        type="button"
+                        class="period__item"
+                        (click)="onPerionSet('m')"
+                    >
+                        <input
+                            class="input"
+                            type="radio"
+                            name="period"
+                            id="mouth"
+                        />
+                        <label
+                            class="label"
+                            for="mouth"
+                            [innerHTML]="pageMain.data.month"
+                            >Этот месяц</label
+                        >
+                    </button>
+                    <button
+                        type="button"
+                        class="period__item"
+                        (click)="openModal({ modalId: 'modalDate' })"
+                    >
+                        <input
+                            class="input"
+                            type="radio"
+                            name="period"
+                            id="other"
+                        />
+                        <label
+                            class="label"
+                            for="other"
+                            [innerHTML]="pageMain.data.selectPeriod"
+                            >Выбрать период</label
+                        >
+                    </button>
+                </div>
+
+                <button
+                    type="button"
+                    class="period__mobile"
+                    [class.active]="btnGreen"
+                    (click)="openModal({ modalId: 'modalPeriod' })"
+                >
+                    <svg
+                        class="icon"
+                        width="18"
+                        height="19"
+                        viewBox="0 0 18 19"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <path
+                            d="M17 0H1C0.447 0 0 0.447 0 1V3.59C0 4.113 0.213 4.627 0.583 4.997L6 10.414V18C6 18.347 6.18 18.668 6.475 18.851C6.635 18.95 6.817 19 7 19C7.153 19 7.306 18.965 7.447 18.895L11.447 16.895C11.786 16.725 12 16.379 12 16V10.414L17.417 4.997C17.787 4.627 18 4.113 18 3.59V1C18 0.447 17.553 0 17 0ZM10.293 9.293C10.105 9.48 10 9.734 10 10V15.382L8 16.382V10C8 9.734 7.895 9.48 7.707 9.293L2 3.59V2H16.001L16.003 3.583L10.293 9.293Z"
+                        />
+                    </svg>
+                </button>
+            </div>
+
+            <div class="archive__wrapper">
+                <div
+                    class="archive__item-wrapper"
+                    *ngFor="let item of giveaways; let i = index"
+                >
+                    <app-accordion-item
+                        [giveaway]="item"
+                        [isArchive]="isArchive"
+                        [page]="pageItem"
+                    >
+                    </app-accordion-item>
+                </div>
+            </div>
+
+            <button
+                *ngIf="total > giveaways.length"
+                type="button"
+                class="archive__btn"
+                [innerHTML]="pageMain.data.showMore"
+            >
+                Показать больше
+            </button>
+        </div>
+    </div>
+</div>
+<app-modal-window id="modalDate">
+    <app-date-picker
+        [page]="pageGeneral"
+        (onAdd)="onPeriodChange($event)"
+        [me]="me"
+    ></app-date-picker>
+</app-modal-window>
+
+<app-modal-window id="modalPeriod" [typeTwo]="typeTwo">
+    <div class="dialog" [class.closing]="isClosing">
+        <div class="dialog__wrap">
+            <div class="dialog__header">
+                <h3
+                    class="dialog__header-title"
+                    [innerHTML]="pageMain.data.filters"
+                >
+                    Фильтры
+                </h3>
+                <button
+                    class="btn-close"
+                    (click)="closeModal('modalPeriod')"
+                ></button>
+            </div>
+
+            <div class="dialog__body">
+                <div class="dialog__body-row">
+                    <input class="input" type="radio" name="period" id="all" />
+                    <label
+                        class="label"
+                        for="all"
+                        [innerHTML]="pageMain.data.allTime"
+                        >Все время</label
+                    >
+                </div>
+                <div class="dialog__body-row">
+                    <input class="input" type="radio" name="period" id="week" />
+                    <label
+                        class="label"
+                        for="week"
+                        [innerHTML]="pageMain.data.week"
+                        >Эта неделя</label
+                    >
+                </div>
+                <div class="dialog__body-row">
+                    <input
+                        class="input"
+                        type="radio"
+                        name="period"
+                        id="mouth"
+                    />
+                    <label
+                        class="label"
+                        for="mouth"
+                        [innerHTML]="pageMain.data.month"
+                        >Этот месяц</label
+                    >
+                </div>
+                <div class="dialog__body-row other">
+                    <button
+                        type="button"
+                        (click)="openModal({ modalId: 'modalDate' })"
+                    >
+                        <input
+                            class="input"
+                            type="radio"
+                            name="period"
+                            id="other"
+                        />
+                        <label
+                            class="label"
+                            for="other"
+                            [innerHTML]="pageMain.data.selectPeriod"
+                            >Выбрать период</label
+                        >
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</app-modal-window>

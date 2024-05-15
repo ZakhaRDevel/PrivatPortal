@@ -1,0 +1,313 @@
+<div class="store">
+    <div class="product">
+        <div class="product__wrap">
+            <a routerLink="/acc/store" class="link-home">
+                <span class="icon-left">
+                    <svg
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <path
+                            d="M19 22.0001H5C4.44772 22.0001 4 21.5524 4 21.0001V13.0001H2L11.292 3.70711C11.4796 3.51933 11.7341 3.41382 11.9995 3.41382C12.2649 3.41382 12.5194 3.51933 12.707 3.70711L22 13.0001H20V21.0001C20 21.5524 19.5523 22.0001 19 22.0001ZM10 15.0001H14V20.0001H18V11.8281L12 5.8281L6 11.8281V20.0001H10V15.0001Z"
+                        />
+                    </svg>
+                </span>
+
+                {{ page.data.home }}
+            </a>
+
+            <div class="product__img">
+                <img
+                    src="assets/img/pages/store/placeholder337x385.svg"
+                    class="placeholder"
+                    alt="placeholder"
+                />
+
+                <img [src]="product.thumbnail" class="img-product" alt="alt" />
+            </div>
+        </div>
+
+        <div class="product__info other">
+            <h1 class="h1">
+                {{
+                    product.productType.titleSingle
+                        ? product.productType.titleSingle
+                        : product.productCategory.titleSingle
+                }}
+                <br />
+
+                {{ product.title }}
+            </h1>
+
+            <div class="price">
+                <p class="price-title">
+                    <span class="icon-left">
+                        <img
+                            src="assets/img/pages/store/icon-price.svg"
+                            alt="alt"
+                        />
+                    </span>
+
+                    {{ page.data.priceSingle }}
+                </p>
+
+                <p
+                    class="price-number"
+                    [innerHTML]="
+                        page.data.scores | replace : { price: +product.price }
+                    "
+                >
+                    {{ +product.price }} баллов
+                </p>
+
+                <div class="buttons">
+                    <div class="buttons__row">
+                        <button
+                            class="btn-darkblue"
+                            type="button"
+                            (click)="toggleInfo(1)"
+                            id="btn1"
+                        >
+                            <span
+                                [innerHTML]="
+                                    page.data.buy
+                                        | replace : { price: +product.price }
+                                "
+                            >
+                                Купить за {{ +product.price }} баллов
+                            </span>
+                        </button>
+
+                        <div class="info" [class.active]="openInfo === 1">
+                            <div class="btn-info desctop">
+                                <div class="icon-default">
+                                    <svg
+                                        width="17"
+                                        height="16"
+                                        viewBox="0 0 17 16"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <path
+                                            d="M8.02963 0C3.6053 0 0 3.592 0 8C0 12.408 3.6053 16 8.02963 16C12.454 16 16.0593 12.408 16.0593 8C16.0593 3.592 12.454 0 8.02963 0ZM8.02963 11.264C7.70041 11.264 7.42741 11 7.42741 10.664C7.42741 10.336 7.70041 10.064 8.02963 10.064C8.36687 10.064 8.63185 10.336 8.63185 10.664C8.63185 11 8.36687 11.264 8.02963 11.264ZM8.63185 8.464C8.63185 8.8 8.35884 9.064 8.02963 9.064C7.70041 9.064 7.42741 8.8 7.42741 8.464V4.736C7.42741 4.4 7.70041 4.136 8.02963 4.136C8.35884 4.136 8.63185 4.4 8.63185 4.736V8.464Z"
+                                            fill="#36B8BC"
+                                        />
+                                    </svg>
+                                </div>
+                                <div class="icon-active">
+                                    <svg
+                                        width="17"
+                                        height="16"
+                                        viewBox="0 0 17 16"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <path
+                                            d="M8.02963 0C3.6053 0 0 3.592 0 8C0 12.408 3.6053 16 8.02963 16C12.454 16 16.0593 12.408 16.0593 8C16.0593 3.592 12.454 0 8.02963 0ZM8.02963 11.264C7.70041 11.264 7.42741 11 7.42741 10.664C7.42741 10.336 7.70041 10.064 8.02963 10.064C8.36687 10.064 8.63185 10.336 8.63185 10.664C8.63185 11 8.36687 11.264 8.02963 11.264ZM8.63185 8.464C8.63185 8.8 8.35884 9.064 8.02963 9.064C7.70041 9.064 7.42741 8.8 7.42741 8.464V4.736C7.42741 4.4 7.70041 4.136 8.02963 4.136C8.35884 4.136 8.63185 4.4 8.63185 4.736V8.464Z"
+                                            fill="#36B8BC"
+                                        />
+                                    </svg>
+                                </div>
+                            </div>
+
+                            <button
+                                class="btn-info mobile"
+                                (click)="toggleInfo(1)"
+                                id="btnInfoMob1"
+                            >
+                                <div class="icon-default">
+                                    <svg
+                                        width="17"
+                                        height="16"
+                                        viewBox="0 0 17 16"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <path
+                                            d="M8.02963 0C3.6053 0 0 3.592 0 8C0 12.408 3.6053 16 8.02963 16C12.454 16 16.0593 12.408 16.0593 8C16.0593 3.592 12.454 0 8.02963 0ZM8.02963 11.264C7.70041 11.264 7.42741 11 7.42741 10.664C7.42741 10.336 7.70041 10.064 8.02963 10.064C8.36687 10.064 8.63185 10.336 8.63185 10.664C8.63185 11 8.36687 11.264 8.02963 11.264ZM8.63185 8.464C8.63185 8.8 8.35884 9.064 8.02963 9.064C7.70041 9.064 7.42741 8.8 7.42741 8.464V4.736C7.42741 4.4 7.70041 4.136 8.02963 4.136C8.35884 4.136 8.63185 4.4 8.63185 4.736V8.464Z"
+                                            fill="#36B8BC"
+                                        />
+                                    </svg>
+                                </div>
+                                <div class="icon-active">
+                                    <svg
+                                        width="17"
+                                        height="16"
+                                        viewBox="0 0 17 16"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <path
+                                            d="M8.02963 0C3.6053 0 0 3.592 0 8C0 12.408 3.6053 16 8.02963 16C12.454 16 16.0593 12.408 16.0593 8C16.0593 3.592 12.454 0 8.02963 0ZM8.02963 11.264C7.70041 11.264 7.42741 11 7.42741 10.664C7.42741 10.336 7.70041 10.064 8.02963 10.064C8.36687 10.064 8.63185 10.336 8.63185 10.664C8.63185 11 8.36687 11.264 8.02963 11.264ZM8.63185 8.464C8.63185 8.8 8.35884 9.064 8.02963 9.064C7.70041 9.064 7.42741 8.8 7.42741 8.464V4.736C7.42741 4.4 7.70041 4.136 8.02963 4.136C8.35884 4.136 8.63185 4.4 8.63185 4.736V8.464Z"
+                                            fill="#36B8BC"
+                                        />
+                                    </svg>
+                                </div>
+                            </button>
+
+                            <div class="dropdown">
+                                <span
+                                    class="text"
+                                    [innerHTML]="page.data.preorder"
+                                    >Предзаказ на все товары PRIVAT Store будет
+                                    доступен в IV квартале 2023 года. Приносим
+                                    свои извинения за ожидание.
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="buttons__row">
+                        <button
+                            class="btn-darkblue"
+                            type="button"
+                            (click)="toggleInfo(2)"
+                            id="btn2"
+                        >
+                            <span [innerHTML]="page.data.takeGift">
+                                Получить в подарок
+                            </span>
+                        </button>
+                        <div class="info" [class.active]="openInfo === 2">
+                            <div class="btn-info desctop">
+                                <div class="icon-default">
+                                    <svg
+                                        width="17"
+                                        height="16"
+                                        viewBox="0 0 17 16"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <path
+                                            d="M8.02963 0C3.6053 0 0 3.592 0 8C0 12.408 3.6053 16 8.02963 16C12.454 16 16.0593 12.408 16.0593 8C16.0593 3.592 12.454 0 8.02963 0ZM8.02963 11.264C7.70041 11.264 7.42741 11 7.42741 10.664C7.42741 10.336 7.70041 10.064 8.02963 10.064C8.36687 10.064 8.63185 10.336 8.63185 10.664C8.63185 11 8.36687 11.264 8.02963 11.264ZM8.63185 8.464C8.63185 8.8 8.35884 9.064 8.02963 9.064C7.70041 9.064 7.42741 8.8 7.42741 8.464V4.736C7.42741 4.4 7.70041 4.136 8.02963 4.136C8.35884 4.136 8.63185 4.4 8.63185 4.736V8.464Z"
+                                            fill="#36B8BC"
+                                        />
+                                    </svg>
+                                </div>
+                                <div class="icon-active">
+                                    <svg
+                                        width="17"
+                                        height="16"
+                                        viewBox="0 0 17 16"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <path
+                                            d="M8.02963 0C3.6053 0 0 3.592 0 8C0 12.408 3.6053 16 8.02963 16C12.454 16 16.0593 12.408 16.0593 8C16.0593 3.592 12.454 0 8.02963 0ZM8.02963 11.264C7.70041 11.264 7.42741 11 7.42741 10.664C7.42741 10.336 7.70041 10.064 8.02963 10.064C8.36687 10.064 8.63185 10.336 8.63185 10.664C8.63185 11 8.36687 11.264 8.02963 11.264ZM8.63185 8.464C8.63185 8.8 8.35884 9.064 8.02963 9.064C7.70041 9.064 7.42741 8.8 7.42741 8.464V4.736C7.42741 4.4 7.70041 4.136 8.02963 4.136C8.35884 4.136 8.63185 4.4 8.63185 4.736V8.464Z"
+                                            fill="#36B8BC"
+                                        />
+                                    </svg>
+                                </div>
+                            </div>
+
+                            <button
+                                type="button"
+                                class="btn-info mobile"
+                                (click)="toggleInfo(2)"
+                                id="btnInfoMob2"
+                            >
+                                <div class="icon-default">
+                                    <svg
+                                        width="17"
+                                        height="16"
+                                        viewBox="0 0 17 16"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <path
+                                            d="M8.02963 0C3.6053 0 0 3.592 0 8C0 12.408 3.6053 16 8.02963 16C12.454 16 16.0593 12.408 16.0593 8C16.0593 3.592 12.454 0 8.02963 0ZM8.02963 11.264C7.70041 11.264 7.42741 11 7.42741 10.664C7.42741 10.336 7.70041 10.064 8.02963 10.064C8.36687 10.064 8.63185 10.336 8.63185 10.664C8.63185 11 8.36687 11.264 8.02963 11.264ZM8.63185 8.464C8.63185 8.8 8.35884 9.064 8.02963 9.064C7.70041 9.064 7.42741 8.8 7.42741 8.464V4.736C7.42741 4.4 7.70041 4.136 8.02963 4.136C8.35884 4.136 8.63185 4.4 8.63185 4.736V8.464Z"
+                                            fill="#36B8BC"
+                                        />
+                                    </svg>
+                                </div>
+                                <div class="icon-active">
+                                    <svg
+                                        width="17"
+                                        height="16"
+                                        viewBox="0 0 17 16"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <path
+                                            d="M8.02963 0C3.6053 0 0 3.592 0 8C0 12.408 3.6053 16 8.02963 16C12.454 16 16.0593 12.408 16.0593 8C16.0593 3.592 12.454 0 8.02963 0ZM8.02963 11.264C7.70041 11.264 7.42741 11 7.42741 10.664C7.42741 10.336 7.70041 10.064 8.02963 10.064C8.36687 10.064 8.63185 10.336 8.63185 10.664C8.63185 11 8.36687 11.264 8.02963 11.264ZM8.63185 8.464C8.63185 8.8 8.35884 9.064 8.02963 9.064C7.70041 9.064 7.42741 8.8 7.42741 8.464V4.736C7.42741 4.4 7.70041 4.136 8.02963 4.136C8.35884 4.136 8.63185 4.4 8.63185 4.736V8.464Z"
+                                            fill="#36B8BC"
+                                        />
+                                    </svg>
+                                </div>
+                            </button>
+                            <div class="dropdown">
+                                <span
+                                    class="text"
+                                    [innerHTML]="page.data.giveaways"
+                                    >Периодически мы проводим раздачи ценных
+                                    подарков, одними из которых являются товары
+                                    PRIVAT Store. Участвуйте в наших раздачах и
+                                    выигрывайте.</span
+                                >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- <div class="about" *ngIf="product.productCategory.slug === 't-shirts'">
+        <h3 class="h3" [innerHTML]="page.data.tshirtCond">
+            Хотите футболку прямо сейчас?<br />
+            И заработать дополнительно 15 USD?
+        </h3>
+
+        <ul class="about__list">
+            <li class="about__item" [innerHTML]="page.data.step1">
+                <span class="step">Шаг 1.</span> Распечатайте футболку в своем
+                городе по нашему дизайн-макету, который можно
+                <a href="">скачать здесь</a> (ваши расходы - $5-7).
+            </li>
+            <li class="about__item" [innerHTML]="page.data.step2">
+                <span class="step">Шаг 2.</span> Сфотографируйтесь в футболке
+                PRIVAT Club и разместите свое фото в любой социальной сети с
+                текстом: Я получил бесплатный NFT от PRIVAT Club, присоединяйся
+                ко мне и получи свой подарок!
+                https://вставьте_вашу_реферальную_ссылку
+            </li>
+            <li class="about__item" [innerHTML]="page.data.step3">
+                <span class="step">Шаг 3.</span> Отправьте ссылку на свой пост в
+                социальной сети в нашу Telegram-группу (<a
+                    target="_blank"
+                    href="@privatclub_world"
+                    >@privatclub_world</a
+                >) с текстом: Я надел футболку PRIVAT Club и получил 15 USD!
+            </li>
+            <li class="about__item" [innerHTML]="page.data.step4">
+                <span class="step">Шаг 4.</span> На ваш Призовой счет будет
+                зачислено 15 USD, которые вы сможете вывести без какой-либо
+                комиссии на свой адрес USDT, USDC или DAI.
+            </li>
+
+            <li class="about__item">
+                <span class="bold" [innerHTML]="page.data.photo">
+                    За групповое фото из 5 человек в футболках PRIVAT вы
+                    получите $90 вместо $75!
+                </span>
+            </li>
+        </ul>
+    </div> -->
+
+    <div class="about logo">
+        <div class="private-store-logo">
+            <img
+                class="type-1"
+                src="assets/img/pages/store/privat-store1.svg"
+                alt="alt"
+            />
+            <img
+                class="type-2"
+                src="assets/img/pages/store/privat-store2.svg"
+                alt="alt"
+            />
+        </div>
+    </div>
+</div>

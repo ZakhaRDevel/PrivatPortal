@@ -1,0 +1,296 @@
+<div class="store" #sliderBlock>
+    <section class="hero">
+        <div class="hero__bg">
+            <div class="hero__bg-1">
+                <img src="assets/img/pages/store/hero-radar.svg" alt="radar" />
+            </div>
+            <div class="hero__bg-2">
+                <img
+                    class="desctop"
+                    src="assets/img/pages/store/hero-privat.svg"
+                    alt="alt"
+                />
+                <img
+                    class="mobile"
+                    src="assets/img/pages/store/hero-privat-mini.svg"
+                    alt="alt"
+                />
+            </div>
+        </div>
+
+        <h1 class="hero__title" [innerHTML]="page.data.title">
+            Станьте частью <br />
+            сообщества PRIVAT
+        </h1>
+
+        <div class="hero__showcase">
+            <div class="hero__showcase-human">
+                <div class="hero__showcase-man">
+                    <img
+                        srcset="assets/img/pages/store/boy1@2x.png 2x"
+                        src="assets/img/pages/store/boy1.png"
+                    />
+                </div>
+                <div class="hero__showcase-woman">
+                    <img
+                        srcset="assets/img/pages/store/girl1@2x.png 2x"
+                        src="assets/img/pages/store/girl1.png"
+                    />
+                </div>
+            </div>
+
+            <div class="hero__showcase-podium">
+                <img
+                    srcset="assets/img/pages/store/podium@2x.png 2x"
+                    src="assets/img/pages/store/podium.png"
+                />
+            </div>
+        </div>
+
+        <div class="hero__mouse">
+            <img src="assets/img/pages/store/icon-mouse.svg" alt="alt" />
+        </div>
+
+        <div class="hero__filter">
+            <div
+                class="hero__filter-item"
+                *ngFor="let category of categories | sort : 'id'; let i = index"
+                [class.active]="openBtnFilter === category.slug"
+            >
+                <button
+                    class="btn-dropdown"
+                    (click)="openFilter(category.slug)"
+                    id="btnDropdown{{ i }}"
+                >
+                    {{ category.title }}
+                    <span class="icon-right">
+                        <img
+                            src="assets/img/pages/store/fi-rr-caret-down.svg"
+                            alt="alt"
+                        />
+                    </span>
+                </button>
+
+                <ul class="dropdown level-1 br-r-b-0" id="dropdown{{ i }}">
+                    <li
+                        class="dropdown-item"
+                        *ngFor="let type of category.productTypes | sort : 'id'"
+                    >
+                        <button
+                            class="btn-filter jc-sb"
+                            (click)="selectTab(category, type, null)"
+                        >
+                            {{ type.title }}
+                            <span
+                                class="icon-right"
+                                *ngIf="type?.productSeries?.length"
+                            >
+                                <svg
+                                    width="6"
+                                    height="8"
+                                    viewBox="0 0 6 8"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <path
+                                        d="M1 1.70751L3.47337 4L1 6.29249L1.7633 7L5 4L1.7633 1L1 1.70751Z"
+                                    />
+                                </svg>
+                            </span>
+                        </button>
+
+                        <ul
+                            class="dropdown level-2"
+                            *ngIf="type?.productSeries?.length"
+                        >
+                            <li
+                                class="dropdown-item"
+                                *ngFor="
+                                    let serie of type.productSeries
+                                        | sort : 'id'
+                                "
+                            >
+                                <button
+                                    class="btn-filter"
+                                    (click)="selectTab(category, type, serie)"
+                                >
+                                    {{ serie.title }}
+                                </button>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <button
+            class="btn-catalog"
+            (click)="openModalCatalog()"
+            [innerHTML]="page.data.catalog"
+        >
+            Перейти в каталог
+        </button>
+    </section>
+
+    <section class="products" #productsBlock id="products">
+        <div class="products__head">
+            <div class="breadcrumbs">
+                <div class="btn-breadcrumbs">
+                    {{ selectedCategory?.title }}
+                </div>
+
+                <div class="symbol symbol-1" *ngIf="selectedSerie?.title">
+                    /
+                </div>
+                <div class="symbol symbol-2" *ngIf="!selectedSerie?.title">
+                    ->
+                </div>
+
+                <div class="btn-breadcrumbs">
+                    {{ selectedType?.title }}
+                </div>
+
+                <ng-container *ngIf="selectedSerie?.title">
+                    <div class="symbol symbol-2">-></div>
+
+                    <div class="btn-breadcrumbs">
+                        {{ selectedSerie?.title }}
+                    </div>
+                </ng-container>
+            </div>
+
+            <div class="colors" *ngIf="selectedSerie?.productColors?.length">
+                <p class="colors__title" [innerHTML]="page.data.color">Цвет</p>
+
+                <ul class="list">
+                    <li
+                        class="list__item"
+                        *ngFor="
+                            let color of selectedSerie.productColors
+                                | sort : 'id' : 'ba'
+                        "
+                    >
+                        <button
+                            class="btn-color"
+                            [ngClass]="color.code"
+                            [class.active]="selectedColor.slug == color.slug"
+                            (click)="
+                                selectTab(
+                                    selectedCategory,
+                                    selectedType,
+                                    selectedSerie,
+                                    color
+                                )
+                            "
+                        ></button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <h2 class="products__title">
+            {{ selectedCategory?.title }}
+        </h2>
+
+        <div class="products__slider" id="slider" *ngIf="!loading">
+            <div
+                class="products__slider-content"
+                [class.two-column-dots]="products.length > 11"
+                [class.tree-items]="products.length < 4"
+            >
+                <ngx-slick-carousel
+                    id="slider-product slider-for "
+                    #sliderProduct
+                    class="carousel sliderProduct"
+                    [config]="sliderProductConfig"
+                    (init)="sliderChange($event)"
+                    (afterChange)="sliderChange($event, 'after')"
+                    (beforeChange)="
+                        sliderChange($event, 'before'); beforeChange($event)
+                    "
+                >
+                    <div
+                        class="slider-item slider-item-info"
+                        id="product_id_{{ item.id }}"
+                        ngxSlickItem
+                        *ngFor="let item of products; let i = index"
+                    >
+                        <div class="item">
+                            <a
+                                class="item__picture"
+                                routerLink="100{{ currentProduct?.id }}"
+                                [target]="isMobile ? '_self' : '_blank'"
+                            >
+                                <img
+                                    [src]="item.thumbnail"
+                                    alt="{{ item.title }}"
+                                />
+                            </a>
+                        </div>
+                    </div>
+                </ngx-slick-carousel>
+            </div>
+            <div class="products__slider-info">
+                <ngx-slick-carousel
+                    id="slider-info slider-nav "
+                    #sliderInfo
+                    class="carousel sliderInfo"
+                    [config]="sliderInfoConfig"
+                >
+                    <div
+                        class="slider-item"
+                        id="info_id_{{ currentProduct?.id }}"
+                        ngxSlickItem
+                        *ngFor="let item of [1]"
+                    >
+                        <div class="item">
+                            <div class="item__info">
+                                <p class="item__title">
+                                    <span class="category"
+                                        >{{
+                                            currentProduct?.productType
+                                                ?.titleSingle
+                                                ? currentProduct?.productType
+                                                      ?.titleSingle
+                                                : currentProduct
+                                                      ?.productCategory
+                                                      ?.titleSingle
+                                        }}
+
+                                        <span class="dot"></span>
+                                    </span>
+                                    {{ currentProduct?.title }}
+                                </p>
+
+                                <div
+                                    class="item__price"
+                                    [innerHTML]="
+                                        page.data.price
+                                            | replace
+                                                : {
+                                                      price: +currentProduct?.price
+                                                  }
+                                    "
+                                >
+                                    Цена: {{ +currentProduct?.price }} баллов
+                                </div>
+
+                                <a
+                                    routerLink="100{{ currentProduct?.id }}"
+                                    [target]="isMobile ? '_self' : '_blank'"
+                                    class="btn-more"
+                                    [innerHTML]="page.data.more"
+                                    >Подробнее</a
+                                >
+                            </div>
+                        </div>
+                    </div>
+                </ngx-slick-carousel>
+            </div>
+        </div>
+
+        <div class="loader" *ngIf="loading">
+            <app-loader></app-loader>
+        </div>
+    </section>
+</div>

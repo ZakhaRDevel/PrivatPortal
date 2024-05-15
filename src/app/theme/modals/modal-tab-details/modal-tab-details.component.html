@@ -1,0 +1,129 @@
+<div
+    class="dialog"
+    [class.closing]="isClosing"
+    [class.giveaway]="!data.refPage"
+>
+    <div class="dialog__wrap">
+        <div class="dialog__header">
+            <h3 class="dialog__header-title" [innerHTML]="data.userTitle">
+                Пользователь
+            </h3>
+            <button class="btn-close" (click)="closeDialog()"></button>
+        </div>
+
+        <div class="dialog__body">
+            <div class="dialog__body-row">
+                <p class="title">{{ data.title_1 }}</p>
+                <span class="value id">{{ data.value_1 }}</span>
+            </div>
+            <div class="dialog__body-row">
+                <p class="title">{{ data.title_2 }}</p>
+                <span class="value">{{ data.value_2 }}</span>
+            </div>
+            <div
+                class="dialog__body-row"
+                *ngIf="!data?.userDetail?.hideFullName"
+            >
+                <p class="title">{{ data.title_3 }}</p>
+                <span class="value">{{ data.value_3 }}</span>
+            </div>
+            <div class="dialog__body-row prize">
+                <p class="title">{{ data.title_4 }}</p>
+                <span *ngIf="!data.item" class="value">{{
+                    (+data.value_4).toFixed(2) + " USD"
+                }}</span>
+                <span *ngIf="data.item" class="value">{{
+                    data.value_4
+                        | replace
+                            : {
+                                  place: data.item.data.place,
+                                  giveaway: data.item.data.giveaway?.title,
+                                  referralId: data.item.data.refferalId,
+                                  amount: data.item.data.refAmount
+                              }
+                }}</span>
+            </div>
+
+            <div class="dialog__body-row" *ngIf="data.refPage">
+                <p class="title">{{ data.title_5 }}</p>
+                <div class="social">
+                    <a
+                        *ngIf="
+                            data.userDetail?.twitterUrl &&
+                            !data.userDetail?.hideTwitter
+                        "
+                        class="social__item"
+                        href="{{ data.userDetail?.twitterUrl }}"
+                        target="_blank"
+                        ><img
+                            class="twitter"
+                            src="assets/img/icons/soc/twitter.svg"
+                            alt="icon"
+                    /></a>
+                    <a
+                        *ngIf="
+                            data.userDetail?.facebookUrl &&
+                            !data.userDetail?.hideFacebook
+                        "
+                        class="social__item"
+                        href="{{ data.userDetail?.facebookUrl }}"
+                        target="_blank"
+                        ><img
+                            class="facebook"
+                            src="assets/img/icons/soc/facebook.svg"
+                            alt="icon"
+                    /></a>
+                    <a
+                        *ngIf="
+                            data.userDetail?.linkedinUrl &&
+                            !data.userDetail?.hideLinkedIn
+                        "
+                        class="social__item"
+                        href="{{ data.userDetail?.linkedinUrl }}"
+                        target="_blank"
+                        ><img
+                            class="linkedin"
+                            src="assets/img/icons/soc/linkedin.svg"
+                            alt="icon"
+                    /></a>
+                    <a
+                        *ngIf="data.telegram"
+                        class="social__item"
+                        href="https://t.me/{{ data.telegram }}"
+                        target="_blank"
+                        ><img
+                            class="telegram"
+                            src="assets/img/icons/soc/telegram.svg"
+                            alt="icon"
+                    /></a>
+                    <a
+                        *ngIf="
+                            data.userDetail?.tiktokUrl &&
+                            !data.userDetail?.hideTiktok
+                        "
+                        class="social__item"
+                        href="{{ data.userDetail?.tiktokUrl }}"
+                        target="_blank"
+                        ><img
+                            class="tiktok"
+                            src="assets/img/icons/soc/tiktok.svg"
+                            alt="icon"
+                    /></a>
+                    <a
+                        *ngIf="
+                            data.userDetail?.instagramUrl &&
+                            !data.userDetail?.hideInstagram
+                        "
+                        class="social__item"
+                        href="{{ data.userDetail?.instagramUrl }}"
+                        target="_blank"
+                        ><img
+                            class="instagram"
+                            src="assets/img/icons/soc/ref_instagram.svg"
+                            alt="icon"
+                    /></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,88 @@
+<form class="pincode"
+      [formGroup]="formGroup"
+      (ngSubmit)="submit()">
+
+    <div class="inputs"
+         formGroupName="numberCode"
+         [ngClass]="{error: hasError(control('numberCode'))}">
+        <input #number0
+               type="text"
+               maxlength="1"
+               formControlName="number0"
+               tabindex="1"
+               (paste)="onPaste($event, 'numberCode')"
+        />
+        <input #number1
+               type="text"
+               maxlength="1"
+               formControlName="number1"
+               tabindex="2"
+               [attr.disabled]="
+                                    !hasValue(
+                                        control('number0', 'numberCode')
+                                    )
+                                        ? 'true'
+                                        : null
+                                "
+               (paste)="onPaste($event, 'numberCode')"
+        />
+        <input #number2
+               type="text"
+               maxlength="1"
+               formControlName="number2"
+               tabindex="3"
+               [attr.disabled]="
+                                    !hasValue(
+                                        control('number1', 'numberCode')
+                                    )
+                                        ? 'true'
+                                        : null
+                                "
+               (paste)="onPaste($event, 'numberCode')"
+        />
+        <input #number3
+               type="text"
+               maxlength="1"
+               formControlName="number3"
+               tabindex="4"
+               [attr.disabled]="
+                                    !hasValue(
+                                        control('number2', 'numberCode')
+                                    )
+                                        ? 'true'
+                                        : null
+                                "
+               (paste)="onPaste($event, 'numberCode')"
+        />
+        <input #number4
+               type="text"
+               maxlength="1"
+               formControlName="number4"
+               tabindex="5"
+               [attr.disabled]="
+                                    !hasValue(
+                                        control('number3', 'numberCode')
+                                    )
+                                        ? 'true'
+                                        : null
+                                "
+               (paste)="onPaste($event, 'numberCode')"
+        />
+        <input #number5
+               type="text"
+               maxlength="1"
+               formControlName="number5"
+               [attr.disabled]="
+                                    !hasValue(
+                                        control('number4', 'numberCode')
+                                    )
+                                        ? 'true'
+                                        : null
+                                "
+               (paste)="onPaste($event, 'numberCode')"
+        />
+    </div>
+    <div class="errors"  [ngClass]="{ show: hasError(control('numberCode')) }">
+        Неверный код, попробуйте еще раз
+    </div>
+</form>

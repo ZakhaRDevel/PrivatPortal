@@ -1,0 +1,279 @@
+<div class="modal" [@ModalAnimate]>
+    <div class="modal__content">
+        <div class="modal__block plug" *ngIf="data.type === 'type_plug'">
+            <div class="modal__head">
+                <div class="modal__head-btn">
+                    <button class="btn-close" (click)="modalClose()"></button>
+                    <button class="arrow-close" (click)="modalClose()">
+                        <img src="assets/img/icons/back.svg" alt="alt" />
+                    </button>
+                </div>
+
+                <h4
+                    class="title"
+                    [innerHTML]="
+                        isSuccessful
+                            ? 'Telegram-бот подключен'
+                            : data.page.data.modalTelegram.title
+                    "
+                >
+                    Подключить Telegram-бота
+                </h4>
+            </div>
+
+            <div class="modal__body" *ngIf="!isSuccessful">
+                <div class="wrapper">
+                    <h6 [innerHTML]="data.page.data.modalTelegram.findTg">
+                        1. Найдите Telegram-бота PRIVAT Club
+                    </h6>
+                    <p [innerHTML]="data.page.data.modalTelegram.openTg">
+                        Откройте Telegram и введите в окне поиска имя
+                        <span>@pvt_club_devel_bot</span>. Если вы не можете
+                        найти бота, перейдите по этой ссылке: <br />
+                        <a
+                            href="https://t.me/pvt_club_devel_bot"
+                            target="_blank"
+                            >https://t.me/pvt_club_devel_bot</a
+                        >
+                    </p>
+                </div>
+                <div class="wrapper">
+                    <h6 [innerHTML]="data.page.data.modalTelegram.sendCode">
+                        2. Введите 6-значный код активации
+                    </h6>
+                    <p
+                        [innerHTML]="
+                            data.page.data.modalTelegram.copyCode
+                                | replace : { code: tgCode }
+                        "
+                    >
+                        Введите ниже код, полученный от Telegram-бота
+                    </p>
+                </div>
+                <form class="form">
+                    <div class="copy">
+                        <!-- <app-code-input
+                            #codeInput
+                            (onSendEvent)="setCode($event)"
+                            [codeError]="data.pageErrors.data.wrongCode"
+                        ></app-code-input> -->
+                        <div class="copy__inner">
+                            <div class="copy__code">{{ tgCode }}</div>
+                            <button
+                                type="button"
+                                class="copy__btn"
+                                (click)="copyString(tgCode)"
+                            >
+                                <svg
+                                    width="22"
+                                    height="26"
+                                    viewBox="0 0 22 26"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <path
+                                        d="M12.0846 4.33333C12.0846 4.62064 12.1988 4.89619 12.4019 5.09936C12.6051 5.30252 12.8806 5.41666 13.168 5.41666H17.4645C17.3847 4.71323 17.076 4.05549 16.5859 3.54466L14.1116 0.989076C13.5703 0.440419 12.8522 0.101148 12.0846 0.031409V4.33333ZM9.91797 4.33333V-7.62939e-06H5.58463C4.14857 0.00171255 2.77182 0.572948 1.75637 1.5884C0.740924 2.60385 0.169689 3.9806 0.167969 5.41666V16.25C0.169689 17.6861 0.740924 19.0628 1.75637 20.0783C2.77182 21.0937 4.14857 21.6649 5.58463 21.6667H12.0846C13.5207 21.6649 14.8974 21.0937 15.9129 20.0783C16.9283 19.0628 17.4996 17.6861 17.5013 16.25V7.58333H13.168C12.306 7.58333 11.4794 7.24092 10.8699 6.63142C10.2604 6.02193 9.91797 5.19528 9.91797 4.33333ZM16.418 26H6.66797C6.38065 26 6.1051 25.8859 5.90194 25.6827C5.69877 25.4795 5.58463 25.204 5.58463 24.9167C5.58463 24.6293 5.69877 24.3538 5.90194 24.1506C6.1051 23.9475 6.38065 23.8333 6.66797 23.8333H16.418C17.2799 23.8333 18.1066 23.4909 18.7161 22.8814C19.3256 22.2719 19.668 21.4453 19.668 20.5833V8.66666C19.668 8.37934 19.7821 8.10379 19.9853 7.90063C20.1884 7.69746 20.464 7.58333 20.7513 7.58333C21.0386 7.58333 21.3142 7.69746 21.5173 7.90063C21.7205 8.10379 21.8346 8.37934 21.8346 8.66666V20.5833C21.8329 22.0194 21.2617 23.3961 20.2462 24.4116C19.2308 25.427 17.854 25.9983 16.418 26Z"
+                                    />
+                                </svg>
+
+                                <span
+                                    class="dropdown"
+                                    [class.active]="isCopiedActive"
+                                    [innerHTML]="
+                                        data.pageGeneral.data.reflink.copied
+                                    "
+                                >
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="form-button">
+                        <button
+                            type="button"
+                            class="btn-submit"
+                            (click)="checkCode()"
+                        >
+                            <app-btn-loader
+                                [isSubmitted]="isSubmitted"
+                                [isAccount]="true"
+                            ></app-btn-loader>
+
+                            <span [class.hide]="isSubmitted">{{
+                                data.page.data.modalTelegram.checkBtn
+                            }}</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="modal__body is_successful" *ngIf="isSuccessful">
+                <div class="icon-wrap">
+                    <div class="icon-check">
+                        <img
+                            src="assets/img/pages/giveaways/icon-big-check-tg.svg"
+                            alt="icon"
+                        />
+                    </div>
+                    <h4
+                        class="h4"
+                        [innerHTML]="
+                            data.page.data.modalTelegram.successConnect
+                        "
+                    >
+                        Вы успешно подключили Telegram-бота!
+                    </h4>
+                </div>
+                <div class="buttons">
+                    <button
+                        class="btn-green"
+                        (click)="modalClose()"
+                        [innerHTML]="data.page.data.modalTickets.btnk"
+                    >
+                        OK
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal__block check" *ngIf="data.type === 'type_check'">
+            <div class="modal__head">
+                <div class="modal__head-btn">
+                    <button class="btn-close" (click)="modalClose()"></button>
+                    <button class="arrow-close" (click)="modalClose()">
+                        <img src="assets/img/icons/back.svg" alt="alt" />
+                    </button>
+                </div>
+
+                <h4 class="title">
+                    {{
+                        isSuccessful
+                            ? data.page.data.modalTelegram.tgConfirmed
+                            : data.page.data.modalTelegram.tgCheck
+                    }}
+                </h4>
+            </div>
+
+            <div class="modal__body" *ngIf="!isSuccessful">
+                <div class="alert">
+                    <div class="icon-left">
+                        <img
+                            src="assets/img/icons/icon-info-orange.svg"
+                            alt="info"
+                        />
+                    </div>
+
+                    <div
+                        class="text"
+                        [innerHTML]="data.page.data.modalTelegram.confirmTg"
+                    >
+                        Подтвердите ваш аккаунт Telegram.
+                    </div>
+                </div>
+                <form class="form">
+                    <div class="form-group">
+                        <p
+                            class="input-title"
+                            [innerHTML]="data.page.data.modalTelegram.code"
+                        >
+                            Проверочный код Telegram
+                        </p>
+                        <p
+                            class="input-sub-title"
+                            [innerHTML]="data.page.data.modalTelegram.enterCode"
+                        >
+                            Введите 6-значный код, полученный от PRIVAT Club
+                        </p>
+
+                        <div class="handler">
+                            <app-code-input
+                                #codeInput
+                                (onSendEvent)="setCode($event)"
+                                [codeError]="data.pageErrors.data.wrongCode"
+                            ></app-code-input>
+
+                            <div class="handler-action">
+                                <button
+                                    class="btn"
+                                    *ngIf="!countdown"
+                                    (click)="generateCode()"
+                                    [innerHTML]="
+                                        data.page.data.modalTelegram.receiveCOde
+                                    "
+                                >
+                                    Получить код
+                                </button>
+
+                                <div class="status" *ngIf="countdown">
+                                    <h6
+                                        [innerHTML]="
+                                            data.page.data.modalTelegram
+                                                .codeSended
+                                        "
+                                    >
+                                        Проверочный код отправлен
+                                    </h6>
+                                    <app-form-prompt
+                                        [dropdownText]="
+                                            data.page.data.modalTelegram.resend
+                                                | replace
+                                                    : { countdown: countdown }
+                                        "
+                                        [icon]="'i'"
+                                        [isTelegramCheck]="true"
+                                    ></app-form-prompt>
+                                </div>
+
+                                <button class="btn" *ngIf="" [innerHTML]="">
+                                    Отправить код снова
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- <div class="input-label"></div> -->
+                    </div>
+
+                    <div class="form-button">
+                        <button
+                            type="button"
+                            class="btn-submit"
+                            (click)="getCode()"
+                        >
+                            <app-btn-loader
+                                [isSubmitted]="isSubmitted"
+                                [isAccount]="true"
+                            ></app-btn-loader>
+                            <span [class.hide]="isSubmitted">{{
+                                data.page.data.modalTickets.confirm
+                            }}</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="modal__body is_successful" *ngIf="isSuccessful">
+                <div class="icon-wrap">
+                    <div class="icon-check">
+                        <img
+                            src="assets/img/pages/giveaways/icon-big-check-tg.svg"
+                            alt="icon"
+                        />
+                    </div>
+                    <h4
+                        class="h4"
+                        [innerHTML]="
+                            data.page.data.modalTelegram.successConfirm
+                        "
+                    >
+                        Ваш телеграм был успешно подтвержден!
+                    </h4>
+                </div>
+                <div class="buttons">
+                    <button
+                        class="btn-green"
+                        (click)="modalClose()"
+                        [innerHTML]="data.page.data.modalTickets.btnk"
+                    >
+                        OK
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

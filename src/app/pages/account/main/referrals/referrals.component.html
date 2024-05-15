@@ -1,0 +1,728 @@
+<div class="referrals">
+    <div class="referrals__wrapper">
+        <h3 class="referrals__header" [innerHTML]="page.data.title">
+            Рефералы
+        </h3>
+        <section class="general">
+            <div class="general__item item__link">
+                <h4 class="title" [innerHTML]="page.data.refLink">
+                    Реферальная ссылка
+                </h4>
+                <div class="text" [innerHTML]="page.data.inviteDesc">
+                    Приглашайте друзей и получайте еще больше преимуществ!
+                </div>
+                <div class="ref-link">
+                    <div
+                        class="wrapper"
+                        (mouseenter)="toggleRefDropdown(true)"
+                        (mouseleave)="toggleRefDropdown(false)"
+                    >
+                        <button class="btn-copy" (click)="copyString(link)">
+                            {{ link }}
+                        </button>
+                        <img
+                            class="mobile-icon"
+                            src="assets/img/icons/icon-info.svg"
+                            alt="icon"
+                        />
+                        <div
+                            class="dropdown"
+                            [class.active]="isRefDropdownActive"
+                        >
+                            <div class="icon">
+                                <img
+                                    src="assets/img/icons/icon-info.svg"
+                                    alt=""
+                                />
+                            </div>
+                            <span class="text" [innerHTML]="page.data.tooltip">
+                            </span>
+                        </div>
+                    </div>
+                    <button
+                        class="btn"
+                        type="button"
+                        (click)="copyHandler(link)"
+                    >
+                        <img
+                            class="icon"
+                            src="assets/img/icons/icon-copy.svg"
+                            alt="copy"
+                        />
+                        <p class="content" [innerHTML]="page.data.copy">
+                            Скопировать
+                        </p>
+                        <p
+                            class="content-mobile"
+                            [innerHTML]="page.data.copyLink"
+                        >
+                            Скопировать ссылку
+                        </p>
+
+                        <span
+                            class="dropdown"
+                            [class.active]="isCopiedActive"
+                            [innerHTML]="pageGeneral.data.reflink.copied"
+                        >
+                        </span>
+                    </button>
+                </div>
+            </div>
+            <div class="general__item item__stats">
+                <div class="title" [innerHTML]="page.data.linkStat">
+                    Статистика ссылки
+                </div>
+                <div class="list">
+                    <div class="list-item">
+                        <div class="key" [innerHTML]="page.data.transitions">
+                            Переходы
+                        </div>
+                        <div class="value">
+                            {{ statistic.clicks | numberFormat }}
+                        </div>
+                    </div>
+                    <div class="list-item">
+                        <div class="key" [innerHTML]="page.data.registers">
+                            Регистрации
+                        </div>
+                        <div class="value">
+                            {{ statistic.registers | numberFormat }}
+                        </div>
+                    </div>
+                    <div class="list-item">
+                        <div class="key" [innerHTML]="page.data.conversion">
+                            Конверсия
+                        </div>
+                        <div class="value">{{ statistic.conversion }}%</div>
+                    </div>
+                </div>
+            </div>
+            <div class="general__item item__points">
+                <div class="title" [innerHTML]="page.data.earnTickets1">
+                    Зарабатывайте баллы, чтобы выигрывать призы
+                </div>
+                <div class="list">
+                    <div class="list-item">
+                        <img
+                            src="assets/img/icons/star.svg"
+                            alt="icon"
+                            class="icon"
+                        />
+                        <p class="text" [innerHTML]="page.data.earnTickets2">
+                            За каждого друга, вступившего в по вашей ссылке, вам
+                            обоим будет начислено по 10 баллов.
+                        </p>
+                    </div>
+                    <div class="list-item">
+                        <img
+                            src="assets/img/icons/star.svg"
+                            alt="icon"
+                            class="icon"
+                        />
+                        <p class="text" [innerHTML]="page.data.earnTickets3">
+                            Стоимость одного билета для участия в розыгрыше – 10
+                            баллов. Чем больше билетов участвует в розыгрыше,
+                            тем больше шансов выиграть один из призов.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="general__item item__nft">
+                <div class="title" [innerHTML]="page.data.earnNft1">
+                    Зарабатывайте дополнительные NFT
+                </div>
+                <div class="list">
+                    <div class="list-item">
+                        <img
+                            src="assets/img/icons/star.svg"
+                            alt="icon"
+                            class="icon"
+                        />
+                        <p class="text" [innerHTML]="page.data.earnNft2">
+                            За каждые 50 участников, вступивших в PRIVAT Club по
+                            вашей ссылке, вы получаете дополнительную NFT карту
+                            стоимостью $50.
+                        </p>
+                    </div>
+                </div>
+                <button class="btn" type="button" (click)="openModalBanner()">
+                    <svg
+                        class="icon"
+                        width="20"
+                        height="16"
+                        viewBox="0 0 20 16"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <path
+                            d="M13.3016 3.2C13.3016 4.04869 12.9539 4.86263 12.335 5.46274C11.7161 6.06286 10.8768 6.4 10.0016 6.4C9.12635 6.4 8.28698 6.06286 7.66811 5.46274C7.04924 4.86263 6.70156 4.04869 6.70156 3.2C6.70156 2.35131 7.04924 1.53737 7.66811 0.937258C8.28698 0.337142 9.12635 0 10.0016 0C10.8768 0 11.7161 0.337142 12.335 0.937258C12.9539 1.53737 13.3016 2.35131 13.3016 3.2ZM18.8016 5.33333C18.8016 5.89913 18.5698 6.44175 18.1572 6.84183C17.7446 7.24191 17.185 7.46667 16.6016 7.46667C16.0181 7.46667 15.4585 7.24191 15.0459 6.84183C14.6333 6.44175 14.4016 5.89913 14.4016 5.33333C14.4016 4.76754 14.6333 4.22492 15.0459 3.82484C15.4585 3.42476 16.0181 3.2 16.6016 3.2C17.185 3.2 17.7446 3.42476 18.1572 3.82484C18.5698 4.22492 18.8016 4.76754 18.8016 5.33333ZM14.4016 12.8C14.4016 11.6684 13.938 10.5832 13.1128 9.78301C12.2877 8.98286 11.1685 8.53333 10.0016 8.53333C8.83461 8.53333 7.71545 8.98286 6.89029 9.78301C6.06513 10.5832 5.60156 11.6684 5.60156 12.8V16H14.4016V12.8ZM5.60156 5.33333C5.60156 5.89913 5.36978 6.44175 4.9572 6.84183C4.54462 7.24191 3.98504 7.46667 3.40156 7.46667C2.81809 7.46667 2.25851 7.24191 1.84593 6.84183C1.43335 6.44175 1.20156 5.89913 1.20156 5.33333C1.20156 4.76754 1.43335 4.22492 1.84593 3.82484C2.25851 3.42476 2.81809 3.2 3.40156 3.2C3.98504 3.2 4.54462 3.42476 4.9572 3.82484C5.36978 4.22492 5.60156 4.76754 5.60156 5.33333ZM16.6016 16V12.8C16.6032 11.7155 16.3192 10.6486 15.7766 9.70027C16.2642 9.57925 16.774 9.56783 17.2669 9.6669C17.7598 9.76597 18.2229 9.9729 18.6208 10.2719C19.0187 10.5709 19.3409 10.9541 19.5629 11.3922C19.7849 11.8304 19.9007 12.3119 19.9016 12.8V16H16.6016ZM4.22656 9.70027C3.68399 10.6486 3.40002 11.7155 3.40156 12.8V16H0.101563V12.8C0.101351 12.3115 0.216472 11.8295 0.438104 11.3908C0.659736 10.9521 0.981996 10.5685 1.38018 10.2692C1.77837 9.97003 2.24192 9.76318 2.7353 9.66455C3.22869 9.56593 3.7388 9.57814 4.22656 9.70027Z"
+                        />
+                    </svg>
+
+                    <p class="text" [innerHTML]="page.data.inviteFriends">
+                        Пригласить друзей
+                    </p>
+                </button>
+            </div>
+        </section>
+
+        <section class="stat">
+            <h4 class="stat__title" [innerHTML]="page.data.review">Обзор</h4>
+            <div class="stat__text" [innerHTML]="page.data.traceReff">
+                Отслеживайте рост рефералов по дням, неделям и месяцам.
+            </div>
+            <div class="stat__wrapper">
+                <div class="charts">
+                    <div class="item" *ngFor="let item of chart">
+                        <div class="number">{{ item.count }}</div>
+                        <div
+                            class="graph"
+                            [class.h0]="item.percent === 0"
+                            [style.height.px]="item.percent"
+                        ></div>
+                        <div class="date">{{ item.date }}</div>
+                    </div>
+                    <!-- <div class="item">
+                        <div class="number">1</div>
+                        <div class="graph h10"></div>
+                        <div class="date">09.06</div>
+                    </div>
+                    <div class="item">
+                        <div class="number">5</div>
+                        <div class="graph h50"></div>
+                        <div class="date">09.07</div>
+                    </div>
+                    <div class="item">
+                        <div class="number">0</div>
+                        <div class="graph h0"></div>
+                        <div class="date">09.08</div>
+                    </div>
+                    <div class="item">
+                        <div class="number">10</div>
+                        <div class="graph h100"></div>
+                        <div class="date">09.09</div>
+                    </div>
+                    <div class="item">
+                        <div class="number">8</div>
+                        <div class="graph h80"></div>
+                        <div class="date">09.10</div>
+                    </div>
+                    <div class="item">
+                        <div class="number">5</div>
+                        <div class="graph h50"></div>
+                        <div class="date">09.11</div>
+                    </div> -->
+                </div>
+                <div class="info">
+                    <div class="item">
+                        <div class="key" [innerHTML]="page.data.today">
+                            Сегодня
+                        </div>
+                        <div class="value">{{ statistic.chart.today }}</div>
+                    </div>
+                    <div class="item">
+                        <div class="key" [innerHTML]="page.data.week">
+                            Эта неделя
+                        </div>
+                        <div class="value">{{ statistic.chart.week }}</div>
+                    </div>
+                    <div class="item">
+                        <div class="key" [innerHTML]="page.data.month">
+                            Этот месяц
+                        </div>
+                        <div class="value">{{ statistic.chart.month }}</div>
+                    </div>
+                    <div class="item total">
+                        <div class="key" [innerHTML]="page.data.allTime">
+                            Все время
+                        </div>
+                        <div class="value">{{ statistic.chart.all }}</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="upliner">
+            <div class="upliner__title" [innerHTML]="page.data.upliner">
+                Мой аплайнер
+            </div>
+            <div class="upliner__text" [innerHTML]="page.data.uplinerDesc">
+                Будьте на связи со своим вышестоящим партнером.
+            </div>
+            <div class="upliner__wrapper">
+                <div class="col col_1">
+                    <div class="header" [innerHTML]="page.data.colId">ID</div>
+                    <div class="content">
+                        <img
+                            class="icon"
+                            src="assets/img/icons/icon-user-black.svg"
+                            alt="icon"
+                        />
+                        <span>{{ me.userUpliner.uplineId }}</span>
+                    </div>
+                </div>
+                <div class="col col_2">
+                    <div class="header" [innerHTML]="page.data.colCreated">
+                        Создан
+                    </div>
+                    <div class="content">
+                        <time>{{ me.userUpliner.createdDate }}</time>
+                    </div>
+                </div>
+                <div class="col col_3">
+                    <div class="header" [innerHTML]="page.data.colName">
+                        Имя
+                    </div>
+                    <div class="content">
+                        <div class="text">
+                            {{ me.userUpliner?.userDetail?.fullName }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col col_4">
+                    <div class="header"><span></span></div>
+                    <div class="content">
+                        <a
+                            class="t_link"
+                            href="https://t.me/{{ me.userUpliner.telegram }}"
+                            [target]="isMobile ? '_self' : '_blank'"
+                            ><svg
+                                class="icon"
+                                width="18"
+                                height="16"
+                                viewBox="0 0 18 16"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <path
+                                    d="M18 0.5668L15.1528 15.3339C15.1528 15.3339 14.7544 16.3578 13.66 15.8667L7.09065 10.6848L7.06019 10.6695C7.94756 9.84978 14.8286 3.48486 15.1293 3.19635C15.5949 2.74952 15.3059 2.48351 14.7653 2.82104L4.60117 9.46162L0.679868 8.10425C0.679868 8.10425 0.0627701 7.87843 0.00340374 7.38739C-0.0567437 6.89556 0.700177 6.62955 0.700177 6.62955L16.6861 0.177833C16.6861 0.177833 18 -0.416066 18 0.5668Z"
+                                />
+                            </svg>
+                            <span [innerHTML]="page.data.tgContact"
+                                >Связаться в Telegram</span
+                            >
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="referal">
+            <div class="referal__title" [innerHTML]="page.data.myRefs">
+                Мои рефералы
+            </div>
+
+            <div class="referal__text" [innerHTML]="page.data.refsList">
+                Список всех зарегистрированных рефералов по вашей ссылке.
+            </div>
+
+            <div class="referal__wrapper">
+                <div class="control">
+                    <ng-select
+                        class="days__select"
+                        [items]="dateFilter"
+                        [(ngModel)]="selectedDateFilter"
+                        bindLabel="days"
+                        [clearable]="false"
+                        [searchable]="false"
+                        dropdownPosition="bottom"
+                        [placeholder]="datePlaceholder"
+                        (change)="onDateChange()"
+                        #selectDate
+                    >
+                        <ng-template ng-label-tmp let-item="item">
+                            <span class="title">
+                                {{
+                                    page.data.periodDays
+                                        | replace : { number: item.days }
+                                }}
+                            </span>
+                        </ng-template>
+                        <ng-template #option ng-option-tmp let-item="item">
+                            <span class="title">
+                                {{
+                                    page.data.periodDays
+                                        | replace : { number: item.days }
+                                }}
+                            </span>
+                        </ng-template>
+                        <ng-template ng-footer-tmp>
+                            <button
+                                class="btn-more"
+                                (click)="openModal({ modalId: 'modalDate' })"
+                                [innerHTML]="page.data.selectPeriod"
+                            >
+                                Выбрать период
+                            </button>
+                        </ng-template>
+                    </ng-select>
+                    <div class="search">
+                        <label class="label"
+                            ><img
+                                class="icon"
+                                src="assets/img/icons/search-white.svg"
+                                alt="icon"
+                            /><span [innerHTML]="page.data.search">Поиск</span>
+                        </label>
+                        <input
+                            class="input"
+                            [placeholder]="page.data.searchPlaceholder"
+                            type="text"
+                            [(ngModel)]="kw"
+                            (ngModelChange)="onSearch()"
+                        />
+                    </div>
+                    <div class="lines">
+                        <label class="label" [innerHTML]="page.data.showStrings"
+                            >Показать строки</label
+                        >
+                        <ng-select
+                            class="lines__select"
+                            dropdownPosition="bottom"
+                            [clearable]="false"
+                            [searchable]="false"
+                            [(ngModel)]="config.itemsPerPage"
+                            [items]="itemsPerPage"
+                            (change)="filter()"
+                            ><ng-template ng-label-tmp let-item="item">
+                                <span class="title">
+                                    {{ item }}
+                                </span>
+                            </ng-template>
+                            <ng-template #option ng-option-tmp let-item="item">
+                                <span class="title">{{ item }} </span>
+                            </ng-template>
+                        </ng-select>
+                    </div>
+                </div>
+                <div class="users">
+                    <span
+                        [innerHTML]="
+                            page.data.total
+                                | replace : { number: config.totalItems }
+                        "
+                        >Всего пользователей: {{ config.totalItems }}</span
+                    >
+                </div>
+                <div class="table">
+                    <div class="table__head">
+                        <div class="table__row">
+                            <div
+                                class="table__cell"
+                                [innerHTML]="page.data.colId"
+                            >
+                                ID
+                            </div>
+                            <div
+                                class="table__cell"
+                                [innerHTML]="page.data.colCreated"
+                            >
+                                Создан
+                            </div>
+                            <div
+                                class="table__cell"
+                                [innerHTML]="page.data.colName"
+                            >
+                                Имя
+                            </div>
+                            <div
+                                class="table__cell"
+                                [innerHTML]="page.data.colEarned"
+                            >
+                                Заработано
+                            </div>
+                            <div class="table__cell">
+                                <div
+                                    class="social"
+                                    [innerHTML]="page.data.colContact"
+                                >
+                                    Связаться
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table__body">
+                        <div
+                            class="table__row"
+                            *ngFor="let item of data | paginate : config"
+                        >
+                            <div class="table__cell">
+                                <span class="id">{{ item.uplineId }}</span>
+                            </div>
+                            <div class="table__cell">
+                                <span>{{ item.createdDate }}</span>
+                            </div>
+                            <div type="button" class="table__cell name">
+                                <span>{{ item.userDetail.fullName }}</span>
+                                <button
+                                    type="button"
+                                    class="button"
+                                    (click)="
+                                        openModalDetails(
+                                            item.uplineId,
+                                            item.createdDate,
+                                            item.userDetail.fullName,
+                                            item.earned,
+                                            item.telegram,
+                                            item.userDetail
+                                        )
+                                    "
+                                >
+                                    <div class="dots">
+                                        <img
+                                            src="assets/img/icons/btn-dots.svg"
+                                            alt="dots"
+                                        />
+                                    </div>
+                                </button>
+                            </div>
+
+                            <div class="table__cell">
+                                {{ (+item.earned).toFixed(2) + " USD" }}
+                            </div>
+                            <div class="table__cell">
+                                <div class="social">
+                                    <a
+                                        *ngIf="
+                                            item.userDetail?.twitterUrl &&
+                                            !item.userDetail?.hideTwitter
+                                        "
+                                        class="social__item"
+                                        href="{{ item.userDetail?.twitterUrl }}"
+                                        target="_blank"
+                                        ><img
+                                            class="twitter"
+                                            src="assets/img/icons/soc/twitter.svg"
+                                            alt="icon"
+                                    /></a>
+                                    <a
+                                        *ngIf="
+                                            item.userDetail?.facebookUrl &&
+                                            !item.userDetail?.hideFacebook
+                                        "
+                                        class="social__item"
+                                        href="{{
+                                            item.userDetail?.facebookUrl
+                                        }}"
+                                        target="_blank"
+                                        ><img
+                                            class="facebook"
+                                            src="assets/img/icons/soc/facebook.svg"
+                                            alt="icon"
+                                    /></a>
+                                    <a
+                                        *ngIf="
+                                            item.userDetail?.linkedinUrl &&
+                                            !item.userDetail?.hideLinkedIn
+                                        "
+                                        class="social__item"
+                                        href="{{
+                                            item.userDetail?.linkedinUrl
+                                        }}"
+                                        target="_blank"
+                                        ><img
+                                            class="linkedin"
+                                            src="assets/img/icons/soc/linkedin.svg"
+                                            alt="icon"
+                                    /></a>
+                                    <a
+                                        *ngIf="item?.telegram"
+                                        class="social__item"
+                                        href="https://t.me/{{ item?.telegram }}"
+                                        target="_blank"
+                                        ><img
+                                            class="telegram"
+                                            src="assets/img/icons/soc/telegram.svg"
+                                            alt="icon"
+                                    /></a>
+                                    <a
+                                        *ngIf="
+                                            item.userDetail?.tiktokUrl &&
+                                            !item.userDetail?.hideTiktok
+                                        "
+                                        class="social__item"
+                                        href="{{ item.userDetail?.tiktokUrl }}"
+                                        target="_blank"
+                                        ><img
+                                            class="tiktok"
+                                            src="assets/img/icons/soc/tiktok.svg"
+                                            alt="icon"
+                                    /></a>
+                                    <a
+                                        *ngIf="
+                                            item.userDetail?.instagramUrl &&
+                                            !item.userDetail?.hideInstagram
+                                        "
+                                        class="social__item"
+                                        href="{{
+                                            item.userDetail?.instagramUrl
+                                        }}"
+                                        target="_blank"
+                                        ><img
+                                            class="instagram"
+                                            src="assets/img/icons/soc/ref_instagram.svg"
+                                            alt="icon"
+                                    /></a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="no_referrals" *ngIf="!data.length">
+                            <img
+                                class="image"
+                                src="assets/img/pages/referals/no-ref.png"
+                                alt=""
+                            />
+                            <span class="text">{{
+                                noData ? page.data.empty : page.data.searchEmpty
+                            }}</span>
+                            <button
+                                type="button"
+                                class="btn"
+                                (click)="openModalBanner()"
+                                [innerHTML]="page.data.inviteFriends"
+                            >
+                                Пригласить друзей
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pagination" *ngIf="config.totalItems > data.length">
+                <pagination-template
+                    #p="paginationApi"
+                    [id]="config.id"
+                    [maxSize]="
+                        p.getCurrent() < 5 ||
+                        p.getCurrent() > p.getLastPage() - 4
+                            ? 7
+                            : 9
+                    "
+                    (pageChange)="pageChange($event)"
+                    (pageBoundsCorrection)="pageChange($event)"
+                >
+                    <div class="custom-pagination">
+                        <div class="wrapper">
+                            <button
+                                type="button"
+                                class="link pagination-prev"
+                                *ngIf="isMobile || !p.isFirstPage()"
+                                (click)="p.previous()"
+                                [class.disabled]="p.isFirstPage()"
+                            >
+                                <svg
+                                    width="6"
+                                    height="10"
+                                    viewBox="0 0 6 10"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <path
+                                        class="icon"
+                                        fill-rule="evenodd"
+                                        clip-rule="evenodd"
+                                        d="M5.70721 0.293154C5.89468 0.480916 6 0.735542 6 1.00104C6 1.26653 5.89468 1.52116 5.70721 1.70892L2.41421 5.00605L5.70721 8.30317C5.88937 8.49201 5.99017 8.74492 5.98789 9.00745C5.98561 9.26997 5.88044 9.5211 5.69503 9.70674C5.50962 9.89238 5.25881 9.99768 4.99661 9.99996C4.73442 10.0022 4.48182 9.90132 4.29321 9.71894L0.293213 5.71393C0.105743 5.52617 0.000426833 5.27154 0.00042681 5.00605C0.000426786 4.74055 0.105742 4.48592 0.293213 4.29816L4.29321 0.293154C4.48074 0.105448 4.73505 1.10585e-07 5.00021 8.74041e-08C5.26538 6.42227e-08 5.51968 0.105448 5.70721 0.293154Z"
+                                    />
+                                </svg>
+                            </button>
+                            <div class="links">
+                                <div *ngFor="let page of p.pages">
+                                    <button
+                                        type="button"
+                                        class="link"
+                                        [class.ellips]="page.label === '...'"
+                                        (click)="p.setCurrent(page.value)"
+                                        *ngIf="
+                                            p.getCurrent() !== page.value &&
+                                            !isMobile
+                                        "
+                                    >
+                                        <span>{{ page.label }}</span>
+                                    </button>
+                                    <a
+                                        class="link"
+                                        [class.current]="
+                                            p.getCurrent() === page.value
+                                        "
+                                        *ngIf="
+                                            p.getCurrent() === page.value &&
+                                            !isMobile
+                                        "
+                                    >
+                                        <span>{{ page.label }}</span>
+                                    </a>
+                                </div>
+                                <input
+                                    #input
+                                    (change)="
+                                        +input.value > 1
+                                            ? p.setCurrent(+input.value)
+                                            : p.setCurrent(1)
+                                    "
+                                    [(ngModel)]="config.currentPage"
+                                    class="link input-mobile"
+                                    type="text"
+                                    min="1"
+                                    (focus)="input.value = null"
+                                    onlyNumber
+                                    inputmode="numeric"
+                                />
+                            </div>
+                            <a
+                                class="link pagination-next"
+                                *ngIf="!p.isLastPage() || isMobile"
+                                (click)="p.next()"
+                                [class.disabled]="p.isLastPage()"
+                            >
+                                <svg
+                                    width="6"
+                                    height="10"
+                                    viewBox="0 0 6 10"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <path
+                                        class="icon"
+                                        fill-rule="evenodd"
+                                        clip-rule="evenodd"
+                                        d="M0.292787 9.70685C0.105316 9.51908 0 9.26446 0 8.99896C0 8.73347 0.105316 8.47884 0.292787 8.29108L3.58579 4.99396L0.292787 1.69683C0.110629 1.50799 0.00983372 1.25508 0.0121121 0.992552C0.0143906 0.730027 0.11956 0.4789 0.304968 0.29326C0.490376 0.10762 0.741189 0.00231912 1.00339 3.78498e-05C1.26558 -0.00224342 1.51818 0.0986775 1.70679 0.281064L5.70679 4.28607C5.89426 4.47383 5.99957 4.72846 5.99957 4.99396C5.99957 5.25945 5.89426 5.51408 5.70679 5.70184L1.70679 9.70685C1.51926 9.89455 1.26495 10 0.999786 10C0.734622 10 0.480314 9.89455 0.292787 9.70685Z"
+                                    />
+                                </svg>
+                            </a>
+                        </div>
+                        <div
+                            class="lenght"
+                            [innerHTML]="
+                                page.data.pages
+                                    | replace : { pages: p.getLastPage() }
+                            "
+                        >
+                            из {{ p.getLastPage() }}
+                        </div>
+                    </div>
+                </pagination-template>
+            </div>
+
+            <div class="buttons" *ngIf="data.length">
+                <button
+                    (click)="openModalBanner()"
+                    type="button"
+                    class="btn"
+                    [innerHTML]="page.data.inviteFriends"
+                >
+                    Пригласить друзей
+                </button>
+            </div>
+        </section>
+    </div>
+</div>
+
+<app-modal-window id="modalDate">
+    <app-date-picker
+        [page]="pageGeneral"
+        (onAdd)="onPeriodChange($event)"
+        [me]="me"
+    ></app-date-picker>
+</app-modal-window>

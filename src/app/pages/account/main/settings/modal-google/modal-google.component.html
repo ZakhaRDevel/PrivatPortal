@@ -1,0 +1,233 @@
+<div class="modal" [@ModalAnimate]>
+    <div class="modal__content">
+        <div class="modal__block">
+            <div class="modal__head">
+                <div class="modal__head-btn">
+                    <button class="btn-close" (click)="modalClose()"></button>
+                    <button class="arrow-close" (click)="modalClose()">
+                        <img src="assets/img/icons/back.svg" alt="alt" />
+                    </button>
+                </div>
+
+                <h4
+                    class="title"
+                    [innerHTML]="data.page.data.modalGoogle.title"
+                >
+                    Включить Google 2FA
+                </h4>
+            </div>
+
+            <div class="modal__body">
+                <div class="step step-1 desctop">
+                    <p
+                        class="title"
+                        [innerHTML]="data.page.data.modalGoogle.scanTitle"
+                    >
+                        1. Отсканируйте QR-код с помощью Google Authenticator
+                    </p>
+                    <p
+                        class="text"
+                        [innerHTML]="data.page.data.modalGoogle.scanDesc"
+                    >
+                        Отсканируйте QR-код, показанный ниже, с помощью
+                        приложения Google Authenticator (скачайте для
+                        <a
+                            href="https://apps.apple.com/app/google-authenticator/id388497605"
+                            target="_blank"
+                            >macOS</a
+                        >
+                        или
+                        <a
+                            href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&hl=&gl=US"
+                            target="_blank"
+                            >Android</a
+                        >). Если вы не можете отсканировать QR-код, пожалуйста,
+                        используйте код, расположенный справа от QR-кода.
+                    </p>
+                </div>
+                <div class="step step-1 mobile">
+                    <p
+                        class="title"
+                        [innerHTML]="data.page.data.modalGoogle.enterTitle"
+                    >
+                        1. Введите этот код в Google Authenticator
+                    </p>
+                </div>
+
+                <div class="content content-1">
+                    <div class="content__left">
+                        <div class="code">
+                            <div class="code__qr">
+                                <img
+                                    *ngIf="googleData.image"
+                                    src="{{ googleData.image || '' }}"
+                                    alt="qr"
+                                />
+                            </div>
+                            <p class="code__key">
+                                {{ googleData.code || "" }}
+                            </p>
+
+                            <app-btn-copy
+                                [type]="'type_1'"
+                                [copyId]="'google'"
+                                [copyText]="googleData.code"
+                                [copiedStr]="data.page.data.modalGoogle.copied"
+                            ></app-btn-copy>
+                        </div>
+                    </div>
+                    <div class="content__right">
+                        <div class="alert">
+                            <div class="icon-left">
+                                <img
+                                    src="assets/img/icons/icon-info-orange.svg"
+                                    alt="info"
+                                />
+                            </div>
+                            {{ data.page.data.modalGoogle.enterDesc }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step step-2">
+                    <p
+                        class="title"
+                        [innerHTML]="data.page.data.modalGoogle.enterCodeTitle"
+                    >
+                        2. Введите 6-значный код из Google Authenticator
+                    </p>
+                    <p
+                        class="text"
+                        [innerHTML]="data.page.data.modalGoogle.enterCodeDesc"
+                    >
+                        Введите 6-значный код из Google Authenticator
+                    </p>
+                </div>
+
+                <div class="content">
+                    <form
+                        class="form"
+                        [formGroup]="formGroup"
+                        (ngSubmit)="submit()"
+                    >
+                        <div class="form__left">
+                            <div
+                                class="inputs"
+                                formGroupName="numberCode"
+                                [ngClass]="{
+                                    error:
+                                        wrongCode ||
+                                        hasError(control('numberCode'))
+                                }"
+                            >
+                                <input
+                                    #number0
+                                    type="text"
+                                    maxlength="1"
+                                    formControlName="number0"
+                                    tabindex="1"
+                                    (paste)="onPaste($event, 'numberCode')"
+                                    (keydown)="handleDelete($event, 0)"
+                                    (focus)="onFocus(number0)"
+                                    (input)="onInputSubmit()"
+                                    inputmode="numeric"
+                                    onlyNumber
+                                />
+                                <input
+                                    #number1
+                                    type="text"
+                                    maxlength="1"
+                                    formControlName="number1"
+                                    tabindex="2"
+                                    (paste)="onPaste($event, 'numberCode')"
+                                    (keydown)="handleDelete($event, 1)"
+                                    (focus)="onFocus(number1)"
+                                    (input)="onInputSubmit()"
+                                    inputmode="numeric"
+                                    onlyNumber
+                                />
+                                <input
+                                    #number2
+                                    type="text"
+                                    maxlength="1"
+                                    formControlName="number2"
+                                    tabindex="3"
+                                    (paste)="onPaste($event, 'numberCode')"
+                                    (keydown)="handleDelete($event, 2)"
+                                    (focus)="onFocus(number2)"
+                                    (input)="onInputSubmit()"
+                                    inputmode="numeric"
+                                    onlyNumber
+                                />
+                                <input
+                                    #number3
+                                    type="text"
+                                    maxlength="1"
+                                    formControlName="number3"
+                                    tabindex="4"
+                                    (paste)="onPaste($event, 'numberCode')"
+                                    (keydown)="handleDelete($event, 3)"
+                                    (focus)="onFocus(number3)"
+                                    (input)="onInputSubmit()"
+                                    inputmode="numeric"
+                                    onlyNumber
+                                />
+                                <input
+                                    #number4
+                                    type="text"
+                                    maxlength="1"
+                                    formControlName="number4"
+                                    tabindex="5"
+                                    (paste)="onPaste($event, 'numberCode')"
+                                    (keydown)="handleDelete($event, 4)"
+                                    (focus)="onFocus(number4)"
+                                    (input)="onInputSubmit()"
+                                    inputmode="numeric"
+                                    onlyNumber
+                                />
+                                <input
+                                    #number5
+                                    type="text"
+                                    maxlength="1"
+                                    formControlName="number5"
+                                    (paste)="onPaste($event, 'numberCode')"
+                                    (keydown)="handleDelete($event, 5)"
+                                    (focus)="onFocus(number5)"
+                                    (input)="onInputSubmit()"
+                                    inputmode="numeric"
+                                    onlyNumber
+                                />
+                            </div>
+                            <div
+                                class="errors"
+                                [ngClass]="{
+                                    show:
+                                        wrongCode ||
+                                        hasError(control('numberCode'))
+                                }"
+                            >
+                                {{ data.pageErrors.data.wrongCode }}
+                            </div>
+                        </div>
+                        <div class="form__right">
+                            <button
+                                class="btn-submit"
+                                type="submit"
+                                [disabled]="!theFieldsAreFloode()"
+                            >
+                                <span [class.hide]="isSubmitted">{{
+                                    data.page.data.submit
+                                }}</span>
+
+                                <app-btn-loader
+                                    [isSubmitted]="isSubmitted"
+                                    [isAccount]="true"
+                                ></app-btn-loader>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

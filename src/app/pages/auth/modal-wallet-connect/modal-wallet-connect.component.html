@@ -1,0 +1,27 @@
+<div class="modal" [@ModalAnimate]>
+    <div class="modal__content">
+        <button (click)="close()" class="modal__close" type="button"></button>
+        <div class="modal__wrapper">
+            <button type="button" class="modal__btn" (click)="metamskAuth()">
+                <img
+                    src="/assets/img/icons/metamask-icon.svg"
+                    alt=""
+                    class="img"
+                />
+                <div class="wallet_name">MetaMask</div>
+                <div class="text">Connect to your MetaMask Wallet</div>
+            </button>
+        </div>
+        <div class="modal__wrapper">
+            <button
+                type="button"
+                class="modal__btn"
+                (click)="walletConnectAuth()"
+            >
+                <img src="/assets/img/icons/wallet.svg" alt="" class="img" />
+                <div class="wallet_name">WalletConnect</div>
+                <div class="text">Scan with WalletConnect to connect</div>
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,199 @@
+//----------------------------------------------INTER
+@font-face {
+    font-family: "Inter";
+    src: url("~assets/fonts/Inter/Inter-Light.eot");
+    src: url("~assets/fonts/Inter/Inter-Light.eot?#iefix")
+            format("embedded-opentype"),
+        url("~assets/fonts/Inter/Inter-Light.woff") format("woff"),
+        url("~assets/fonts/Inter/Inter-Light.ttf") format("truetype");
+    font-weight: 300;
+    font-style: normal;
+}
+@font-face {
+    font-family: "Inter";
+    src: url("~assets/fonts/Inter/Inter-Regular.eot");
+    src: url("~assets/fonts/Inter/Inter-Regular.eot?#iefix")
+            format("embedded-opentype"),
+        url("~assets/fonts/Inter/Inter-Regular.woff") format("woff"),
+        url("~assets/fonts/Inter/Inter-Regular.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Inter";
+    src: url("~assets/fonts/Inter/Inter-Medium.eot");
+    src: url("~assets/fonts/Inter/Inter-Medium.eot?#iefix")
+            format("embedded-opentype"),
+        url("~assets/fonts/Inter/Inter-Medium.woff") format("woff"),
+        url("~assets/fonts/Inter/Inter-Medium.ttf") format("truetype");
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Inter";
+    src: url("~assets/fonts/Inter/Inter-SemiBold.eot");
+    src: url("~assets/fonts/Inter/Inter-SemiBold.eot?#iefix")
+            format("embedded-opentype"),
+        url("~assets/fonts/Inter/Inter-SemiBold.woff") format("woff"),
+        url("~assets/fonts/Inter/Inter-SemiBold.ttf") format("truetype");
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Inter";
+    src: url("~assets/fonts/Inter/Inter-Bold.eot");
+    src: url("~assets/fonts/Inter/Inter-Bold.eot?#iefix")
+            format("embedded-opentype"),
+        url("~assets/fonts/Inter/Inter-Bold.woff") format("woff"),
+        url("~assets/fonts/Inter/Inter-Bold.ttf") format("truetype");
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Inter";
+    src: url("~assets/fonts/Inter/Inter-ExtraBold.eot");
+    src: url("~assets/fonts/Inter/Inter-ExtraBold.eot?#iefix")
+            format("embedded-opentype"),
+        url("~assets/fonts/Inter/Inter-ExtraBold.woff") format("woff"),
+        url("~assets/fonts/Inter/Inter-ExtraBold.ttf") format("truetype");
+    font-weight: 800;
+    font-style: normal;
+}
+@font-face {
+    font-family: "Inter";
+    src: url("~assets/fonts/Inter/Inter-Black.eot");
+    src: url("~assets/fonts/Inter/Inter-Black.eot?#iefix")
+            format("embedded-opentype"),
+        url("~assets/fonts/Inter/Inter-Black.ttf") format("truetype");
+    font-weight: 900;
+    font-style: normal;
+}
+//----------------------------------------------TT Norms Pro
+@font-face {
+    font-family: "TT Norms Pro";
+    src: url("~assets/fonts/TT Norms Pro/TTNormsPro-Regular.eot");
+    src: url("~assets/fonts/TT Norms Pro/TTNormsPro-Regular.eot?#iefix")
+            format("embedded-opentype"),
+        url("~assets/fonts/TT Norms Pro/TTNormsPro-Regular.woff") format("woff"),
+        url("~assets/fonts/TT Norms Pro/TTNormsPro-Regular.ttf")
+            format("truetype");
+    font-weight: 400;
+    font-style: normal;
+}
+@font-face {
+    font-family: "TT Norms Pro";
+    src: url("~assets/fonts/TT Norms Pro/TTNormsPro-Italic.eot");
+    src: url("~assets/fonts/TT Norms Pro/TTNormsPro-Italic.eot?#iefix")
+            format("embedded-opentype"),
+        url("~assets/fonts/TT Norms Pro/TTNormsPro-Italic.woff") format("woff"),
+        url("~assets/fonts/TT Norms Pro/TTNormsPro-Italic.ttf")
+            format("truetype");
+    font-weight: 400;
+    font-style: italic;
+}
+@font-face {
+    font-family: "TT Norms Pro";
+    src: url("~assets/fonts/TT Norms Pro/TTNormsPro-Medium.eot");
+    src: url("~assets/fonts/TT Norms Pro/TTNormsPro-Medium.eot?#iefix")
+            format("embedded-opentype"),
+        url("~assets/fonts/TT Norms Pro/TTNormsPro-Medium.woff") format("woff"),
+        url("~assets/fonts/TT Norms Pro/TTNormsPro-Medium.ttf")
+            format("truetype");
+    font-weight: 500;
+    font-style: normal;
+}
+@font-face {
+    font-family: "TT Norms Pro";
+    src: url("~assets/fonts/TT Norms Pro/TTNormsPro-MediumItalic.eot");
+    src: url("~assets/fonts/TT Norms Pro/TTNormsPro-MediumItalic.eot?#iefix")
+            format("embedded-opentype"),
+        url("~assets/fonts/TT Norms Pro/TTNormsPro-MediumItalic.woff")
+            format("woff"),
+        url("~assets/fonts/TT Norms Pro/TTNormsPro-MediumItalic.ttf")
+            format("truetype");
+    font-weight: 500;
+    font-style: italic;
+}
+@font-face {
+    font-family: "TT Norms Pro";
+    src: url("~assets/fonts/TT Norms Pro/TTNormsPro-Bold.eot");
+    src: url("~assets/fonts/TT Norms Pro/TTNormsPro-Bold.eot?#iefix")
+            format("embedded-opentype"),
+        url("~assets/fonts/TT Norms Pro/TTNormsPro-Bold.woff") format("woff"),
+        url("~assets/fonts/TT Norms Pro/TTNormsPro-Bold.ttf") format("truetype");
+    font-weight: 700;
+    font-style: normal;
+}
+@font-face {
+    font-family: "TT Norms Pro";
+    src: url("~assets/fonts/TT Norms Pro/TTNormsPro-BoldItalic.eot");
+    src: url("~assets/fonts/TT Norms Pro/TTNormsPro-BoldItalic.eot?#iefix")
+            format("embedded-opentype"),
+        url("~assets/fonts/TT Norms Pro/TTNormsPro-BoldItalic.woff")
+            format("woff"),
+        url("~assets/fonts/TT Norms Pro/TTNormsPro-BoldItalic.ttf")
+            format("truetype");
+    font-weight: 700;
+    font-style: italic;
+}
+@font-face {
+    font-family: "TT Norms Pro";
+    src: url("~assets/fonts/TT Norms Pro/TTNormsPro-Black.eot");
+    src: url("~assets/fonts/TT Norms Pro/TTNormsPro-Black.eot?#iefix")
+            format("embedded-opentype"),
+        url("~assets/fonts/TT Norms Pro/TTNormsPro-Black.woff") format("woff"),
+        url("~assets/fonts/TT Norms Pro/TTNormsPro-Black.ttf")
+            format("truetype");
+    font-weight: 800;
+    font-style: normal;
+}
+@font-face {
+    font-family: "TT Norms Pro";
+    src: url("~assets/fonts/TT Norms Pro/TTNormsPro-BlackItalic.eot");
+    src: url("~assets/fonts/TT Norms Pro/TTNormsPro-BlackItalic.eot?#iefix")
+            format("embedded-opentype"),
+        url("~assets/fonts/TT Norms Pro/TTNormsPro-BlackItalic.woff")
+            format("woff"),
+        url("~assets/fonts/TT Norms Pro/TTNormsPro-BlackItalic.ttf")
+            format("truetype");
+    font-weight: 800;
+    font-style: italic;
+}
+@font-face {
+    font-family: "TT Norms Pro";
+    src: url("~assets/fonts/TT Norms Pro/TTNormsPro-ExtraBlack.eot");
+    src: url("~assets/fonts/TT Norms Pro/TTNormsPro-ExtraBlack.eot?#iefix")
+            format("embedded-opentype"),
+        url("~assets/fonts/TT Norms Pro/TTNormsPro-ExtraBlack.woff")
+            format("woff"),
+        url("~assets/fonts/TT Norms Pro/TTNormsPro-ExtraBlack.ttf")
+            format("truetype");
+    font-weight: 900;
+    font-style: normal;
+}
+@font-face {
+    font-family: "TT Norms Pro";
+    src: url("~assets/fonts/TT Norms Pro/TTNormsPro-ExtraBlackItalic.eot");
+    src: url("~assets/fonts/TT Norms Pro/TTNormsPro-ExtraBlackItalic.eot?#iefix")
+            format("embedded-opentype"),
+        url("~assets/fonts/TT Norms Pro/TTNormsPro-ExtraBlackItalic.woff")
+            format("woff"),
+        url("~assets/fonts/TT Norms Pro/TTNormsPro-ExtraBlackItalic.ttf")
+            format("truetype");
+    font-weight: 900;
+    font-style: italic;
+}
+//----------------------------------------------VERDANA
+@font-face {
+    font-family: "Verdana";
+    src: local("Verdana Regular"), local("Verdana-Regular"),
+        url("~assets/fonts/Verdana/Verdana.woff2") format("woff2"),
+        url("~assets/fonts/Verdana/Verdana.woff") format("woff"),
+        url("~assets/fonts/Verdana/Verdana.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+}

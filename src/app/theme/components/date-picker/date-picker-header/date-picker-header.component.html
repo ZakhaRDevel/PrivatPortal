@@ -1,0 +1,121 @@
+<div class="date-picker">
+    <button
+        mat-icon-button
+        class="double-arrow"
+        (click)="previousClicked('year')"
+    >
+        <span class="arrow">
+            <svg
+                width="8"
+                height="14"
+                viewBox="0 0 8 14"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+            >
+                <path
+                    d="M7 1L1 7L7 13"
+                    stroke="#54657E"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                />
+            </svg>
+        </span>
+        <span class="arrow arrow-second">
+            <svg
+                width="8"
+                height="14"
+                viewBox="0 0 8 14"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+            >
+                <path
+                    d="M7 1L1 7L7 13"
+                    stroke="#54657E"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                />
+            </svg>
+        </span>
+    </button>
+    <button
+        mat-icon-button
+        class="one-arrow"
+        (click)="previousClicked('month')"
+    >
+        <span class="arrow">
+            <svg
+                width="8"
+                height="14"
+                viewBox="0 0 8 14"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+            >
+                <path
+                    d="M7 1L1 7L7 13"
+                    stroke="#54657E"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                />
+            </svg>
+        </span>
+    </button>
+    <span class="date-picker-header-label">{{ periodLabel }}</span>
+    <button mat-icon-button class="one-arrow" (click)="nextClicked('month')">
+        <span class="arrow">
+            <svg
+                width="8"
+                height="14"
+                viewBox="0 0 8 14"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+            >
+                <path
+                    d="M0.999998 13L7 7L1 1"
+                    stroke="#54657E"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                />
+            </svg>
+        </span>
+    </button>
+    <button mat-icon-button class="double-arrow" (click)="nextClicked('year')">
+        <span class="arrow arrow-second">
+            <svg
+                width="8"
+                height="14"
+                viewBox="0 0 8 14"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+            >
+                <path
+                    d="M0.999998 13L7 7L1 1"
+                    stroke="#54657E"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                />
+            </svg>
+        </span>
+        <span class="arrow">
+            <svg
+                width="8"
+                height="14"
+                viewBox="0 0 8 14"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+            >
+                <path
+                    d="M0.999998 13L7 7L1 1"
+                    stroke="#54657E"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                />
+            </svg>
+        </span>
+    </button>
+</div>

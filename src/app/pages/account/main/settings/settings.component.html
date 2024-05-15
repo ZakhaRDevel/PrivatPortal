@@ -1,0 +1,780 @@
+<div class="settings">
+    <div class="settings__heading">
+        <div class="settings__heading-content">
+            <h2 class="title" [innerHTML]="page.data.title">Мой профиль</h2>
+            <p class="sub-title" [innerHTML]="page.data.desc">
+                Добавляйте и редактируйте информацию, которую видят пользователи
+                на вашей партнерской странице.
+            </p>
+        </div>
+        <div class="settings__heading-icon">
+            <img src="assets/img/pages/settings/icons-cogwheel.svg" alt="alt" />
+        </div>
+    </div>
+
+    <div class="settings__list">
+        <div class="tablet">
+            <!--nickname-->
+            <div class="tablet__row">
+                <div class="tablet__col tablet__col-1">
+                    <div class="icon-left">
+                        <img
+                            src="assets/img/pages/settings/icon-user.svg"
+                            alt="alt"
+                        />
+                    </div>
+
+                    <div class="text">
+                        <h4 class="h4" [innerHTML]="page.data.nickname">
+                            Никнейм
+                        </h4>
+                        <p
+                            class="sub-title"
+                            [innerHTML]="page.data.nicknameDesc"
+                        >
+                            Установите индивидуальный никнейм для вашей
+                            реферальной ссылки.
+                        </p>
+                    </div>
+                </div>
+                <div class="tablet__col tablet__col-2">
+                    <p class="value">
+                        {{ me.nickname ? me.nickname : me.uplineId }}
+                    </p>
+                </div>
+                <div class="tablet__col tablet__col-3">
+                    <app-button-action
+                        [name]="'nickname'"
+                        [value]="me.nickname ? me.nickname : me.uplineId"
+                        [pageErrors]="pageErrors"
+                        [page]="page"
+                        [isBtnEdit]="true"
+                        (onSuccess)="onSuccess($event)"
+                    ></app-button-action>
+                </div>
+            </div>
+
+            <!--name-->
+            <div
+                class="tablet__row"
+                [class.disabled]="!checkData(me.userDetail.fullName)"
+            >
+                <div class="tablet__col tablet__col-1">
+                    <div class="icon-left">
+                        <img
+                            src="assets/img/pages/settings/icon-user2.svg"
+                            alt="alt"
+                        />
+                    </div>
+
+                    <div class="text">
+                        <h4 class="h4" [innerHTML]="page.data.fullName">Имя</h4>
+                        <p
+                            class="sub-title"
+                            [innerHTML]="page.data.fullNameDesc"
+                        >
+                            l Здесь вы можете отредактировать или скрыть свое
+                            имя.
+                        </p>
+                    </div>
+                </div>
+                <div class="tablet__col tablet__col-2">
+                    <p class="value">
+                        {{ me.userDetail.fullName }}
+                    </p>
+                </div>
+                <div class="tablet__col tablet__col-3">
+                    <app-button-action
+                        [name]="'fullName'"
+                        [value]="me.userDetail.fullName"
+                        [pageErrors]="pageErrors"
+                        [page]="page"
+                        (onSuccess)="onSuccess($event)"
+                        [isBtnEdit]="checkData(me.userDetail.fullName)"
+                        [isBtnVisible]="checkData(me.userDetail.fullName)"
+                        [isBtnAdd]="!checkData(me.userDetail.fullName)"
+                        [isShowUserData]="!me.userDetail.hideFullName"
+                        (onHide)="onHide('hideFullName')"
+                    ></app-button-action>
+                </div>
+            </div>
+
+            <!--telegram-->
+            <div class="tablet__row" [class.disabled]="!checkData(me.telegram)">
+                <div class="tablet__col tablet__col-1">
+                    <div class="icon-left">
+                        <img
+                            src="assets/img/pages/settings/soc-telegram.svg"
+                            alt="alt"
+                        />
+                    </div>
+                    <div class="text">
+                        <h4 class="h4">Telegram</h4>
+
+                        <p
+                            class="sub-title"
+                            [innerHTML]="
+                                page.data.socialDesc
+                                    | replace : { social: 'Telegram' }
+                            "
+                        >
+                            Здесь вы можете отредактировать или скрыть свой
+                            Telegram.
+                        </p>
+                    </div>
+                </div>
+                <div class="tablet__col tablet__col-2">
+                    <a
+                        target="_blank"
+                        [href]="'https://t.me/' + me.telegram"
+                        target="_blank"
+                        class="value link"
+                        *ngIf="me.telegram != null"
+                    >
+                        @{{ me.telegram }}
+                    </a>
+                    <div class="not-added" *ngIf="me.telegram == null">
+                        <div class="icon-left">
+                            <img
+                                src="assets/img/pages/settings/off_close.svg"
+                                alt="alt"
+                            />
+                        </div>
+                        <span class="text">{{ page.data.notAdded }}</span>
+                    </div>
+                </div>
+                <div class="tablet__col tablet__col-3">
+                    <app-button-action
+                        [name]="'telegram'"
+                        [value]="me.telegram"
+                        [pageErrors]="pageErrors"
+                        [page]="page"
+                        (onSuccess)="onSuccess($event)"
+                        [isBtnEdit]="checkData(me.telegram)"
+                        [isBtnVisible]="checkData(me.telegram)"
+                        [isBtnAdd]="!checkData(me.telegram)"
+                        [isShowUserData]="!me.userDetail.hideTelegram"
+                        (onHide)="onHide('hideTelegram')"
+                    ></app-button-action>
+                </div>
+            </div>
+
+            <!--twitter-->
+            <div
+                class="tablet__row"
+                [class.disabled]="!checkData(me.userDetail.twitterUrl)"
+            >
+                <div class="tablet__col tablet__col-1">
+                    <div class="icon-left">
+                        <img
+                            src="assets/img/pages/settings/soc-twitter.svg"
+                            alt="alt"
+                        />
+                    </div>
+
+                    <div class="text">
+                        <h4 class="h4">Twitter</h4>
+                        <p
+                            class="sub-title"
+                            [innerHTML]="
+                                page.data.socialDesc
+                                    | replace : { social: 'Twitter' }
+                            "
+                        >
+                            Здесь вы можете отредактировать или скрыть свой
+                            Twitter.
+                        </p>
+                    </div>
+                </div>
+                <div class="tablet__col tablet__col-2">
+                    <a
+                        class="value link"
+                        *ngIf="me.userDetail.twitterUrl != null"
+                        target="_blank"
+                        [href]="me.userDetail.twitterUrl"
+                    >
+                        {{
+                            me.userDetail.twitterUrl
+                                .toString()
+                                ?.replace("https://twitter.com/", "")
+                        }}
+                    </a>
+                    <div
+                        class="not-added"
+                        *ngIf="me.userDetail.twitterUrl == null"
+                    >
+                        <div class="icon-left">
+                            <img
+                                src="assets/img/pages/settings/off_close.svg"
+                                alt="alt"
+                            />
+                        </div>
+                        <span class="text">{{ page.data.notAdded }}</span>
+                    </div>
+                </div>
+                <div class="tablet__col tablet__col-3">
+                    <app-button-action
+                        [id]="'btn_name'"
+                        [name]="'twitterUrl'"
+                        [value]="me.userDetail.twitterUrl"
+                        [pageErrors]="pageErrors"
+                        [page]="page"
+                        (onSuccess)="onSuccess($event)"
+                        (onHide)="onHide('hideTwitter')"
+                        [isShowUserData]="!me.userDetail.hideTwitter"
+                        [isBtnEdit]="checkData(me.userDetail.twitterUrl)"
+                        [isBtnVisible]="checkData(me.userDetail.twitterUrl)"
+                        [isBtnAdd]="!checkData(me.userDetail.twitterUrl)"
+                    ></app-button-action>
+                </div>
+            </div>
+
+            <!--instagram-->
+            <div
+                class="tablet__row"
+                [class.disabled]="!checkData(me.userDetail.instagramUrl)"
+            >
+                <div class="tablet__col tablet__col-1">
+                    <div class="icon-left">
+                        <img
+                            src="assets/img/pages/settings/soc-instagram.svg"
+                            alt="alt"
+                        />
+                    </div>
+
+                    <div class="text">
+                        <h4 class="h4">Instagram</h4>
+                        <p
+                            class="sub-title"
+                            [innerHTML]="
+                                page.data.socialDesc
+                                    | replace : { social: 'Instagram' }
+                            "
+                        >
+                            Здесь вы можете отредактировать или скрыть свой
+                            Instagram.
+                        </p>
+                    </div>
+                </div>
+                <div class="tablet__col tablet__col-2">
+                    <a
+                        [href]="me.userDetail.instagramUrl"
+                        target="_blank"
+                        class="value link"
+                        *ngIf="me.userDetail.instagramUrl != null"
+                    >
+                        {{
+                            me.userDetail.instagramUrl
+                                .toString()
+                                ?.replace("https://instagram.com/", "")
+                        }}
+                    </a>
+                    <div
+                        class="not-added"
+                        *ngIf="me.userDetail.instagramUrl == null"
+                    >
+                        <div class="icon-left">
+                            <img
+                                src="assets/img/pages/settings/off_close.svg"
+                                alt="alt"
+                            />
+                        </div>
+                        <span class="text">{{ page.data.notAdded }}</span>
+                    </div>
+                </div>
+                <div class="tablet__col tablet__col-3">
+                    <app-button-action
+                        [id]="'btn_name'"
+                        [name]="'instagramUrl'"
+                        [value]="me.userDetail.instagramUrl"
+                        [pageErrors]="pageErrors"
+                        [page]="page"
+                        (onSuccess)="onSuccess($event)"
+                        (onHide)="onHide('hideInstagram')"
+                        [isShowUserData]="!me.userDetail.hideInstagram"
+                        [isBtnEdit]="checkData(me.userDetail.instagramUrl)"
+                        [isBtnVisible]="checkData(me.userDetail.instagramUrl)"
+                        [isBtnAdd]="!checkData(me.userDetail.instagramUrl)"
+                    ></app-button-action>
+                </div>
+            </div>
+
+            <!--facebook-->
+            <div
+                class="tablet__row"
+                [class.disabled]="!checkData(me.userDetail.facebookUrl)"
+            >
+                <div class="tablet__col tablet__col-1">
+                    <div class="icon-left">
+                        <img
+                            src="assets/img/pages/settings/soc-facebook.svg"
+                            alt="alt"
+                        />
+                    </div>
+
+                    <div class="text">
+                        <h4 class="h4">Facebook</h4>
+
+                        <p
+                            class="sub-title"
+                            [innerHTML]="
+                                page.data.socialDesc
+                                    | replace : { social: 'Facebook' }
+                            "
+                        >
+                            Здесь вы можете отредактировать или скрыть свой
+                            Facebook.
+                        </p>
+                    </div>
+                </div>
+                <div class="tablet__col tablet__col-2">
+                    <a
+                        [href]="me.userDetail.facebookUrl"
+                        target="_blank"
+                        class="value link"
+                        *ngIf="me.userDetail.facebookUrl != null"
+                    >
+                        {{
+                            shortAddress(
+                                me.userDetail.facebookUrl
+                                    .toString()
+                                    ?.replace("https://facebook.com/", "")
+                            )
+                        }}
+                    </a>
+                    <div
+                        class="not-added"
+                        *ngIf="me.userDetail.facebookUrl == null"
+                    >
+                        <div class="icon-left">
+                            <img
+                                src="assets/img/pages/settings/off_close.svg"
+                                alt="alt"
+                            />
+                        </div>
+                        <span class="text">{{ page.data.notAdded }}</span>
+                    </div>
+                </div>
+                <div class="tablet__col tablet__col-3">
+                    <div class="buttons">
+                        <app-button-action
+                            [id]="'btn_name'"
+                            [name]="'facebookUrl'"
+                            [value]="me.userDetail.facebookUrl"
+                            [pageErrors]="pageErrors"
+                            [page]="page"
+                            (onSuccess)="onSuccess($event)"
+                            (onHide)="onHide('hideFacebook')"
+                            [isShowUserData]="!me.userDetail.hideFacebook"
+                            [isBtnEdit]="checkData(me.userDetail.facebookUrl)"
+                            [isBtnVisible]="
+                                checkData(me.userDetail.facebookUrl)
+                            "
+                            [isBtnAdd]="!checkData(me.userDetail.facebookUrl)"
+                        ></app-button-action>
+                    </div>
+                </div>
+            </div>
+
+            <!--linkdin-->
+            <div
+                class="tablet__row"
+                [class.disabled]="!checkData(me.userDetail.linkedinUrl)"
+            >
+                <div class="tablet__col tablet__col-1">
+                    <div class="icon-left">
+                        <img
+                            src="assets/img/pages/settings/soc-linkedin.svg"
+                            alt="alt"
+                        />
+                    </div>
+
+                    <div class="text">
+                        <h4 class="h4">LinkedIn</h4>
+
+                        <p
+                            class="sub-title"
+                            [innerHTML]="
+                                page.data.socialDesc
+                                    | replace : { social: 'LinkedIn' }
+                            "
+                        >
+                            Здесь вы можете отредактировать или скрыть свой
+                            LinkedIn.
+                        </p>
+                    </div>
+                </div>
+                <div class="tablet__col tablet__col-2">
+                    <a
+                        [href]="me.userDetail.linkedinUrl"
+                        target="_blank"
+                        class="value link"
+                        *ngIf="me.userDetail.linkedinUrl != null"
+                    >
+                        {{
+                            shortAddress(
+                                me.userDetail.linkedinUrl
+                                    .toString()
+                                    ?.replace("https://linkedin.com/", "")
+                            )
+                        }}
+                    </a>
+                    <div
+                        class="not-added"
+                        *ngIf="me.userDetail.linkedinUrl == null"
+                    >
+                        <div class="icon-left">
+                            <img
+                                src="assets/img/pages/settings/off_close.svg"
+                                alt="alt"
+                            />
+                        </div>
+                        <span class="text">{{ page.data.notAdded }}</span>
+                    </div>
+                </div>
+                <div class="tablet__col tablet__col-3">
+                    <app-button-action
+                        [id]="'btn_name'"
+                        [name]="'linkedinUrl'"
+                        [value]="me.userDetail.linkedinUrl"
+                        [pageErrors]="pageErrors"
+                        [page]="page"
+                        (onSuccess)="onSuccess($event)"
+                        (onHide)="onHide('hideLinkedIn')"
+                        [isShowUserData]="!me.userDetail.hideLinkedIn"
+                        [isBtnEdit]="checkData(me.userDetail.linkedinUrl)"
+                        [isBtnVisible]="checkData(me.userDetail.linkedinUrl)"
+                        [isBtnAdd]="!checkData(me.userDetail.linkedinUrl)"
+                    ></app-button-action>
+                </div>
+            </div>
+
+            <!--tiktok-->
+            <div
+                class="tablet__row"
+                [class.disabled]="!checkData(me.userDetail.tiktokUrl)"
+            >
+                <div class="tablet__col tablet__col-1">
+                    <div class="icon-left">
+                        <img
+                            src="assets/img/pages/settings/soc-tiktok.svg"
+                            alt="alt"
+                        />
+                    </div>
+
+                    <div class="text">
+                        <h4 class="h4">TikTok</h4>
+
+                        <p
+                            class="sub-title"
+                            [innerHTML]="
+                                page.data.socialDesc
+                                    | replace : { social: 'TikTok' }
+                            "
+                        >
+                            Здесь вы можете отредактировать или скрыть свой
+                            TikTok.
+                        </p>
+                    </div>
+                </div>
+                <div class="tablet__col tablet__col-2">
+                    <a
+                        class="value link"
+                        [href]="me.userDetail.tiktokUrl"
+                        target="_blank"
+                        *ngIf="me.userDetail.tiktokUrl != null"
+                    >
+                        {{
+                            me.userDetail.tiktokUrl
+                                .toString()
+                                ?.replace("https://tiktok.com/", "")
+                        }}
+                    </a>
+                    <div
+                        class="not-added"
+                        *ngIf="me.userDetail.tiktokUrl == null"
+                    >
+                        <div class="icon-left">
+                            <img
+                                src="assets/img/pages/settings/off_close.svg"
+                                alt="alt"
+                            />
+                        </div>
+                        <span class="text">{{ page.data.notAdded }}</span>
+                    </div>
+                </div>
+                <div class="tablet__col tablet__col-3">
+                    <app-button-action
+                        [id]="'btn_name'"
+                        [name]="'tiktokUrl'"
+                        [value]="me.userDetail.tiktokUrl"
+                        [pageErrors]="pageErrors"
+                        [page]="page"
+                        (onSuccess)="onSuccess($event)"
+                        (onHide)="onHide('hideTiktok')"
+                        [isShowUserData]="!me.userDetail.hideTiktok"
+                        [isBtnEdit]="checkData(me.userDetail.tiktokUrl)"
+                        [isBtnVisible]="checkData(me.userDetail.tiktokUrl)"
+                        [isBtnAdd]="!checkData(me.userDetail.tiktokUrl)"
+                    ></app-button-action>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="settings__heading">
+        <div class="settings__heading-content">
+            <h2 class="title" [innerHTML]="page.data.security">Безопасность</h2>
+            <p class="sub-title" [innerHTML]="page.data.securityDesc">
+                Повысьте защиту вашего аккаунта и транзакций с помощью
+                рекомендуемых настроек безопасности.
+            </p>
+        </div>
+        <div class="settings__heading-icon">
+            <img src="assets/img/pages/settings/icon-shield.svg" alt="alt" />
+        </div>
+    </div>
+
+    <div class="settings__list" #secutity>
+        <div class="tablet tablet_down">
+            <div class="tablet__row google">
+                <div class="tablet__col tablet__col-1">
+                    <div class="icon-left">
+                        <img
+                            src="assets/img/pages/settings/icon-2fa.svg"
+                            alt="alt"
+                        />
+                    </div>
+
+                    <div class="text">
+                        <h4 class="h4">
+                            Google 2FA
+
+                            <p
+                                class="status"
+                                *ngIf="!me.userSecurity.googleEnabled"
+                            >
+                                <span class="icon-left-mobile">
+                                    <img
+                                        src="assets/img/pages/settings/off_close.svg"
+                                        alt="alt"
+                                    />
+                                </span>
+                                <span class="text">{{
+                                    page.data.notActive
+                                }}</span>
+                            </p>
+                            <p
+                                class="status"
+                                *ngIf="me.userSecurity.googleEnabled"
+                            >
+                                <span class="icon-left-mobile">
+                                    <img
+                                        src="assets/img/pages/settings/check-circle-green.svg"
+                                        alt="alt"
+                                    />
+                                </span>
+                                <span class="text">{{ page.data.active }}</span>
+                            </p>
+                        </h4>
+
+                        <p class="sub-title" [innerHTML]="page.data.googleDesc">
+                            Защитите свой аккаунт и вывод средств с помощью
+                            Google Authenticator.
+                        </p>
+
+                        <div class="text_btn">
+                            <button
+                                class="btn-help"
+                                [innerHTML]="page.data.googleTb"
+                                (click)="openModalGoogleProblem()"
+                            >
+                                Возникли проблемы?
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="tablet__col tablet__col-2">
+                    <p class="status" *ngIf="!me.userSecurity.googleEnabled">
+                        <span class="icon-left">
+                            <img
+                                src="assets/img/pages/settings/off_close.svg"
+                                alt="alt"
+                            />
+                        </span>
+                        <span class="text">{{ page.data.notActive }}</span>
+                    </p>
+                    <p class="status" *ngIf="me.userSecurity.googleEnabled">
+                        <span class="icon-left">
+                            <img
+                                src="assets/img/pages/settings/check-circle-green.svg"
+                                alt="alt"
+                            />
+                        </span>
+                        <span class="text">{{ page.data.active }}</span>
+                    </p>
+                </div>
+                <div class="tablet__col tablet__col-3">
+                    <app-button-action
+                        [data]="me.uplineId"
+                        [value]="me.userSecurity.googleEnabled"
+                        [isBtnGoogle]="true"
+                        (onSuccess)="onSuccess($event)"
+                        [pageErrors]="pageErrors"
+                        [page]="page"
+                    ></app-button-action>
+                    <div class="text_btn-mobile">
+                        <button
+                            class="btn-help"
+                            (click)="openModalGoogleProblem()"
+                        >
+                            {{ page.data.googleTb }}
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tablet__row password">
+                <div class="tablet__col tablet__col-1">
+                    <div class="icon-left">
+                        <img
+                            src="assets/img/pages/settings/icon-password.svg"
+                            alt="alt"
+                        />
+                    </div>
+
+                    <div class="text">
+                        <h4 class="h4" [innerHTML]="page.data.pwd">
+                            Пароль для входа
+                        </h4>
+                        <p class="sub-title" [innerHTML]="page.data.pwdDesc">
+                            При необходимости измените пароль для входа в свой
+                            аккаунт.
+                        </p>
+                    </div>
+                </div>
+                <div class="tablet__col tablet__col-2"></div>
+                <div class="tablet__col tablet__col-3">
+                    <div class="buttons">
+                        <app-button-action
+                            [itemName]="'password'"
+                            [data]="me.uplineId"
+                            [isBtnPasswordChange]="true"
+                            [pageErrors]="pageErrors"
+                            [page]="page"
+                        ></app-button-action>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tablet__row wallet">
+                <div class="tablet__col tablet__col-1">
+                    <div class="icon-left">
+                        <img
+                            src="assets/img/pages/settings/icon-wallet.svg"
+                            alt="alt"
+                        />
+                    </div>
+
+                    <div class="text">
+                        <h4 class="h4">
+                            {{ page.data.wallets }}
+
+                            <div
+                                class="not-added"
+                                *ngIf="!me.userWallets.length"
+                            >
+                                <div class="icon-left-mobile">
+                                    <img
+                                        src="assets/img/pages/settings/off_close.svg"
+                                        alt="alt"
+                                    />
+                                </div>
+                                <span class="text">{{
+                                    page.data.notAdded
+                                }}</span>
+                            </div>
+                        </h4>
+                        <p
+                            class="sub-title"
+                            [innerHTML]="page.data.walletsDesc"
+                        >
+                            Добавьте адреса ваших кошельков, которые будут
+                            использоваться для вывода средств и NFT с вашего
+                            аккаунта.
+                        </p>
+                    </div>
+                </div>
+                <div class="tablet__col tablet__col-2">
+                    <div class="not-added" *ngIf="!me.userWallets.length">
+                        <div class="icon-left">
+                            <img
+                                src="assets/img/pages/settings/off_close.svg"
+                                alt="alt"
+                            />
+                        </div>
+                        <span class="text">{{ page.data.notAdded }}</span>
+                    </div>
+                    <div class="wallet-list" *ngIf="me.userWallets.length">
+                        <div
+                            class="wallet-item"
+                            *ngFor="let wallet of me.userWallets"
+                        >
+                            <div class="icon-left">
+                                <img
+                                    src="assets/img/pages/settings/check-circle-green.svg"
+                                    alt="alt"
+                                />
+                            </div>
+                            <p class="wallet-text">
+                                {{ wallet.networkCode }}:
+                                {{ wallet.shortAddress }}
+                            </p>
+                            <button
+                                class="btn-remove"
+                                (click)="openModalRemoveWallet(wallet)"
+                            >
+                                <img
+                                    src="assets/img/pages/settings/icon-trash.svg"
+                                    alt="remove"
+                                />
+                            </button>
+                            <div class="dropdown">
+                                <div class="dropdown_wrapper">
+                                    {{ wallet.wallet }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tablet__col tablet__col-3">
+                    <div class="buttons" *ngIf="me.userWallets.length < 2">
+                        <button class="btn-add" (click)="openModalAddWallet()">
+                            <span class="icon-left">
+                                <img
+                                    src="assets/img/icons/icon-plus-green.svg"
+                                    alt="alt"
+                                />
+                            </span>
+                            <span
+                                class="btn-add_text"
+                                [innerHTML]="page.data.add"
+                                >Добавить</span
+                            >
+                        </button>
+                        <!-- <app-button-action
+                            [itemName]="'wallet'"
+                            [data]="me.uplineId"
+                            [isBtnAddWallet]="true"
+                            [wallets]="me.userWallets"
+                            [pageErrors]="pageErrors"
+                            [page]="page"
+                            (onSuccess)="onSuccess($event)"
+                            [googleEnabled]="me.userSecurity.googleEnabled"
+                        ></app-button-action> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

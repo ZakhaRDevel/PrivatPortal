@@ -1,0 +1,328 @@
+<div class="modal" [class.closing]="isClosing">
+    <div class="modal__wrap">
+        <div class="modal__header-mobile">
+            <button class="modal__close-mobile" (click)="close()"></button>
+        </div>
+        <div class="modal__content">
+            <button (click)="onBannerPrev()" class="modal__btn prev">
+                <img
+                    class="arrow"
+                    src="assets/img/icons/arrow-white.svg"
+                    alt="arrow"
+                />
+            </button>
+
+            <button (click)="onBannerNext()" class="modal__btn next">
+                <img
+                    class="arrow"
+                    src="assets/img/icons/arrow-white.svg"
+                    alt="arrow"
+                />
+            </button>
+            <div class="modal__content-slider" #slider>
+                <button (click)="onBannerPrev()" class="modal__btn-mobile prev">
+                    <div class="plug"></div>
+                </button>
+
+                <img
+                    class="banner vertical"
+                    @ModalAnimate
+                    *ngIf="bannerSize == 'vertical'"
+                    [src]="banners[activeBanner].vertical"
+                />
+                <img
+                    class="banner square"
+                    @ModalAnimate
+                    *ngIf="bannerSize == 'square'"
+                    [src]="banners[activeBanner].square"
+                />
+                <img
+                    class="banner wide"
+                    @ModalAnimate
+                    *ngIf="bannerSize == 'wide'"
+                    [src]="banners[activeBanner].wide"
+                />
+
+                <button (click)="onBannerNext()" class="modal__btn-mobile next">
+                    <div class="plug"></div>
+                </button>
+            </div>
+            <div class="modal__content-dots">
+                <button
+                    class="btn"
+                    type="button"
+                    *ngFor="let item of banners; let i = index"
+                    [class.active]="activeBanner === i"
+                    (click)="selectBanner(i)"
+                >
+                    <div class="dot"></div>
+                </button>
+            </div>
+            <div class="modal__content-sizes">
+                <button
+                    type="button"
+                    class="item"
+                    (click)="bannerSize = 'vertical'"
+                    [class.active]="bannerSize == 'vertical'"
+                >
+                    <div class="item_wrap">
+                        <div class="item_demo vertical"></div>
+
+                        <div class="item_size">9:16</div>
+                    </div>
+                    <div class="item_check">
+                        <svg
+                            class="icon"
+                            width="14"
+                            height="14"
+                            viewBox="0 0 14 14"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <path
+                                fill-rule="evenodd"
+                                clip-rule="evenodd"
+                                d="M7.00156 13.4C8.69895 13.4 10.3268 12.7257 11.527 11.5255C12.7273 10.3252 13.4016 8.69736 13.4016 6.99998C13.4016 5.30259 12.7273 3.67472 11.527 2.47449C10.3268 1.27426 8.69895 0.599976 7.00156 0.599976C5.30418 0.599976 3.67631 1.27426 2.47608 2.47449C1.27585 3.67472 0.601563 5.30259 0.601562 6.99998C0.601563 8.69736 1.27585 10.3252 2.47608 11.5255C3.67631 12.7257 5.30418 13.4 7.00156 13.4ZM9.96716 5.96558C10.1129 5.81469 10.1935 5.61261 10.1917 5.40285C10.1899 5.1931 10.1057 4.99245 9.95742 4.84412C9.80909 4.69579 9.60844 4.61166 9.39868 4.60984C9.18892 4.60801 8.98684 4.68865 8.83596 4.83438L6.20156 7.46878L5.16716 6.43438C5.01628 6.28865 4.8142 6.20801 4.60444 6.20984C4.39468 6.21166 4.19403 6.29579 4.04571 6.44412C3.89738 6.59245 3.81325 6.7931 3.81142 7.00285C3.8096 7.21261 3.89024 7.41469 4.03596 7.56558L5.63596 9.16558C5.78598 9.31555 5.98943 9.3998 6.20156 9.3998C6.41369 9.3998 6.61714 9.31555 6.76716 9.16558L9.96716 5.96558Z"
+                            />
+                        </svg>
+                    </div>
+                </button>
+
+                <button
+                    type="button"
+                    class="item"
+                    (click)="bannerSize = 'square'"
+                    [class.active]="bannerSize == 'square'"
+                >
+                    <div class="item_wrap">
+                        <div class="item_demo square"></div>
+
+                        <div class="item_size">1:1</div>
+                    </div>
+                    <div class="item_check">
+                        <svg
+                            class="icon"
+                            width="14"
+                            height="14"
+                            viewBox="0 0 14 14"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <path
+                                fill-rule="evenodd"
+                                clip-rule="evenodd"
+                                d="M7.00156 13.4C8.69895 13.4 10.3268 12.7257 11.527 11.5255C12.7273 10.3252 13.4016 8.69736 13.4016 6.99998C13.4016 5.30259 12.7273 3.67472 11.527 2.47449C10.3268 1.27426 8.69895 0.599976 7.00156 0.599976C5.30418 0.599976 3.67631 1.27426 2.47608 2.47449C1.27585 3.67472 0.601563 5.30259 0.601562 6.99998C0.601563 8.69736 1.27585 10.3252 2.47608 11.5255C3.67631 12.7257 5.30418 13.4 7.00156 13.4ZM9.96716 5.96558C10.1129 5.81469 10.1935 5.61261 10.1917 5.40285C10.1899 5.1931 10.1057 4.99245 9.95742 4.84412C9.80909 4.69579 9.60844 4.61166 9.39868 4.60984C9.18892 4.60801 8.98684 4.68865 8.83596 4.83438L6.20156 7.46878L5.16716 6.43438C5.01628 6.28865 4.8142 6.20801 4.60444 6.20984C4.39468 6.21166 4.19403 6.29579 4.04571 6.44412C3.89738 6.59245 3.81325 6.7931 3.81142 7.00285C3.8096 7.21261 3.89024 7.41469 4.03596 7.56558L5.63596 9.16558C5.78598 9.31555 5.98943 9.3998 6.20156 9.3998C6.41369 9.3998 6.61714 9.31555 6.76716 9.16558L9.96716 5.96558Z"
+                            />
+                        </svg>
+                    </div>
+                </button>
+                <button
+                    type="button"
+                    class="item"
+                    (click)="bannerSize = 'wide'"
+                    [class.active]="bannerSize == 'wide'"
+                >
+                    <div class="item_wrap">
+                        <div class="item_demo wide"></div>
+
+                        <div class="item_size">16:9</div>
+                    </div>
+                    <div class="item_check">
+                        <svg
+                            class="icon"
+                            width="14"
+                            height="14"
+                            viewBox="0 0 14 14"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <path
+                                fill-rule="evenodd"
+                                clip-rule="evenodd"
+                                d="M7.00156 13.4C8.69895 13.4 10.3268 12.7257 11.527 11.5255C12.7273 10.3252 13.4016 8.69736 13.4016 6.99998C13.4016 5.30259 12.7273 3.67472 11.527 2.47449C10.3268 1.27426 8.69895 0.599976 7.00156 0.599976C5.30418 0.599976 3.67631 1.27426 2.47608 2.47449C1.27585 3.67472 0.601563 5.30259 0.601562 6.99998C0.601563 8.69736 1.27585 10.3252 2.47608 11.5255C3.67631 12.7257 5.30418 13.4 7.00156 13.4ZM9.96716 5.96558C10.1129 5.81469 10.1935 5.61261 10.1917 5.40285C10.1899 5.1931 10.1057 4.99245 9.95742 4.84412C9.80909 4.69579 9.60844 4.61166 9.39868 4.60984C9.18892 4.60801 8.98684 4.68865 8.83596 4.83438L6.20156 7.46878L5.16716 6.43438C5.01628 6.28865 4.8142 6.20801 4.60444 6.20984C4.39468 6.21166 4.19403 6.29579 4.04571 6.44412C3.89738 6.59245 3.81325 6.7931 3.81142 7.00285C3.8096 7.21261 3.89024 7.41469 4.03596 7.56558L5.63596 9.16558C5.78598 9.31555 5.98943 9.3998 6.20156 9.3998C6.41369 9.3998 6.61714 9.31555 6.76716 9.16558L9.96716 5.96558Z"
+                            />
+                        </svg>
+                    </div>
+                </button>
+            </div>
+            <button
+                class="modal__content-copylink"
+                type="button"
+                (click)="copyString(data.link)"
+            >
+                <div class="title" [innerHTML]="data.page.data.reflink.title">
+                    Реферальная ссылка
+                </div>
+                <div class="link">
+                    <div class="text">{{ data.link }}</div>
+                    <svg
+                        class="icon"
+                        width="14"
+                        height="16"
+                        viewBox="0 0 14 16"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <path
+                            d="M7.66536 2.66667C7.66536 2.84348 7.7356 3.01305 7.86063 3.13807C7.98565 3.2631 8.15522 3.33333 8.33203 3.33333H10.976C10.9269 2.90045 10.737 2.49569 10.4354 2.18133L8.9127 0.608667C8.5796 0.271032 8.13771 0.0622496 7.66536 0.0193333V2.66667ZM6.33203 2.66667V0H3.66536C2.78163 0.00105857 1.9344 0.352588 1.30951 0.97748C0.684619 1.60237 0.33309 2.4496 0.332031 3.33333V10C0.33309 10.8837 0.684619 11.731 1.30951 12.3559C1.9344 12.9807 2.78163 13.3323 3.66536 13.3333H7.66536C8.5491 13.3323 9.39633 12.9807 10.0212 12.3559C10.6461 11.731 10.9976 10.8837 10.9987 10V4.66667H8.33203C7.8016 4.66667 7.29289 4.45595 6.91782 4.08088C6.54274 3.70581 6.33203 3.1971 6.33203 2.66667ZM10.332 16H4.33203C4.15522 16 3.98565 15.9298 3.86063 15.8047C3.7356 15.6797 3.66536 15.5101 3.66536 15.3333C3.66536 15.1565 3.7356 14.987 3.86063 14.8619C3.98565 14.7369 4.15522 14.6667 4.33203 14.6667H10.332C10.8625 14.6667 11.3712 14.456 11.7462 14.0809C12.1213 13.7058 12.332 13.1971 12.332 12.6667V5.33333C12.332 5.15652 12.4023 4.98695 12.5273 4.86193C12.6523 4.7369 12.8219 4.66667 12.9987 4.66667C13.1755 4.66667 13.3451 4.7369 13.4701 4.86193C13.5951 4.98695 13.6654 5.15652 13.6654 5.33333V12.6667C13.6643 13.5504 13.3128 14.3976 12.6879 15.0225C12.063 15.6474 11.2158 15.9989 10.332 16Z"
+                        />
+                    </svg>
+                </div>
+
+                <span
+                    class="dropdown"
+                    [class.active]="isCopiedActive"
+                    [innerHTML]="data.page.data.reflink.copied"
+                >
+                </span>
+            </button>
+            <div class="modal__content-footer">
+                <a
+                    [href]="'https://twitter.com/share?url=' + data.link"
+                    target="_blank"
+                    class="item"
+                >
+                    <div class="social-icon">
+                        <img
+                            src="assets/img/icons/soc/twitter.svg"
+                            width="15px"
+                            height="12px"
+                            alt="icon"
+                        />
+                    </div>
+                </a>
+                <a
+                    [href]="
+                        'https://www.facebook.com/sharer.php?u=' + data.link
+                    "
+                    target="_blank"
+                    class="item"
+                >
+                    <div class="social-icon">
+                        <img
+                            src="assets/img/icons/soc/facebook.svg"
+                            width="9px"
+                            height="17px"
+                            alt="icon"
+                        />
+                    </div>
+                </a>
+                <a
+                    [href]="
+                        'https://www.linkedin.com/shareArticle?mini=true&url=' +
+                        data.link
+                    "
+                    target="_blank"
+                    class="item"
+                >
+                    <div class="social-icon">
+                        <img
+                            src="assets/img/icons/soc/linkedin.svg"
+                            width="11px"
+                            height="11px"
+                            alt="icon"
+                        />
+                    </div>
+                </a>
+                <a
+                    [href]="'https://t.me/share/url?url=' + data.link"
+                    target="_blank"
+                    class="item"
+                >
+                    <div class="social-icon">
+                        <img
+                            src="assets/img/icons/soc/telegram.svg"
+                            width="14px"
+                            height="13px"
+                            alt="icon"
+                        />
+                    </div>
+                </a>
+                <a
+                    [href]="'https://www.tiktok.com/'"
+                    target="_blank"
+                    class="item"
+                >
+                    <div class="social-icon">
+                        <img
+                            src="assets/img/icons/soc/tiktok.svg"
+                            width="14px"
+                            height="16px"
+                            alt="icon"
+                        />
+                    </div>
+                </a>
+                <a
+                    [href]="'https://www.instagram.com/'"
+                    target="_blank"
+                    class="item"
+                >
+                    <div class="social-icon">
+                        <img
+                            src="assets/img/icons/soc/instagram.svg"
+                            width="15px"
+                            height="15px"
+                            alt="icon"
+                        />
+                    </div>
+                </a>
+                <a
+                    [href]="banners[activeBanner][bannerSize]"
+                    download
+                    class="item download"
+                >
+                    <svg
+                        class="icon"
+                        width="20"
+                        height="22"
+                        viewBox="0 0 20 22"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <path
+                            fill-rule="evenodd"
+                            clip-rule="evenodd"
+                            d="M1.25 16.3125C1.76777 16.3125 2.1875 16.7322 2.1875 17.25V19.75C2.1875 19.9226 2.32741 20.0625 2.5 20.0625H17.5C17.6726 20.0625 17.8125 19.9226 17.8125 19.75V17.25C17.8125 16.7322 18.2322 16.3125 18.75 16.3125C19.2678 16.3125 19.6875 16.7322 19.6875 17.25V19.75C19.6875 20.9581 18.7081 21.9375 17.5 21.9375H2.5C1.29188 21.9375 0.3125 20.9581 0.3125 19.75V17.25C0.3125 16.7322 0.732233 16.3125 1.25 16.3125Z"
+                        />
+                        <path
+                            d="M8.42244 0.6875C7.77945 0.6875 7.24308 1.1789 7.18693 1.81944C6.99488 4.01033 6.96101 6.21199 7.08547 8.4073C6.77674 8.42436 6.46813 8.44413 6.15966 8.46662L4.29778 8.60234C3.57991 8.65467 3.17861 9.45512 3.56616 10.0617C4.89371 12.1393 6.60429 13.9454 8.60672 15.3839L9.35265 15.9197C9.73952 16.1976 10.2606 16.1976 10.6475 15.9197L11.3934 15.3839C13.3958 13.9454 15.1064 12.1393 16.434 10.0617C16.8215 9.45512 16.4202 8.65467 15.7024 8.60234L13.8405 8.46662C13.532 8.44413 13.2234 8.42436 12.9147 8.4073C13.0391 6.21199 13.0052 4.01032 12.8132 1.81943C12.757 1.1789 12.2207 0.6875 11.5777 0.6875H8.42244Z"
+                        />
+                    </svg>
+                </a>
+            </div>
+
+            <div class="modal__content-footer-mobile">
+                <a
+                    [href]="banners[activeBanner][bannerSize]"
+                    download
+                    class="item"
+                >
+                    <img
+                        class="icon"
+                        src="assets/img/icons/download.svg"
+                        alt="icon"
+                    />
+                    <div
+                        class="text"
+                        [innerHTML]="data.page.data.modalBanner.download"
+                    >
+                        Скачать
+                    </div>
+                </a>
+                <button class="item" type="button" (click)="shareBanner()">
+                    <img
+                        class="icon"
+                        src="assets/img/icons/share.svg"
+                        alt="icon"
+                    />
+                    <div
+                        class="text"
+                        [innerHTML]="data.page.data.modalBanner.share"
+                    >
+                        Поделиться
+                    </div>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

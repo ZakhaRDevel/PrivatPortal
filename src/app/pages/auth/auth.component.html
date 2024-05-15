@@ -1,0 +1,61 @@
+<main class="wrapper" [class.login-page]="is_bgFourLights" [class.loading]="loaderService.isLoading">
+    <div class="lang">
+        <app-lang-switcher
+            [typeSelect]="'home'"
+            [authClass]="authClass"
+        ></app-lang-switcher>
+    </div>
+
+    <div class="wrapper__bg">
+        <img class="loader"
+             src="assets/img/pages/auth/form-bg-loader.svg"
+             alt="bg"
+        />
+
+        <img class="desctop"
+             src="assets/img/pages/auth/form-bg-3.svg"
+             alt="bg"
+             *ngIf="!is_bgFourLights"
+        />
+
+        <img class="desctop"
+             src="assets/img/pages/auth/form-bg-4.svg"
+             alt="bg"
+             *ngIf="is_bgFourLights"
+        />
+
+        <img class="mobile" src="assets/img/pages/auth/mobile-form-bg.svg" alt="bg">
+    </div>
+
+    <section class="fullscreen">
+        <div class="fullscreen__body">
+            <div class="fullscreen__body-header">
+                <a routerLink="{{homeLink}}" class="logo">
+                    <img src="assets/img/icons/logo.svg" alt="logo" />
+                </a>
+            </div>
+
+            <div class="fullscreen__body-preloader" *ngIf="loaderService.isLoading">
+                <app-loader></app-loader>
+            </div>
+
+            <div class="fullscreen__body-content" *ngIf="!loaderService.isLoading">
+                <router-outlet></router-outlet>
+            </div>
+
+            <div class="fullscreen__body-footer">
+                <div class="line-wrap">
+                    <span class="line"></span>
+                    <div class="logo">
+                        <img src="assets/img/icons/logo-p.svg" alt="alt" />
+                    </div>
+                    <span class="line"></span>
+                </div>
+
+                <p class="copyright">
+                    © 2023 <span class="dot"></span> The Platform You Deserve
+                </p>
+            </div>
+        </div>
+    </section>
+</main>

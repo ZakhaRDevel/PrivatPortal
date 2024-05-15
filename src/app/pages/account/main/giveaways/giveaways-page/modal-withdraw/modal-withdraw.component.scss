@@ -1,0 +1,791 @@
+@import "~src/assets/scss/variables";
+@import "~src/assets/scss/mixins";
+
+.modal {
+    padding: 0 15px;
+
+    @media only screen and (max-width: $tablet) {
+        padding: 0;
+        height: 100%;
+    }
+
+    &__content {
+        display: flex;
+        background-color: #fff;
+        max-width: 470px;
+        border-radius: 10px;
+        padding: 0 !important;
+
+        @media only screen and (max-width: $tablet) {
+            max-width: 100%;
+            height: 100%;
+        }
+    }
+
+    &__block {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        width: 500px;
+
+        @media only screen and (max-width: $tablet) {
+            width: 100%;
+        }
+
+        &.withdraw {
+            .modal__body {
+                padding: 21px 30px 28px;
+
+                @media only screen and (max-width: $tablet) {
+                    padding: 33px 15px 85px;
+                }
+
+                .form {
+                    .buttons {
+                        margin-top: 30px;
+                    }
+                }
+            }
+        }
+    }
+
+    &__head {
+        padding: 24px 30px;
+        border-bottom: 1px solid #f2f3f5;
+        display: flex;
+        align-items: center;
+        position: relative;
+
+        @media only screen and (max-width: $tablet) {
+            padding: 28px 15px 28px 22px;
+            justify-content: flex-start;
+        }
+
+        .title {
+            font: 600 20px $font-family-primary;
+            color: $color-font-1;
+            padding-right: 20px;
+
+            @media only screen and (max-width: $tablet) {
+                padding-right: 0;
+            }
+        }
+
+        &-btn {
+            position: absolute;
+            right: 30px;
+            top: 27px;
+            display: flex;
+
+            @media only screen and (max-width: $tablet) {
+                position: relative;
+                left: 0;
+                top: 0;
+                margin-right: 22px;
+            }
+
+            .btn-close {
+                position: relative;
+                width: 18px;
+                height: 18px;
+
+                @media only screen and (max-width: $tablet) {
+                    display: none;
+                }
+
+                &:hover {
+                    &::after {
+                        @media only screen and (min-width: $tablet) {
+                            transform: rotate(-45deg);
+                            background-color: #56c6ad;
+                        }
+                    }
+
+                    &::before {
+                        @media only screen and (min-width: $tablet) {
+                            transform: rotate(45deg);
+                            background-color: #56c6ad;
+                        }
+                    }
+                }
+
+                &::before,
+                &::after {
+                    content: "";
+                    width: 2px;
+                    height: 25px;
+                    background-color: #b5bcc6;
+                    position: absolute;
+                    left: 9px;
+                    top: -3px;
+                    z-index: 1;
+                    transform: rotate(-45deg);
+                    border-radius: 10px;
+                    transition: transform 0.3s linear,
+                        background-color 0.3s linear;
+                }
+
+                &::after {
+                    transform: rotate(45deg);
+                }
+            }
+
+            .arrow-close {
+                display: none;
+
+                @media only screen and (max-width: $tablet) {
+                    display: flex;
+                }
+            }
+        }
+    }
+
+    &__body {
+        padding: 24px 30px 28px;
+        display: flex;
+        flex-direction: column;
+
+        @media only screen and (max-width: $tablet) {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 32px 16px 84px;
+            flex: 1;
+        }
+
+        .alert {
+            display: flex;
+            align-items: center;
+            background: #fff8dd;
+            border: 1px solid #ffd89f;
+            border-radius: 8px;
+            font: 400 12px $font-family-primary;
+            color: #1f2328;
+            padding: 12px 30px 12px 17px;
+            min-height: 56px;
+
+            @media only screen and (max-width: $tablet) {
+                padding-left: 14px;
+            }
+
+            .icon-left {
+                display: flex;
+                margin-right: 11px;
+                width: 22px;
+                min-width: 22px;
+            }
+        }
+
+        .wallets {
+            display: flex;
+            flex-direction: column;
+            margin: 5px 0 8px;
+
+            @media only screen and (max-width: $tablet) {
+                margin: 0;
+            }
+
+            &__item {
+                display: flex;
+                margin-bottom: 15px;
+
+                @media only screen and (max-width: $tablet) {
+                    margin-bottom: 39px;
+
+                    &:last-child {
+                        margin-bottom: 33px;
+                    }
+                }
+
+                input {
+                    position: absolute;
+                    top: -30px;
+                    opacity: 0;
+                    visibility: hidden;
+                }
+
+                input:checked {
+                    +.radio_label {
+                        &::before {
+                            background-color: #56c6ad;
+                        }
+
+                        &::after {
+                            background-color: #fff;
+                        }
+                    }
+                }
+
+                .radio_label {
+                    position: relative;
+                    padding-left: 35px;
+                    font: 400 16px $font-family-primary;
+                    color: $color-font-1;
+                    cursor: pointer;
+
+                    @media (hover: hover) {
+                        &:hover {
+                            &::before {
+                                background-color: #c5d2ea;
+                            }
+
+                            &::after {
+                                background-color: #fff;
+                            }
+                        }
+                    }
+
+                    @media only screen and (max-width: $tablet) {
+                        padding-left: 47px;
+
+                        &::before {
+                            background-color: #c5d2ea;
+                        }
+
+                        &::after {
+                            background-color: #fff;
+                        }
+                    }
+
+                    &::before {
+                        position: absolute;
+                        width: 18px;
+                        height: 18px;
+                        left: 0;
+                        top: 1px;
+                        content: "";
+                        background: #d5dff2;
+                        background-size: auto;
+                        background-position: center;
+                        border-radius: 50%;
+                        transition: all 0.3s linear;
+
+                        @media only screen and (max-width: $tablet) {
+                            left: 14px;
+                        }
+                    }
+
+                    &::after {
+                        position: absolute;
+                        width: 8px;
+                        height: 8px;
+                        left: 5px;
+                        top: 6px;
+                        content: "";
+                        background: #efefef;
+                        background-position: center;
+                        border-radius: 50%;
+                        transition: all 0.3s linear;
+
+                        @media only screen and (max-width: $tablet) {
+                            left: 19px;
+                        }
+                    }
+                }
+            }
+        }
+
+        .form {
+            display: flex;
+            flex-direction: column;
+            margin-top: 30px;
+
+            @media only screen and (max-width: $tablet) {
+                justify-content: space-between;
+                flex: 1;
+            }
+
+            .form-group {
+                display: flex;
+                flex-direction: column;
+                margin-bottom: 22px;
+                position: relative;
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+
+                @media only screen and (max-width: $tablet) {
+                    flex: 1;
+                    margin-bottom: 30px;
+                }
+
+                &.mb-0 {
+                    margin-bottom: 0;
+                }
+
+                .input-title {
+                    display: flex;
+                    align-items: center;
+                    font: 400 14px $font-family-primary;
+                    color: #1f2328;
+                    margin-bottom: 10px;
+
+                    @media only screen and (max-width: $tablet) {
+                        padding: 0 10px;
+                        margin-bottom: 10px;
+                    }
+
+                    &.mb-0 {
+                        margin-bottom: 0;
+                    }
+
+                    .text {
+                        margin-right: 12px;
+
+                        @media only screen and (max-width: $small) {
+                            margin-right: 9px;
+                        }
+                    }
+                }
+
+                .input-sub-title {
+                    display: flex;
+                    align-items: center;
+                    font: 400 12px $font-family-primary;
+                    color: #727a89;
+                    margin-bottom: 10px;
+                    margin-top: 2px;
+
+                    .text {
+                        margin-right: 12px;
+
+                        @media only screen and (max-width: $small) {
+                            margin-right: 9px;
+                        }
+                    }
+
+                    @media only screen and (max-width: $small) {
+                        margin-bottom: 18px;
+                        padding: 0;
+                    }
+                }
+
+                .input-label {
+                    height: 50px;
+                    width: 100%;
+                    display: flex;
+                    position: relative;
+
+                    &:hover {
+                        .dropdown {
+                            opacity: 1;
+                            visibility: visible;
+                        }
+                    }
+
+                    .dropdown {
+                        opacity: 0;
+                        visibility: hidden;
+                        transition: opacity 0.25s,
+                            visibility 0.2s, transform 0.3s;
+                        cursor: default;
+                        position: absolute;
+                        z-index: 10;
+                        top: -55px;
+                        left: 0;
+                        padding-bottom: 13px;
+
+
+                        @media only screen and (max-width: $tiny) {
+                            width: 100%;
+                        }
+
+
+
+                        &_wrapper {
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+
+                            padding: 12px 18px;
+                            height: 42px;
+                            background: #54657e;
+                            box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.11);
+                            border-radius: 8px;
+                            font-family: $font-family-primary;
+                            font-size: 12px;
+                            line-height: 18px;
+                            font-weight: 400;
+                            color: #fff;
+                            white-space: nowrap;
+                            position: relative;
+
+
+                            &::before {
+                                content: "";
+                                position: absolute;
+                                z-index: 2;
+                                bottom: -7px;
+                                left: 64px;
+                                height: 7px;
+                                width: 12px;
+                                background-image: url(/assets/img/icons/ticker.svg);
+                                background-size: cover;
+                                background-repeat: no-repeat;
+                                // transform: translate(0, -101%);
+                                transform: rotate(180deg);
+
+                                @media only screen and (max-width: $tiny) {
+                                    left: 0;
+                                    right: 0;
+                                    margin: auto;
+                                }
+                            }
+                        }
+                    }
+
+                    input {
+                        box-shadow: none;
+                        outline: none;
+                        font: 400 16px $font-family-primary;
+                        color: #000000;
+                        padding: 14px 65px 14px 15px;
+                        width: 100%;
+                        height: 100%;
+                        background: #f5f8f9;
+                        border: 1px solid #f5f8f9;
+                        border-radius: 10px;
+                        transition: background-color 0.2s linear,
+                            border-color 0.2s linear;
+                        -webkit-appearance: none;
+
+                        @media only screen and (max-width: $small) {
+                            padding: 14px 75px 14px 15px;
+                        }
+
+                        @media (hover: hover) {
+                            &:hover {
+                                border-color: #a5b4c7;
+                                background-color: #fcfdfd;
+                            }
+                        }
+
+                        &:focus {
+                            border-color: #a5b4c7;
+                            background-color: #fcfdfd;
+                        }
+
+                        &:disabled {
+                            opacity: 1;
+                            -webkit-text-fill-color: #000;
+                            background: #f5f8f9;
+                            border-color: #f5f8f9;
+
+                            &:focus {
+                                background: #f5f8f9;
+                                border-color: #f5f8f9;
+                            }
+
+                            @media (hover: hover) {
+                                &:hover {
+                                    background: #f5f8f9;
+                                    border-color: #f5f8f9;
+                                }
+                            }
+                        }
+
+                        &.error {
+                            border-color: #de7d84;
+                            color: #de7d84;
+                            background: rgba(245, 248, 249, 0.31);
+
+                            @media (hover: hover) {
+                                &:hover {
+                                    border-color: #de7d84;
+                                    color: #de7d84;
+                                    background: rgba(245, 248, 249, 0.31);
+                                }
+                            }
+
+                            &:disabled {
+                                -webkit-text-fill-color: #de7d84;
+                            }
+                        }
+
+                        &.medium {
+                            font: 500 14px $font-family-primary;
+                        }
+
+                        &::placeholder {
+                            font: 400 14px $font-family-primary;
+                            color: #a5b4c7;
+                        }
+                    }
+
+                    .placeholder {
+                        font: 400 14px $font-family-primary;
+                        color: #a5b4c7;
+                        letter-spacing: normal;
+                        white-space: nowrap;
+                        user-select: none;
+                        cursor: text;
+                        position: absolute;
+                        left: 16px;
+                        top: 17px;
+                        z-index: 1;
+                        -webkit-user-select: none;
+                        -moz-user-select: none;
+                        user-select: none;
+                        pointer-events: none;
+                    }
+
+                    .icons {
+                        display: flex;
+                        align-items: center;
+                        position: absolute;
+                        top: 50%;
+                        right: 16px;
+                        transform: translateY(-50%);
+                        z-index: 1;
+
+                        @media only screen and (max-width: $small) {
+                            right: 14px;
+                        }
+
+                        .btn-clear {
+                            display: flex;
+                            cursor: pointer;
+
+                            .btn-clear-img {
+                                fill: #54657e;
+                                transition: fill 0.2s linear;
+                            }
+
+                            &:hover {
+                                .btn-clear-img {
+                                    fill: #056b6f;
+                                }
+                            }
+                        }
+
+                        .btn-toggle {
+                            display: flex;
+                            align-items: center;
+                            width: 19px;
+                            height: 24px;
+                            margin-left: 6px;
+                            cursor: pointer;
+
+                            @media only screen and (max-width: $small) {
+                                margin-left: 15px;
+                            }
+
+                            &:hover {
+
+                                .hide,
+                                .show {
+                                    fill: #056b6f;
+                                }
+                            }
+
+                            .hide {
+                                fill: #54657e;
+                                transition: fill 0.2s linear;
+                            }
+
+                            .show {
+                                fill: #36b8bc;
+                                transition: fill 0.2s linear;
+                            }
+                        }
+                    }
+                }
+
+                ::ng-deep {
+                    .errors {
+                        max-width: 426px;
+                        font: 400 12px $font-family-primary;
+                        color: #de7d84;
+                        margin-top: 6px;
+                        line-height: 15px;
+
+                        @media only screen and (max-width: $small) {
+                            margin: 5px 0 0 0;
+                        }
+                    }
+                }
+            }
+
+            .form-button {
+                width: 50%;
+                padding: 0 10px;
+                margin-top: 27px;
+
+                @media only screen and (max-width: $tablet) {
+                    flex: 1;
+                    flex-direction: column-reverse;
+                    justify-content: flex-start;
+                }
+
+                &.w-100 {
+                    width: 100%;
+                }
+
+                .btn-submit {
+                    @include btn-green();
+                    width: 100%;
+                    color: #fcfcfc;
+
+                    @media only screen and (max-width: $small) {
+                        height: 50px;
+                    }
+
+                    .loader {
+                        position: absolute;
+                        display: inline-block;
+                        left: 0;
+                        right: 0;
+                        top: 0;
+                        bottom: 0;
+                        z-index: 10;
+                        margin: 0 auto;
+                        width: 50px;
+                        opacity: 0;
+
+                        &:before {
+                            content: "";
+                            display: block;
+                            padding-top: 100%;
+                        }
+
+                        &.visible {
+                            opacity: 1;
+                            visibility: visible;
+                        }
+                    }
+
+                    .circular {
+                        animation: rotate 2s linear infinite;
+                        height: 100%;
+                        transform-origin: center center;
+                        width: 100%;
+                        position: absolute;
+                        top: 0;
+                        bottom: 0;
+                        left: 0;
+                        right: 0;
+                        margin: auto;
+                    }
+
+                    .path {
+                        stroke-dasharray: 1, 200;
+                        stroke-dashoffset: 0;
+                        animation: dash 1.5s ease-in-out infinite,
+                            color 6s ease-in-out infinite;
+                        stroke-linecap: round;
+                    }
+
+                    @keyframes rotate {
+                        100% {
+                            transform: rotate(360deg);
+                        }
+                    }
+
+                    @keyframes dash {
+                        0% {
+                            stroke-dasharray: 1, 200;
+                            stroke-dashoffset: 0;
+                        }
+
+                        50% {
+                            stroke-dasharray: 89, 200;
+                            stroke-dashoffset: -35px;
+                        }
+
+                        100% {
+                            stroke-dasharray: 89, 200;
+                            stroke-dashoffset: -124px;
+                        }
+                    }
+
+                    @keyframes color {
+
+                        100%,
+                        0% {
+                            stroke: #36b8bc;
+                        }
+                    }
+                }
+            }
+        }
+
+        .icon-wallet {
+            display: flex;
+            margin: -20px auto 18px;
+
+            @media only screen and (max-width: $tablet) {
+                margin-bottom: 0;
+            }
+
+            img {
+                margin-right: 22px;
+            }
+        }
+
+        .icon-check {
+            display: flex;
+            margin: 0 auto 40px;
+
+            @media only screen and (max-width: $tablet) {
+                margin-bottom: 28px;
+            }
+        }
+
+        .h4 {
+            font: 500 16px $font-family-primary;
+            color: #727a89;
+            text-align: center;
+            margin: 0 auto;
+            max-width: 370px;
+            line-height: 1.44;
+
+            br {
+                @media only screen and (max-width: $tablet) {
+                    display: none;
+                }
+            }
+        }
+
+        .icon-wrap {
+            display: flex;
+            flex-direction: column;
+
+            @media only screen and (max-width: $tablet) {
+                flex: 1;
+                justify-content: center;
+            }
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 36px;
+            width: 100%;
+
+            @media only screen and (max-width: $tablet) {
+                flex-direction: column-reverse;
+                justify-content: flex-start;
+            }
+
+            .btn-grey {
+                @include btn-grey;
+                margin-right: 20px;
+
+                @media only screen and (max-width: $tablet) {
+                    height: 50px;
+                    margin-right: 0;
+                    margin-top: 20px;
+                }
+            }
+
+            .btn-green {
+                @include btn-green;
+
+                @media only screen and (max-width: $tablet) {
+                    margin-left: 0;
+                    height: 50px;
+                }
+            }
+        }
+    }
+}

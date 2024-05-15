@@ -1,0 +1,329 @@
+@import "~src/assets/scss/mixins";
+@import "~src/assets/scss/variables";
+
+.input-label {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+    align-items: center;
+    position: relative;
+    background: #f5f8f9;
+    margin-top: 10px;
+    height: 50px;
+    width: 100%;
+    border-radius: 8px;
+
+    &.mt28 {
+        margin-top: 28px;
+    }
+
+    .input {
+        height: 50px;
+        width: 100%;
+        padding-left: 15px;
+
+        border: 1px solid #f5f8f9;
+        border-radius: 8px;
+        background: #f5f8f9;
+        transition: border 0.3s linear, background-color 0.3s linear;
+        -webkit-appearance: none;
+        outline: none;
+        box-shadow: none;
+
+        font: 400 16px $font-family-primary;
+        color: $color-black;
+
+        @media (hover: hover) {
+            &:hover {
+                border-color: #a5b4c7;
+                background: #fcfdfd;
+            }
+        }
+
+        &:focus {
+            border-color: #a5b4c7;
+            background: #fcfdfd;
+        }
+
+        &.error {
+            background-color: #fcfdfd;
+            border-color: #de7d84;
+
+            &::placeholder {
+                font-size: 0;
+            }
+        }
+
+        &:focus+.ng-select {
+            border-color: #a5b4c7;
+            background: #fcfdfd;
+
+            &.error {
+                border-color: #de7d84;
+            }
+        }
+
+        &::placeholder {
+            font: 400 14px $font-family-primary;
+            color: #a5b4c7;
+        }
+    }
+
+    &.country-mask {
+        .ng-select {
+            height: 50px;
+            width: 100%;
+            position: initial;
+            left: 0;
+            outline: none;
+            font: 400 14px $font-family-primary;
+            color: blue;
+            border: 1px solid #ffffff;
+            border-radius: 8px;
+            transition: all 0.3s linear;
+
+            * {
+                outline: none;
+                box-shadow: none;
+            }
+
+            @media (hover: hover) {
+                &:hover {
+                    cursor: pointer;
+                    border: 1px solid #a5b4c7;
+                    background: #fcfdfd;
+                }
+            }
+
+            &:focus {
+                border: 1px solid #a5b4c7;
+                background: #fcfdfd;
+            }
+
+            &.error {
+                background-color: #fcfdfd;
+                border-color: #de7d84;
+
+                &::placeholder {
+                    font-size: 0;
+                }
+            }
+
+            ::ng-deep {
+                .ng-select-container {
+                    height: 100%;
+                    min-height: 26px;
+                    width: 100%;
+                    //cursor: pointer;
+                    background: transparent;
+                    box-shadow: none !important;
+                    border: 0;
+                    border-radius: 8px;
+
+                    &:hover {
+                        cursor: pointer;
+                    }
+
+                    .ng-value-container {
+                        margin-left: 4px;
+
+                        .ng-placeholder {
+                            font: 400 14px $font-family-primary;
+                            color: #a5b4c7;
+                        }
+
+                        .ng-value {
+                            display: flex;
+
+                            .item {
+                                display: flex;
+                                align-items: center;
+
+                                .icon {
+                                    display: flex;
+                                    width: 26px;
+                                    height: 26px;
+                                    border-radius: 50%;
+                                    margin-right: 13px;
+                                    overflow: hidden;
+                                    border: 1px solid #f1f4f8;
+
+                                    @media only screen and (max-width: $small) {
+                                        margin-right: 10px;
+                                    }
+
+                                    img {
+                                        object-fit: cover;
+                                        width: 100%;
+                                        height: 100%;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    .ng-arrow-wrapper {
+                        padding: 0;
+                        width: 10px;
+                        display: flex;
+                        justify-content: flex-end;
+                        right: 15px;
+
+                        .ng-arrow {
+                            border: none;
+                            background: url(/assets/img/icons/quest_arrow.svg) no-repeat 50%;
+                            //background-size: cover;
+                            width: 14px;
+                            height: 14px;
+                            top: 0;
+                            transition: transform 0.2s;
+                        }
+                    }
+                }
+
+                .ng-dropdown-panel {
+                    background: #ffffff;
+                    border: 1px solid #caced3;
+                    box-shadow: 0px 19px 32px rgba(0, 0, 0, 0.07);
+                    border-radius: 8px;
+
+                    overflow: hidden;
+
+                    &.ng-select-top {
+                        bottom: 0 !important;
+                    }
+
+                    &>* {
+                        border-radius: 0;
+                    }
+
+                    &.ng-select-top {
+                        bottom: 0;
+                    }
+
+                    &.ng-select-bottom {
+                        top: 0;
+                    }
+
+                    &>.ng-dropdown-header {
+                        padding: 0 14px;
+                        border-bottom: 1px solid #dee2e7;
+                        height: 50px;
+
+                        .select-search {
+                            position: relative;
+                            display: flex;
+                            width: 100%;
+                            height: 100%;
+                            align-items: center;
+                            padding-left: 24px;
+
+                            .icon-left {
+                                position: absolute;
+                                left: 0;
+                                top: 49%;
+                                transform: translateY(-49%);
+                            }
+
+                            &>input.input-search {
+                                font: 400 16px $font-family-primary;
+                                color: #000;
+                                border: none;
+                                box-shadow: none;
+                                width: 100%;
+                                height: 100%;
+                                padding: 0 0 2px 4px;
+
+                                &::placeholder {
+                                    color: #a5b4c7;
+                                    font-size: 14px;
+                                    line-height: 1;
+                                }
+                            }
+                        }
+                    }
+
+                    .ng-dropdown-panel-items {
+                        width: 100%;
+                        max-height: 250px;
+                    }
+
+                    .ng-option {
+                        white-space: normal;
+                        border-radius: 0;
+                        width: 100%;
+                        transition: background-color 0.3s, color 0.3s;
+                        font-family: $font-family-primary;
+                        border-bottom: 1px solid #f1f4f8;
+                        padding: 0;
+                        background-color: transparent !important;
+
+                        &:hover {
+                            .item {
+                                background: #f8f9fa;
+                            }
+                        }
+
+                        &-marked {
+                            background: transparent;
+                        }
+
+                        &:last-child {
+                            border-bottom: none;
+                        }
+
+                        .item {
+                            display: flex;
+                            align-items: center;
+                            height: 49px;
+                            width: 100%;
+                            transition: background-color 0.3s;
+                            padding: 12px 15px;
+                            font: 400 16px $font-family-primary;
+
+                            @media only screen and (max-width: $small) {
+                                height: 50px;
+                                padding: 8px 16px;
+                            }
+
+                            .icon {
+                                display: flex;
+                                width: 26px;
+                                height: 26px;
+                                border-radius: 50%;
+                                margin-right: 12px;
+                                overflow: hidden;
+                                border: 1px solid #f1f4f8;
+
+                                img {
+                                    object-fit: cover;
+                                    width: 100%;
+                                    height: 100%;
+                                }
+                            }
+                        }
+
+                        &-disabled {
+                            font-family: $font-family-primary;
+                            color: #A5B4C7;
+                            padding: 17px 15px 16px;
+                            font-weight: 400;
+                            font-size: 14px;
+                            line-height: 17px;
+                        }
+                    }
+
+                    .ng-option-selected {
+                        background: #f8f9fa;
+
+                        @media (hover: hover) {
+                            &:hover {
+                                background: #f8f9fa;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

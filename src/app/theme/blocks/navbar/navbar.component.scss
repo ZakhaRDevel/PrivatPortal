@@ -1,0 +1,203 @@
+@import "~src/assets/scss/mixins";
+@import "~src/assets/scss/variables";
+
+.navbar {
+    width: 200px;
+    height: 100%;
+    min-height: calc(100vh - 64px);
+    padding: 40px 0 0 23px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    //background: #fff;
+    @media only screen and (max-width: $tablet) {
+        justify-content: space-evenly;
+        flex-direction: row;
+        width: 100%;
+        min-height: auto;
+        padding: 7px 0 7px;
+    }
+
+    &__item {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        min-width: 154px;
+        max-width: 165px;
+        height: 50px;
+        padding: 0 11px 0 17px;
+        margin-bottom: 10px;
+        border-radius: 10px;
+        transition: all 0.2s linear;
+
+        &:hover {
+            background: #f7f8fe;
+
+            @media only screen and (max-width: $tablet) {
+                background: none;
+            }
+        }
+
+        @media only screen and (max-width: $tablet) {
+            flex-direction: column;
+            justify-content: space-between;
+            width: auto;
+            height: 100%;
+            margin-bottom: 0;
+            flex: 1;
+            padding: 0;
+            min-width: auto;
+            max-width: auto;
+        }
+
+        &:nth-child(1) {
+            @media only screen and (max-width: $tablet) {
+                order: 1;
+            }
+        }
+        &:nth-child(2) {
+            .icon {
+                // top: 2px;
+            }
+
+            @media only screen and (max-width: $tablet) {
+                order: 3;
+            }
+        }
+        &:nth-child(3) {
+            @media only screen and (max-width: $tablet) {
+                order: 2;
+            }
+        }
+        &:nth-child(4) {
+            @media only screen and (max-width: $tablet) {
+                order: 4;
+            }
+        }
+        &:nth-child(5) {
+            .icon {
+                top: -1px;
+            }
+
+            @media only screen and (max-width: $tablet) {
+                order: 5;
+            }
+        }
+        &:nth-child(6) {
+            .icon {
+                top: 0;
+            }
+
+            @media only screen and (max-width: $tablet) {
+                display: none;
+                order: 6;
+            }
+        }
+        &:last-child {
+            @media only screen and (max-width: $tablet) {
+                display: none;
+            }
+
+            .icon {
+                top: 0;
+
+                .circle {
+                    position: absolute;
+                    top: 1px;
+                    right: 1px;
+                    transform: translate(50%, -50%);
+                }
+            }
+        }
+
+        &.active {
+            background: #56c6ad;
+
+            &:hover {
+                background: #56c6ad;
+
+                @media only screen and (max-width: $tablet) {
+                    background: none;
+                }
+            }
+            @media only screen and (max-width: $tablet) {
+                background: none;
+            }
+
+            .icon img {
+                opacity: 0;
+
+                &.active {
+                    opacity: 1;
+
+                    @media only screen and (max-width: $tablet) {
+                        opacity: 0;
+                    }
+                }
+
+                &.mobile {
+                    opacity: 0;
+
+                    @media only screen and (max-width: $tablet) {
+                        opacity: 1;
+                    }
+                }
+            }
+
+            .text {
+                color: #fff;
+                font-weight: 500;
+            }
+        }
+
+        &.btn-sidebar-right {
+            .icon {
+                margin-top: 1px;
+            }
+        }
+
+        .icon {
+            position: relative;
+            top: -1px;
+            min-width: 18px;
+            width: 18px;
+            @media only screen and (max-width: $tablet) {
+                display: flex;
+                align-items: center;
+                flex: 1;
+                top: 1px !important;
+                margin-bottom: 4px;
+            }
+
+            img {
+                &.mobile,
+                &.active {
+                    position: absolute;
+                    opacity: 0;
+                }
+
+                &.active {
+                    top: 0;
+                }
+            }
+        }
+
+        .text {
+            position: relative;
+            top: -1px;
+            font-size: 14px;
+            font-weight: 400;
+            margin-left: 10px;
+            color: $color-font-grey;
+
+            @media only screen and (max-width: $tablet) {
+                color: #a0a0a0;
+                margin-left: 0;
+            }
+
+            @media only screen and (max-width: $small) {
+                font-size: 10px;
+            }
+        }
+    }
+}

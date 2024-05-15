@@ -1,0 +1,51 @@
+<h2 class="auth-title" [innerHTML]="page.data.title">Проверка безопасности</h2>
+<p class="auth-sub-title" [innerHTML]="page.data.desc">
+    В вашем аккаунте включена двухфакторная аутентификация Google. Чтобы войти,
+    пожалуйста, выполните следующую проверку.
+</p>
+
+<form class="form form-twofa" [formGroup]="formGroup" (ngSubmit)="submit()">
+    <div class="form-group">
+        <pc-input
+            [isInvalid]="hasError(control('code'))"
+            [errorsTranslate]="pageErrors"
+            [errors]="errors('code')"
+        >
+            <p class="input-title" [innerHTML]="page.data.enterCode">
+                Введите 6-значный код из Google Authenticator
+            </p>
+
+            <div class="input-label">
+                <input
+                    formControlName="code"
+                    type="text"
+                    tabindex="1"
+                    [ngClass]="{
+                        error: hasError(control('code'))
+                    }"
+                    id="code"
+                    ngModel
+                    ngxMask="0-0-0-0-0-0"
+                    #input
+                    (input)="inputSubmit(input.value.length)"
+                />
+            </div>
+        </pc-input>
+    </div>
+
+    <div class="form-button">
+        <button
+            class="btn-submit"
+            type="submit"
+            [disabled]="!hasValue(control('code'))"
+            [class.loading]="isSubmitted"
+        >
+            <app-btn-loader
+                [isSubmitted]="isSubmitted"
+                [isAuth]="true"
+            ></app-btn-loader>
+
+            <span>{{ page.data.btnSubmit }}</span>
+        </button>
+    </div>
+</form>

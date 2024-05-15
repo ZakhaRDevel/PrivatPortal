@@ -1,0 +1,142 @@
+@import "~src/assets/scss/mixins";
+@import "~src/assets/scss/variables";
+
+.btn-copy {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: $green;
+    border-radius: 0px 8px 8px 0px;
+    height: 32px;
+    width: 32px;
+    transition: all 0.2s linear;
+    cursor: pointer;
+
+    @media only screen and (max-width: $medium) {
+        height: 26px;
+    }
+
+    @media only screen and (max-width: $tablet) {
+        border-radius: 8px;
+        border: none;
+        color: #868f9d;
+        font-size: 13px;
+        justify-content: center;
+        height: 36px;
+        width: 100%;
+        background: #56c6ad;
+        display: flex;
+        margin-top: 12px;
+    }
+
+    &.empty {
+        background: transparent;
+        height: 14px;
+        width: 12px;
+        margin-left: 10px;
+
+        @media only screen and (max-width: $tablet) {
+            margin-top: 3px;
+        }
+
+        .icon {
+            position: relative;
+            top: 2px;
+
+            @media only screen and (max-width: $tablet) {
+                top: 1px;
+                display: block;
+            }
+
+            svg {
+                fill: rgba(129, 137, 148, 1);
+                transition: fill 0.3s;
+
+                &:hover {
+                    fill: #53ad99;
+                }
+            }
+
+            //&:hover {
+            //    svg {
+            //        fill: rgba(84, 101, 126, 1);
+            //    }
+            //}
+        }
+
+        &:hover {
+            background: transparent;
+        }
+
+        aside {
+            pointer-events: none;
+
+            top: -57px;
+            right: -13px;
+            padding: 9px 18px 7px;
+        }
+    }
+
+    &.type_3 {
+        background: transparent;
+        border-radius: 0;
+        margin-top: 0;
+
+        &:hover {
+            background: transparent;
+        }
+
+        .icon {
+            display: block;
+        }
+
+    }
+
+    &:hover {
+        background: $dark-green;
+    }
+
+    .icon {
+        @media only screen and (max-width: $tablet) {
+            display: none;
+        }
+    }
+
+    .text {
+        display: none;
+
+        @media only screen and (max-width: $tablet) {
+            display: block;
+            font: 600 12px $font-family-primary;
+            color: #fff;
+        }
+    }
+
+    aside {
+        @include copied(50px);
+        right: 5px;
+        top: -55px;
+
+        &:after {
+            transform: rotate(300deg);
+            bottom: -5px;
+            top: auto;
+        }
+
+        cursor: auto;
+
+        @media only screen and (max-width: $tablet) {}
+
+        &.copy-hidden {
+            opacity: 0;
+            z-index: -1;
+            bottom: 15px;
+            visibility: hidden;
+        }
+    }
+
+    img {
+        width: 100%;
+    }
+}

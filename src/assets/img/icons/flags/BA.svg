@@ -1,0 +1,20 @@
+<svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+<mask id="mask0_1_15734" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="26" height="26">
+<circle cx="13" cy="13" r="13" fill="#634848"/>
+</mask>
+<g mask="url(#mask0_1_15734)">
+<mask id="mask1_1_15734" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="-5" y="0" width="38" height="26">
+<rect x="-4.41667" width="36.8333" height="26" fill="white"/>
+</mask>
+<g mask="url(#mask1_1_15734)">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M-4.41927 0H30.2474V26H-4.41927V0Z" fill="#2E42A5"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M5.33073 0H26.9974V26L5.33073 0Z" fill="#FECA00"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M2.19083 3.02734L0.917295 3.69688L1.16052 2.27878L0.130207 1.27447L1.55406 1.06758L2.19083 -0.222656L2.8276 1.06758L4.25145 1.27447L3.22114 2.27878L3.46436 3.69688L2.19083 3.02734Z" fill="#F7FCFF"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M5.96557 7.66406L4.69203 8.3336L4.93526 6.9155L3.90495 5.91119L5.3288 5.70429L5.96557 4.41406L6.60233 5.70429L8.02619 5.91119L6.99588 6.9155L7.2391 8.3336L5.96557 7.66406Z" fill="#F7FCFF"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M9.51179 12.1758L8.23826 12.8453L8.48148 11.4272L7.45117 10.4229L8.87503 10.216L9.51179 8.92578L10.1486 10.216L11.5724 10.4229L10.5421 11.4272L10.7853 12.8453L9.51179 12.1758Z" fill="#F7FCFF"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M12.9818 16.499L11.7083 17.1686L11.9515 15.7505L10.9212 14.7462L12.3451 14.5393L12.9818 13.249L13.6186 14.5393L15.0425 14.7462L14.0122 15.7505L14.2554 17.1686L12.9818 16.499Z" fill="#F7FCFF"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M16.7143 20.9492L15.4407 21.6188L15.684 20.2007L14.6536 19.1963L16.0775 18.9895L16.7143 17.6992L17.351 18.9895L18.7749 19.1963L17.7446 20.2007L17.9878 21.6188L16.7143 20.9492Z" fill="#F7FCFF"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M20.8445 25.2549L19.5709 25.9244L19.8142 24.5063L18.7839 23.502L20.2077 23.2951L20.8445 22.0049L21.4812 23.2951L22.9051 23.502L21.8748 24.5063L22.118 25.9244L20.8445 25.2549Z" fill="#F7FCFF"/>
+</g>
+</g>
+</svg>

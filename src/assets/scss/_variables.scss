@@ -1,0 +1,50 @@
+$color-white: #fff;
+$color-black: #000;
+$color-green: #00a76a;
+$color-green-dark: #147362;
+$color-orange: #f7a600;
+$color-blue: #3347ff;
+$color-blue-dark: #2231bb;
+
+$color-font-1: #1f2328;
+$color-font-2: #1f2328;
+$color-error: #f36d8d;
+$color-font-grey: #868f9d;
+$color-font-dark-grey: #54657e;
+
+$color-aqua: #36b8bc;
+
+$background-grey: #f4f5fa;
+$dark-grey: #333;
+$green: #56c6ad;
+$dark-green: #53ab98;
+
+$font-color-default: $color-white;
+$font-color-invert: $color-black;
+$font-family-primary: "Inter", sans-sarif;
+$font-family-secondary: "TT Norms Pro", sans-sarif;
+$font-size-base: 16px;
+$font-weight-base: 500;
+$font-color-default: $font-color-default;
+$color-hover: $color-blue-dark;
+$color-accent: $color-blue;
+
+//breakpoints
+$tiny: 480px;
+$small: 768px;
+$tablet: 1024px;
+$medium: 1280px;
+$large: 1441px;
+$m-large: 1850px;
+$x-large: 2560px;
+
+//hero
+
+$hero-large-height: 492px;
+$hero-tablet-height: 300px;
+$hero-small-height: 250px;
+
+$hero-large-font: 50px;
+$hero-tablet-font: 40px;
+$hero-small-font: 32px;
+$hero-tiny-font: 24px;

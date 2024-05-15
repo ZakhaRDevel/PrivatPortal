@@ -1,0 +1,413 @@
+<!-- <div class="modal_security" *ngIf="!modalSuccessfully">
+    <div class="modal_security__wrapper" [@ModalAnimate]>
+        <form
+            class="modal_security__content"
+            [formGroup]="formGroup"
+            (ngSubmit)="submit()"
+        >
+            <div class="modal_security__header">
+                <button class="close-mobile" (click)="close()" type="button">
+                    <img src="/assets/img/icons/back.svg" alt="alt" />
+                </button>
+                <h3 class="title">Проверка безопасности</h3>
+                <button (click)="close()" class="close" type="button"></button>
+            </div>
+            <div class="modal_security__body">
+                <div class="modal_security__description">
+                    <div class="icon">
+                        <img
+                            src="/assets/img/icons/icon-info-orange.svg"
+                            alt=""
+                        />
+                    </div>
+                    <div class="text">
+                        Подтвердите ваш Telegram и номер телефона.
+                    </div>
+                </div>
+                <div class="modal_security__code">
+                    <div class="title">Проверочный код Telegram</div>
+                    <div class="subtitle">
+                        Введите 6-значный код, полученный от PRIVAT Club
+                    </div>
+                    <div class="item">
+                        <div
+                            class="inputs"
+                            formGroupName="telegramCode"
+                            [ngClass]="{
+                                error: hasError(control('telegramCode'))
+                            }"
+                        >
+                            <input
+                                #telegramCode0
+                                type="text"
+                                maxlength="1"
+                                formControlName="telegramCode0"
+                                tabindex="1"
+                                (paste)="onPaste($event, 'telegramCode')"
+                            />
+                            <input
+                                #telegramCode1
+                                type="text"
+                                maxlength="1"
+                                formControlName="telegramCode1"
+                                tabindex="2"
+                                [attr.disabled]="
+                                    !hasValue(
+                                        control('telegramCode0', 'telegramCode')
+                                    )
+                                        ? 'true'
+                                        : null
+                                "
+                                (paste)="onPaste($event, 'telegramCode')"
+                            />
+                            <input
+                                #telegramCode2
+                                type="text"
+                                maxlength="1"
+                                formControlName="telegramCode2"
+                                tabindex="3"
+                                [attr.disabled]="
+                                    !hasValue(
+                                        control('telegramCode1', 'telegramCode')
+                                    )
+                                        ? 'true'
+                                        : null
+                                "
+                                (paste)="onPaste($event, 'telegramCode')"
+                            />
+                            <input
+                                #telegramCode3
+                                type="text"
+                                maxlength="1"
+                                formControlName="telegramCode3"
+                                tabindex="4"
+                                [attr.disabled]="
+                                    !hasValue(
+                                        control('telegramCode2', 'telegramCode')
+                                    )
+                                        ? 'true'
+                                        : null
+                                "
+                                (paste)="onPaste($event, 'telegramCode')"
+                            />
+                            <input
+                                #telegramCode4
+                                type="text"
+                                maxlength="1"
+                                formControlName="telegramCode4"
+                                tabindex="5"
+                                [attr.disabled]="
+                                    !hasValue(
+                                        control('telegramCode3', 'telegramCode')
+                                    )
+                                        ? 'true'
+                                        : null
+                                "
+                                (paste)="onPaste($event, 'telegramCode')"
+                            />
+                            <input
+                                #telegramCode5
+                                type="text"
+                                maxlength="1"
+                                formControlName="telegramCode5"
+                                [attr.disabled]="
+                                    !hasValue(
+                                        control('telegramCode4', 'telegramCode')
+                                    )
+                                        ? 'true'
+                                        : null
+                                "
+                                (paste)="onPaste($event, 'telegramCode')"
+                            />
+                        </div>
+                        <div
+                            class="errors-mobile"
+                            [ngClass]="{
+                                show: hasError(control('telegramCode'))
+                            }"
+                        >
+                            Неверный код, попробуйте еще раз
+                        </div>
+                        <div
+                            class="state1"
+                            [ngClass]="{ active: tgCodeCounter === null }"
+                        >
+                            <button
+                                type="button"
+                                (click)="sendTelegramCode()"
+                                class="link"
+                            >
+                                Получить код
+                            </button>
+                        </div>
+
+                        <div
+                            class="state2"
+                            [ngClass]="{ active: tgCodeCounter > 0 }"
+                        >
+                            <div class="text">Проверочный код отправлен</div>
+                            <div class="icon">
+                                <img
+                                    src="assets/img/icons/еxclamation.svg"
+                                    alt=""
+                                />
+                                <div class="dropdown">
+                                    <span class="text"
+                                        >Не получили код? Запросить новый код
+                                        можно через {{ tgCodeCounter }} секунд.
+                                        Срок действия кода истекает через 15
+                                        минут.</span
+                                    >
+                                </div>
+                            </div>
+                        </div>
+
+                        <div
+                            class="state3"
+                            [ngClass]="{ active: tgCodeCounter === 0 }"
+                        >
+                            <button
+                                type="button"
+                                (click)="sendTelegramCode()"
+                                class="link"
+                            >
+                                Отправить код снова
+                            </button>
+                        </div>
+                    </div>
+                    <div
+                        class="errors"
+                        [ngClass]="{ show: hasError(control('telegramCode')) }"
+                    >
+                        Неверный код, попробуйте еще раз
+                    </div>
+                </div>
+                <div class="modal_security__code">
+                    <div class="title">Проверочный код phone</div>
+                    <div class="subtitle">
+                        Введите 6-значный код, отправленный вам по phone
+                    </div>
+                    <div class="item">
+                        <div
+                            class="inputs"
+                            formGroupName="phoneCode"
+                            [ngClass]="{
+                                error: hasError(control('phoneCode'))
+                            }"
+                        >
+                            <input
+                                #phoneCode0
+                                type="text"
+                                maxlength="1"
+                                formControlName="phoneCode0"
+                                tabindex="1"
+                                (paste)="onPaste($event, 'phoneCode')"
+                            />
+                            <input
+                                #phoneCode1
+                                type="text"
+                                maxlength="1"
+                                formControlName="phoneCode1"
+                                tabindex="2"
+                                [attr.disabled]="
+                                    !hasValue(
+                                        control('phoneCode0', 'phoneCode')
+                                    )
+                                        ? 'true'
+                                        : null
+                                "
+                                (paste)="onPaste($event, 'phoneCode')"
+                            />
+                            <input
+                                #phoneCode2
+                                type="text"
+                                maxlength="1"
+                                formControlName="phoneCode2"
+                                tabindex="3"
+                                [attr.disabled]="
+                                    !hasValue(
+                                        control('phoneCode1', 'phoneCode')
+                                    )
+                                        ? 'true'
+                                        : null
+                                "
+                                (paste)="onPaste($event, 'phoneCode')"
+                            />
+                            <input
+                                #phoneCode3
+                                type="text"
+                                maxlength="1"
+                                formControlName="phoneCode3"
+                                tabindex="4"
+                                [attr.disabled]="
+                                    !hasValue(
+                                        control('phoneCode2', 'phoneCode')
+                                    )
+                                        ? 'true'
+                                        : null
+                                "
+                                (paste)="onPaste($event, 'phoneCode')"
+                            />
+                            <input
+                                #phoneCode4
+                                type="text"
+                                maxlength="1"
+                                formControlName="phoneCode4"
+                                tabindex="5"
+                                [attr.disabled]="
+                                    !hasValue(
+                                        control('phoneCode3', 'phoneCode')
+                                    )
+                                        ? 'true'
+                                        : null
+                                "
+                                (paste)="onPaste($event, 'phoneCode')"
+                            />
+                            <input
+                                #phoneCode5
+                                type="text"
+                                maxlength="1"
+                                formControlName="phoneCode5"
+                                [attr.disabled]="
+                                    !hasValue(
+                                        control('phoneCode4', 'phoneCode')
+                                    )
+                                        ? 'true'
+                                        : null
+                                "
+                                (paste)="onPaste($event, 'phoneCode')"
+                            />
+                        </div>
+
+                        <div
+                            class="errors-mobile"
+                            [ngClass]="{ show: hasError(control('phoneCode')) }"
+                        >
+                            Неверный код, попробуйте еще раз
+                        </div>
+
+                        <div
+                            class="state1"
+                            [ngClass]="{ active: phoneCodeCounter === null }"
+                        >
+                            <button
+                                type="button"
+                                (click)="sendphoneCode()"
+                                class="link"
+                            >
+                                Получить код
+                            </button>
+                        </div>
+
+                        <div
+                            class="state2"
+                            [ngClass]="{ active: phoneCodeCounter > 0 }"
+                        >
+                            <div class="text">Проверочный код отправлен</div>
+                            <div class="icon">
+                                <img
+                                    src="assets/img/icons/еxclamation.svg"
+                                    alt=""
+                                />
+                                <div class="dropdown">
+                                    <span class="text"
+                                        >Не получили код? Запросить новый код
+                                        можно через 119 секунд. Срок действия
+                                        кода истекает через 15 минут.</span
+                                    >
+                                </div>
+                            </div>
+                        </div>
+
+                        <div
+                            class="state3"
+                            [ngClass]="{ active: phoneCodeCounter === 0 }"
+                        >
+                            <button
+                                type="button"
+                                (click)="sendphoneCode()"
+                                class="link"
+                            >
+                                Отправить код снова
+                            </button>
+                        </div>
+                    </div>
+
+                    <div
+                        class="errors"
+                        [ngClass]="{ show: hasError(control('phoneCode')) }"
+                    >
+                        Неверный код, попробуйте еще раз
+                    </div>
+                </div>
+            </div>
+            <div class="modal_security__footer">
+                <button class="btn next" type="submit">Подтвердить</button>
+            </div>
+        </form>
+    </div>
+</div> -->
+
+<div class="modal" [@ModalAnimate]>
+    <div class="modal__content">
+        <div class="modal__block">
+            <div class="modal__head">
+                <h4
+                    class="subtitle"
+                    [innerHTML]="data.page.data.modalSuccess.subtitle"
+                ></h4>
+                <h3
+                    class="title"
+                    [innerHTML]="data.page.data.modalSuccess.title"
+                ></h3>
+            </div>
+            <div class="modal__body">
+                <div class="text">
+                    <p [innerHTML]="data.page.data.modalSuccess.desc"></p>
+                </div>
+                <ul class="list">
+                    <li
+                        class="list-item"
+                        [innerHTML]="data.page.data.modalSuccess.advantage1"
+                    ></li>
+                    <li
+                        class="list-item"
+                        [innerHTML]="data.page.data.modalSuccess.advantage2"
+                    ></li>
+                    <li
+                        class="list-item"
+                        [innerHTML]="data.page.data.modalSuccess.advantage3"
+                    ></li>
+                    <li
+                        class="list-item"
+                        [innerHTML]="data.page.data.modalSuccess.advantage4"
+                    ></li>
+                    <li
+                        class="list-item"
+                        [innerHTML]="data.page.data.modalSuccess.advantage5"
+                    ></li>
+                </ul>
+                <div class="button">
+                    <button
+                        class="btn next"
+                        type="button"
+                        (click)="goToDashboard()"
+                        [innerHTML]="data.page.data.modalSuccess.btn"
+                    ></button>
+                </div>
+            </div>
+        </div>
+        <div class="modal__poster">
+            <img
+                class="desktop"
+                src="/assets/img/pages/questionare/moda-welcome_img.png"
+                alt=""
+            />
+            <img
+                src="/assets/img/pages/questionare/modal-welcome_img-mobile.png"
+                alt=""
+                class="mobile"
+            />
+        </div>
+    </div>
+</div>

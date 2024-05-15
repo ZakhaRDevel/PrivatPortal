@@ -1,0 +1,31 @@
+<div
+    *ngIf="coreService.isBrowser"
+    class="loader"
+    [class.visible]="isSubmitted"
+    [class.account]="isAccount"
+    [class.auth]="isAuth"
+>
+    <svg class="circular" viewBox="25 25 50 50" *ngIf="isAccount">
+        <circle
+            class="path"
+            cx="50"
+            cy="50"
+            fill="none"
+            stroke-miterlimit="10"
+            stroke-width="3px"
+            r="15"
+        />
+    </svg>
+
+    <svg class="circular" viewBox="25 25 50 50" *ngIf="isAuth">
+        <circle
+            class="path"
+            cx="50"
+            cy="50"
+            fill="none"
+            stroke-miterlimit="10"
+            stroke-width="4px"
+            r="18"
+        />
+    </svg>
+</div>

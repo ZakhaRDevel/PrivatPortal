@@ -1,0 +1,42 @@
+<div class="modal">
+    <div class="modal__content" [@ModalAnimate]>
+        <div class="modal__progress-bar" [@barWindow]="barWindowState">
+            <div class="bar">
+                <div class="progress"></div>
+            </div>
+            <div class="content">
+                <img class="icon" src="/assets/img/icons/envelope.svg" alt="" />
+                <p
+                    class="text"
+                    [innerHTML]="data.page.data.modalLastStep.resended"
+                ></p>
+            </div>
+        </div>
+        <div class="modal__img">
+            <img src="/assets/img/pages/auth/messages.png" alt="" />
+        </div>
+        <button (click)="close()" class="modal__close" type="button"></button>
+        <div
+            class="modal__title"
+            [innerHTML]="data.page.data.modalLastStep.title"
+        ></div>
+        <div class="modal__text">
+            <p [innerHTML]="data.page.data.modalLastStep.subtitle"></p>
+            <p [innerHTML]="data.page.data.modalLastStep.desc"></p>
+        </div>
+        <a
+            class="modal__link"
+            *ngIf="!showMessage"
+            (click)="animateNotification()"
+            [innerHTML]="data.page.data.modalLastStep.btnResend"
+        ></a>
+        <p
+            class="modal__message"
+            *ngIf="showMessage"
+            #timerMes
+            [innerHTML]="
+                data.page.data.modalLastStep.toResend | replace : { seconds }
+            "
+        ></p>
+    </div>
+</div>

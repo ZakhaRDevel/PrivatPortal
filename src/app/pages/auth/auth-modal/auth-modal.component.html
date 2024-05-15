@@ -1,0 +1,38 @@
+<div class="modal">
+    <div class="modal__content" [@ModalAnimate]>
+        <button (click)="close()" type="button" class="modal__close">
+            <svg
+                width="18"
+                height="18"
+                viewBox="0 0 18 18"
+                xmlns="http://www.w3.org/2000/svg"
+            >
+                <path
+                    d="M16.5 1.38757L1.5 16.6126"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                />
+                <path
+                    d="M1.5 1.38757L16.5 16.6126"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                />
+            </svg>
+        </button>
+        <div class="modal__img">
+            <img [src]="data.img_url" alt="alt" />
+        </div>
+        <div class="modal__title">
+            {{ data.title }}
+        </div>
+        <div class="modal__text" *ngIf="data.text">
+            {{ data.text }}
+        </div>
+        <a
+            (click)="close()"
+            [routerLink]="data.btn_link"
+            class="modal__button"
+            >{{ data.btn_text }}</a
+        >
+    </div>
+</div>

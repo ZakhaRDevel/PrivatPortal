@@ -1,0 +1,148 @@
+@import "~src/assets/scss/variables";
+@import "~src/assets/scss/mixins";
+
+.modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 34px 40px 0 40px;
+
+    @media only screen and (max-width: $small) {
+        padding: 0 15px;
+    }
+
+    &__img {
+        max-width: 127px;
+        max-height: 124px;
+    }
+
+    &__close {
+        position: absolute;
+        height: 22px;
+        width: 22px;
+        right: 27px;
+        top: -3px;
+        right: -41px;
+        z-index: 1;
+
+        @media only screen and (max-width: $small) {
+            top: 33px;
+            right: 32px;
+        }
+
+        @media (hover: hover) {
+            &:hover {
+                &::after {
+                    transform: rotate(-45deg);
+                    width: 3px;
+                }
+
+                &::before {
+                    transform: rotate(45deg);
+                    width: 3px;
+                }
+            }
+        }
+
+        &:before {
+            content: "";
+            width: 2px;
+            height: 22px;
+            background-color: #ffffff;
+            position: absolute;
+            left: 9px;
+            top: 0;
+            z-index: 1;
+            transform: rotate(-45deg);
+            border-radius: 10px;
+            transition: transform 0.3s linear, width 0.3s linear;
+
+            @media only screen and (max-width: $small) {
+                width: 3px;
+            }
+        }
+
+        &::after {
+            content: "";
+            width: 2px;
+            height: 22px;
+            background-color: #ffffff;
+            position: absolute;
+            left: 9px;
+            top: 0;
+            z-index: 1;
+            transform: rotate(45deg);
+            border-radius: 10px;
+            transition: transform 0.3s linear, background-color 0.3s linear;
+            @media only screen and (max-width: $small) {
+                width: 3px;
+            }
+        }
+    }
+    &__content {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        background: #163d41;
+        border: 1px solid #36b8bc;
+        border-radius: 30px;
+        padding: 51px 50px 53px;
+        width: 500px;
+        position: relative;
+
+        @media only screen and (max-width: $small) {
+            padding: 51px 15px 49px;
+        }
+    }
+
+    &__title {
+        margin: 33px 0 0;
+
+        font: 600 18px $font-family-primary;
+        color: #fff;
+        text-align: center;
+        word-break: break-word;
+        line-height: 22px;
+        @media only screen and (max-width: $small) {
+            margin-top: 37px;
+        }
+    }
+
+    &__text {
+        margin-top: 31px;
+
+        font: 400 14px $font-family-primary;
+        color: #beefff;
+        line-height: 20px;
+        text-align: center;
+        max-width: 330px;
+        word-break: break-word;
+
+        p {
+            margin-bottom: 20px;
+        }
+    }
+
+    &__button {
+        @include btn-aqua();
+        padding: 0 60px;
+        width: auto;
+        margin-top: 29px;
+        cursor: pointer;
+
+        @media only screen and (max-width: $small) {
+            height: 50px;
+            width: 100%;
+            margin-top: 51px;
+        }
+    }
+}
+::ng-deep {
+    .cdk-overlay-container .cdk-global-overlay-wrapper {
+        @media only screen and (max-width: $tablet) {
+            background: none;
+        }
+    }
+}

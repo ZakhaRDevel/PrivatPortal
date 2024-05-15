@@ -1,0 +1,614 @@
+@import "~src/assets/scss/mixins";
+@import "~src/assets/scss/variables";
+
+.settings {
+    display: flex;
+    flex-direction: column;
+
+    &__heading {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        background: #54657e;
+        height: 140px;
+        padding: 0 40px 0 40px;
+
+        @media only screen and (max-width: $tablet) {
+            height: 160px;
+            align-items: flex-start;
+            padding-top: 30px;
+        }
+
+        @media only screen and (max-width: $small) {
+            padding: 30px 20px 0;
+        }
+
+        &-content {
+            display: flex;
+            flex-direction: column;
+
+            @media only screen and (max-width: $tablet) {
+                flex: 1;
+            }
+
+            .title {
+                font: 600 30px $font-family-primary;
+                color: #fff;
+
+                @media only screen and (max-width: $tablet) {
+                    font-size: 24px;
+                }
+
+                @media only screen and (max-width: $small) {
+                    font-size: 20px;
+                }
+            }
+
+            .sub-title {
+                font: 400 14px $font-family-primary;
+                color: #fff;
+                margin-top: 6px;
+
+                @media only screen and (max-width: $small) {
+                    margin-top: 16px;
+                    line-height: 1.4;
+                }
+            }
+        }
+
+        &-icon {
+            display: flex;
+
+            @media only screen and (max-width: $tablet) {
+                width: 32px;
+                margin-top: -4px;
+            }
+        }
+    }
+
+    &__list {
+        padding: 40px 40px 40px 40px;
+
+        &:last-child {
+            padding: 40px 40px 30px;
+
+            @media only screen and (max-width: $small) {
+                padding: 30px 10px 0;
+            }
+        }
+
+        @media only screen and (max-width: $small) {
+            padding: 30px 10px 0;
+        }
+
+        .tablet {
+            display: flex;
+            flex-direction: column;
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 0 30px 0 40px;
+
+            @media only screen and (max-width: $tablet) {
+                max-width: 500px;
+                padding: 0;
+                margin: auto;
+                background: transparent;
+            }
+
+            &__row {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 30px 0;
+                border-bottom: 1px solid #d8e3e5;
+
+                @media only screen and (max-width: $tablet) {
+                    flex-direction: column;
+                    background: #ffffff;
+                    border-radius: 8px;
+                    margin-bottom: 15px;
+                    border-bottom: none;
+                    padding: 25px 16px;
+                }
+
+                &:last-child {
+                    border-bottom: none;
+
+                    @media only screen and (max-width: $medium) {
+                        margin-bottom: 0;
+                    }
+
+                    @media only screen and (max-width: $tablet) {
+                        margin-bottom: 30px;
+                    }
+                }
+
+                &.disabled {
+                    @media only screen and (max-width: $tablet) {
+                        flex-direction: row;
+                        flex-wrap: wrap;
+                        justify-content: space-between;
+                    }
+
+                    .tablet__col-1 {
+                        opacity: 0.45;
+
+                        @media only screen and (max-width: $tablet) {
+                            width: auto;
+                        }
+                    }
+
+                    .tablet__col-2 {
+                        @media only screen and (max-width: $tablet) {
+                            width: auto;
+                            padding: 0;
+                        }
+                    }
+
+                    .tablet__col-3 {
+                        @media only screen and (max-width: $tablet) {
+                            margin-top: 25px;
+                        }
+                    }
+
+                    .sub-title {
+                        display: none;
+                    }
+                }
+            }
+
+            &__col {
+                display: flex;
+                align-items: center;
+
+                &-1 {
+                    width: 50%;
+                    align-items: flex-start;
+                    padding-right: 10px;
+                    flex: 1;
+                    position: relative;
+                    padding-left: 30px;
+
+                    @media only screen and (max-width: $medium) {
+                        width: 100%;
+                        padding-right: 0;
+                    }
+
+                    @media only screen and (max-width: $tablet) {
+                        padding: 0;
+                    }
+
+                    .icon-left {
+                        position: absolute;
+                        width: 22px;
+                        left: 0;
+                        top: -1px;
+                        z-index: 1;
+
+                        @media only screen and (max-width: $tablet) {}
+                    }
+                }
+
+                &-2 {
+                    width: 20%;
+                    padding: 0 5px;
+                    min-width: 316px;
+
+                    @media only screen and (max-width: $large) {
+                        min-width: 220px;
+                        padding: 0 0 0 10px;
+                    }
+
+                    @media only screen and (max-width: $tablet) {
+                        width: 100%;
+                        min-width: 0;
+                        padding: 15px 0;
+                    }
+                }
+
+                &-3 {
+                    padding-left: 10px;
+                    width: 300px;
+                    justify-content: flex-end;
+
+                    @media only screen and (max-width: $large) {
+                        width: 280px;
+                    }
+
+                    @media only screen and (max-width: $medium) {
+                        width: 150px;
+                        padding-left: 0;
+                    }
+
+                    @media only screen and (max-width: $tablet) {
+                        width: 100%;
+                        padding: 0;
+                        display: inline-block;
+                    }
+                }
+
+                .not-added,
+                .status {
+                    display: flex;
+                    align-items: center;
+                    font: 500 14px $font-family-primary;
+                    color: #54657e;
+
+                    @media only screen and (max-width: $tablet) {
+                        font-size: 12px;
+                    }
+
+                    .icon-left {
+                        width: 16px;
+                        display: flex;
+                        margin-right: 7px;
+
+                        img {
+                            height: 16px;
+                            width: 16px;
+                        }
+                    }
+
+                    .text {
+                        display: inline-block;
+                        line-height: 20px;
+                    }
+                }
+
+                .text {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: flex-start;
+                    flex: 1;
+
+                    .h4 {
+                        font: 500 16px $font-family-primary;
+                        color: #54657e;
+
+                        @media only screen and (max-width: $tablet) {
+                            padding-left: 30px;
+                        }
+                    }
+
+                    .sub-title {
+                        font: 400 14px $font-family-primary;
+                        color: #868f9d;
+                        margin-top: 9px;
+                        line-height: 20px;
+
+                        @media only screen and (max-width: $tablet) {
+                            //margin-right: -30px;
+                        }
+                    }
+
+                    &_btn {
+                        @media only screen and (max-width: $tablet) {
+                            display: none;
+                        }
+                    }
+
+                    &_btn-mobile {
+                        display: none;
+
+                        @media only screen and (max-width: $tablet) {
+                            display: flex;
+                            justify-content: center;
+                            margin-top: 20px;
+                        }
+                    }
+                }
+
+                .value {
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+
+                    font: 500 14px $font-family-primary;
+                    color: #54657e;
+
+                    &.link {
+                        position: relative;
+
+                        &:after {
+                            content: "";
+                            width: 100%;
+                            height: 1px;
+                            background-color: transparent;
+                            transition: background-color 0.2s linear;
+
+                            position: absolute;
+                            bottom: 0;
+                            left: 0;
+                            z-index: 1;
+                        }
+
+                        @media (hover: hover) {
+                            &:hover {
+                                color: #868f9d;
+
+                                &::after {
+                                    background-color: #868f9d;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .btn-help {
+                    font: 500 14px $font-family-primary;
+                    color: #56c6ad;
+                    border-bottom: 1px solid #56c6ad;
+                    transition: border-color 0.3s;
+
+                    &:hover {
+                        border-bottom: 1px solid transparent;
+                    }
+                }
+
+                .btn-edit {
+                    display: flex;
+                    align-items: center;
+                    height: 36px;
+                    background: #959da9;
+                    border-radius: 6px;
+                    font: 500 14px $font-family-primary;
+                    color: #fff;
+                    transition: background-color 0.3s;
+                    padding: 5px 16px;
+
+                    &:hover {
+                        background: #54657e;
+                    }
+                }
+
+                .wallet-list {
+                    display: flex;
+                    flex-direction: column;
+
+                    @media only screen and (max-width: $tablet) {
+                        width: 100%;
+                    }
+
+                    .wallet-item {
+                        display: flex;
+                        align-items: center;
+                        margin-bottom: 14px;
+
+                        position: relative;
+
+                        @media only screen and (max-width: $tablet) {
+                            width: 100%;
+                        }
+
+                        &:last-child {
+                            margin-bottom: 0;
+                        }
+
+                        &:hover {
+                            .dropdown {
+                                opacity: 1;
+                                visibility: visible;
+                            }
+                        }
+
+                        .dropdown {
+                            opacity: 0;
+                            visibility: hidden;
+                            transition: opacity 0.25s,
+                                visibility 0.2s, transform 0.3s;
+                            cursor: default;
+                            position: absolute;
+                            z-index: 10;
+                            top: -50px;
+                            left: 0;
+                            padding-bottom: 10px;
+
+
+                            @media only screen and (max-width: $tiny) {
+                                left: -17px;
+                            }
+
+
+
+                            &_wrapper {
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+
+                                padding: 12px 18px;
+                                height: 42px;
+                                background: #54657e;
+                                box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.11);
+                                border-radius: 8px;
+                                font-family: $font-family-primary;
+                                font-size: 12px;
+                                line-height: 18px;
+                                font-weight: 400;
+                                color: #fff;
+                                white-space: nowrap;
+                                position: relative;
+
+                                @media only screen and (max-width: $tiny) {
+                                    white-space: auto;
+                                    word-wrap: break-word;
+                                }
+
+                                &::before {
+                                    content: "";
+                                    position: absolute;
+                                    z-index: 2;
+                                    bottom: -7px;
+                                    left: 64px;
+                                    height: 7px;
+                                    width: 12px;
+                                    background-image: url(/assets/img/icons/ticker.svg);
+                                    background-size: cover;
+                                    background-repeat: no-repeat;
+                                    // transform: translate(0, -101%);
+                                    transform: rotate(180deg);
+                                }
+                            }
+                        }
+
+                        .icon-left {
+                            display: flex;
+                            margin-right: 5px;
+                            width: 18px;
+                            min-width: 16px;
+                        }
+
+                        .wallet-text {
+                            font: 500 14px $font-family-primary;
+                            color: #54657e;
+                            line-height: 20px;
+
+                            @media only screen and (max-width: $tablet) {
+                                flex: 1;
+                            }
+                        }
+
+                        .btn-remove {
+                            display: flex;
+                            margin-left: 21px;
+                        }
+                    }
+                }
+            }
+
+            &.tablet_down {
+                .tablet__row {
+                    &:last-child {
+                        @media only screen and (max-width: $tablet) {
+                            margin-bottom: 25px;
+                        }
+                    }
+
+                    &.google {
+                        .tablet__col-3 {
+                            ::ng-deep {
+                                .buttons {
+                                    .btn-grey {
+                                        @media only screen and (max-width: $tablet) {
+                                            margin-top: 25px;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    &.password,
+                    &.wallet {
+                        .tablet__col-2 {
+                            .not-added {
+                                @media only screen and (max-width: $tablet) {
+                                    display: none;
+                                }
+                            }
+                        }
+
+                        .tablet__col-3 {
+                            .buttons {
+                                @media only screen and (max-width: $tablet) {
+                                    margin-top: 25px;
+                                }
+
+                                .btn-add {
+                                    display: flex;
+                                    align-items: center;
+                                    font: 500 14px $font-family-primary;
+                                    color: #54657e;
+
+                                    @media only screen and (max-width: $tablet) {
+                                        display: flex;
+                                        align-items: center;
+                                        justify-content: center;
+                                        height: 36px;
+                                        width: 100%;
+                                        background: #56c6ad;
+                                        border-radius: 8px;
+                                        font: 500 12px $font-family-primary;
+                                        color: #fff;
+                                    }
+
+                                    .icon-left {
+                                        width: 16px;
+                                        display: flex;
+                                        margin-right: 8px;
+
+                                        @media only screen and (max-width: $tablet) {
+                                            display: none;
+                                        }
+                                    }
+
+                                    &_text {
+                                        border-bottom: 1px solid #54657e;
+                                        transition: border-color 0.3s, color 0.3s linear;
+
+                                        @media only screen and (max-width: $tablet) {
+                                            text-align: center;
+                                            border-bottom: none;
+                                        }
+                                    }
+
+                                    &:hover {
+                                        .btn-add_text {
+                                            border-bottom-color: transparent;
+                                            color: #56c6ad;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    .tablet__col-1 {
+                        .text h4 {
+                            @media only screen and (max-width: $tablet) {
+                                display: flex;
+                                justify-content: space-between;
+                                width: 100%;
+                                margin-right: -30px;
+                            }
+
+                            .status,
+                            .not-added {
+                                display: none;
+
+                                @media only screen and (max-width: $tablet) {
+                                    display: flex;
+                                    position: relative;
+                                }
+
+                                .icon-left-mobile {
+                                    width: 18px;
+                                    display: flex;
+                                    margin-right: 6px;
+                                }
+                            }
+                        }
+                    }
+
+                    .tablet__col-2 {
+                        padding: 0 5px;
+
+                        .status {
+                            @media only screen and (max-width: $tablet) {
+                                display: none;
+                            }
+                        }
+
+                        .wallet-list {
+                            @media only screen and (max-width: $tablet) {
+                                margin-top: 25px;
+                            }
+                        }
+                    }
+
+                    .tablet__col-3 {}
+                }
+            }
+        }
+    }
+}

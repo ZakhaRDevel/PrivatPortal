@@ -1,0 +1,99 @@
+<form
+    class="form"
+    [formGroup]="formGroup"
+    (ngSubmit)="submit()"
+    [class.google]="isGoogle"
+    [class.telegram_check]="isTelegramCheck"
+>
+    <div class="form__left">
+        <div
+            class="inputs"
+            formGroupName="numberCode"
+            [ngClass]="{ error: wrongCode || hasError(control('numberCode')) }"
+        >
+            <input
+                #number0
+                type="text"
+                maxlength="1"
+                formControlName="number0"
+                tabindex="1"
+                (paste)="onPaste($event, 'numberCode')"
+                (keydown)="handleDelete($event, 0)"
+                (focus)="onFocus(number0)"
+                (input)="onInputSubmit()"
+                inputmode="numeric"
+                onlyNumber
+            />
+            <input
+                #number1
+                type="text"
+                maxlength="1"
+                formControlName="number1"
+                tabindex="2"
+                (paste)="onPaste($event, 'numberCode')"
+                (keydown)="handleDelete($event, 1)"
+                (focus)="onFocus(number1)"
+                (input)="onInputSubmit()"
+                inputmode="numeric"
+                onlyNumber
+            />
+            <input
+                #number2
+                type="text"
+                maxlength="1"
+                formControlName="number2"
+                tabindex="3"
+                (paste)="onPaste($event, 'numberCode')"
+                (keydown)="handleDelete($event, 2)"
+                (focus)="onFocus(number2)"
+                (input)="onInputSubmit()"
+                inputmode="numeric"
+                onlyNumber
+            />
+            <input
+                #number3
+                type="text"
+                maxlength="1"
+                formControlName="number3"
+                tabindex="4"
+                (paste)="onPaste($event, 'numberCode')"
+                (keydown)="handleDelete($event, 3)"
+                (focus)="onFocus(number3)"
+                (input)="onInputSubmit()"
+                inputmode="numeric"
+                onlyNumber
+            />
+            <input
+                #number4
+                type="text"
+                maxlength="1"
+                formControlName="number4"
+                tabindex="5"
+                (paste)="onPaste($event, 'numberCode')"
+                (keydown)="handleDelete($event, 4)"
+                (focus)="onFocus(number4)"
+                (input)="onInputSubmit()"
+                inputmode="numeric"
+                onlyNumber
+            />
+            <input
+                #number5
+                type="text"
+                maxlength="1"
+                formControlName="number5"
+                (paste)="onPaste($event, 'numberCode')"
+                (keydown)="handleDelete($event, 5)"
+                (focus)="onFocus(number5)"
+                (input)="onInputSubmit()"
+                inputmode="numeric"
+                onlyNumber
+            />
+        </div>
+        <div
+            class="errors"
+            [ngClass]="{ show: wrongCode || hasError(control('numberCode')) }"
+        >
+            {{ codeError }}
+        </div>
+    </div>
+</form>

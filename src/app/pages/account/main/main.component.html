@@ -1,0 +1,28 @@
+<main class="account main__wrapper">
+    <app-header [page]="page"></app-header>
+
+    <div class="account__wrapper">
+        <div class="sidebar_left">
+            <app-navbar [page]="page"></app-navbar>
+        </div>
+
+        <div class="middle_wrapper">
+            <div class="content-wrapper">
+                <router-outlet></router-outlet>
+            </div>
+
+            <div class="footer-wrapper">
+                <app-footer [page]="page"></app-footer>
+            </div>
+        </div>
+
+        <div class="sidebar_right">
+            <app-sidebar [page]="page"></app-sidebar>
+            <app-fast-start [page]="page" [isSidebar]="true"></app-fast-start>
+            <app-transactions
+                [page]="page"
+                [isSidebar]="true"
+            ></app-transactions>
+        </div>
+    </div>
+</main>

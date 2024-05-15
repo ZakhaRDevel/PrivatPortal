@@ -1,0 +1,37 @@
+<footer class="footer">
+    <!-- <div class="footer__button">
+        <button [class.show]="true" class="btn-up" (click)="triggerScrollTo()">
+            <span class="icon default">
+                <img src="assets/img/icons/chevron-up-dark.svg" alt="alt" />
+            </span>
+            <span class="icon white">
+                <img src="assets/img/icons/chevron-up-white.svg" alt="alt" />
+            </span>
+        </button>
+    </div> -->
+    <div class="row">
+        <div class="footer__container">
+            <div class="line-wrap">
+                <span class="line-hr"></span>
+                <div class="logo">
+                    <img
+                        loading="lazy"
+                        src="assets/img/icons/logo-p.svg"
+                        alt="alt"
+                    />
+                </div>
+                <span class="line-hr"></span>
+            </div>
+
+            <div class="logo">
+                <img
+                    loading="lazy"
+                    src="assets/img/icons/logo-2.svg"
+                    alt="alt"
+                />
+            </div>
+
+            <p class="copyright" [innerHTML]="page.data.footer.copyright"></p>
+        </div>
+    </div>
+</footer>

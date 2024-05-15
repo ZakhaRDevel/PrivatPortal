@@ -1,0 +1,21 @@
+<svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+<mask id="mask0_1_11198" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="26" height="26">
+<circle cx="13" cy="13" r="13" fill="#634848"/>
+</mask>
+<g mask="url(#mask0_1_11198)">
+<mask id="mask1_1_11198" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="-5" y="0" width="36" height="26">
+<rect x="-4.33333" width="34.6667" height="26" fill="white"/>
+</mask>
+<g mask="url(#mask1_1_11198)">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M-4.33073 0H30.3359V26H-4.33073V0Z" fill="#F7FCFF"/>
+<rect x="-4.30273" y="5.41675" width="34.6667" height="3.14167" fill="#E31D1C"/>
+<rect x="-4.30273" y="11.0503" width="34.6667" height="3.14167" fill="#E31D1C"/>
+<rect x="-4.20963" y="16.4668" width="34.6667" height="2.70833" fill="#E31D1C"/>
+<rect x="-4.20963" y="21.8835" width="34.6667" height="2.925" fill="#E31D1C"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M-4.32812 0H30.3385V2.70833H-4.32812V0Z" fill="#E31D1C"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M-4.32812 0H13.0052V13H-4.32812V0Z" fill="#3D58DB"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M-0.432777 6.71945C-0.432777 8.21036 0.269465 9.62022 1.69811 9.62022C3.84157 9.62022 4.25858 9.16325 5.25877 8.53278C5.49524 9.06391 4.69762 11.3369 1.66886 11.3369C-0.753755 11.2881 -2.71159 9.34183 -2.71159 6.71945C-2.71159 3.70939 -0.497713 2.0838 1.60806 2.10221C3.46709 2.10221 5.43879 3.15711 5.37837 4.50285C4.50244 3.64719 3.55134 3.64719 1.96806 3.64719C0.384781 3.64719 -0.432777 5.22836 -0.432777 6.71945Z" fill="#FECA00"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M7.58855 7.9082L6.58424 9.37414L6.6334 7.59786L4.95924 8.19351L6.04308 6.78536L4.33855 6.2832L6.04308 5.78105L4.95924 4.3729L6.6334 4.96855L6.58424 3.19227L7.58855 4.6582L8.59285 3.19227L8.5437 4.96855L10.2179 4.3729L9.13401 5.78105L10.8385 6.2832L9.13401 6.78536L10.2179 8.19351L8.5437 7.59786L8.59285 9.37414L7.58855 7.9082Z" fill="#FECA00"/>
+</g>
+</g>
+</svg>

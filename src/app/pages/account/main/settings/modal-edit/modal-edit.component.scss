@@ -1,0 +1,311 @@
+@import "~src/assets/scss/variables";
+@import "~src/assets/scss/mixins";
+
+.modal {
+    padding: 0 15px;
+
+    @media only screen and (max-width: $tablet) {
+        padding: 0;
+        height: 100%;
+    }
+
+    &__content {
+        display: flex;
+        background-color: #fff;
+        max-width: 470px;
+        border-radius: 10px;
+        padding: 0 !important;
+        height: 100%;
+
+        @media only screen and (max-width: $tablet) {
+            max-width: 100%;
+        }
+    }
+
+    &__block {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        width: 500px;
+
+        @media only screen and (max-width: $tablet) {
+            width: 100%;
+        }
+    }
+
+    &__head {
+        padding: 24px 30px;
+        border-bottom: 1px solid #f2f3f5;
+        display: flex;
+        align-items: center;
+        position: relative;
+
+        @media only screen and (max-width: $tablet) {
+            padding: 28px 24px;
+            justify-content: flex-start;
+        }
+
+        .title {
+            font: 600 20px $font-family-primary;
+            color: $color-font-1;
+            padding-right: 20px;
+        }
+
+        .icon-soc {
+            @media only screen and (max-width: $tablet) {
+                position: absolute;
+                right: 16px;
+            }
+
+            &.desctop {
+                display: flex;
+                margin-right: 10px;
+
+                @media only screen and (max-width: $tablet) {
+                    display: none;
+                }
+            }
+
+            &.mobile {
+                display: none;
+
+                @media only screen and (max-width: $tablet) {
+                    display: flex;
+                }
+            }
+        }
+
+        &-btn {
+            position: absolute;
+            right: 30px;
+            top: 27px;
+            display: flex;
+
+            @media only screen and (max-width: $tablet) {
+                position: relative;
+                left: 0;
+                top: 0;
+                margin-right: 22px;
+            }
+
+            .btn-close {
+                position: relative;
+                width: 18px;
+                height: 18px;
+
+                @media only screen and (max-width: $tablet) {
+                    display: none;
+                }
+
+                &:hover {
+                    &::after {
+                        @media only screen and (min-width: $tablet) {
+                            transform: rotate(-45deg);
+                            background-color: #56c6ad;
+                        }
+                    }
+
+                    &::before {
+                        @media only screen and (min-width: $tablet) {
+                            transform: rotate(45deg);
+                            background-color: #56c6ad;
+                        }
+                    }
+                }
+
+                &::before,
+                &::after {
+                    content: "";
+                    width: 2px;
+                    height: 25px;
+                    background-color: #b5bcc6;
+                    position: absolute;
+                    left: 9px;
+                    top: -3px;
+                    z-index: 1;
+                    transform: rotate(-45deg);
+                    border-radius: 10px;
+                    transition: transform 0.3s linear,
+                        background-color 0.3s linear;
+                }
+
+                &::after {
+                    transform: rotate(45deg);
+                }
+            }
+
+            .arrow-close {
+                display: none;
+
+                @media only screen and (max-width: $tablet) {
+                    display: flex;
+                }
+
+                img {
+                    min-width: 22px;
+                }
+            }
+        }
+    }
+
+    &__body {
+        padding: 24px 30px 28px;
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+
+        @media only screen and (max-width: $tablet) {
+            width: 100%;
+            padding: 32px 16px 84px;
+        }
+
+        .alert {
+            display: flex;
+            align-items: center;
+            background: #fff8dd;
+            border: 1px solid #ffd89f;
+            border-radius: 8px;
+            font: 400 12px $font-family-primary;
+            color: #1f2328;
+            padding: 12px 30px 12px 17px;
+            min-height: 56px;
+
+            @media only screen and (max-width: $tablet) {
+                padding-left: 14px;
+            }
+
+            .icon-left {
+                display: flex;
+                margin-right: 11px;
+                width: 22px;
+                min-width: 22px;
+            }
+        }
+
+        .form {
+            margin-top: 30px;
+            display: flex;
+            flex-direction: column;
+
+            &.error {
+                .input-label input {
+                    border: 1px solid #de7d84;
+                    color: #de7d84;
+                    background: rgba(245, 248, 249, 0.31);
+
+                    &:focus {
+                        border-color: #de7d84;
+                    }
+
+                    &::placeholder {
+                        color: #de7d84;
+                    }
+
+                    @media (hover: hover) {
+                        &:hover {
+                            border-color: #de7d84;
+                        }
+                    }
+                }
+            }
+
+            ::ng-deep {
+                .errors {
+                    font: 400 12px $font-family-primary;
+                    color: #de7d84;
+                    margin-top: 5px;
+                }
+            }
+
+            .input-title {
+                font: 400 14px $font-family-primary;
+                color: #1f2328;
+                margin-bottom: 11px;
+
+                @media only screen and (max-width: $tablet) {
+                    padding: 0 10px;
+                }
+            }
+
+            .input-label {
+                position: relative;
+
+                .telegram_placeholder {
+                    font: 400 16px $font-family-primary;
+                    color: #000;
+
+                    position: absolute;
+                    left: 15px;
+                    top: 15px;
+                    z-index: 1;
+                }
+
+                input {
+                    background: #f5f8f9;
+                    border-radius: 8px;
+                    font: 400 16px $font-family-primary;
+                    color: #000;
+                    padding: 5px 15px;
+                    border: 1px solid #f5f8f9;
+                    height: 50px;
+                    width: 100%;
+
+                    transition: background-color 0.3s linear,
+                        border-color 0.3s linear;
+
+                    &:focus {
+                        background-color: #fcfdfd;
+                        border: 1px solid #a5b4c7;
+                    }
+
+                    &::placeholder {
+                        font: 400 16px $font-family-primary;
+                        color: #000000;
+                    }
+
+                    &.telegram {
+                        padding-left: 29px;
+                    }
+
+                    @media (hover: hover) {
+                        &:hover {
+                            background-color: #fcfdfd;
+                            border: 1px solid #a5b4c7;
+                        }
+                    }
+                }
+            }
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+
+            @media only screen and (max-width: $tablet) {
+                flex: 1;
+                flex-direction: column-reverse;
+                justify-content: flex-start;
+            }
+
+            .btn-grey {
+                @include btn-grey;
+            }
+
+            .btn-green {
+                @include btn-green;
+                margin-left: 20px;
+
+                .hide {
+                    opacity: 0;
+                    visibility: hidden;
+                }
+
+                @media only screen and (max-width: $tablet) {
+                    margin-left: 0;
+                    margin-bottom: 22px;
+                }
+            }
+        }
+    }
+}

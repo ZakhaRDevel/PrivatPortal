@@ -1,0 +1,175 @@
+<div class="modal modal-date">
+    <div class="modal-content-head">
+        <h6 [innerHTML]="page.data.dateFilter.title">
+            Настройка диапазона дат
+        </h6>
+        <button type="button" (click)="closeModal('modalDate')" class="close">
+            <img class="icon" src="assets/img/icons/back.svg" alt="close" />
+        </button>
+    </div>
+
+    <div class="modal-content-wrap">
+        <div class="date">
+            <div class="date__item">
+                <div
+                    class="date__item-title"
+                    [innerHTML]="page.data.dateFilter.startDate"
+                >
+                    Начальная дата
+                </div>
+                <div class="date__item-input" [class.opened]="isOpenedDateFrom">
+                    <mat-datepicker-toggle
+                        matSuffix
+                        [for]="dateFrom"
+                        class="datepicker"
+                    >
+                        <mat-icon matDatepickerToggleIcon>
+                            <svg
+                                class="icon"
+                                width="18"
+                                height="18"
+                                viewBox="0 0 18 18"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <path
+                                    d="M14.445 0.926999H14.301V0.675C14.301 0.306 13.995 0 13.626 0C13.257 0 12.951 0.306 12.951 0.675V0.926999H5.049V0.675C5.049 0.306 4.752 0 4.374 0C4.005 0 3.699 0.306 3.699 0.675V0.926999H3.555C1.593 0.926999 0 2.52 0 4.482V14.445C0 16.407 1.593 18 3.555 18H14.445C16.407 18 18 16.407 18 14.445V4.482C18 2.52 16.407 0.926999 14.445 0.926999ZM3.6 15.273C3.105 15.273 2.7 14.877 2.7 14.373C2.7 13.878 3.105 13.473 3.6 13.473C4.095 13.473 4.5 13.878 4.5 14.373C4.5 14.877 4.095 15.273 3.6 15.273ZM3.6 12.141C3.105 12.141 2.7 11.736 2.7 11.241C2.7 10.737 3.105 10.341 3.6 10.341C4.095 10.341 4.5 10.737 4.5 11.241C4.5 11.736 4.095 12.141 3.6 12.141ZM3.6 9C3.105 9 2.7 8.595 2.7 8.1C2.7 7.605 3.105 7.2 3.6 7.2C4.095 7.2 4.5 7.605 4.5 8.1C4.5 8.595 4.095 9 3.6 9ZM7.2 15.273C6.705 15.273 6.3 14.877 6.3 14.373C6.3 13.878 6.705 13.473 7.2 13.473C7.695 13.473 8.1 13.878 8.1 14.373C8.1 14.877 7.695 15.273 7.2 15.273ZM7.2 12.141C6.705 12.141 6.3 11.736 6.3 11.241C6.3 10.737 6.705 10.341 7.2 10.341C7.695 10.341 8.1 10.737 8.1 11.241C8.1 11.736 7.695 12.141 7.2 12.141ZM7.2 9C6.705 9 6.3 8.595 6.3 8.1C6.3 7.605 6.705 7.2 7.2 7.2C7.695 7.2 8.1 7.605 8.1 8.1C8.1 8.595 7.695 9 7.2 9ZM10.8 15.273C10.305 15.273 9.9 14.877 9.9 14.373C9.9 13.878 10.305 13.473 10.8 13.473C11.295 13.473 11.7 13.878 11.7 14.373C11.7 14.877 11.295 15.273 10.8 15.273ZM10.8 12.141C10.305 12.141 9.9 11.736 9.9 11.241C9.9 10.737 10.305 10.341 10.8 10.341C11.295 10.341 11.7 10.737 11.7 11.241C11.7 11.736 11.295 12.141 10.8 12.141ZM10.8 9C10.305 9 9.9 8.595 9.9 8.1C9.9 7.605 10.305 7.2 10.8 7.2C11.295 7.2 11.7 7.605 11.7 8.1C11.7 8.595 11.295 9 10.8 9ZM14.4 12.141C13.905 12.141 13.5 11.736 13.5 11.241C13.5 10.737 13.905 10.341 14.4 10.341C14.895 10.341 15.3 10.737 15.3 11.241C15.3 11.736 14.895 12.141 14.4 12.141ZM14.4 9C13.905 9 13.5 8.595 13.5 8.1C13.5 7.605 13.905 7.2 14.4 7.2C14.895 7.2 15.3 7.605 15.3 8.1C15.3 8.595 14.895 9 14.4 9ZM16.65 4.63499H1.35V4.482C1.35 3.267 2.34 2.277 3.555 2.277H3.699V2.529C3.699 2.907 4.005 3.204 4.374 3.204C4.752 3.204 5.049 2.907 5.049 2.529V2.277H12.951V2.529C12.951 2.907 13.257 3.204 13.626 3.204C13.995 3.204 14.301 2.907 14.301 2.529V2.277H14.445C15.66 2.277 16.65 3.267 16.65 4.482V4.63499Z"
+                                />
+                            </svg>
+                        </mat-icon>
+                    </mat-datepicker-toggle>
+
+                    <mat-datepicker-toggle
+                        matSuffix
+                        (click)="clearDate($event, 'date_from')"
+                        *ngIf="date_from"
+                        class="close"
+                    >
+                        <mat-icon matDatepickerToggleIcon class="clear__btn">
+                            <svg
+                                class="icon"
+                                width="18"
+                                height="18"
+                                viewBox="0 0 18 18"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <path
+                                    class="icon"
+                                    fill-rule="evenodd"
+                                    clip-rule="evenodd"
+                                    d="M18 9C18 13.9706 13.9706 18 9 18C4.02944 18 0 13.9706 0 9C0 4.02944 4.02944 0 9 0C13.9706 0 18 4.02944 18 9ZM9 10.4142L5.70711 13.7071L4.29289 12.2929L7.58579 9L4.29289 5.70711L5.70711 4.29289L9 7.58579L12.2929 4.29289L13.7071 5.70711L10.4142 9L13.7071 12.2929L12.2929 13.7071L9 10.4142Z"
+                                />
+                            </svg>
+                        </mat-icon>
+                    </mat-datepicker-toggle>
+
+                    <mat-datepicker
+                        #dateFrom
+                        [calendarHeaderComponent]="exampleHeader"
+                        (opened)="toggleDateModal(true, 'dateFrom')"
+                        (closed)="toggleDateModal(false, 'dateFrom')"
+                    ></mat-datepicker>
+
+                    <input
+                        readonly="readonly"
+                        matInput
+                        [max]="maxDate"
+                        [min]="minDate"
+                        (dateChange)="dateChange()"
+                        [(ngModel)]="date_from"
+                        [ngModelOptions]="{
+                            standalone: true
+                        }"
+                        [matDatepicker]="dateFrom"
+                        placeholder="YYYY-MM-DD"
+                    />
+                </div>
+            </div>
+
+            <div class="date__item">
+                <div
+                    class="date__item-title"
+                    [innerHTML]="page.data.dateFilter.endDate"
+                >
+                    Конечная дата
+                </div>
+                <div class="date__item-input" [class.opened]="isOpenedDateTo">
+                    <mat-datepicker-toggle
+                        matSuffix
+                        [for]="dateTo"
+                        class="datepicker"
+                    >
+                        <mat-icon matDatepickerToggleIcon>
+                            <svg
+                                class="icon"
+                                width="18"
+                                height="18"
+                                viewBox="0 0 18 18"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <path
+                                    d="M14.445 0.926999H14.301V0.675C14.301 0.306 13.995 0 13.626 0C13.257 0 12.951 0.306 12.951 0.675V0.926999H5.049V0.675C5.049 0.306 4.752 0 4.374 0C4.005 0 3.699 0.306 3.699 0.675V0.926999H3.555C1.593 0.926999 0 2.52 0 4.482V14.445C0 16.407 1.593 18 3.555 18H14.445C16.407 18 18 16.407 18 14.445V4.482C18 2.52 16.407 0.926999 14.445 0.926999ZM3.6 15.273C3.105 15.273 2.7 14.877 2.7 14.373C2.7 13.878 3.105 13.473 3.6 13.473C4.095 13.473 4.5 13.878 4.5 14.373C4.5 14.877 4.095 15.273 3.6 15.273ZM3.6 12.141C3.105 12.141 2.7 11.736 2.7 11.241C2.7 10.737 3.105 10.341 3.6 10.341C4.095 10.341 4.5 10.737 4.5 11.241C4.5 11.736 4.095 12.141 3.6 12.141ZM3.6 9C3.105 9 2.7 8.595 2.7 8.1C2.7 7.605 3.105 7.2 3.6 7.2C4.095 7.2 4.5 7.605 4.5 8.1C4.5 8.595 4.095 9 3.6 9ZM7.2 15.273C6.705 15.273 6.3 14.877 6.3 14.373C6.3 13.878 6.705 13.473 7.2 13.473C7.695 13.473 8.1 13.878 8.1 14.373C8.1 14.877 7.695 15.273 7.2 15.273ZM7.2 12.141C6.705 12.141 6.3 11.736 6.3 11.241C6.3 10.737 6.705 10.341 7.2 10.341C7.695 10.341 8.1 10.737 8.1 11.241C8.1 11.736 7.695 12.141 7.2 12.141ZM7.2 9C6.705 9 6.3 8.595 6.3 8.1C6.3 7.605 6.705 7.2 7.2 7.2C7.695 7.2 8.1 7.605 8.1 8.1C8.1 8.595 7.695 9 7.2 9ZM10.8 15.273C10.305 15.273 9.9 14.877 9.9 14.373C9.9 13.878 10.305 13.473 10.8 13.473C11.295 13.473 11.7 13.878 11.7 14.373C11.7 14.877 11.295 15.273 10.8 15.273ZM10.8 12.141C10.305 12.141 9.9 11.736 9.9 11.241C9.9 10.737 10.305 10.341 10.8 10.341C11.295 10.341 11.7 10.737 11.7 11.241C11.7 11.736 11.295 12.141 10.8 12.141ZM10.8 9C10.305 9 9.9 8.595 9.9 8.1C9.9 7.605 10.305 7.2 10.8 7.2C11.295 7.2 11.7 7.605 11.7 8.1C11.7 8.595 11.295 9 10.8 9ZM14.4 12.141C13.905 12.141 13.5 11.736 13.5 11.241C13.5 10.737 13.905 10.341 14.4 10.341C14.895 10.341 15.3 10.737 15.3 11.241C15.3 11.736 14.895 12.141 14.4 12.141ZM14.4 9C13.905 9 13.5 8.595 13.5 8.1C13.5 7.605 13.905 7.2 14.4 7.2C14.895 7.2 15.3 7.605 15.3 8.1C15.3 8.595 14.895 9 14.4 9ZM16.65 4.63499H1.35V4.482C1.35 3.267 2.34 2.277 3.555 2.277H3.699V2.529C3.699 2.907 4.005 3.204 4.374 3.204C4.752 3.204 5.049 2.907 5.049 2.529V2.277H12.951V2.529C12.951 2.907 13.257 3.204 13.626 3.204C13.995 3.204 14.301 2.907 14.301 2.529V2.277H14.445C15.66 2.277 16.65 3.267 16.65 4.482V4.63499Z"
+                                />
+                            </svg>
+                        </mat-icon>
+                    </mat-datepicker-toggle>
+
+                    <mat-datepicker-toggle
+                        matSuffix
+                        (click)="clearDate($event, 'date_to')"
+                        *ngIf="date_to"
+                        class="close"
+                    >
+                        <mat-icon matDatepickerToggleIcon class="clear__btn">
+                            <svg
+                                width="18"
+                                height="18"
+                                viewBox="0 0 18 18"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <path
+                                    class="icon"
+                                    fill-rule="evenodd"
+                                    clip-rule="evenodd"
+                                    d="M18 9C18 13.9706 13.9706 18 9 18C4.02944 18 0 13.9706 0 9C0 4.02944 4.02944 0 9 0C13.9706 0 18 4.02944 18 9ZM9 10.4142L5.70711 13.7071L4.29289 12.2929L7.58579 9L4.29289 5.70711L5.70711 4.29289L9 7.58579L12.2929 4.29289L13.7071 5.70711L10.4142 9L13.7071 12.2929L12.2929 13.7071L9 10.4142Z"
+                                />
+                            </svg>
+                        </mat-icon>
+                    </mat-datepicker-toggle>
+                    <mat-datepicker
+                        #dateTo
+                        [calendarHeaderComponent]="exampleHeader"
+                        (opened)="toggleDateModal(true, 'dateTo')"
+                        (closed)="toggleDateModal(false, 'dateTo')"
+                    ></mat-datepicker>
+                    <!--<mat-error *ngIf="input.hasError('matDatepickerMax')">Date should be inferior</mat-error>-->
+                    <input
+                        readonly="readonly"
+                        matInput
+                        (dateChange)="dateChange()"
+                        [max]="maxDate"
+                        [min]="minDate"
+                        [(ngModel)]="date_to"
+                        [ngModelOptions]="{
+                            standalone: true
+                        }"
+                        [matDatepicker]="dateTo"
+                        placeholder="YYYY-MM-DD"
+                    />
+                </div>
+            </div>
+        </div>
+
+        <button
+            class="btn"
+            (click)="onPeriodChange()"
+            [innerHTML]="page.data.dateFilter.btnSubmit"
+            [disabled]="!date_to || !date_from"
+        >
+            Продолжить
+        </button>
+    </div>
+</div>

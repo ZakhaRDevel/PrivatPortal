@@ -1,0 +1,150 @@
+<div class="modal" [@ModalAnimate]>
+    <div class="modal__content">
+        <div class="modal__block" [class.ticket]="!isSuccessful">
+            <div class="modal__head">
+                <div class="modal__head-btn">
+                    <button class="btn-close" (click)="modalClose()"></button>
+                    <button class="arrow-close" (click)="modalClose()">
+                        <img src="assets/img/icons/back.svg" alt="alt" />
+                    </button>
+                </div>
+
+                <h4
+                    class="title"
+                    [innerHTML]="data.page.data.modalTickets.confirmPart"
+                >
+                    Участие подтверждено
+                </h4>
+            </div>
+
+            <div class="modal__body" *ngIf="!isSuccessful">
+                <div class="icon-ticket">
+                    <img
+                        src="assets/img/pages/giveaways/big-icon-ticket.svg"
+                        alt="wallet"
+                    />
+                </div>
+
+                <h2
+                    class="title"
+                    [innerHTML]="data.page.data.modalTickets.ticketsBalance"
+                >
+                    Доступно билетов
+                </h2>
+                <p class="number">
+                    {{ data.tickets }}
+                </p>
+                <form
+                    class="form"
+                    [formGroup]="formGroup"
+                    (ngSubmit)="submit()"
+                    #form
+                >
+                    <div class="form-group">
+                        <p
+                            class="input-title"
+                            [innerHTML]="
+                                data.page.data.modalTickets.enterTickets
+                            "
+                        >
+                            Введите количество билетов для участия
+                        </p>
+
+                        <pc-input
+                            [isInvalid]="hasError(control('tickets'))"
+                            [errors]="errors('tickets')"
+                            [errorsTranslate]="data.pageErrors"
+                        >
+                            <div class="input-label">
+                                <input
+                                    [class.error]="hasError(control('tickets'))"
+                                    type="text"
+                                    formControlName="tickets"
+                                    (ngModelChange)="onTicketsChange($event)"
+                                />
+                                <div class="icons">
+                                    <button
+                                        class="btn-max"
+                                        type="button"
+                                        (click)="setMaxPoints()"
+                                        [innerHTML]="
+                                            data.page.data.modalTickets.max
+                                        "
+                                    >
+                                        MAX
+                                    </button>
+                                </div>
+                            </div>
+                        </pc-input>
+                        <p
+                            class="sub-title"
+                            [innerHTML]="data.page.data.modalTickets.desc"
+                        >
+                            Чем больше билетов участвует в розыгрыше, тем больше
+                            шансов выиграть один из призов.
+                        </p>
+                    </div>
+
+                    <div class="buttons">
+                        <button
+                            class="btn-grey"
+                            type="button"
+                            (click)="modalClose()"
+                            [innerHTML]="data.page.data.modalTickets.decline"
+                        >
+                            Отменить
+                        </button>
+                        <button
+                            class="btn-green"
+                            type="submit"
+                            [disabled]="!+control('tickets').value"
+                            [innerHTML]=""
+                        >
+                            <app-btn-loader
+                                [isAccount]="true"
+                                [isSubmitted]="isSubmitted"
+                            ></app-btn-loader>
+                            <span [class.hide]="isSubmitted">{{
+                                data.page.data.modalTickets.confirm
+                            }}</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal__body" *ngIf="isSuccessful">
+                <div class="icon-wrap">
+                    <div class="icon-check">
+                        <img
+                            src="assets/img/pages/giveaways/icon-big-check-2.svg"
+                            alt="wallet"
+                        />
+                    </div>
+                    <h4
+                        class="h4"
+                        [innerHTML]="
+                            data.page.data.modalTickets.success
+                                | replace
+                                    : {
+                                          tickets: ticketsValue,
+                                          title: declOfNum
+                                      }
+                        "
+                    >
+                        Участие в розыгрыше подтверждено <br />
+                        на {{ control("tickets").value }} билетов!
+                    </h4>
+                </div>
+                <div class="buttons">
+                    <button
+                        class="btn-green"
+                        (click)="modalClose()"
+                        [innerHTML]="data.page.data.modalTickets.btnk"
+                    >
+                        OK
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

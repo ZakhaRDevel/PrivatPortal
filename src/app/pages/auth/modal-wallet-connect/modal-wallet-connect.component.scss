@@ -1,0 +1,153 @@
+@import "~src/assets/scss/variables";
+@import "~src/assets/scss/mixins";
+
+.modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 34px 40px 0 40px;
+
+    @media only screen and (max-width: $small) {
+        padding: 0 15px;
+    }
+
+    &__content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background: rgba(54, 184, 188, 0.29);
+        backdrop-filter: blur(8px);
+        border: 1px solid #36b8bc;
+        border-radius: 30px;
+        width: 500px;
+        position: relative;
+
+        @media only screen and (max-width: $small) {
+            padding: 79px 0 0 0;
+        }
+    }
+
+    &__close {
+        position: absolute;
+        height: 22px;
+        width: 22px;
+        right: 27px;
+        top: -3px;
+        right: -41px;
+        z-index: 1;
+
+        @media only screen and (max-width: $small) {
+            top: 33px;
+            right: 32px;
+        }
+
+        @media (hover: hover) {
+            &:hover {
+                &::after {
+                    transform: rotate(-45deg);
+                    width: 3px;
+                }
+
+                &::before {
+                    transform: rotate(45deg);
+                    width: 3px;
+                }
+            }
+        }
+
+        &:before {
+            content: "";
+            width: 2px;
+            height: 22px;
+            background-color: #ffffff;
+            position: absolute;
+            left: 9px;
+            top: 0;
+            z-index: 1;
+            transform: rotate(-45deg);
+            border-radius: 10px;
+            transition: transform 0.3s linear, width 0.3s linear;
+
+            @media only screen and (max-width: $small) {
+                width: 3px;
+            }
+        }
+
+        &::after {
+            content: "";
+            width: 2px;
+            height: 22px;
+            background-color: #ffffff;
+            position: absolute;
+            left: 9px;
+            top: 0;
+            z-index: 1;
+            transform: rotate(45deg);
+            border-radius: 10px;
+            transition: transform 0.3s linear, background-color 0.3s linear;
+
+            @media only screen and (max-width: $small) {
+                width: 3px;
+            }
+        }
+    }
+
+    &__wrapper {
+        width: 100%;
+        border-bottom: 1px solid rgba(40, 183, 188, 0.36);
+        padding: 20px;
+
+        @media only screen and (max-width: $small) {
+            padding: 11px;
+        }
+
+        &:last-child {
+            border-width: 0px;
+        }
+    }
+
+    &__btn {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 43px 30px 44px 30px;
+        border-radius: 20px;
+        transition: background-color 0.2s linear;
+        width: 100%;
+        @media only screen and (max-width: $small) {
+            background-color: #21565b;
+            padding: 17px 10px 17px 10px;
+            border-radius: 30px;
+            height: 198px;
+        }
+
+        &:hover {
+            background-color: #21565b;
+        }
+
+        .wallet_name {
+            margin-top: 20px;
+
+            font: 600 24px $font-family-primary;
+            color: #fff;
+            text-align: center;
+        }
+
+        .text {
+            margin-top: 6px;
+
+            font: 400 18px $font-family-primary;
+            color: #beefff;
+            text-align: center;
+        }
+    }
+}
+::ng-deep {
+    .cdk-overlay-container .cdk-global-overlay-wrapper {
+        @media only screen and (max-width: $tablet) {
+            background: none;
+        }
+    }
+}

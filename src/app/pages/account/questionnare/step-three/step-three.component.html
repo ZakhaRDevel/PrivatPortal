@@ -1,0 +1,314 @@
+<form class="form" [formGroup]="formGroup" (ngSubmit)="submit()" #form>
+    <div class="form__content" *ngIf="me.userQuestionnaire.hasMlmExperience">
+        <div class="form-item step3">
+            <pc-input
+                [isInvalid]="hasError(control('projectName'))"
+                [errors]="errors('projectName')"
+                [errorsTranslate]="pageErrors"
+            >
+                <label class="label mt3"
+                    >{{ page.data.form.step3Question1
+                    }}<app-form-prompt
+                        [icon]="icon"
+                        [dropdownText]="page.data.form.requireText"
+                    ></app-form-prompt>
+                </label>
+                <div class="input-label mt28">
+                    <input
+                        class="input"
+                        type="text"
+                        name="name"
+                        [placeholder]="page.data.form.placeholder"
+                        formControlName="projectName"
+                        [ngClass]="{
+                            error: hasError(control('projectName'))
+                        }"
+                    />
+                </div>
+            </pc-input>
+        </div>
+        <div class="form-item">
+            <pc-input [withErrors]="false">
+                <label class="label" for="check"
+                    >{{ page.data.form.step3Question2
+                    }}<app-form-prompt
+                        [icon]="icon"
+                        [dropdownText]="page.data.form.requireText"
+                    ></app-form-prompt>
+                    <div class="errors">
+                        <p *ngFor="let error of errors('partnersCount')">
+                            {{
+                                pageErrors.data[
+                                    error === "required" ? "requiredOne" : error
+                                ]
+                            }}
+                        </p>
+                    </div>
+                </label>
+                <div class="radio step3">
+                    <div class="wrap">
+                        <div class="radio_item mb40">
+                            <input
+                                type="radio"
+                                name="referal"
+                                id="0-100"
+                                value="0-100"
+                                formControlName="partnersCount"
+                            />
+                            <label
+                                class="radio_label"
+                                for="0-100"
+                                [innerHTML]="page.data.form.partnersCount1"
+                            ></label>
+                        </div>
+                        <div class="radio_item mb40">
+                            <input
+                                type="radio"
+                                name="referal"
+                                id="100-300"
+                                value="100-300"
+                                formControlName="partnersCount"
+                            />
+                            <label
+                                class="radio_label"
+                                for="100-300"
+                                [innerHTML]="page.data.form.partnersCount2"
+                            ></label>
+                        </div>
+                        <div class="radio_item mb40">
+                            <input
+                                type="radio"
+                                name="referal"
+                                id="300-500"
+                                value="300-500"
+                                formControlName="partnersCount"
+                            />
+                            <label
+                                class="radio_label"
+                                for="300-500"
+                                [innerHTML]="page.data.form.partnersCount3"
+                            ></label>
+                        </div>
+                        <div class="radio_item mb40">
+                            <input
+                                type="radio"
+                                name="referal"
+                                id="500-1000"
+                                value="500-1000"
+                                formControlName="partnersCount"
+                            />
+                            <label
+                                class="radio_label"
+                                for="500-1000"
+                                [innerHTML]="page.data.form.partnersCount4"
+                            ></label>
+                        </div>
+                    </div>
+                    <div class="wrap">
+                        <div class="radio_item mb40">
+                            <input
+                                type="radio"
+                                name="referal"
+                                id="1000-2000"
+                                value="1000-2000"
+                                formControlName="partnersCount"
+                            />
+                            <label
+                                class="radio_label"
+                                for="1000-2000"
+                                [innerHTML]="page.data.form.partnersCount5"
+                            ></label>
+                        </div>
+                        <div class="radio_item mb40">
+                            <input
+                                type="radio"
+                                name="referal"
+                                id="2000-5000"
+                                value="2000-5000"
+                                formControlName="partnersCount"
+                            />
+                            <label
+                                class="radio_label"
+                                for="2000-5000"
+                                [innerHTML]="page.data.form.partnersCount6"
+                            ></label>
+                        </div>
+                        <div class="radio_item mb40">
+                            <input
+                                type="radio"
+                                name="referal"
+                                id="5000-10000"
+                                value="5000-10000"
+                                formControlName="partnersCount"
+                            />
+                            <label
+                                class="radio_label"
+                                for="5000-10000"
+                                [innerHTML]="page.data.form.partnersCount7"
+                            ></label>
+                        </div>
+                        <div class="radio_item mb40">
+                            <input
+                                type="radio"
+                                name="referal"
+                                id="over10000"
+                                value="over10000"
+                                formControlName="partnersCount"
+                            />
+                            <label
+                                class="radio_label"
+                                for="over10000"
+                                [innerHTML]="page.data.form.partnersCount8"
+                            ></label>
+                        </div>
+                    </div>
+                </div>
+            </pc-input>
+        </div>
+    </div>
+
+    <div class="form__content" *ngIf="!me.userQuestionnaire.hasMlmExperience">
+        <div class="form-item">
+            <pc-input
+                ><div class="label" for="check">
+                    {{ page.data.form.step3Question3
+                    }}<app-form-prompt
+                        [icon]="icon"
+                        [dropdownText]="page.data.form.requireText"
+                    ></app-form-prompt>
+                    <div
+                        class="errors"
+                        *ngIf="
+                            hasError(control('trustLevel')) &&
+                            errors('trustLevel').length
+                        "
+                    >
+                        <p *ngFor="let error of errors('trustLevel')">
+                            {{
+                                pageErrors.data[
+                                    error === "required" ? "requiredOne" : error
+                                ]
+                            }}
+                        </p>
+                    </div>
+                </div>
+                <div class="slider">
+                    <div class="slider__scale">
+                        <div class="slider__scale-item">0%</div>
+                        <div class="slider__scale-item">10%</div>
+                        <div class="slider__scale-item">20%</div>
+                        <div class="slider__scale-item">30%</div>
+                        <div class="slider__scale-item">40%</div>
+                        <div class="slider__scale-item">50%</div>
+                        <div class="slider__scale-item">60%</div>
+                        <div class="slider__scale-item">70%</div>
+                        <div class="slider__scale-item">80%</div>
+                        <div class="slider__scale-item">90%</div>
+                        <div class="slider__scale-item">100%</div>
+                    </div>
+                    <div class="slider__wrapper">
+                        <!-- <input
+                            #range
+                            class="slider__input"
+                            type="range"
+                            min="0"
+                            max="100"
+                            step="10"
+                            [(ngModel)]="slider.value"
+                            formControlName="trustLevel"
+                            (input)="handleInputChange()"
+                        /> -->
+                        <mat-slider
+                            (input)="updateSlider($event)"
+                            min="0"
+                            max="100"
+                            step="10"
+                            [value]="+input.value.replace('%', '')"
+                        >
+                            <input
+                                #input
+                                class="slider_input"
+                                type="text"
+                                formControlName="trustLevel"
+                            />
+                        </mat-slider>
+                        <div class="slider__value">
+                            <span [style]="'left:' + input.value">{{
+                                input.value ? input.value : "0%"
+                            }}</span>
+                        </div>
+                    </div>
+                </div>
+            </pc-input>
+        </div>
+        <div class="form-item">
+            <pc-input [withErrors]="false">
+                <div class="label" for="check">
+                    {{ page.data.form.step3Question4
+                    }}<app-form-prompt
+                        [icon]="icon"
+                        [dropdownText]="page.data.form.requireText"
+                    ></app-form-prompt>
+                    <div
+                        class="errors"
+                        *ngIf="
+                            hasError(control('isStartTeam')) &&
+                            errors('isStartTeam').length
+                        "
+                    >
+                        <p *ngFor="let error of errors('isStartTeam')">
+                            {{
+                                pageErrors.data[
+                                    error === "required" ? "requiredOne" : error
+                                ]
+                            }}
+                        </p>
+                    </div>
+                </div>
+                <div class="radio step3-1">
+                    <div class="radio_item">
+                        <input
+                            type="radio"
+                            name="team"
+                            id="yes"
+                            [value]="true"
+                            formControlName="isStartTeam"
+                        />
+                        <label
+                            class="radio_label"
+                            for="yes"
+                            [innerHTML]="page.data.form.yes"
+                        ></label>
+                    </div>
+                    <div class="radio_item">
+                        <input
+                            type="radio"
+                            name="team"
+                            id="no"
+                            [value]="false"
+                            formControlName="isStartTeam"
+                        />
+                        <label
+                            class="radio_label"
+                            for="no"
+                            [innerHTML]="page.data.form.no"
+                        ></label>
+                    </div>
+                </div>
+            </pc-input>
+        </div>
+    </div>
+    <div class="buttons step3">
+        <button
+            type="button"
+            (click)="clickPrevStep()"
+            class="btn prev"
+            [innerHTML]="page.data.form.btnBack"
+        ></button>
+        <button
+            type="submit"
+            class="btn next"
+            [innerHTML]="page.data.form.btnSubmit"
+        ></button>
+    </div>
+</form>

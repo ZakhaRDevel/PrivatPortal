@@ -1,0 +1,40 @@
+<div class="modal" [@ModalAnimate]>
+    <div class="modal__content">
+        <div class="modal__block successfull">
+            <div class="modal__head">
+                <div class="modal__head-btn">
+                    <button class="btn-close" (click)="modalClose()"></button>
+                    <button class="arrow-close" (click)="modalClose()">
+                        <img src="assets/img/icons/back.svg" alt="alt" />
+                    </button>
+                </div>
+
+                <h4 class="title" [innerHTML]="data.page.data.modalHelp.title">
+                    Возникли проблемы с вашим Google Authenticator?
+                </h4>
+            </div>
+
+            <div class="modal__body">
+                <div class="icon-check">
+                    <img
+                        src="assets/img/pages/settings/icon-2fa-big.svg"
+                        alt="alt"
+                    />
+                </div>
+
+                <h4 class="h4" [innerHTML]=" data.page.data.modalHelp.desc | replace : { link: link }">
+                </h4>
+            </div>
+
+            <div class="modal__footer">
+                <button
+                    class="btn-submit"
+                    (click)="modalClose()"
+                    [innerHTML]="data.page.data.modalPwd.btnOk"
+                >
+                    Ok
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

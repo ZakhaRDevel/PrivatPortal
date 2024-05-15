@@ -1,0 +1,481 @@
+<div class="dashboard">
+    <div class="dashboard__wrapper">
+        <!-- <section
+            class="start"
+            [class.active]="hiddenMenuService.name === 'dashboard_start'"
+        >
+            <h3 class="h3" [innerHTML]="page.data.quickStart"></h3>
+
+            <button
+                class="btn-close"
+                (click)="toggleMenu('dashboard_start')"
+            ></button>
+
+            <div class="list">
+                <overlay-scrollbars class="scrollhost">
+                    <div class="list__item">
+                        <div class="list__item-header">
+                            <img
+                                class="icon"
+                                src="assets/img/pages/dashboard/auth.svg"
+                                alt=""
+                            />
+                            <span
+                                class="title"
+                                [innerHTML]="page.data.quickStart2fa"
+                            ></span>
+                        </div>
+
+                        <div
+                            class="list__item-content"
+                            [innerHTML]="page.data.quickStart2faDesc"
+                        ></div>
+
+                        <div class="list__item-footer">
+                            <img
+                                src="assets/img/icons/icon-arrow-right.svg"
+                                alt=""
+                            />
+                            <span
+                                (click)="navigate('/acc/settings')"
+                                class="text"
+                                [innerHTML]="page.data.quickStartBtn"
+                            ></span>
+                        </div>
+                    </div>
+
+                    <div class="list__item">
+                        <div class="list__item-header">
+                            <img
+                                class="icon"
+                                src="assets/img/pages/dashboard/wallet.svg"
+                                alt=""
+                            />
+                            <span
+                                class="title"
+                                [innerHTML]="page.data.quickStartWallets"
+                            ></span>
+                        </div>
+
+                        <div
+                            class="list__item-content"
+                            [innerHTML]="page.data.quickStartWalletsDesc"
+                        ></div>
+
+                        <div class="list__item-footer">
+                            <img
+                                src="assets/img/icons/icon-arrow-right.svg"
+                                alt=""
+                            />
+                            <span
+                                (click)="navigate('/acc/settings')"
+                                class="text"
+                                [innerHTML]="page.data.quickStartBtn"
+                                >Продолжить</span
+                            >
+                        </div>
+                    </div>
+
+                    <div class="list__item">
+                        <div class="list__item-header">
+                            <img
+                                class="icon"
+                                src="assets/img/pages/dashboard/megaphone.svg"
+                                alt=""
+                            />
+                            <span
+                                class="title"
+                                [innerHTML]="page.data.quickStartRef"
+                            >
+                            </span>
+                        </div>
+
+                        <div
+                            class="list__item-content"
+                            [innerHTML]="page.data.quickStartRefDesc"
+                        ></div>
+
+                        <div class="list__item-footer">
+                            <img
+                                src="assets/img/icons/icon-arrow-right.svg"
+                                alt=""
+                            />
+                            <a
+                                routerLink="/acc/referral"
+                                class="text"
+                                [innerHTML]="page.data.quickStartBtn"
+                            ></a>
+                        </div>
+                    </div>
+                </overlay-scrollbars>
+            </div>
+        </section> -->
+
+        <app-fast-start
+            [page]="pageGeneral"
+            [isSidebar]="false"
+        ></app-fast-start>
+
+        <section class="account">
+            <h3 class="h3" [innerHTML]="page.data.myAccount"></h3>
+
+            <div class="list">
+                <div class="list__side list__side--left">
+                    <div class="list__item list__item--profile">
+                        <div class="list__item-image">
+                            <img
+                                src="assets/img/pages/dashboard/profile.png"
+                                alt=""
+                            />
+                        </div>
+
+                        <div class="list__item-content">
+                            <div class="column" [class.wide]="!isNameLong">
+                                <div class="profile-header">
+                                    <div class="name" id="account-name">
+                                        <span
+                                            class="text"
+                                            [class.hidden]="isNameLong"
+                                        >
+                                            {{ me.userDetail.fullName }}
+                                        </span>
+
+                                        <span
+                                            class="dropdown"
+                                            [class.active]="isNameLong"
+                                            >{{ me.userDetail.fullName }}</span
+                                        >
+                                    </div>
+
+                                    <a
+                                        routerLink="/acc/settings"
+                                        class="btn-settings"
+                                    >
+                                        <svg
+                                            class="icon"
+                                            width="20"
+                                            height="20"
+                                            viewBox="0 0 20 20"
+                                            fill="none"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                            <path
+                                                fill-rule="evenodd"
+                                                clip-rule="evenodd"
+                                                d="M11.8416 1.54848C11.3713 -0.382047 8.62399 -0.382047 8.15372 1.54848C8.08351 1.83858 7.9458 2.108 7.7518 2.33482C7.5578 2.56164 7.31298 2.73945 7.03727 2.85378C6.76156 2.96812 6.46276 3.01574 6.16517 2.99278C5.86758 2.96982 5.57962 2.87692 5.32471 2.72165C3.62681 1.68709 1.68387 3.62999 2.71845 5.32787C3.38672 6.42431 2.79394 7.85488 1.5465 8.15807C-0.385293 8.62709 -0.385293 11.3756 1.5465 11.8434C1.83668 11.9137 2.10615 12.0515 2.33297 12.2457C2.5598 12.4398 2.73756 12.6848 2.85179 12.9607C2.96601 13.2365 3.01347 13.5354 2.9903 13.8331C2.96713 14.1308 2.87399 14.4188 2.71845 14.6736C1.68387 16.3715 3.62681 18.3144 5.32471 17.2798C5.57957 17.1243 5.86756 17.0312 6.16523 17.008C6.4629 16.9848 6.76183 17.0323 7.03769 17.1465C7.31354 17.2607 7.55852 17.4385 7.75267 17.6653C7.94683 17.8921 8.08466 18.1616 8.15496 18.4518C8.62399 20.3835 11.3726 20.3835 11.8404 18.4518C11.9109 18.1617 12.0489 17.8925 12.2431 17.6658C12.4372 17.4391 12.6822 17.2615 12.958 17.1473C13.2337 17.0331 13.5326 16.9856 13.8301 17.0086C14.1277 17.0317 14.4157 17.1246 14.6706 17.2798C16.3685 18.3144 18.3114 16.3715 17.2769 14.6736C17.1216 14.4187 17.0287 14.1307 17.0056 13.8332C16.9826 13.5356 17.0301 13.2368 17.1443 12.961C17.2585 12.6852 17.4362 12.4403 17.6628 12.2461C17.8895 12.0519 18.1588 11.9139 18.4488 11.8434C20.3806 11.3744 20.3806 8.62586 18.4488 8.15807C18.1586 8.08778 17.8892 7.94994 17.6623 7.75579C17.4355 7.56164 17.2578 7.31667 17.1435 7.04082C17.0293 6.76497 16.9818 6.46604 17.005 6.16837C17.0282 5.87071 17.1213 5.58272 17.2769 5.32787C18.3114 3.62999 16.3685 1.68709 14.6706 2.72165C14.4157 2.87718 14.1278 2.97033 13.8301 2.9935C13.5324 3.01667 13.2335 2.96921 12.9576 2.85498C12.6818 2.74076 12.4368 2.563 12.2426 2.33618C12.0485 2.10936 11.9107 1.83989 11.8404 1.54972L11.8416 1.54848ZM9.99766 13.7133C10.9823 13.7133 11.9266 13.3222 12.6229 12.6259C13.3191 11.9297 13.7103 10.9854 13.7103 10.0007C13.7103 9.01611 13.3191 8.07181 12.6229 7.37557C11.9266 6.67933 10.9823 6.28818 9.99766 6.28818C9.01301 6.28818 8.06869 6.67933 7.37244 7.37557C6.67619 8.07181 6.28504 9.01611 6.28504 10.0007C6.28504 10.9854 6.67619 11.9297 7.37244 12.6259C8.06869 13.3222 9.01301 13.7133 9.99766 13.7133Z"
+                                            />
+                                        </svg>
+                                    </a>
+                                </div>
+
+                                <div class="profile-info">
+                                    <span class="id">{{ me.uplineId }}</span>
+                                    <span class="email"
+                                        >({{ me.shortEmail }})</span
+                                    >
+                                </div>
+                            </div>
+
+                            <div class="profile-date">
+                                <span
+                                    class="title"
+                                    [innerHTML]="page.data.myAccountLastLogin"
+                                >
+                                </span>
+                                <span class="date">{{ me.lastLogin }}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="list__item list__item--nft">
+                        <div class="list__item-image">
+                            <img
+                                src="assets/img/pages/dashboard/nft.png"
+                                alt=""
+                            />
+                        </div>
+
+                        <div class="list__item-content">
+                            <div class="nft-number">
+                                <span
+                                    class="title"
+                                    [innerHTML]="page.data.myAccountNftCount"
+                                >
+                                </span>
+                                <span class="value">{{
+                                    +statistic?.nft?.total
+                                }}</span>
+                            </div>
+
+                            <div class="nft-number">
+                                <span
+                                    class="title"
+                                    [innerHTML]="page.data.myAccountNftPrice"
+                                >
+                                </span>
+                                <span class="value"
+                                    >{{ +statistic?.nft?.sum }} USD</span
+                                >
+                            </div>
+
+                            <button
+                                class="btn green"
+                                [innerHTML]="page.data.myAccountTransferBtn"
+                                (click)="navigate('acc/nft', true)"
+                            ></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="list__side list__side--right">
+                    <div class="list__item list__item--stats">
+                        <div class="list__item-image">
+                            <img
+                                src="assets/img/pages/dashboard/stats.png"
+                                alt=""
+                            />
+                        </div>
+
+                        <div class="list__item-content">
+                            <div class="stats-column">
+                                <div class="text">
+                                    <span
+                                        class="title"
+                                        [innerHTML]="
+                                            page.data.myAccountRefCount
+                                        "
+                                    >
+                                    </span>
+                                    <span class="value">{{
+                                        statistic?.affiliate?.partners
+                                    }}</span>
+                                </div>
+                                <button
+                                    (click)="navigate('/acc/referrals')"
+                                    class="btn grey"
+                                    [innerHTML]="page.data.myAccountRefBtn"
+                                ></button>
+                            </div>
+
+                            <span class="divider"></span>
+
+                            <div class="stats-column">
+                                <div class="text">
+                                    <span
+                                        class="title"
+                                        [innerHTML]="page.data.myAccountPrize"
+                                    >
+                                    </span>
+                                    <span class="value"
+                                        >{{
+                                            +statistic?.affiliate?.account
+                                        }}
+                                        USD</span
+                                    >
+                                </div>
+                                <button
+                                    (click)="navigate('/acc/activities', true)"
+                                    class="btn green"
+                                    [innerHTML]="page.data.myAccountPrizeBtn"
+                                ></button>
+                            </div>
+
+                            <span class="divider"></span>
+
+                            <div class="stats-column">
+                                <div class="text">
+                                    <span
+                                        class="title"
+                                        [innerHTML]="page.data.myAccountDraw"
+                                    >
+                                    </span>
+                                    <span class="value">{{
+                                        statistic?.affiliate?.giveaway
+                                    }}</span>
+                                </div>
+                                <button
+                                    (click)="
+                                        navigate('/acc/activities', false, true)
+                                    "
+                                    class="btn red"
+                                    [innerHTML]="page.data.myAccountDrawBtn"
+                                ></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="list__item list__item--link">
+                        <div class="list__item-image">
+                            <img
+                                src="assets/img/pages/dashboard/link.png"
+                                alt=""
+                            />
+                        </div>
+
+                        <div class="list__item-content">
+                            <h6
+                                class="link-title"
+                                [innerHTML]="page.data.myAccountRef"
+                            ></h6>
+
+                            <div class="ref-link">
+                                <div
+                                    class="label"
+                                    (mouseenter)="toggleRefDropdown(true)"
+                                    (mouseleave)="toggleRefDropdown(false)"
+                                >
+                                    <span
+                                        [innerHTML]="page.data.myAccountRefLink"
+                                    ></span>
+                                    <div class="icon">
+                                        <img
+                                            src="assets/img/icons/icon-info.svg"
+                                            alt=""
+                                        />
+                                    </div>
+                                    <div class="dropdown">
+                                        <div class="icon">
+                                            <img
+                                                src="assets/img/icons/icon-info.svg"
+                                                alt=""
+                                            />
+                                        </div>
+                                        <span
+                                            class="text"
+                                            [innerHTML]="
+                                                page.data.myAccountRefLinkDesc
+                                            "
+                                        >
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="link-wrapper">
+                                    <div
+                                        class="link-content"
+                                        (mouseenter)="toggleRefDropdown(true)"
+                                        (mouseleave)="toggleRefDropdown(false)"
+                                    >
+                                        <button
+                                            class="btn-copy-link"
+                                            (click)="copyString(link)"
+                                        >
+                                            {{ link }}
+                                        </button>
+
+                                        <div
+                                            class="dropdown"
+                                            [class.active]="isRefDropdownActive"
+                                        >
+                                            <div class="icon">
+                                                <img
+                                                    src="assets/img/icons/icon-info.svg"
+                                                    alt=""
+                                                />
+                                            </div>
+                                            <span
+                                                class="text"
+                                                [innerHTML]="
+                                                    page.data
+                                                        .myAccountRefLinkDesc
+                                                "
+                                            >
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <button
+                                        class="btn-copy"
+                                        (click)="copyHandler(link)"
+                                    >
+                                        <img
+                                            src="assets/img/icons/icon-copy.svg"
+                                            alt=""
+                                        />
+
+                                        <span
+                                            class="btn-mobile"
+                                            [innerHTML]="
+                                                pageGeneral.data.reflink.copy
+                                            "
+                                        >
+                                        </span>
+
+                                        <span
+                                            class="dropdown"
+                                            [class.active]="isCopiedActive"
+                                            [innerHTML]="
+                                                pageGeneral.data.reflink.copied
+                                            "
+                                        >
+                                        </span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section
+            class="transactions"
+            #transactions
+            [class.active]="hiddenMenuService.name === 'transactions_sidebar'"
+        >
+            <h3 class="h3" [innerHTML]="page.data.latestTxs"></h3>
+
+            <button
+                class="btn-close"
+                (click)="toggleMenu('transactions_sidebar')"
+            ></button>
+
+            <div class="list">
+                <overlay-scrollbars
+                    class="list__scrollhost"
+                    *ngIf="transactionsData.length"
+                >
+                    <app-transaction-item
+                        *ngFor="let item of transactionsData; let i = index"
+                        [data]="item"
+                        [firstChild]="0 === i"
+                        [lastChild]="transactionsData.length - 1 === i"
+                        [pageGeneral]="pageGeneral"
+                    ></app-transaction-item>
+
+                    <!--<div class="list__item" *ngFor="let item of transactionsList">-->
+                    <!--<div class="list__item-icon">-->
+                    <!--<img src="assets/img/pages/dashboard/doc.svg" alt="">-->
+                    <!--</div>-->
+                    <!--<div class="list__item-title" [innerHTML]="item._type"></div>-->
+
+                    <!--<div class="mobile-break"></div>-->
+
+                    <!--<div class="list__item-date" [innerHTML]="item.date"></div>-->
+
+                    <!--<div class="list__item-value" [innerHTML]="item.sum"></div>-->
+
+                    <!--<button class="list__item-details" (click)="openTransactionDialog(item)">-->
+                    <!--<span class="icon">-->
+                    <!--<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">-->
+                    <!--<path d="M4 4C4 3.46957 4.21071 2.96086 4.58579 2.58579C4.96086 2.21071 5.46957 2 6 2H10.586C11.1164 2.00011 11.625 2.2109 12 2.586L15.414 6C15.7891 6.37499 15.9999 6.88361 16 7.414V16C16 16.5304 15.7893 17.0391 15.4142 17.4142C15.0391 17.7893 14.5304 18 14 18H12.472C13.4938 16.8569 14.0393 15.366 13.9964 13.8334C13.9535 12.3008 13.3255 10.8428 12.2414 9.75864C11.1572 8.6745 9.69917 8.04652 8.16657 8.00363C6.63396 7.96074 5.14308 8.50619 4 9.528V4Z" />-->
+                    <!--<path fill-rule="evenodd" clip-rule="evenodd" d="M8.0002 10C7.29487 9.9999 6.60204 10.1863 5.99199 10.5403C5.38193 10.8943 4.87633 11.4034 4.52645 12.0158C4.17657 12.6283 3.99485 13.3223 3.99973 14.0276C4.0046 14.733 4.19589 15.4245 4.5542 16.032L3.2932 17.292C3.20029 17.3848 3.12658 17.4951 3.07627 17.6164C3.02596 17.7377 3.00005 17.8678 3 17.9991C2.99995 18.1305 3.02578 18.2606 3.076 18.3819C3.12622 18.5033 3.19986 18.6136 3.2927 18.7065C3.38555 18.7994 3.49578 18.8731 3.61712 18.9234C3.73845 18.9737 3.8685 18.9997 3.99985 18.9997C4.1312 18.9997 4.26127 18.9739 4.38264 18.9237C4.50401 18.8735 4.61429 18.7998 4.7072 18.707L5.9682 17.446C6.49805 17.7583 7.09277 17.9442 7.70614 17.9892C8.31951 18.0343 8.93502 17.9373 9.50482 17.7058C10.0746 17.4743 10.5834 17.1146 10.9915 16.6545C11.3996 16.1944 11.6962 15.6464 11.8581 15.0531C12.02 14.4598 12.043 13.8371 11.9251 13.2335C11.8072 12.6298 11.5518 12.0615 11.1785 11.5727C10.8053 11.0838 10.3244 10.6876 9.77317 10.4149C9.22194 10.1421 8.61523 10.0001 8.0002 10ZM6.0002 14C6.0002 13.4696 6.21092 12.9609 6.58599 12.5858C6.96106 12.2107 7.46977 12 8.0002 12C8.53064 12 9.03934 12.2107 9.41442 12.5858C9.78949 12.9609 10.0002 13.4696 10.0002 14C10.0002 14.5304 9.78949 15.0391 9.41442 15.4142C9.03934 15.7893 8.53064 16 8.0002 16C7.46977 16 6.96106 15.7893 6.58599 15.4142C6.21092 15.0391 6.0002 14.5304 6.0002 14Z" />-->
+                    <!--</svg>-->
+                    <!--</span>-->
+
+                    <!--<span class="text">Детали</span>-->
+                    <!--</button>-->
+                    <!--</div>-->
+                </overlay-scrollbars>
+
+                <div class="list-empty" *ngIf="!transactionsData.length">
+                    <div class="icon">
+                        <img src="assets/img/pages/dashboard/doc.svg" alt="" />
+                    </div>
+                    <p [innerHTML]="pageGeneral.data.transactions.noTxs">
+                        У вас еще нет транзакций
+                    </p>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>

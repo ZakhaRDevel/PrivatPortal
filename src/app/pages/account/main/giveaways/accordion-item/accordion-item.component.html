@@ -1,0 +1,461 @@
+<div
+    class="accordion__item"
+    [class.open]="isOpen === 'accordion_' + giveaway.id"
+>
+    <div
+        class="accordion__head"
+        [class.archive]="isArchive"
+        [class.active]="active"
+    >
+        <div class="wrap-gray">
+            <p class="date">{{ giveaway.startDate }}</p>
+
+            <span class="arrow-desctop">
+                <svg
+                    class="icon"
+                    width="6"
+                    height="10"
+                    viewBox="0 0 6 10"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <path
+                        d="M5.76953 4.80794L1.31215 1.09346C0.791086 0.659238 0 1.02976 0 1.70803V8.29197C0 8.97024 0.791085 9.34076 1.31215 8.90654L5.76953 5.19206C5.88947 5.09211 5.88947 4.90789 5.76953 4.80794Z"
+                    />
+                </svg>
+            </span>
+
+            <p class="title">{{ giveaway.title }}</p>
+        </div>
+
+        <span class="arrow-desctop">
+            <svg
+                class="icon"
+                width="6"
+                height="10"
+                viewBox="0 0 6 10"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+            >
+                <path
+                    d="M5.76953 4.80794L1.31215 1.09346C0.791086 0.659238 0 1.02976 0 1.70803V8.29197C0 8.97024 0.791085 9.34076 1.31215 8.90654L5.76953 5.19206C5.88947 5.09211 5.88947 4.90789 5.76953 4.80794Z"
+                />
+            </svg>
+        </span>
+
+        <div class="timer">
+            <p class="timer-title">{{ page.data.title }}</p>
+
+            <p class="time">
+                <span class="time-number">{{ days }}</span>
+                <span class="time-title" [innerHTML]="page.data.days"></span>
+
+                <span class="time-number">{{ hours }}</span>
+                <span class="time-title" [innerHTML]="page.data.hours"></span>
+
+                <span class="time-number">{{ minutes }}</span>
+                <span class="time-title" [innerHTML]="page.data.minutes"></span>
+            </p>
+        </div>
+
+        <button
+            class="btn-accordion"
+            (click)="toggleAccordionMenu('accordion_' + giveaway.id)"
+        >
+            <span class="icon-right">
+                <svg
+                    class="icon"
+                    width="18"
+                    height="10"
+                    viewBox="0 0 18 10"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <path
+                        d="M0.515625 1.46501L9.00062 9.95001L17.4856 1.46501L16.0716 0.0500126L9.00062 7.12201L1.92962 0.0500126L0.515625 1.46501Z"
+                    />
+                </svg>
+            </span>
+        </button>
+
+        <button class="btn-modal" (click)="openModalItem()"></button>
+    </div>
+
+    <div class="accordion__container" [@toggle]="isOpen ? 'shown' : 'hidden'">
+        <div class="accordion__block">
+            <h5 class="h5">
+                <span class="icon-left">
+                    <img
+                        src="assets/img/pages/giveaways/accord-title-icon-1.svg"
+                        alt="alt"
+                    />
+                </span>
+                {{ page.data.part }}
+            </h5>
+
+            <p class="sub-title" [innerHTML]="page.data.partDesc">
+                Все члены международного сообщества PRIVAT Club
+            </p>
+
+            <div class="participation" *ngIf="!isArchive">
+                <button
+                    class="btn-green"
+                    (click)="openModalTicket()"
+                    [innerHTML]="page.data.btnPart"
+                >
+                    ПРИНЯТЬ УЧАСТИЕ
+                </button>
+
+                <div class="arrow">
+                    <img
+                        src="assets/img/pages/giveaways/round-arrow-right-gray.svg"
+                        alt="alt"
+                    />
+                </div>
+
+                <div
+                    class="points"
+                    [innerHTML]="
+                        page.data.myTickets
+                            | replace
+                                : {
+                                      tickets: ticketsValue,
+                                      title: declOfNum
+                                  }
+                    "
+                >
+                    Я участвую на
+                    <b
+                        >{{
+                            giveaway.tickets
+                                ? giveaway.tickets
+                                : +currentTickets || 0
+                        }}
+                        билетов</b
+                    >
+                </div>
+            </div>
+        </div>
+
+        <div class="accordion__block">
+            <h5 class="h5">
+                <span class="icon-left">
+                    <img
+                        src="assets/img/pages/giveaways/accord-title-icon-2.svg"
+                        alt="alt"
+                    />
+                </span>
+                {{ page.data.rules }}
+            </h5>
+
+            <ul class="terms-list">
+                <li class="terms-list__item">
+                    <p class="text" [innerHTML]="page.data.rulesDesc">
+                        Для участия в розыгрыше подключите Telegram-бота PRIVAT
+                        Club, нажав на левую кнопку ниже. Если вы уже подключали
+                        бота ранее, подтвердите ваш аккаунт Telegram, нажав на
+                        правую кнопку ниже.
+                    </p>
+                    <div class="buttons" *ngIf="!isArchive">
+                        <button
+                            class="btn-pink"
+                            [disabled]="
+                                myGiveaway?.telegramConfirmed ||
+                                me.telegramVerifiedAt ||
+                                telegramVerified
+                            "
+                            (click)="openModalTelegram('type_plug')"
+                            [innerHTML]="page.data.tgConnect"
+                        >
+                            Подключить Telegram-бота
+                        </button>
+                        <button
+                            class="btn-gray"
+                            (click)="openModalTelegram('type_check')"
+                            [class.no-takes-part]="
+                                !myGiveaway && me.telegramVerifiedAt
+                            "
+                            [disabled]="
+                                !myGiveaway ||
+                                myGiveaway?.telegramConfirmed ||
+                                !me.telegramVerifiedAt ||
+                                telegramChecked
+                            "
+                        >
+                            {{ page.data.tgConfirm }}
+
+                            <div class="dropdown">
+                                <div class="dropdown_icon">
+                                    <img
+                                        src="assets/img/icons/icon-info.svg"
+                                        alt=""
+                                    />
+                                </div>
+                                <span
+                                    class="dropdown_text"
+                                    [innerHTML]="page.data.tgPopup"
+                                >
+                                </span>
+                            </div>
+                        </button>
+                    </div>
+                </li>
+                <ng-container *ngFor="let condition of giveaway.conditionsList">
+                    <li class="terms-list__item" *ngIf="condition">
+                        <p
+                            class="text"
+                            [innerHTML]="condition | safe : 'html'"
+                        ></p></li
+                ></ng-container>
+            </ul>
+        </div>
+
+        <div class="accordion__block">
+            <h5 class="h5">
+                <span class="icon-left">
+                    <img
+                        src="assets/img/pages/giveaways/accord-title-icon-3.svg"
+                        alt="alt"
+                    />
+                </span>
+                {{ page.data.places }}
+            </h5>
+
+            <ul class="top-list">
+                <li
+                    class="top-list__item"
+                    *ngFor="let prize of giveaway.prizeGroup"
+                >
+                    <div class="elips">
+                        <svg
+                            class="icon"
+                            width="18"
+                            height="18"
+                            viewBox="0 0 18 18"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <path
+                                fill-rule="evenodd"
+                                clip-rule="evenodd"
+                                d="M4.63024 0.5625H13.3627C13.6531 0.5625 13.89 0.799383 13.89 1.08984V6.72184C13.89 9.65566 11.7778 12.1116 8.99648 12.6477C6.21512 12.1115 4.10294 9.65566 4.10294 6.72184V1.08984C4.1029 0.799383 4.33978 0.5625 4.63024 0.5625ZM10.6944 4.46832C10.5894 4.13546 10.3549 3.85017 10.0397 3.65228C9.85657 3.53728 9.64585 3.45146 9.41828 3.40344V3.13327C9.41828 2.90029 9.22939 2.71139 8.9964 2.71139C8.76342 2.71139 8.57453 2.90029 8.57453 3.13327V3.40309C8.27317 3.46627 8.00198 3.59532 7.78545 3.77054C7.44672 4.04462 7.23719 4.43067 7.23719 4.86366C7.23719 5.29664 7.44672 5.68269 7.78545 5.95677C8.09918 6.21063 8.52763 6.36764 8.9964 6.36764C9.26619 6.36764 9.50645 6.45286 9.67671 6.59064C9.82198 6.7082 9.91184 6.86324 9.91184 7.02788C9.91184 7.19251 9.82198 7.34755 9.67671 7.46511C9.50645 7.60289 9.26619 7.68811 8.9964 7.68811C8.78687 7.68811 8.59527 7.63689 8.43995 7.54952C8.29367 7.46726 8.18247 7.35585 8.12467 7.22988C8.0282 7.01873 7.7788 6.92578 7.56766 7.02225C7.35651 7.11872 7.26355 7.36812 7.36002 7.57927C7.4939 7.87103 7.72927 8.11649 8.02796 8.28454C8.19249 8.3771 8.37702 8.44692 8.57453 8.48841V8.7583C8.57453 8.99128 8.76342 9.18018 8.9964 9.18018C9.22939 9.18018 9.41828 8.99128 9.41828 8.7583V8.48848C9.71964 8.4253 9.99083 8.29624 10.2074 8.12102C10.5461 7.84695 10.7556 7.46089 10.7556 7.02791C10.7556 6.59493 10.5461 6.20888 10.2074 5.93476C9.89366 5.6809 9.46518 5.52389 8.9964 5.52389C8.72662 5.52389 8.48636 5.43867 8.3161 5.30089C8.17083 5.18333 8.08097 5.02829 8.08097 4.86366C8.08097 4.69902 8.17083 4.54398 8.3161 4.42642C8.48636 4.28864 8.72662 4.20342 8.9964 4.20342C9.22478 4.20342 9.43094 4.26343 9.59142 4.36419C9.73884 4.45676 9.84599 4.58209 9.89015 4.72212C9.96021 4.9442 10.1971 5.06739 10.4191 4.99732C10.6413 4.92722 10.7645 4.69041 10.6944 4.46832ZM14.7337 2.65598H16.7475C16.9805 2.65598 17.1694 2.84488 17.1694 3.07786C17.1694 3.08545 17.1691 3.09298 17.1688 3.10046C17.2243 4.90729 17.2433 6.30861 16.7287 7.41045C16.2998 8.3288 15.5333 8.99438 14.1722 9.43671C14.3167 9.10213 14.4353 8.75454 14.5257 8.39675C15.2611 8.0563 15.7064 7.61319 15.9673 7.05449C16.3676 6.19738 16.3808 5.01303 16.3393 3.49973H14.7337V2.65598H14.7337ZM3.25915 3.49973H1.65353C1.61205 5.01303 1.62523 6.19738 2.02555 7.05449C2.28652 7.61319 2.73181 8.0563 3.46717 8.39675C3.55749 8.75461 3.67617 9.10213 3.8207 9.43671C2.45959 8.99438 1.69308 8.3288 1.26418 7.41045C0.749558 6.30861 0.768542 4.90729 0.824089 3.1005C0.823703 3.09301 0.823492 3.08545 0.823492 3.07789C0.823492 2.84491 1.01239 2.65602 1.24537 2.65602H3.25915V3.49973ZM12.9205 16.2732C12.9297 16.2742 12.9389 16.2752 12.9481 16.2761C13.0381 16.2853 13.106 16.3604 13.106 16.4509V17.2617C13.106 17.3585 13.027 17.4375 12.9302 17.4375H5.06267C4.96585 17.4375 4.88689 17.3585 4.88689 17.2617V16.4509C4.88689 16.3604 4.95474 16.2853 5.04481 16.2761C5.05398 16.2751 5.06316 16.2742 5.0723 16.2732C6.67595 16.1051 7.91082 14.8536 8.08547 13.2867C8.3894 13.3819 8.68506 13.4469 8.9964 13.5069C9.30771 13.4469 9.60341 13.3819 9.90734 13.2867C10.082 14.8536 11.3169 16.1051 12.9205 16.2732Z"
+                            />
+                        </svg>
+                    </div>
+                    <span class="number">{{ prize["place"] }}</span>
+                    <div class="prize">
+                        <img
+                            class="icon"
+                            src="assets/img/pages/giveaways/subtract.svg"
+                            alt=""
+                        />
+                        <span class="title">{{ prize["title"] }}</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="accordion__block">
+            <h5 class="h5">
+                <span class="icon-left">
+                    <img
+                        src="assets/img/pages/giveaways/accord-title-icon-4.svg"
+                        alt="alt"
+                    />
+                </span>
+                {{ page.data.winners }}
+            </h5>
+
+            <div
+                class="winners-list"
+                *ngIf="
+                    giveaway.winners?.length &&
+                    !now.isBefore(giveaway.fullEndDate)
+                "
+            >
+                <div
+                    class="winners-list__item"
+                    *ngFor="let winner of giveaway?.winners"
+                    [class.gold]="
+                        winner.prize === giveaway?.prizeGroup[0]?.title
+                    "
+                    [class.silver]="
+                        winner.prize === giveaway?.prizeGroup[1]?.title
+                    "
+                    [class.bronze]="
+                        winner.prize === giveaway?.prizeGroup[2]?.title
+                    "
+                >
+                    <div class="elips">
+                        <svg
+                            class="icon"
+                            width="20"
+                            height="20"
+                            viewBox="0 0 20 20"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <path
+                                d="M10 0C4.49 0 0 4.49 0 10C0 15.51 4.49 20 10 20C15.51 20 20 15.51 20 10C20 4.49 15.51 0 10 0ZM9.8 4.77C11.58 4.77 13.02 6.21 13.02 7.99C13.02 9.76 11.58 11.21 9.8 11.21C8.03 11.21 6.59 9.76 6.59 7.99C6.59 6.21 8.03 4.77 9.8 4.77ZM15.93 16.08C15.48 16.53 14.97 16.92 14.43 17.25C13.14 18.05 11.62 18.5 10 18.5C8.38 18.5 6.86001 18.05 5.57001 17.25C5.03001 16.92 4.52001 16.53 4.07001 16.08V15.89C4.07001 13.84 5.74 12.17 7.78 12.17H12.22C14.26 12.17 15.93 13.84 15.93 15.89V16.08Z"
+                                fill="white"
+                            />
+                        </svg>
+                    </div>
+                    <div class="item__place">
+                        {{ winner.place }}
+                    </div>
+                    <div class="item__id">
+                        {{ winner.userId }}
+                    </div>
+
+                    <div class="item__sum">{{ winner.prize }}</div>
+                </div>
+            </div>
+
+            <div
+                class="winners-timer"
+                *ngIf="now.isBefore(giveaway.fullEndDate)"
+            >
+                <div class="winners-timer-wrapper">
+                    <div class="timer">
+                        <div class="timer__item">
+                            <div class="timer__item-wrapper">
+                                <span>{{ days }}</span>
+                            </div>
+                            <div class="timer__text"[innerHTML]="page.data.days">Дней</div>
+                        </div>
+                        <div class="timer__item">
+                            <div class="timer__item-wrapper">
+                                <span>{{ hours }}</span>
+                            </div>
+                            <div class="timer__text" [innerHTML]="page.data.hours">Часов</div>
+                        </div>
+                        <div class="timer__item">
+                            <div class="timer__item-wrapper">
+                                <span>{{ minutes }}</span>
+                            </div>
+                            <div class="timer__text" [innerHTML]="page.data.minutes">Минут</div>
+                        </div>
+                        <div class="timer__item">
+                            <div class="timer__item-wrapper">
+                                <span>{{ seconds }}</span>
+                            </div>
+                            <div class="timer__text" [innerHTML]="page.data.seconds">Секунд</div>
+                        </div>
+                    </div>
+                    <div class="progress-bar">
+                        <svg
+                            class="watch"
+                            width="158"
+                            height="158"
+                            viewBox="0 0 158 158"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <path
+                                d="M79.2483 81.243C79.2483 81.243 79.1607 81.2148 78.996 81.1569C76.5794 80.2959 57.6091 72.7167 58.9183 47.3428L78.8802 46.2266L78.996 46.2295L99.0217 46.8277C99.0217 46.8277 102.051 72.6692 79.2483 81.243V81.243Z"
+                                fill="#F3F5FA"
+                            />
+                            <path
+                                d="M99.0217 117.141L78.996 117.74L78.8802 117.743L58.9183 116.628C57.6091 91.2525 76.5794 83.6732 78.996 82.8123C79.1607 82.7544 79.2483 82.7262 79.2483 82.7262C102.051 91.2999 99.0217 117.141 99.0217 117.141V117.141Z"
+                                fill="#F3F5FA"
+                            />
+                            <path
+                                d="M99.0257 117.141L79 117.74V82.8123C79.1648 82.7544 79.2523 82.7262 79.2523 82.7262C102.055 91.2999 99.0257 117.141 99.0257 117.141V117.141Z"
+                                fill="#E7E9F0"
+                            />
+                            <path
+                                d="M79.2523 81.2423C79.2523 81.2423 79.1648 81.2141 79 81.1562V46.2288L99.0257 46.8271C99.0257 46.8271 102.055 72.6685 79.2523 81.2423V81.2423Z"
+                                fill="#E7E9F0"
+                            />
+                            <path
+                                d="M96.5707 64.6488C89.37 77.7425 79.2495 81.2426 79.2495 81.2426C79.1649 81.2189 79.0803 81.1936 78.9972 81.1684C67.0168 77.597 61.1921 64.6488 61.1921 64.6488H96.5707Z"
+                                fill="#56C6AD"
+                            />
+                            <path
+                                d="M98.6938 112.959V118.516H59.5478V112.45L66.3864 105.161C69.6609 101.67 74.1006 99.7508 78.8818 99.7508C78.9204 99.7508 78.959 99.7508 78.9976 99.7523C83.7387 99.782 88.1339 101.703 91.3773 105.161L98.6938 112.959Z"
+                                fill="#56C6AD"
+                            />
+                            <path
+                                d="M79.2523 81.2426C79.1677 81.2189 79.0831 81.1936 79 81.1684V64.6488H96.5735C89.3728 77.7425 79.2523 81.2426 79.2523 81.2426V81.2426Z"
+                                fill="#53AD99"
+                            />
+                            <path
+                                d="M98.6962 112.957V118.515H79V99.7508C83.7411 99.7805 88.1363 101.701 91.3797 105.16L98.6962 112.957Z"
+                                fill="#53AD99"
+                            />
+                            <path
+                                d="M56.7664 109.176V117.773H61.2195V109.176C61.2195 102.573 64.3131 96.3636 70.4144 90.7195C73.8572 87.5348 77.3509 85.4264 78.9937 84.5166C80.6364 85.4264 84.1302 87.5348 87.5729 90.7195C93.6743 96.3634 96.7679 102.573 96.7679 109.176V117.773H101.221V109.176C101.221 101.355 97.5142 93.8121 90.5013 87.3625C87.9574 85.0228 85.4252 83.2313 83.4786 81.9996C85.4252 80.7678 87.9574 78.9764 90.5013 76.6367C97.5142 70.1871 101.221 62.6439 101.221 54.8229V46.8272H96.7679V54.8229C96.7679 61.4258 93.6743 67.6356 87.5729 73.2796C84.1296 76.4648 80.6353 78.5735 78.9937 79.4825C77.3509 78.5728 73.8572 76.4643 70.4144 73.2796C64.3131 67.6357 61.2195 61.426 61.2195 54.8229V46.8272H56.7664V54.8229C56.7664 62.6439 60.4731 70.1871 67.4861 76.6367C70.03 78.9764 72.5622 80.7678 74.5088 81.9996C72.5622 83.2313 70.03 85.0228 67.4861 87.3625C60.4731 93.8121 56.7664 101.355 56.7664 109.176V109.176Z"
+                                fill="#E3E7ED"
+                            />
+                            <path
+                                d="M106.608 46.2266C106.608 47.4556 105.612 48.4531 104.381 48.4531H53.6126C52.3821 48.4531 51.3861 47.4556 51.3861 46.2266C51.3861 44.9975 52.3821 44 53.6126 44H104.381C105.612 44 106.608 44.9975 106.608 46.2266Z"
+                                fill="#54657E"
+                            />
+                            <path
+                                d="M106.608 117.773C106.608 119.002 105.612 120 104.381 120H53.6126C52.3821 120 51.3861 119.002 51.3861 117.773C51.3861 116.544 52.3821 115.547 53.6126 115.547H104.381C105.612 115.547 106.608 116.544 106.608 117.773Z"
+                                fill="#54657E"
+                            />
+                            <path
+                                d="M106.611 117.773C106.611 119.002 105.615 120 104.384 120H79V115.547H104.384C105.615 115.547 106.611 116.544 106.611 117.773Z"
+                                fill="#4D5C72"
+                            />
+                            <path
+                                d="M79 48.4531V44H104.384C105.615 44 106.611 44.9975 106.611 46.2266C106.611 47.4556 105.615 48.4531 104.384 48.4531H79Z"
+                                fill="#4D5C72"
+                            />
+                        </svg>
+
+                        <svg
+                            class="bar"
+                            width="158"
+                            height="158"
+                            viewBox="0 0 158 158"
+                        >
+                            <circle
+                                cx="79"
+                                cy="79"
+                                r="73"
+                                fill="none"
+                                stroke="#F2F2F2"
+                                stroke-width="12"
+                            />
+                            <circle
+                                #percent
+                                class="percent"
+                                cx="79"
+                                cy="79"
+                                r="73"
+                                fill="none"
+                                stroke="url(#paint0_linear_9_23)"
+                                stroke-linecap="round"
+                                stroke-width="12"
+                                pathLength="100"
+                            />
+
+                            <linearGradient
+                                id="paint0_linear_9_23"
+                                x1="142.5"
+                                y1="30"
+                                x2="15.5"
+                                y2="122"
+                                gradientUnits="userSpaceOnUse"
+                            >
+                                <stop stop-color="#53AD99" />
+                                <stop offset="1" stop-color="#56C6AD" />
+                            </linearGradient>
+                        </svg>
+                    </div>
+                </div>
+                <div class="description">
+                    <div class="description__title" [innerHTML]="page.data.timerTitle">
+                        Таймер обратного отсчета
+                    </div>
+                    <div class="description__text" >
+                        <p [innerHTML]="page.data.timerText1"></p>
+                        <p [innerHTML]="page.data.timerText2"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,68 @@
+<div class="input-label phone-mask">
+    <input
+        class="input"
+        phone
+        [code]="selectedCountry?.phoneCode"
+        type="tel"
+        [formControl]="control"
+        #inputPhone
+        (keydown)="onType(); numberOnly($event)"
+        (focusout)="onType()"
+        [ngClass]="{
+            error: isInvalid
+        }"
+    />
+    <ng-select
+        [(ngModel)]="selectedCountry"
+        [ngModelOptions]="{ standalone: true }"
+        class="phone scrollSelector scrollSelectorGray"
+        bindLabel="title"
+        [items]="items | filter : ['phoneCode', 'title', 'code'] : 'phone' : kw"
+        [searchable]="false"
+        [clearable]="false"
+        dropdownPosition="bottom"
+        customScrollDetector
+        [scrollSelectors]="['.scrollSelector .ng-dropdown-panel-items']"
+        (change)="onChange($event)"
+        [notFoundText]="notFoundText"
+        (close)="kw = ''"
+        [ngClass]="{
+            error: isInvalid
+        }"
+    >
+        <ng-template ng-header-tmp>
+            <div class="select-search">
+                <div class="icon-left">
+                    <img
+                        src="assets/img/icons/quest_search.svg"
+                        alt="alt"
+                        loadImg
+                    />
+                </div>
+                <input
+                    class="input-search"
+                    type="text"
+                    [placeholder]="placeholder"
+                    [(ngModel)]="kw"
+                    [ngModelOptions]="{ standalone: true }"
+                />
+            </div>
+        </ng-template>
+        <ng-template ng-label-tmp let-item="item">
+            <div class="item">
+                <div class="icon">
+                    <img [src]="selectedCountry?.logo" loadImg />
+                </div>
+            </div>
+        </ng-template>
+
+        <ng-template ng-option-tmp let-item="item" let-index="index">
+            <div class="item">
+                <div class="icon">
+                    <img [src]="item.logo" loadImg />
+                </div>
+                <p class="number" [innerHTML]="item.phoneCode"></p>
+            </div>
+        </ng-template>
+    </ng-select>
+</div>

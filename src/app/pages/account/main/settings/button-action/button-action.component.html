@@ -1,0 +1,55 @@
+<div class="buttons">
+    <button
+        class="btn-grey btn-edit"
+        *ngIf="isBtnEdit"
+        (click)="openModalEdit()"
+        [innerHTML]="page.data.edit"
+    >
+        Редактировать
+    </button>
+
+    <button
+        class="btn-show"
+        [ngClass]="isShowUserData ? 'hidden' : 'visible'"
+        *ngIf="isBtnVisible"
+        (click)="clickShowData()"
+    >
+        {{ isShowUserData ? page.data.hide : page.data.show }}
+    </button>
+
+    <button class="btn-add" *ngIf="isBtnAdd" (click)="openModalEdit()">
+        <span class="icon-left">
+            <img src="assets/img/icons/icon-plus-green.svg" alt="alt" />
+        </span>
+        <span class="text" [innerHTML]="page.data.add">Добавить</span>
+    </button>
+
+    <button
+        class="btn-grey"
+        *ngIf="isBtnGoogle && !value"
+        (click)="openModalGoogle()"
+        [innerHTML]="page.data.activate"
+    >
+        Включить
+    </button>
+
+    <button
+        class="btn-grey"
+        *ngIf="isBtnPasswordChange"
+        (click)="openModalPassword()"
+        [innerHTML]="page.data.change"
+    >
+        Изменить
+    </button>
+    <!--
+    <button
+        class="btn-add"
+        *ngIf="isBtnAddWallet"
+        (click)="openModalAddWallet()"
+    >
+        <span class="icon-left">
+            <img src="assets/img/icons/icon-plus-green.svg" alt="alt" />
+        </span>
+        <span class="text" [innerHTML]="page.data.add">Добавить</span>
+    </button> -->
+</div>

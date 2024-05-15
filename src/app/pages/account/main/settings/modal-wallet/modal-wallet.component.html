@@ -1,0 +1,301 @@
+<div class="modal" [@ModalAnimate]>
+    <div class="modal__content">
+        <div class="modal__block add-wallet" *ngIf="isAddWallet && !security">
+            <div class="modal__head">
+                <div class="modal__head-btn">
+                    <button class="btn-close" (click)="modalClose()"></button>
+                    <button class="arrow-close" (click)="modalClose()">
+                        <img src="assets/img/icons/back.svg" alt="alt" />
+                    </button>
+                </div>
+
+                <h4
+                    class="title"
+                    [innerHTML]="data.page.data.modalWallet.title"
+                >
+                    Добавить кошелек
+                </h4>
+            </div>
+
+            <div class="modal__body">
+                <div class="alert">
+                    <div class="icon-left">
+                        <img
+                            src="assets/img/icons/icon-info-orange.svg"
+                            alt="info"
+                        />
+                    </div>
+
+                    <div
+                        class="text"
+                        [innerHTML]="data.page.data.modalWallet.addAddress"
+                    >
+                        Добавьте свой кошелек для вывода средств и NFT.
+                    </div>
+                </div>
+
+                <form
+                    class="form"
+                    [formGroup]="formGroup"
+                    (ngSubmit)="walletCheck()"
+                >
+                    <div class="form-wrapper">
+                        <div class="form__item">
+                            <pc-input
+                                [errors]="errors('1')"
+                                [errorsTranslate]="data.pageErrors"
+                                [isInvalid]="hasError(control('1'))"
+                                [replace]="{ network: 'ERC20' }"
+                            >
+                                <div
+                                    class="form-group"
+                                    [class.has-error]="hasError(control('1'))"
+                                >
+                                    <p class="input-title">
+                                        ERC20 (Ethereum, Polygon)
+                                    </p>
+
+                                    <div class="input-label">
+                                        <div class="dropdown" *ngIf="ercWallet">
+                                            <div class="dropdown_wrapper">
+                                                {{ ercWallet }}
+                                            </div>
+                                        </div>
+                                        <input
+                                            #wallet
+                                            class="input"
+                                            formControlName="1"
+                                            type="text"
+                                            [placeholder]="
+                                                data.page.data.modalWallet
+                                                    .enterAddress
+                                                    | replace
+                                                        : { network: 'ERC20' }
+                                            "
+                                        />
+                                    </div>
+                                </div>
+                            </pc-input>
+                        </div>
+                        <div class="form__item mb0">
+                            <pc-input
+                                [errors]="errors('2')"
+                                [errorsTranslate]="data.pageErrors"
+                                [isInvalid]="hasError(control('2'))"
+                                [replace]="{ network: 'TRC20' }"
+                            >
+                                <div
+                                    class="form-group"
+                                    [class.has-error]="hasError(control('2'))"
+                                >
+                                    <p class="input-title">TRC20 (TRON)</p>
+
+                                    <div class="input-label">
+                                        <div class="dropdown" *ngIf="trcWallet">
+                                            <div class="dropdown_wrapper">
+                                                {{ trcWallet }}
+                                            </div>
+                                        </div>
+                                        <input
+                                            class="input"
+                                            formControlName="2"
+                                            type="text"
+                                            [placeholder]="
+                                                data.page.data.modalWallet
+                                                    .enterAddress
+                                                    | replace
+                                                        : { network: 'TRC20' }
+                                            "
+                                        />
+                                    </div>
+                                </div>
+                            </pc-input>
+                        </div>
+                    </div>
+                    <div class="buttons">
+                        <button
+                            (click)="modalClose()"
+                            type="button"
+                            class="btn-grey"
+                            [innerHTML]="data.page.data.cancel"
+                        >
+                            Отменить
+                        </button>
+                        <button
+                            type="submit"
+                            class="btn-green"
+                            [disabled]="
+                                (this.formGroup.get('1').status ===
+                                    'DISABLED' &&
+                                    !this.formGroup.get('2').value) ||
+                                (this.formGroup.get('2').status ===
+                                    'DISABLED' &&
+                                    !this.formGroup.get('1').value) ||
+                                !(
+                                    this.formGroup.get('2').value ||
+                                    this.formGroup.get('1').value
+                                )
+                            "
+                        >
+                            <span [class.hide]="isSubmitted">{{
+                                data.page.data.submit
+                            }}</span>
+
+                            <app-btn-loader
+                                [isSubmitted]="isSubmitted"
+                                [isAccount]="true"
+                            ></app-btn-loader>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div
+            class="modal__block remove-wallet"
+            *ngIf="!isAddWallet && !security"
+        >
+            <div class="modal__head">
+                <div class="modal__head-btn">
+                    <button class="btn-close" (click)="modalClose()"></button>
+                    <button class="arrow-close" (click)="modalClose()">
+                        <img src="assets/img/icons/back.svg" alt="alt" />
+                    </button>
+                </div>
+                <h4
+                    class="title"
+                    [innerHTML]="data.page.data.modalWallet.removeWallet"
+                >
+                    Удалить кошелек
+                </h4>
+            </div>
+
+            <div class="modal__body">
+                <div class="icon-wrap">
+                    <div class="icon-wallet">
+                        <img
+                            src="assets/img/pages/settings/icon-delete-wallet.svg"
+                            alt="wallet"
+                        />
+                    </div>
+
+                    <h4
+                        class="h4"
+                        [innerHTML]="
+                            data.page.data.modalWallet.removeWalletDesc
+                        "
+                    >
+                        Вы уверены, что хотите удалить этот кошелек?
+                    </h4>
+                </div>
+
+                <div class="buttons">
+                    <button
+                        type="button"
+                        class="btn-grey"
+                        (click)="modalClose()"
+                        [innerHTML]="data.page.data.cancel"
+                    >
+                        Отменить
+                    </button>
+                    <button
+                        type="button"
+                        class="btn-green"
+                        (click)="deleteWallet()"
+                    >
+                        <app-btn-loader
+                            [isSubmitted]="isSubmitted"
+                            [isAccount]="true"
+                        ></app-btn-loader>
+                        <span [class.hide]="isSubmitted">{{
+                            data.page.data.submit
+                        }}</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal__block security" *ngIf="security">
+            <div class="modal__head">
+                <div class="modal__head-btn">
+                    <button class="btn-close" (click)="modalClose()"></button>
+                    <button class="arrow-close" (click)="modalClose()">
+                        <img src="assets/img/icons/back.svg" alt="alt" />
+                    </button>
+                </div>
+                <h4
+                    class="title"
+                    [innerHTML]="data.page.data.modalWallet.securityTitle"
+                >
+                    Проверка безопасности
+                </h4>
+            </div>
+
+            <div class="modal__body">
+                <div class="alert">
+                    <div class="icon-left">
+                        <img
+                            src="assets/img/icons/icon-info-orange.svg"
+                            alt="info"
+                        />
+                    </div>
+
+                    <div
+                        class="text"
+                        [innerHTML]="data.page.data.modalWallet.securityDesc"
+                    >
+                        Для защиты вашего аккаунта, пожалуйста, выполните
+                        следующую проверку.
+                    </div>
+                </div>
+
+                <form class="form">
+                    <div class="form-group w-100">
+                        <p
+                            class="input-title mb-0"
+                            [innerHTML]="
+                                data.page.data.modalWallet.securityCode
+                            "
+                        >
+                            Проверочный код Google
+                        </p>
+                        <p
+                            class="input-sub-title"
+                            [innerHTML]="
+                                data.page.data.modalWallet.securityCodeEnter
+                            "
+                        >
+                            Введите 6-значный код из Google Authenticator
+                        </p>
+
+                        <!-- <div class="input-label"></div> -->
+                        <div class="content">
+                            <app-code-input
+                                #codeInput
+                                (onSendEvent)="onCodeEnter($event)"
+                                [codeError]="data.pageErrors.data.wrongCode"
+                                [isGoogle]="true"
+                            ></app-code-input>
+                        </div>
+                    </div>
+
+                    <div class="form-button w-100">
+                        <button
+                            class="btn-submit"
+                            (click)="securityCheck()"
+                            [disabled]="!this.codeInput.theFieldsAreFloode()"
+                        >
+                            <app-btn-loader
+                                [isSubmitted]="codeInput.isSubmitted"
+                                [isAccount]="true"
+                            ></app-btn-loader>
+                            <span [class.hide]="codeInput.isSubmitted">{{
+                                data.page.data.submit
+                            }}</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

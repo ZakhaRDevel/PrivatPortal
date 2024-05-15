@@ -1,0 +1,387 @@
+<header class="header" id="header">
+    <div class="header__desctop">
+        <div
+            class="header__left"
+            [class.hidden]="!user?.id"
+            [class.center]="!showSocials || user.userDetail?.hideFullName"
+        >
+            <p
+                *ngIf="!user.userDetail?.hideFullName"
+                class="title"
+                [innerHTML]="
+                    page.data.header.user
+                        | replace
+                            : {
+                                  link: registerLink,
+                                  user: user.userDetail?.fullName || ''
+                              }
+                "
+            ></p>
+            <ul class="soc" *ngIf="showSocials">
+                <p class="text" [innerHTML]="page.data.header.contactMe1"></p>
+                <li
+                    class="soc__item"
+                    *ngIf="user.telegram && !user.userDetail?.hideTelegram"
+                >
+                    <a
+                        href="https://t.me/{{ user.telegram }}"
+                        class="btn-soc telegram"
+                        target="_blank"
+                        [class.disabled]="!user.telegram"
+                    >
+                        <img
+                            src="assets/img/icons/soc/telegram.svg"
+                            alt="https://t.me/{{ user.telegram }}"
+                        />
+                    </a>
+                </li>
+                <li
+                    class="soc__item"
+                    *ngIf="
+                        user.userDetail?.twitterUrl &&
+                        !user.userDetail?.hideTwitter
+                    "
+                >
+                    <a
+                        href="{{ user.userDetail?.twitterUrl }}"
+                        class="btn-soc twitter"
+                        target="_blank"
+                        *ngIf="user.userDetail?.twitterUrl"
+                    >
+                        <img
+                            src="assets/img/icons/soc/twitter.svg"
+                            alt="{{ user.userDetail?.twitterUrl }}"
+                        />
+                    </a>
+                </li>
+                <li
+                    class="soc__item"
+                    *ngIf="
+                        user.userDetail?.facebookUrl &&
+                        !user.userDetail?.hideFacebook
+                    "
+                >
+                    <a
+                        href="{{ user.userDetail?.facebookUrl }}"
+                        class="btn-soc facebook"
+                        target="_blank"
+                        *ngIf="user.userDetail?.facebookUrl"
+                    >
+                        <img
+                            src="assets/img/icons/soc/facebook.svg"
+                            alt="{{ user.userDetail?.facebookUrl }}"
+                        />
+                    </a>
+                </li>
+                <li
+                    class="soc__item"
+                    *ngIf="
+                        user.userDetail?.linkedinUrl &&
+                        !user.userDetail?.hideLinkedIn
+                    "
+                >
+                    <a
+                        href="{{ user.userDetail?.linkedinUrl }}"
+                        class="btn-soc facebook"
+                        target="_blank"
+                        *ngIf="user.userDetail?.linkedinUrl"
+                    >
+                        <img
+                            src="assets/img/icons/soc/linkedin.svg"
+                            alt="{{ user.userDetail?.linkedinUrl }}"
+                        />
+                    </a>
+                </li>
+                <li
+                    class="soc__item"
+                    *ngIf="
+                        user.userDetail?.instagramUrl &&
+                        !user.userDetail?.hideInstagram
+                    "
+                >
+                    <a
+                        href="{{ user.userDetail?.instagramUrl }}"
+                        class="btn-soc instagram"
+                        target="_blank"
+                        *ngIf="user.userDetail?.instagramUrl"
+                    >
+                        <img
+                            src="assets/img/icons/soc/instagram.svg"
+                            alt="{{ user.userDetail?.instagramUrl }}"
+                        />
+                    </a>
+                </li>
+                <li
+                    class="soc__item"
+                    *ngIf="
+                        user.userDetail?.tiktokUrl &&
+                        !user.userDetail?.hideTiktok
+                    "
+                >
+                    <a
+                        href="{{ user.userDetail?.tiktokUrl }}"
+                        class="btn-soc tiktok"
+                        target="_blank"
+                        *ngIf="user.userDetail?.tiktokUrl"
+                    >
+                        <img
+                            src="assets/img/icons/soc/tiktok.svg"
+                            alt="{{ user.userDetail?.tiktokUrl }}"
+                        />
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="header__right">
+            <div class="lang">
+                <app-lang-switcher
+                    [langSwitch]="page.data.header.langSwitch"
+                    [typeSelect]="'home'"
+                ></app-lang-switcher>
+            </div>
+
+            <a
+                routerLink="/acc"
+                [queryParams]="{ u: user.id ? user.uplineId : '' }"
+                class="btn-acc"
+            >
+                <span class="icon-left">
+                    <img src="assets/img/icons/icon-user.svg" alt="alt" />
+                </span>
+
+                {{ page.data.header.btnAccount }}
+            </a>
+
+            <a
+                routerLink="/register"
+                [queryParams]="{ u: user.id ? user.uplineId : '' }"
+                class="btn-aqua"
+                *ngIf="!is_login"
+            >
+                {{ page.data.header.btnRegister }}
+            </a>
+
+            <button
+                class="btn-logout btn-aqua"
+                type="button"
+                (click)="logout()"
+                *ngIf="is_login"
+            >
+                {{ page.data.header.logout }}
+            </button>
+        </div>
+    </div>
+
+    <div class="header__mobile">
+        <div class="lang">
+            <app-lang-switcher
+                [langSwitch]="page.data.header.langSwitch"
+                [typeSelect]="'home'"
+            ></app-lang-switcher>
+        </div>
+
+        <div class="contact" [class.hidden]="!user?.id || !showSocials">
+            <button class="btn-contact" (click)="openMenuContact()">
+                <span class="icon-left">
+                    <img
+                        src="assets/img/icons/arrow-green-left.svg"
+                        alt="alt"
+                    />
+                </span>
+
+                {{ page.data.header.contactMe1 }}
+
+                <span class="icon-right">
+                    <img
+                        src="assets/img/icons/icon-cursor-white.svg"
+                        alt="alt"
+                    />
+                </span>
+            </button>
+
+            <div
+                class="bg-overlay menu__overlay"
+                [class.show]="hiddenMenuService.name === 'menu_contact'"
+            >
+                <div
+                    class="bg-overlay-close"
+                    (click)="closeMenuContact()"
+                    (touchstart)="swipe($event, 'start')"
+                ></div>
+
+                <div
+                    class="menu__wrap"
+                    [class.show]="hiddenMenuService.name === 'menu_contact'"
+                >
+                    <div class="menu__contact">
+                        <div class="head">
+                            <button
+                                class="btn-close-menu"
+                                (click)="closeMenuContact()"
+                            >
+                                <img
+                                    src="assets/img/icons/icon-close.svg"
+                                    alt="close"
+                                />
+                            </button>
+                        </div>
+
+                        <p class="list-title">
+                            {{ page.data.header.contactMe2 }}
+                        </p>
+                        <ul class="list">
+                            <li class="list__item">
+                                <a
+                                    href="https://t.me/{{ user.telegram }}"
+                                    class="btn-soc telegram"
+                                    target="_blank"
+                                    [class.disabled]="
+                                        !user.telegram ||
+                                        user.userDetail?.hideTelegram
+                                    "
+                                >
+                                    <span class="icon-left">
+                                        <img
+                                            src="assets/img/icons/soc/telegram.svg"
+                                            alt="https://t.me/{{
+                                                user.telegram
+                                            }}"
+                                        />
+                                    </span>
+
+                                    Telegram
+                                </a>
+                            </li>
+                            <li class="list__item">
+                                <a
+                                    href="{{ user.userDetail?.twitterUrl }}"
+                                    class="btn-soc twitter"
+                                    target="_blank"
+                                    [class.disabled]="
+                                        !user.userDetail?.twitterUrl ||
+                                        user.userDetail?.hideTwitter
+                                    "
+                                >
+                                    <span class="icon-left">
+                                        <img
+                                            src="assets/img/icons/soc/twitter.svg"
+                                            alt="{{
+                                                user.userDetail?.twitterUrl
+                                            }}"
+                                        />
+                                    </span>
+
+                                    Twitter
+                                </a>
+                            </li>
+                            <li class="list__item">
+                                <a
+                                    href="{{ user.userDetail?.facebookUrl }}"
+                                    class="btn-soc twitter"
+                                    target="_blank"
+                                    [class.disabled]="
+                                        !user.userDetail?.facebookUrl ||
+                                        user.userDetail?.hideFacebook
+                                    "
+                                >
+                                    <span class="icon-left">
+                                        <img
+                                            src="assets/img/icons/soc/twitter.svg"
+                                            alt="{{
+                                                user.userDetail?.facebookUrl
+                                            }}"
+                                        />
+                                    </span>
+
+                                    Facebook
+                                </a>
+                            </li>
+                            <li class="list__item">
+                                <a
+                                    href="{{ user.userDetail?.linkedinUrl }}"
+                                    class="btn-soc twitter"
+                                    target="_blank"
+                                    [class.disabled]="
+                                        !user.userDetail?.linkedinUrl ||
+                                        user.userDetail?.hideLinkedIn
+                                    "
+                                >
+                                    <span class="icon-left">
+                                        <img
+                                            src="assets/img/icons/soc/linkedin.svg"
+                                            alt="{{
+                                                user.userDetail?.linkedinUrl
+                                            }}"
+                                        />
+                                    </span>
+
+                                    Linkedin
+                                </a>
+                            </li>
+                            <li class="list__item">
+                                <a
+                                    href="{{ user.userDetail?.instagramUrl }}"
+                                    class="btn-soc instagram"
+                                    target="_blank"
+                                    [class.disabled]="
+                                        !user.userDetail?.instagramUrl ||
+                                        user.userDetail?.hideInstagram
+                                    "
+                                >
+                                    <span class="icon-left">
+                                        <img
+                                            src="assets/img/icons/soc/instagram.svg"
+                                            alt="{{
+                                                user.userDetail?.instagramUrl
+                                            }}"
+                                        />
+                                    </span>
+
+                                    Instagram
+                                </a>
+                            </li>
+                            <li class="list__item">
+                                <a
+                                    href="{{ user.userDetail?.tiktokUrl }}"
+                                    class="btn-soc tiktok"
+                                    target="_blank"
+                                    [class.disabled]="
+                                        !user.userDetail?.tiktokUrl ||
+                                        user.userDetail?.hideTiktok
+                                    "
+                                >
+                                    <span class="icon-left">
+                                        <img
+                                            src="assets/img/icons/soc/tiktok.svg"
+                                            alt="{{
+                                                user.userDetail?.tiktokUrl
+                                            }}"
+                                        />
+                                    </span>
+
+                                    Tiktok
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header__user">
+        <p
+            id="test"
+            class="title"
+            [class.hidden]="!user?.id || user.userDetail?.hideFullName"
+            [innerHTML]="
+                page.data.header.user
+                    | replace
+                        : {
+                              link: registerLink,
+                              user: user?.userDetail?.fullName
+                          }
+            "
+        ></p>
+    </div>
+</header>

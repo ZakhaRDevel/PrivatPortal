@@ -1,0 +1,29 @@
+@import "~src/assets/scss/mixins";
+@import "~src/assets/scss/variables";
+
+.footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 326px;
+    margin: 0 auto 30px;
+    font-size: 14px;
+    font-weight: 400;
+    color: $color-font-dark-grey;
+    @media only screen and (max-width: $small) {
+        display: none;
+    }
+
+    &.dark {
+        background: #000;
+        color: #54657E;
+        height: 80px;
+        width: 100%;
+        justify-content: center;
+        margin: 0;
+    }
+
+    svg {
+        margin: 0 6px;
+    }
+}

@@ -1,0 +1,56 @@
+<div class="announcement" [class.archive]="isArchive">
+    <div class="announcement__header">
+        <div class="announcement__header-wrapper">
+            <button
+                (click)="goBack()"
+                type="button"
+                class="back"
+                *ngIf="!isArchive"
+            >
+                <img src="assets/img/icons/back.svg" alt="" />
+            </button>
+            <div class="title" [innerHTML]="page.data[title]">Анонсы</div>
+        </div>
+        <div class="search">
+            <img
+                class="icon"
+                src="assets/img/icons/quest_search.svg"
+                alt="search"
+            />
+            <input
+                [placeholder]="page.data.searchPlaceholder"
+                class="input"
+                type="text"
+                class="input"
+                [(ngModel)]="search"
+            />
+            <button
+                (click)="onSearch()"
+                class="btn"
+                type="button"
+                [innerHTML]="page.data.search"
+            >
+                Поиск
+            </button>
+        </div>
+    </div>
+    <div class="announcement__wrapper">
+        <router-outlet></router-outlet>
+        <div class="announcement__last-announcement" *ngIf="!isArchive">
+            <aside class="sidebar">
+                <div class="title" [innerHTML]="page.data.latest">
+                    Последние анонсы
+                </div>
+                <div class="content">
+                    <a
+                        class="item"
+                        *ngFor="let item of announcements"
+                        (click)="goToAnnouncement(item.slug)"
+                        [class.active]="item.slug === current?.slug"
+                        [innerHTML]="item.subject"
+                    ></a>
+                </div>
+            </aside>
+        </div>
+    </div>
+</div>

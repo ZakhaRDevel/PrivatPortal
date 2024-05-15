@@ -1,0 +1,253 @@
+<div class="modal" [@ModalAnimate]>
+    <div class="modal__content">
+        <div
+            class="modal__block withdraw"
+            *ngIf="me.userWallets.length && !isSuccessful"
+        >
+            <div class="modal__head">
+                <div class="modal__head-btn">
+                    <button class="btn-close" (click)="modalClose()"></button>
+                    <button class="arrow-close" (click)="modalClose()">
+                        <img src="assets/img/icons/back.svg" alt="alt" />
+                    </button>
+                </div>
+
+                <h4
+                    class="title"
+                    [innerHTML]="data.page.data.modalWithdrawal.title"
+                >
+                    Вывести средства
+                </h4>
+            </div>
+
+            <form
+                class="modal__body"
+                [formGroup]="formGroup"
+                (ngSubmit)="submit()"
+            >
+                <div class="wallets">
+                    <div
+                        class="wallets__item"
+                        *ngFor="let item of me.userWallets"
+                    >
+                        <input
+                            type="radio"
+                            name="referal"
+                            id="{{ item.networkId }}"
+                            [value]="item.id"
+                            formControlName="walletId"
+                        />
+                        <label class="radio_label" for="{{ item.networkId }}"
+                            >{{ item.networkCode }}:
+                            {{ item.shortAddress }}</label
+                        >
+                    </div>
+                </div>
+
+                <div class="alert">
+                    <div class="icon-left">
+                        <img
+                            src="assets/img/icons/icon-info-orange.svg"
+                            alt="info"
+                        />
+                    </div>
+
+                    <div
+                        class="text"
+                        [innerHTML]="data.page.data.modalWithdrawal.desc"
+                    >
+                        Подтвердите вывод, нажав на кнопку ниже.
+                    </div>
+                </div>
+
+                <div class="form">
+                    <div class="form__wrapper">
+                        <div class="form-group">
+                            <p
+                                class="input-title"
+                                [innerHTML]="
+                                    data.page.data.modalWithdrawal.wallet
+                                        | replace
+                                            : {
+                                                  networkCode:
+                                                      wallet?.networkCode
+                                              }
+                                "
+                            >
+                                Ваш адрес {{ wallet?.networkCode }}
+                            </p>
+
+                            <div class="input-label">
+                                <input
+                                    type="text"
+                                    placeholder=""
+                                    [value]="wallet?.shortAddress"
+                                    [attr.disabled]="true"
+                                />
+
+                                <div class="dropdown">
+                                    <div class="dropdown_wrapper">
+                                        {{ wallet.wallet }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <pc-input
+                                [isInvalid]="hasError(control('amount'))"
+                                [errors]="errors('amount')"
+                                [errorsTranslate]="data.pageErrors"
+                            >
+                                <p
+                                    class="input-title"
+                                    [innerHTML]="
+                                        data.page.data.modalWithdrawal.sum
+                                    "
+                                >
+                                    Сумма
+                                </p>
+
+                                <div class="input-label">
+                                    <input
+                                        [class.error]="
+                                            hasError(control('amount'))
+                                        "
+                                        type="text"
+                                        placeholder=""
+                                        [value]="+data.balance + ' USD'"
+                                        [attr.disabled]="true"
+                                    />
+                                </div>
+                            </pc-input>
+                        </div>
+                    </div>
+
+                    <div class="buttons">
+                        <button
+                            type="button"
+                            class="btn-grey"
+                            (click)="modalClose()"
+                            [innerHTML]="data.page.data.modalWithdrawal.decline"
+                        >
+                            Отменить
+                        </button>
+                        <button
+                            [disabled]="+data.balance <= 0"
+                            class="btn-green"
+                            type="submit"
+                        >
+                            <app-btn-loader
+                                [isAccount]="true"
+                                [isSubmitted]="isSubmitted"
+                            ></app-btn-loader>
+                            <span *ngIf="!isSubmitted">{{
+                                data.page.data.modalWithdrawal.confirm
+                            }}</span>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="modal__block" *ngIf="!me.userWallets.length">
+            <div class="modal__head">
+                <div class="modal__head-btn">
+                    <button class="btn-close" (click)="modalClose()"></button>
+                    <button class="arrow-close" (click)="modalClose()">
+                        <img src="assets/img/icons/back.svg" alt="alt" />
+                    </button>
+                </div>
+                <h4
+                    class="title"
+                    [innerHTML]="data.page.data.modalWithdrawal.title"
+                >
+                    Вывести средства
+                </h4>
+            </div>
+
+            <div class="modal__body">
+                <div class="icon-wrap">
+                    <div class="icon-wallet">
+                        <img
+                            src="assets/img/pages/giveaways/icon-big-wallet.svg"
+                            alt="wallet"
+                        />
+                    </div>
+
+                    <h4
+                        class="h4"
+                        [innerHTML]="data.page.data.modalWithdrawal.addAddress"
+                    >
+                        Добавьте свой адрес ERC20 или TRC20 в разделе “Кошельки
+                        и адреса”.
+                    </h4>
+                </div>
+
+                <div class="buttons">
+                    <button
+                        class="btn-green"
+                        (click)="goToSettings()"
+                        [innerHTML]="data.page.data.modalWithdrawal.settingsBtn"
+                    >
+                        Перейти в настройки
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal__block" *ngIf="isSuccessful">
+            <div class="modal__head">
+                <div class="modal__head-btn">
+                    <button class="btn-close" (click)="modalClose()"></button>
+                    <button class="arrow-close" (click)="modalClose()">
+                        <img src="assets/img/icons/back.svg" alt="alt" />
+                    </button>
+                </div>
+                <h4
+                    class="title"
+                    [innerHTML]="data.page.data.modalWithdrawal.success"
+                >
+                    Вывод подтвержден
+                </h4>
+            </div>
+
+            <div class="modal__body">
+                <div class="icon-wrap">
+                    <div class="icon-check">
+                        <img
+                            src="assets/img/pages/giveaways/icon-big-check-2.svg"
+                            alt="wallet"
+                        />
+                    </div>
+
+                    <h4
+                        class="h4"
+                        [innerHTML]="
+                            data.page.data.modalWithdrawal.successDesc
+                                | replace
+                                    : {
+                                          balance: balance,
+                                          networkCode: wallet.networkCode
+                                      }
+                        "
+                    >
+                        После подтверждения сети вы получите
+                        {{ data.balance }} USDT на ваш адрес
+                        {{ wallet.networkCode }}.
+                    </h4>
+                </div>
+
+                <div class="buttons">
+                    <button
+                        class="btn-green"
+                        (click)="modalClose()"
+                        [innerHTML]="data.page.data.modalWithdrawal.btnOk"
+                    >
+                        OK
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

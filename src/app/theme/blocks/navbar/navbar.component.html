@@ -1,0 +1,129 @@
+<nav class="navbar">
+    <a
+        rel="noreferrer noopener"
+        routerLinkActive="active"
+        routerLink="dashboard"
+        class="navbar__item"
+        (click)="closeAllDialog()"
+    >
+        <span class="icon">
+            <img src="assets/img/nav/dashboard.svg" />
+            <img class="active" src="assets/img/nav/dashboard-active.svg" />
+            <img class="mobile" src="assets/img/nav/dashboard-mobile.svg" />
+        </span>
+
+        <span class="text">{{ page.data.navbar.link1 }}</span>
+    </a>
+
+    <a
+        rel="noreferrer noopener"
+        routerLinkActive="active"
+        routerLink="nft"
+        (click)="closeAllDialog()"
+        class="navbar__item"
+    >
+        <span class="icon">
+            <img src="assets/img/nav/nft.svg" />
+            <img class="active" src="assets/img/nav/nft-active.svg" />
+            <img class="mobile" src="assets/img/nav/nft-mobile.svg" />
+        </span>
+
+        <span class="text">{{ page.data.navbar.link2 }}</span>
+    </a>
+
+    <a
+        rel="noreferrer noopener"
+        routerLinkActive="active"
+        routerLink="referrals"
+        (click)="closeAllDialog()"
+        class="navbar__item"
+    >
+        <span class="icon">
+            <img src="assets/img/nav/referrals.svg" />
+            <img class="active" src="assets/img/nav/referrals-active.svg" />
+            <img class="mobile" src="assets/img/nav/referrals-mobile.svg" />
+        </span>
+
+        <span class="text">{{ page.data.navbar.link3 }}</span>
+    </a>
+
+    <a
+        rel="noreferrer noopener"
+        [class.active]="isGiveaways"
+        routerLink="activities"
+        (click)="closeAllDialog()"
+        class="navbar__item"
+    >
+        <span class="icon">
+            <img src="assets/img/nav/gifts.svg" />
+            <img class="active" src="assets/img/nav/gifts-active.svg" />
+            <img class="mobile" src="assets/img/nav/gifts-mobile.svg" />
+        </span>
+
+        <span class="text">{{ page.data.navbar.link4 }}</span>
+    </a>
+
+    <a
+        rel="noreferrer noopener"
+        routerLinkActive="active"
+        (click)="closeAllDialog()"
+        routerLink="store"
+        class="navbar__item"
+    >
+        <span class="icon">
+            <img src="assets/img/nav/store.svg" />
+            <img class="active" src="assets/img/nav/store-active.svg" />
+            <img class="mobile" src="assets/img/nav/store-mobile.svg" />
+        </span>
+
+        <span class="text">{{ page.data.navbar.link5 }}</span>
+    </a>
+
+    <a
+        rel="noreferrer noopener"
+        routerLinkActive="active"
+        routerLink="settings"
+        (click)="closeAllDialog()"
+        class="navbar__item"
+    >
+        <span class="icon">
+            <img src="assets/img/nav/settings.svg" />
+            <img class="active" src="assets/img/nav/settings-active.svg" />
+            <img class="mobile" src="assets/img/nav/settings-mobile.svg" />
+        </span>
+
+        <span class="text">{{ page.data.navbar.link6 }}</span>
+    </a>
+
+    <button
+        (click)="toggleMenu('dashboard_sidebar')"
+        class="btn-sidebar-right navbar__item"
+    >
+        <span class="icon">
+            <svg
+                width="16"
+                height="16"
+                viewBox="0 0 16 16"
+                xmlns="http://www.w3.org/2000/svg"
+            >
+                <path
+                    d="M15.322 0H4.47458C4.29477 0 4.12232 0.0714284 3.99518 0.198572C3.86804 0.325715 3.79661 0.498158 3.79661 0.677966V6.50847H0.677966C0.498158 6.50847 0.325715 6.5799 0.198572 6.70705C0.0714284 6.83419 0 7.00663 0 7.18644L0 13.1525C0.000717996 13.9075 0.300948 14.6314 0.834794 15.1652C1.36864 15.6991 2.09249 15.9993 2.84746 16H13.1525C13.9075 15.9993 14.6314 15.6991 15.1652 15.1652C15.6991 14.6314 15.9993 13.9075 16 13.1525V0.677966C16 0.498158 15.9286 0.325715 15.8014 0.198572C15.6743 0.0714284 15.5018 0 15.322 0V0ZM3.79661 13.6949C3.79661 13.9466 3.69661 14.1881 3.51861 14.3661C3.34061 14.5441 3.09919 14.6441 2.84746 14.6441C2.4521 14.6434 2.07314 14.486 1.79358 14.2064C1.51402 13.9269 1.35665 13.5479 1.35593 13.1525V7.86441H3.79661V13.6949ZM12.6102 11.84H7.18644C7.00663 11.84 6.83419 11.7686 6.70705 11.6414C6.5799 11.5143 6.50847 11.3418 6.50847 11.162C6.50847 10.9822 6.5799 10.8098 6.70705 10.6826C6.83419 10.5555 7.00663 10.4841 7.18644 10.4841H12.6102C12.79 10.4841 12.9624 10.5555 13.0896 10.6826C13.2167 10.8098 13.2881 10.9822 13.2881 11.162C13.2881 11.3418 13.2167 11.5143 13.0896 11.6414C12.9624 11.7686 12.79 11.84 12.6102 11.84ZM12.6102 8.67797H7.18644C7.00663 8.67797 6.83419 8.60654 6.70705 8.47939C6.5799 8.35225 6.50847 8.17981 6.50847 8C6.50847 7.82019 6.5799 7.64775 6.70705 7.52061C6.83419 7.39346 7.00663 7.32203 7.18644 7.32203H12.6102C12.79 7.32203 12.9624 7.39346 13.0896 7.52061C13.2167 7.64775 13.2881 7.82019 13.2881 8C13.2881 8.17981 13.2167 8.35225 13.0896 8.47939C12.9624 8.60654 12.79 8.67797 12.6102 8.67797ZM12.6102 5.51322H7.18644C7.00663 5.51322 6.83419 5.44179 6.70705 5.31465C6.5799 5.18751 6.50847 5.01506 6.50847 4.83525C6.50847 4.65545 6.5799 4.483 6.70705 4.35586C6.83419 4.22872 7.00663 4.15729 7.18644 4.15729H12.6102C12.79 4.15729 12.9624 4.22872 13.0896 4.35586C13.2167 4.483 13.2881 4.65545 13.2881 4.83525C13.2881 5.01506 13.2167 5.18751 13.0896 5.31465C12.9624 5.44179 12.79 5.51322 12.6102 5.51322Z"
+                    fill="#868F9D"
+                />
+            </svg>
+
+            <svg
+                *ngIf="me.hasAnnouncement"
+                class="circle"
+                width="8"
+                height="8"
+                viewBox="0 0 8 8"
+                xmlns="http://www.w3.org/2000/svg"
+            >
+                <circle cx="4" cy="4" r="3.5" fill="#FA003C" stroke="white" />
+            </svg>
+        </span>
+
+        <span class="text">{{ page.data.navbar.link7 }}</span>
+    </button>
+</nav>

@@ -1,0 +1,153 @@
+@import "~src/assets/scss/mixins";
+@import "~src/assets/scss/variables";
+
+.buttons {
+    display: flex;
+    align-items: center;
+
+    @media only screen and (max-width: $medium) {
+        flex-direction: column;
+        align-items: flex-end;
+    }
+
+    @media only screen and (max-width: $tablet) {
+        width: 100%;
+        align-items: center;
+    }
+
+    .btn-grey {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #959da9;
+        height: 36px;
+        border-radius: 6px;
+        font: 500 14px $font-family-primary;
+        color: #fff;
+        transition: background-color 0.3s;
+        line-height: normal;
+        padding: 9px 16px 10px;
+
+        @media only screen and (max-width: $medium) {
+            width: 100%;
+        }
+
+        &:hover {
+            @media only screen and (min-width: $tablet) {
+                background: #54657e;
+
+            }
+        }
+
+        @media only screen and (max-width: $tablet) {
+            font-size: 12px;
+            border-radius: 8px;
+        }
+    }
+
+    .btn-show {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #f3f5fa;
+        height: 36px;
+        border: 1px solid #d8e3e5;
+        border-radius: 6px;
+        font: 500 14px $font-family-primary;
+        color: #54657e;
+        transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+        margin-left: 20px;
+        line-height: normal;
+        padding: 8px 16px 9px;
+
+        @media only screen and (max-width: $medium) {
+            width: 150px;
+            margin-left: 0;
+            margin-top: 8px;
+        }
+
+        @media only screen and (max-width: $tablet) {
+            width: 100%;
+            background: #959da9;
+            color: #fff;
+            border: 1px solid #959da9;
+            font-size: 12px;
+            border-radius: 8px;
+        }
+
+        &:hover {
+            @media only screen and (min-width: $tablet) {
+                background: #eaedf5;
+                color: #54657e;
+                border-color: #eaedf5;
+            }
+        }
+
+        &.visible {
+            @media only screen and (max-width: $tablet) {
+                background: #f3f5fa;
+                border: 1px solid #d8e3e5;
+                border-radius: 8px;
+                color: #54657e;
+            }
+        }
+
+        &.hidden {
+            background-color: #959da9;
+            border-color: #959da9;
+            color: #fff;
+
+            &:hover {
+                @media only screen and (min-width: $tablet) {
+                    background: #54657e;
+                    border-color: #54657e;
+                }
+            }
+        }
+    }
+
+    .btn-add {
+        display: flex;
+        align-items: center;
+        font: 500 14px $font-family-primary;
+        color: #54657e;
+
+        @media only screen and (max-width: $tablet) {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 36px;
+            width: 100%;
+            background: #56c6ad;
+            border-radius: 8px;
+            font: 500 12px $font-family-primary;
+            color: #fff;
+        }
+
+        .icon-left {
+            width: 16px;
+            display: flex;
+            margin-right: 8px;
+
+            @media only screen and (max-width: $tablet) {
+                display: none;
+            }
+        }
+
+        .text {
+            border-bottom: 1px solid #54657e;
+            transition: border-color 0.3s, color 0.3s linear;
+
+            @media only screen and (max-width: $tablet) {
+                border-bottom: none;
+            }
+        }
+
+        &:hover {
+            .text {
+                border-bottom-color: transparent;
+                color: #56c6ad;
+            }
+        }
+    }
+}

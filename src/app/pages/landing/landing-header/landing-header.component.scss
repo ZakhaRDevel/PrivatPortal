@@ -1,0 +1,303 @@
+@import "~src/assets/scss/mixins";
+@import "~src/assets/scss/variables";
+
+.header {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    width: 100%;
+    padding: 45px 50px;
+    z-index: 100;
+    @media only screen and (max-width: $medium) {
+        padding: 30px 16px;
+    }
+    @media only screen and (max-width: $tablet) {
+        padding: 36px 20px 16px;
+    }
+
+    &__desctop {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        @media only screen and (max-width: $tablet) {
+            display: none;
+        }
+    }
+
+    &__user {
+        display: none;
+
+        @media only screen and (max-width: $tablet) {
+            display: inline-block;
+            text-align: center;
+            font: 400 14px $font-family-primary;
+            color: #fff;
+            margin-top: 24px;
+            width: 100%;
+        }
+
+        ::ng-deep {
+            .btn-link {
+                font: 500 16px $font-family-primary;
+                color: #36b8bc;
+                border-bottom: 1px solid transparent;
+                transition: border-color 0.3s;
+                display: inline-block;
+                width: 100%;
+                text-align: center;
+                @media only screen and (max-width: $tablet) {
+                    width: auto;
+                }
+                &:active,
+                &:hover {
+                    border-bottom: 1px solid #36b8bc;
+                    color: #7ef9fd;
+                    @media only screen and (max-width: $tablet) {
+                        //border-bottom: none;
+                    }
+                }
+            }
+        }
+    }
+
+    &__mobile {
+        display: none;
+        @media only screen and (max-width: $tablet) {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .btn-contact {
+            display: flex;
+            align-items: center;
+            font: 400 12px $font-family-primary;
+            color: #fff;
+
+            .icon-left {
+                display: flex;
+                margin-right: 6px;
+            }
+
+            .icon-right {
+                margin-left: 8px;
+                display: block;
+            }
+        }
+    }
+
+    &__left {
+        &.center {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            .soc {
+                margin-top: 0;
+            }
+        }
+
+        .title {
+            font: 400 14px $font-family-primary;
+            color: #fff;
+
+            ::ng-deep {
+                .btn-link {
+                    font: 400 14px $font-family-primary;
+                    color: #36b8bc;
+                    border-bottom: 1px solid transparent;
+                    transition: border-color 0.3s;
+
+                    &:active,
+                    &:hover {
+                        border-bottom: 1px solid #36b8bc;
+                        color: #7ef9fd;
+                    }
+                }
+            }
+        }
+
+        .soc {
+            display: flex;
+            align-items: center;
+            margin-top: 20px;
+
+            .text {
+                font: 400 14px $font-family-primary;
+                color: #fff;
+                margin-right: 6px;
+            }
+
+            &__item {
+                display: flex;
+                margin: 0 10px;
+
+                .btn-soc {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 30px;
+                    height: 30px;
+                    background: rgba(54, 184, 188, 0.16);
+                    border: 1px solid #28b7bc;
+                    border-radius: 50%;
+                    transition: background-color 0.3s;
+
+                    &.disabled {
+                        opacity: 0.2;
+                        pointer-events: none;
+                    }
+
+                    &:hover {
+                        background: #36b8bc;
+                    }
+
+                    &.telegram img {
+                        margin: 1px 3px 0 0;
+                    }
+                    &.linkedin img {
+                        margin: 0 0 1px 0;
+                    }
+                }
+            }
+        }
+    }
+
+    &__right {
+        display: flex;
+        justify-content: flex-end;
+        //width: 50%;
+        flex: 1;
+
+        .lang {
+            margin-right: 23px;
+        }
+
+        .auth {
+            display: flex;
+            width: inherit;
+            justify-content: flex-end;
+        }
+
+        .btn-aqua {
+            @include btn-aqua();
+            max-width: 200px;
+            margin-left: 30px;
+        }
+
+        .btn-empty {
+            @include btn-empty();
+            max-width: 200px;
+        }
+
+        .btn-acc {
+            @include btn-empty();
+            max-width: initial;
+            width: initial;
+            padding: 0 26px;
+            white-space: nowrap;
+            min-width: 200px;
+        }
+    }
+
+    .menu__wrap {
+        display: flex;
+        flex-direction: column;
+        max-width: 226px;
+        right: 0;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s, visibility 0.3s, transform 0.3s;
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        margin: auto;
+        z-index: 100;
+        overflow: auto;
+        transform: translateX(100%);
+
+        &.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(0);
+        }
+    }
+
+    .menu__contact {
+        display: flex;
+        flex-direction: column;
+        background: #11252a;
+        border-radius: 20px 0px 0px 20px;
+        width: 100%;
+        padding: 35px 25px 35px 48px;
+        max-height: 668px;
+        height: 100%;
+
+        .head {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .btn-close-menu {
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .list-title {
+            font: 400 14px $font-family-primary;
+            color: #28b7bc;
+            margin: 28px 0 33px;
+        }
+
+        .list {
+            display: flex;
+            flex-direction: column;
+
+            &__item {
+                display: flex;
+                width: 100%;
+                margin-bottom: 46px;
+
+                .btn-soc {
+                    display: flex;
+                    align-items: center;
+                    width: 100%;
+                    font: 400 14px $font-family-primary;
+                    color: #beefff;
+
+                    &.disabled {
+                        opacity: 0.2;
+                        pointer-events: none;
+                    }
+
+                    &.telegram img {
+                        margin: 1px 3px 0 0;
+                    }
+
+                    .icon-left {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        width: 30px;
+                        height: 30px;
+                        background: rgba(54, 184, 188, 0.16);
+                        border: 1px solid #28b7bc;
+                        border-radius: 50%;
+                        transition: background-color 0.3s;
+                        margin-right: 13px;
+                    }
+                }
+            }
+        }
+    }
+
+    .hidden {
+        opacity: 0;
+        pointer-events: none;
+    }
+}

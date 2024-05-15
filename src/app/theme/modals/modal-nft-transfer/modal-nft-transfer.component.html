@@ -1,0 +1,311 @@
+<div class="dialog" [class.closing]="isClosing">
+    <div class="dialog__wrap">
+        <div class="dialog__header">
+            <button class="btn-mobile" (click)="closeDialog()">
+                <img src="assets/img/pages/nft/dialog-mobile.svg" />
+            </button>
+
+            <h3
+                class="dialog__header-title"
+                [innerHTML]="data.page.data.modalTransfer[activeState.title]"
+            ></h3>
+            <div class="dialog__header-btn">
+                <button class="btn-close" (click)="closeDialog()"></button>
+            </div>
+        </div>
+
+        <div
+            class="dialog__body no-anim"
+            *ngIf="activeState.value === 'settingsRedirect'"
+        >
+            <form class="transfer-form">
+                <div class="img-wrapper wallet">
+                    <img src="assets/img/pages/nft/wallet.png" />
+
+                    <div
+                        class="text"
+                        [innerHTML]="data.page.data.modalTransfer.addAddress"
+                    >
+                        Добавьте свой адрес ERC20 (сеть Polygon) в разделе
+                        “Кошельки и адреса”.
+                    </div>
+                </div>
+
+                <div class="btn-group">
+                    <button
+                        class="btn btn-green"
+                        (click)="closeDialog(true)"
+                        [innerHTML]="data.page.data.modalTransfer.settingsBtn"
+                    >
+                        Перейти в настройки
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <div class="dialog__body" *ngIf="activeState.value === 'transferForm'">
+            <form
+                class="transfer-form"
+                [formGroup]="formGroup"
+                (submit)="beforeSubmit()"
+            >
+                <div class="radio-group">
+                    <div
+                        class="item-wrapper"
+                        *ngFor="let item of userNfts; let i = index"
+                    >
+                        <input
+                            name="tranfer"
+                            class="radio-input"
+                            [id]="'id' + i"
+                            type="radio"
+                            [value]="item.id"
+                            formControlName="userNftId"
+                            (ngModelChange)="onNftChange($event)"
+                        />
+                        <label class="radio-label" for="id{{ i }}"
+                            >{{ item.nft.price }} PUSD (NFT #{{
+                                item.customId
+                            }})</label
+                        >
+                    </div>
+                </div>
+
+                <div class="alert">
+                    <img src="assets/img/pages/nft/alert.svg" class="icon" />
+                    <span
+                        class="text"
+                        [innerHTML]="
+                            data.page.data.modalTransfer.confirmTransfer
+                        "
+                        >Подтвердите перевод, нажав на кнопку ниже.</span
+                    >
+                </div>
+
+                <div class="address">
+                    <span
+                        for="address"
+                        class="address-label"
+                        [innerHTML]="data.page.data.modalTransfer.walletAddress"
+                        >Ваш адрес ERC20</span
+                    >
+                    <div id="address" type="text" class="address-content">
+                        {{ shortWallet }}
+                        <div class="dropdown">
+                            <div class="dropdown_wrapper">
+                                {{ wallet }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="btn-group">
+                    <button
+                        type="button"
+                        class="btn btn-cancel"
+                        (click)="closeDialog()"
+                        [innerHTML]="data.page.data.modalTransfer.btnDecline"
+                    >
+                        Отменить
+                    </button>
+                    <button
+                        [disabled]="!selectedUserNft"
+                        type="submit"
+                        class="btn btn-green"
+                    >
+                        <app-btn-loader
+                            [isSubmitted]="isSubmitted"
+                            [isAccount]="true"
+                        ></app-btn-loader>
+
+                        <span [class.hide]="isSubmitted">{{
+                            data.page.data.modalTransfer.btnConfirm
+                        }}</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <div
+            class="dialog__body mt-34"
+            *ngIf="activeState.value === 'authCheck'"
+        >
+            <form
+                class="transfer-form"
+                [formGroup]="formGroup"
+                (ngSubmit)="submit()"
+            >
+                <div class="alert">
+                    <img src="assets/img/pages/nft/alert.svg" class="icon" />
+                    <span
+                        class="text"
+                        [innerHTML]="data.page.data.modalTransfer.authDesc"
+                        >Для защиты вашего аккаунта, пожалуйста, выполните
+                        следующую проверку.</span
+                    >
+                </div>
+
+                <div class="code-confirmation">
+                    <div class="code-confirmation__header">
+                        <span
+                            class="regular"
+                            [innerHTML]="data.page.data.modalTransfer.authCode"
+                        >
+                            Проверочный код Google
+                        </span>
+                        <span
+                            class="light"
+                            [innerHTML]="
+                                data.page.data.modalTransfer.authCodeEnter
+                            "
+                        >
+                            Введите 6-значный код из Google Authenticator
+                        </span>
+                    </div>
+                    <div class="code-confirmation__body">
+                        <div
+                            class="inputs"
+                            formGroupName="numberCode"
+                            [ngClass]="{
+                                error:
+                                    hasError(control('numberCode')) || wrongCode
+                            }"
+                        >
+                            <input
+                                #number0
+                                type="text"
+                                maxlength="1"
+                                formControlName="number0"
+                                tabindex="1"
+                                (paste)="onPaste($event, 'numberCode')"
+                                (keydown)="handleDelete($event, 0)"
+                                (focus)="onFocus(number0)"
+                                (input)="onInputSubmit()"
+                                onlyNumber
+                                inputmode="numeric"
+                            />
+                            <input
+                                #number1
+                                type="text"
+                                maxlength="1"
+                                formControlName="number1"
+                                tabindex="2"
+                                (paste)="onPaste($event, 'numberCode')"
+                                (keydown)="handleDelete($event, 1)"
+                                (focus)="onFocus(number1)"
+                                (input)="onInputSubmit()"
+                                onlyNumber
+                                inputmode="numeric"
+                            />
+                            <input
+                                #number2
+                                type="text"
+                                maxlength="1"
+                                formControlName="number2"
+                                tabindex="3"
+                                (paste)="onPaste($event, 'numberCode')"
+                                (keydown)="handleDelete($event, 2)"
+                                (focus)="onFocus(number2)"
+                                (input)="onInputSubmit()"
+                                onlyNumber
+                                inputmode="numeric"
+                            />
+                            <input
+                                #number3
+                                type="text"
+                                maxlength="1"
+                                formControlName="number3"
+                                tabindex="4"
+                                (paste)="onPaste($event, 'numberCode')"
+                                (keydown)="handleDelete($event, 3)"
+                                (focus)="onFocus(number3)"
+                                (input)="onInputSubmit()"
+                                onlyNumber
+                                inputmode="numeric"
+                            />
+                            <input
+                                #number4
+                                type="text"
+                                maxlength="1"
+                                formControlName="number4"
+                                tabindex="5"
+                                (paste)="onPaste($event, 'numberCode')"
+                                (keydown)="handleDelete($event, 4)"
+                                (focus)="onFocus(number4)"
+                                (input)="onInputSubmit()"
+                                onlyNumber
+                                inputmode="numeric"
+                            />
+                            <input
+                                #number5
+                                type="text"
+                                maxlength="1"
+                                formControlName="number5"
+                                (paste)="onPaste($event, 'numberCode')"
+                                (keydown)="handleDelete($event, 5)"
+                                (focus)="onFocus(number5)"
+                                (input)="onInputSubmit()"
+                                onlyNumber
+                                inputmode="numeric"
+                            />
+                        </div>
+                        <div
+                            class="errors"
+                            [ngClass]="{
+                                show:
+                                    wrongCode || hasError(control('numberCode'))
+                            }"
+                        >
+                            {{ data.pageErrors.data.wrongCode }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="btn-group">
+                    <button type="submit" class="btn btn-green" [disabled]="">
+                        <app-btn-loader
+                            [isSubmitted]="isSubmitted"
+                            [isAccount]="true"
+                        ></app-btn-loader>
+                        <span [class.hide]="isSubmitted">{{
+                            data.page.data.modalTransfer.btnConfirm
+                        }}</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <div
+            class="dialog__body"
+            *ngIf="activeState.value === 'orderCompleted'"
+        >
+            <form class="transfer-form">
+                <div class="img-wrapper confirmation">
+                    <img src="assets/img/pages/nft/confirmation.png" />
+
+                    <div
+                        class="text"
+                        [innerHTML]="
+                            data.page.data.modalTransfer.succesDesc
+                                | replace
+                                    : { price: selectedUserNft?.nft?.price }
+                        "
+                    >
+                        После подтверждения сети вы получите NFT номинальной
+                        стоимостью {{ selectedUserNft?.nft?.price }} USD.
+                    </div>
+                </div>
+
+                <div class="btn-group">
+                    <button
+                        class="btn btn-green"
+                        (click)="closeDialog()"
+                        [innerHTML]="data.page.data.modalTransfer.btnOk"
+                    >
+                        ОK
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

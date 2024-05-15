@@ -1,0 +1,67 @@
+<aside
+    class="sidebar"
+    [class.active]="hiddenMenuService.name === 'dashboard_sidebar'"
+>
+    <div class="bg-overlay-close" (click)="closeMenuSidebar()"></div>
+    <div
+        class="announce"
+        [class.active]="hiddenMenuService.name === 'dashboard_sidebar'"
+    >
+        <div class="announce__header">
+            <h3 class="h3">
+                {{ page.data.sidebar.announcements }}
+
+                <a
+                    (click)="closeMenuSidebar()"
+                    class="btn-link"
+                    [routerLink]="'/acc/announcements'"
+                    [target]="isMobile ? '_self' : '_blank'"
+                >
+                    <img
+                        class="icon-grey"
+                        src="assets/img/icons/icon-arrow-right-grey.svg"
+                        alt=""
+                    />
+                    <img
+                        class="icon-green"
+                        src="assets/img/icons/icon-arrow-right.svg"
+                        alt=""
+                    />
+                </a>
+            </h3>
+
+            <button
+                class="btn-close"
+                (click)="toggleMenu('dashboard_sidebar')"
+            ></button>
+            <button
+                class="btn-close btn-close-mobile"
+                (click)="toggleMobileMenu('dashboard_sidebar')"
+            ></button>
+        </div>
+
+        <overlay-scrollbars class="list">
+            <a
+                (click)="closeMenuSidebar()"
+                class="list__item"
+                [class.list__item--new]="announcement.isNew"
+                [routerLink]="'/acc/announcements/' + announcement.slug"
+                [target]="isMobile ? '_self' : '_blank'"
+                *ngFor="let announcement of announcements"
+            >
+                <div class="list__item-icon" *ngIf="announcement.isNew">
+                    <img src="assets/img/pages/dashboard/news.svg" alt="" />
+                </div>
+
+                <div class="list__item-content">
+                    <h5 class="title" [innerHTML]="announcement.subject"></h5>
+                    <p class="text" [innerHTML]="announcement.title"></p>
+                    <span
+                        class="date"
+                        [innerHTML]="announcement.published"
+                    ></span>
+                </div>
+            </a>
+        </overlay-scrollbars>
+    </div>
+</aside>

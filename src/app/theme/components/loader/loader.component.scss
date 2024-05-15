@@ -1,0 +1,55 @@
+.loader {
+    display: flex;
+    max-width: 124px;
+    height: 124px;
+}
+
+.icon-p {
+    //animation: rotate-icon 2s linear infinite;
+    //transform-origin: center
+}
+
+
+.circle {
+    //stroke-dasharray: 1, 200;
+    //stroke-dashoffset: 0;
+    //animation: dash 1.5s ease-in-out infinite,
+    //color 6s ease-in-out infinite;
+    //stroke-linecap: round;
+
+    // animation: rotate 2s linear infinite;
+    // transform-origin: center ;
+}
+
+// @keyframes rotate {
+//     100% {
+//         transform: rotate(360deg);
+//     }
+// }
+@keyframes rotate-icon {
+    100% {
+        transform: rotateY(360deg);
+    }
+}
+
+//@keyframes dash {
+//    0% {
+//        stroke-dasharray: 1, 200;
+//        stroke-dashoffset: 0;
+//    }
+//    50% {
+//        stroke-dasharray: 89, 200;
+//        stroke-dashoffset: -35px;
+//    }
+//    100% {
+//        stroke-dasharray: 89, 200;
+//        stroke-dashoffset: -124px;
+//    }
+//}
+
+//@keyframes color {
+//    100%,
+//    0% {
+//        stroke: red;
+//    }
+//}

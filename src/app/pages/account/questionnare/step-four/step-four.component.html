@@ -1,0 +1,151 @@
+<form class="form" #form [formGroup]="formGroup" (ngSubmit)="submit()">
+    <div class="form__content">
+        <div class="form-item step4">
+            <label
+                class="label"
+                [innerHTML]="page.data.form.linksTitle"
+            ></label>
+            <div class="social">
+                <div class="social_item">
+                    <div class="social_wrap">
+                        <div class="social_icon">
+                            <img
+                                src="/assets/img/pages/questionare/twitter.svg"
+                                alt=""
+                                loadImg
+                            />
+                        </div>
+                        <div
+                            class="social_name"
+                            [innerHTML]="page.data.form.twitter"
+                        ></div>
+                    </div>
+                    <input
+                        type="text"
+                        class="social_input"
+                        [placeholder]="placeholder"
+                        formControlName="twitterUrl"
+                    />
+                </div>
+                <div class="social_item">
+                    <div class="social_wrap">
+                        <div class="social_icon">
+                            <img
+                                src="/assets/img/pages/questionare/facebook.svg"
+                                alt=""
+                                loadImg
+                            />
+                        </div>
+                        <div
+                            class="social_name"
+                            [innerHTML]="page.data.form.facebook"
+                        ></div>
+                    </div>
+                    <input
+                        type="text"
+                        class="social_input"
+                        [placeholder]="placeholder"
+                        formControlName="facebookUrl"
+                    />
+                </div>
+                <div class="social_item">
+                    <div class="social_wrap">
+                        <div class="social_icon">
+                            <img
+                                src="/assets/img/pages/questionare/linkedin.svg"
+                                alt=""
+                                loadImg
+                            />
+                        </div>
+                        <div
+                            class="social_name"
+                            [innerHTML]="page.data.form.linkedin"
+                        ></div>
+                    </div>
+                    <input
+                        type="text"
+                        class="social_input"
+                        [placeholder]="placeholder"
+                        formControlName="linkedinUrl"
+                    />
+                </div>
+                <div class="social_item">
+                    <div class="social_wrap">
+                        <div class="social_icon">
+                            <img
+                                src="/assets/img/pages/questionare/instagram.svg"
+                                alt=""
+                                loadImg
+                            />
+                        </div>
+                        <div
+                            class="social_name"
+                            [innerHTML]="page.data.form.instagram"
+                        ></div>
+                    </div>
+                    <input
+                        type="text"
+                        class="social_input"
+                        [placeholder]="placeholder"
+                        formControlName="instagramUrl"
+                    />
+                </div>
+                <div class="social_item">
+                    <div class="social_wrap">
+                        <div class="social_icon">
+                            <img
+                                src="/assets/img/pages/questionare/tiktok.svg"
+                                alt=""
+                                loadImg
+                            />
+                        </div>
+                        <div
+                            class="social_name"
+                            [innerHTML]="page.data.form.tiktok"
+                        ></div>
+                    </div>
+                    <input
+                        type="text"
+                        class="social_input"
+                        [placeholder]="placeholder"
+                        formControlName="tiktokUrl"
+                    />
+                </div>
+                <div class="social_item">
+                    <div class="social_wrap">
+                        <div class="social_icon">
+                            <img
+                                src="/assets/img/pages/questionare/youtube.svg"
+                                alt=""
+                                loadImg
+                            />
+                        </div>
+                        <div
+                            class="social_name"
+                            [innerHTML]="page.data.form.youtube"
+                        ></div>
+                    </div>
+                    <input
+                        type="text"
+                        class="social_input"
+                        [placeholder]="'https//'"
+                        formControlName="customUrl"
+                    />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="buttons step4">
+        <button
+            type="button"
+            (click)="clickPrevStep()"
+            class="btn prev"
+            [innerHTML]="page.data.form.btnBack"
+        ></button>
+        <button
+            type="submit"
+            class="btn next"
+            [innerHTML]="page.data.form.btnSubmit"
+        ></button>
+    </div>
+</form>

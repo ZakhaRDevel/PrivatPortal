@@ -1,0 +1,57 @@
+<div class="input-label country-mask">
+    <ng-select
+        class="country scrollSelector scrollSelectorGray"
+        bindLabel="title"
+        [items]="items | filter : filters : 'likeSingle' : kw"
+        [searchable]="false"
+        [clearable]="false"
+        [placeholder]="placeholderSelect"
+        customScrollDetector
+        [scrollSelectors]="['.scrollSelector .ng-dropdown-panel-items']"
+        dropdownPosition="bottom"
+        [formControl]="control"
+        [ngClass]="{
+            error: isInvalid
+        }"
+        (change)="onChange()"
+        (close)="kw = ''"
+        [notFoundText]="notFoundText"
+    >
+        <ng-template ng-header-tmp>
+            <div class="select-search">
+                <div class="icon-left">
+                    <img
+                        src="assets/img/icons/quest_search.svg"
+                        alt="alt"
+                        loadImg
+                    />
+                </div>
+                <input
+                    class="input-search"
+                    type="text"
+                    [placeholder]="placeholderSearch"
+                    [(ngModel)]="kw"
+                    [ngModelOptions]="{ standalone: true }"
+                />
+            </div>
+        </ng-template>
+
+        <ng-template ng-label-tmp let-item="item">
+            <div class="item">
+                <div class="icon" *ngIf="item.title">
+                    <img [src]="item.logo" loadImg />
+                </div>
+                <div class="title" [innerHTML]="item.title"></div>
+            </div>
+        </ng-template>
+
+        <ng-template ng-option-tmp let-item="item" let-index="index">
+            <div class="item">
+                <div class="icon">
+                    <img [src]="item.logo" loadImg />
+                </div>
+                <p class="number" [innerHTML]="item.title"></p>
+            </div>
+        </ng-template>
+    </ng-select>
+</div>

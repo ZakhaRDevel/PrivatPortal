@@ -1,0 +1,93 @@
+image: docker:git
+
+variables:
+    DOCKER_DRIVER: overlay2
+
+before_script:
+    - mkdir -p ~/.ssh
+    - echo "$DEMO_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/demo_id_rsa
+    - chmod 600 ~/.ssh/demo_id_rsa
+    # - echo "$PRODUCTION_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/production_id_rsa
+    # - chmod 600 ~/.ssh/production_id_rsa
+    - ssh-keyscan -p ${DEMO_SSH_PORT-22} -H "$DEMO_HOST" >> ~/.ssh/known_hosts
+    # - ssh-keyscan -p ${PRODUCTION_SSH_PORT-22} -H "$PRODUCTION_HOST" >> ~/.ssh/known_hosts
+    - export BUILD_NAME=$(echo $CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME)
+    - export BUILD_TAG=$CI_COMMIT_REF_NAME
+    # - export PRODUCTION_TAG=$(date +%Y%m%d_%H%M%S_$CI_COMMIT_SHORT_SHA)
+
+stages:
+    - build
+    - deploy
+
+### BUILD STAGE ###
+build_for_demo:
+    stage: build
+    only:
+        - devel
+        - devel-vk
+        - devel-al
+    script:
+        - docker build --build-arg BUILD_APP_ENV=demo -t "$BUILD_NAME":"$BUILD_TAG" .
+
+build_for_staging:
+    stage: build
+    only:
+        - staging
+    script:
+        - docker build --build-arg BUILD_APP_ENV=staging -t "$BUILD_NAME":"$BUILD_TAG" .
+
+# build_for_production:
+#     stage: build
+#     only:
+#         - master
+#     script:
+#         - docker build --build-arg BUILD_APP_ENV=production -t "$BUILD_NAME":"$BUILD_TAG" .
+
+### DEPLOY STAGE ###
+deploy_to_demo:
+    stage: deploy
+    only:
+        - devel
+    script:
+        - docker tag $BUILD_NAME:$BUILD_TAG dokku/$DEMO_APP_NAME:$BUILD_TAG
+        - docker save dokku/$DEMO_APP_NAME:$BUILD_TAG | gzip -c | ssh -p ${DEMO_SSH_PORT-22} -i ~/.ssh/demo_id_rsa $DEPLOYER_USER@$DEMO_HOST "gunzip -c | sudo docker load"
+        - ssh -p ${DEMO_SSH_PORT-22} -i ~/.ssh/demo_id_rsa $DEPLOYER_USER@$DEMO_HOST "sudo dokku tags:deploy $DEMO_APP_NAME $BUILD_TAG"
+
+deploy_to_staging:
+    stage: deploy
+    only:
+        - staging
+    script:
+        - docker tag $BUILD_NAME:$BUILD_TAG dokku/$STAGING_APP_NAME:$BUILD_TAG
+        - docker save dokku/$STAGING_APP_NAME:$BUILD_TAG | gzip -c | ssh -p ${DEMO_SSH_PORT-22} -i ~/.ssh/demo_id_rsa $DEPLOYER_USER@$DEMO_HOST "gunzip -c | sudo docker load"
+        - ssh -p ${DEMO_SSH_PORT-22} -i ~/.ssh/demo_id_rsa $DEPLOYER_USER@$DEMO_HOST "sudo dokku tags:deploy $STAGING_APP_NAME $BUILD_TAG"
+
+deploy_to_devel_vk:
+    stage: deploy
+    only:
+        - devel-vk
+    script:
+        - docker tag $BUILD_NAME:$BUILD_TAG dokku/$DEMO_APP_NAME_VK:$BUILD_TAG
+        - docker save dokku/$DEMO_APP_NAME_VK:$BUILD_TAG | gzip -c | ssh -p ${DEMO_SSH_PORT-22} -i ~/.ssh/demo_id_rsa $DEPLOYER_USER@$DEMO_HOST "gunzip -c | sudo docker load"
+        - ssh -p ${DEMO_SSH_PORT-22} -i ~/.ssh/demo_id_rsa $DEPLOYER_USER@$DEMO_HOST "sudo dokku tags:deploy $DEMO_APP_NAME_VK $BUILD_TAG"
+
+deploy_to_devel_al:
+    stage: deploy
+    only:
+        - devel-al
+    script:
+        - docker tag $BUILD_NAME:$BUILD_TAG dokku/$DEMO_APP_NAME_AL:$BUILD_TAG
+        - docker save dokku/$DEMO_APP_NAME_AL:$BUILD_TAG | gzip -c | ssh -p ${DEMO_SSH_PORT-22} -i ~/.ssh/demo_id_rsa $DEPLOYER_USER@$DEMO_HOST "gunzip -c | sudo docker load"
+        - ssh -p ${DEMO_SSH_PORT-22} -i ~/.ssh/demo_id_rsa $DEPLOYER_USER@$DEMO_HOST "sudo dokku tags:deploy $DEMO_APP_NAME_AL $BUILD_TAG"
+# deploy_to_production:
+#     stage: deploy
+#     when: manual
+#     only:
+#         refs:
+#             - master
+#         variables:
+#             - $PRODUCTION_HOST
+#     script:
+#         - docker tag "$BUILD_NAME:$BUILD_TAG" "dokku/$PRODUCTION_APP_NAME:$PRODUCTION_TAG"
+#         - docker save dokku/$PRODUCTION_APP_NAME:$PRODUCTION_TAG | gzip -c | ssh -p ${PRODUCTION_SSH_PORT-22} -i ~/.ssh/production_id_rsa $DEPLOYER_USER@$PRODUCTION_HOST "gunzip -c | sudo docker load"
+#         - ssh -p ${PRODUCTION_SSH_PORT-22} -i ~/.ssh/production_id_rsa $DEPLOYER_USER@$PRODUCTION_HOST "sudo dokku tags:deploy $PRODUCTION_APP_NAME $PRODUCTION_TAG"

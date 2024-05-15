@@ -1,0 +1,71 @@
+<div class="announcement__header-mobile">
+    <div class="announcement__header-mobile-wrapper">
+        <button (click)="goBack()" type="button" class="back">
+            <img src="assets/img/icons/back.svg" alt="" />
+        </button>
+        <div class="title" [innerHTML]="pageMain.data.title1">Анонс</div>
+    </div>
+    <div class="buttons">
+        <button
+            class="btn prev"
+            (click)="goToPrevAnnouncement()"
+            [disabled]="firstItem === announcement.slug"
+        >
+            <span class="arrow"></span>
+        </button>
+
+        <button
+            class="btn next"
+            (click)="goToNextAnnouncement()"
+            [disabled]="lastItem"
+        >
+            <span class="arrow"></span>
+        </button>
+    </div>
+</div>
+<div class="announcement__wrapper">
+    <div class="announcement-item">
+        <div class="announcement-item__wrapper">
+            <div class="announcement-item__content">
+                <div class="announcement-item__content-wrapper">
+                    <div class="header">
+                        <h3 [innerHTML]="announcement.subject"></h3>
+                        <time datetime="">{{ announcement.published }}</time>
+                    </div>
+                    <div
+                        class="content"
+                        [innerHTML]="announcement.description | safe : 'html'"
+                    ></div>
+                </div>
+                <div class="footer">
+                    <div class="footer__inner">
+                        <button
+                            class="content__btn prev"
+                            (click)="goToPrevAnnouncement()"
+                            [disabled]="firstItem === announcement.slug"
+                        >
+                            <span class="arrow"></span>
+                            <span
+                                class="label-mobile"
+                                [innerHTML]="pageMain.data.prev"
+                                >Предыдущий</span
+                            >
+                        </button>
+                        <button
+                            class="content__btn next"
+                            (click)="goToNextAnnouncement()"
+                            [disabled]="lastItem"
+                        >
+                            <span
+                                class="label-mobile"
+                                [innerHTML]="pageMain.data.next"
+                                >Сдедующий</span
+                            >
+                            <span class="arrow"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

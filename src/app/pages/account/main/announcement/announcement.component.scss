@@ -1,0 +1,243 @@
+@import "~src/assets/scss/mixins";
+@import "~src/assets/scss/variables";
+
+.announcement {
+    display: flex;
+    flex-direction: column;
+    padding: 38px 25px 30px 40px;
+    height: 100%;
+
+    @media only screen and (max-width: $tablet) {
+        padding: 23px 10px 30px;
+    }
+
+    &.archive {
+        @media only screen and (max-width: $tablet) {
+            padding: 30px 20px 30px;
+        }
+
+        .announcement__header {
+            @media only screen and (max-width: $tablet) {
+                display: flex;
+            }
+        }
+    }
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 38px;
+
+        @media only screen and (max-width: $medium) {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        @media only screen and (max-width: $tablet) {
+            display: none;
+        }
+
+        &-wrapper {
+            display: flex;
+            align-items: center;
+
+            @media only screen and (max-width: $medium) {
+                margin-bottom: 30px;
+            }
+
+            .title {
+                font: 600 30px $font-family-primary;
+                color: #54657e;
+
+                @media only screen and (max-width: $tablet) {
+                    font-size: 20px;
+                    line-height: 20px;
+                }
+            }
+
+            .back {
+                margin-right: 17px;
+                margin-left: 2px;
+
+                img {
+                    width: 24px;
+                    height: 24px;
+                }
+            }
+        }
+
+        .search {
+            width: 100%;
+            max-width: 425px;
+            position: relative;
+
+            @media only screen and (max-width: $tablet) {
+                max-width: none;
+            }
+
+            .icon {
+                margin: auto;
+                position: absolute;
+                left: 15px;
+                bottom: 0;
+                top: 0;
+                z-index: 1;
+
+                @media only screen and (max-width: $tablet) {
+                    left: 11px;
+                }
+            }
+
+            .input {
+                width: 100%;
+                padding: 9px 107px 11px 43px;
+                background: #ffffff;
+                border-radius: 5px;
+                border: none;
+
+                font: 400 16px $font-family-primary;
+                color: #1f2328;
+
+                &::placeholder {
+                    font: 400 14px $font-family-primary;
+                    color: #a5b4c7;
+                }
+
+                @media only screen and (max-width: $tablet) {
+                    height: 40px;
+                    border-radius: 8px;
+                    padding: 0 82px 0 39px;
+                }
+            }
+
+            .btn {
+                display: flex;
+                position: absolute;
+                right: 5px;
+                top: 0;
+                bottom: 0;
+                margin: auto;
+                z-index: 1;
+
+                padding: 6px 20px 7px;
+                height: 30px;
+                background: #56c6ad;
+                border-radius: 4px;
+                transition: background-color 0.3s linear;
+
+                font: 500 14px $font-family-primary;
+                color: #fff;
+
+                &:active {
+                    background: #53ad99;
+                }
+
+                @media (hover: hover) {
+                    &:hover {
+                        background: #53ad99;
+                    }
+                }
+
+                @media only screen and (max-width: $medium) {
+                    height: 40px;
+                    border-radius: 0px 8px 8px 0px;
+                    padding: 10px 25px 10px 21px;
+                    right: 0;
+
+                    font: 600 12px $font-family-primary;
+                }
+
+                @media only screen and (max-width: $tablet) {
+                    align-items: center;
+                }
+            }
+        }
+    }
+
+    &__wrapper {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        height: 100%;
+        background-color: #fff;
+        border-radius: 8px;
+        padding: 35px 40px;
+
+        @media only screen and (max-width: $tablet) {
+            background-color: transparent;
+            border-radius: none;
+            padding: 0;
+        }
+
+        .announcement__last-announcement {
+            @media only screen and (max-width: $medium) {
+                display: none;
+            }
+
+            .sidebar {
+                position: sticky;
+                padding-left: 40px;
+                top: 70px;
+                min-width: 420px;
+                max-width: 420px;
+
+                .title {
+                    margin-left: 10px;
+
+                    font: 500 16px $font-family-primary;
+                    color: #374957;
+                    line-height: 20px;
+                }
+
+                .content {
+                    margin-top: 20px;
+
+                    .item {
+                        display: block;
+                        padding: 10px;
+                        margin-bottom: 10px;
+                        font: 400 14px $font-family-primary;
+                        color: #868f9d;
+                        line-height: 20px;
+                        border-radius: 5px;
+                        cursor: pointer;
+                        word-break: break-word;
+
+                        transition: background-color 0.3s linear,
+                            color 0.3s linear;
+
+                        &:last-child {
+                            margin-bottom: none;
+                        }
+
+                        @media (hover: hover) {
+                            &:hover {
+                                background: #f5f8f9;
+                            }
+                        }
+
+                        &:active {
+                            background: #f5f8f9;
+                        }
+
+                        &.active {
+                            background: #f5f8f9;
+                            color: #374957;
+                            font-weight: 500;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+::ng-deep {
+    app-announcement-item,
+    app-announcement-archive {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+    }
+}

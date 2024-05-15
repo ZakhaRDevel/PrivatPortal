@@ -1,0 +1,279 @@
+<form class="form" [formGroup]="formGroup" (ngSubmit)="submit()" #form>
+    <div class="form__content" id="form__content">
+        <div class="form-item step2">
+            <pc-input [withErrors]="false">
+                <div class="form-item-wrapper">
+                    <div class="label mt3">
+                        {{ page.data.form.step2Question1
+                        }}<app-form-prompt
+                            [icon]="icon"
+                            [dropdownText]="page.data.form.requireText"
+                        ></app-form-prompt>
+                        <div
+                            class="errors"
+                            *ngIf="
+                                hasError(control('isInvestor')) &&
+                                errors('isInvestor').length
+                            "
+                        >
+                            <p *ngFor="let error of errors('isInvestor')">
+                                {{
+                                    pageErrors.data[
+                                        error === "required"
+                                            ? "requiredOne"
+                                            : error
+                                    ]
+                                }}
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="checkbox">
+                        <div class="wrap">
+                            <div class="checkbox_item">
+                                <input
+                                    type="checkbox"
+                                    id="investor"
+                                    formControlName="isInvestor"
+                                />
+                                <label class="checkbox_label" for="investor"
+                                    >{{ page.data.form.investor }}
+                                    <svg
+                                        class="icon"
+                                        width="12"
+                                        height="10"
+                                        viewBox="0 0 12 10"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <path
+                                            d="M4.14414 9.24276L0.431641 5.53026L1.49214 4.46976L4.14527 7.11989L4.14414 7.12101L10.5079 0.757263L11.5684 1.81776L5.20464 8.18226L4.14489 9.24201L4.14414 9.24276Z"
+                                        />
+                                    </svg>
+                                </label>
+                            </div>
+                            <div class="checkbox_item">
+                                <input
+                                    type="checkbox"
+                                    id="trader"
+                                    formControlName="isTrader"
+                                />
+                                <label class="checkbox_label" for="trader"
+                                    >{{ page.data.form.trader }}
+                                    <svg
+                                        class="icon"
+                                        width="12"
+                                        height="10"
+                                        viewBox="0 0 12 10"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <path
+                                            d="M4.14414 9.24276L0.431641 5.53026L1.49214 4.46976L4.14527 7.11989L4.14414 7.12101L10.5079 0.757263L11.5684 1.81776L5.20464 8.18226L4.14489 9.24201L4.14414 9.24276Z"
+                                        />
+                                    </svg>
+                                </label>
+                            </div>
+                            <div class="checkbox_item">
+                                <input
+                                    type="checkbox"
+                                    id="blogger"
+                                    formControlName="isBlogger"
+                                />
+                                <label class="checkbox_label" for="blogger"
+                                    >{{ page.data.form.blogger }}
+                                    <svg
+                                        class="icon"
+                                        width="12"
+                                        height="10"
+                                        viewBox="0 0 12 10"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <path
+                                            d="M4.14414 9.24276L0.431641 5.53026L1.49214 4.46976L4.14527 7.11989L4.14414 7.12101L10.5079 0.757263L11.5684 1.81776L5.20464 8.18226L4.14489 9.24201L4.14414 9.24276Z"
+                                        />
+                                    </svg>
+                                </label>
+                            </div>
+                            <div class="checkbox_item">
+                                <input
+                                    type="checkbox"
+                                    id="freelancer"
+                                    formControlName="isFreelancer"
+                                />
+                                <label class="checkbox_label" for="freelancer"
+                                    >{{ page.data.form.freelancer }}
+                                    <svg
+                                        class="icon"
+                                        width="12"
+                                        height="10"
+                                        viewBox="0 0 12 10"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <path
+                                            d="M4.14414 9.24276L0.431641 5.53026L1.49214 4.46976L4.14527 7.11989L4.14414 7.12101L10.5079 0.757263L11.5684 1.81776L5.20464 8.18226L4.14489 9.24201L4.14414 9.24276Z"
+                                        />
+                                    </svg>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="wrap">
+                            <div class="checkbox_item">
+                                <input
+                                    type="checkbox"
+                                    id="exchange"
+                                    formControlName="isCurrencyExchanger"
+                                />
+                                <label class="checkbox_label" for="exchange"
+                                    >{{ page.data.form.exchange }}
+                                    <svg
+                                        class="icon"
+                                        width="12"
+                                        height="10"
+                                        viewBox="0 0 12 10"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <path
+                                            d="M4.14414 9.24276L0.431641 5.53026L1.49214 4.46976L4.14527 7.11989L4.14414 7.12101L10.5079 0.757263L11.5684 1.81776L5.20464 8.18226L4.14489 9.24201L4.14414 9.24276Z"
+                                        />
+                                    </svg>
+                                </label>
+                            </div>
+                            <div class="checkbox_item">
+                                <input
+                                    type="checkbox"
+                                    id="entrepreneur"
+                                    formControlName="isEntrepreneur"
+                                />
+                                <label class="checkbox_label" for="entrepreneur"
+                                    >{{ page.data.form.entrepreneur }}
+                                    <svg
+                                        class="icon"
+                                        width="12"
+                                        height="10"
+                                        viewBox="0 0 12 10"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <path
+                                            d="M4.14414 9.24276L0.431641 5.53026L1.49214 4.46976L4.14527 7.11989L4.14414 7.12101L10.5079 0.757263L11.5684 1.81776L5.20464 8.18226L4.14489 9.24201L4.14414 9.24276Z"
+                                        />
+                                    </svg>
+                                </label>
+                            </div>
+                            <div class="checkbox_item">
+                                <input
+                                    type="checkbox"
+                                    id="employed"
+                                    formControlName="isEmployed"
+                                />
+                                <label class="checkbox_label" for="employed"
+                                    >{{ page.data.form.employed }}
+                                    <svg
+                                        class="icon"
+                                        width="12"
+                                        height="10"
+                                        viewBox="0 0 12 10"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <path
+                                            d="M4.14414 9.24276L0.431641 5.53026L1.49214 4.46976L4.14527 7.11989L4.14414 7.12101L10.5079 0.757263L11.5684 1.81776L5.20464 8.18226L4.14489 9.24201L4.14414 9.24276Z"
+                                        />
+                                    </svg>
+                                </label>
+                            </div>
+                            <div class="checkbox_item">
+                                <input
+                                    type="checkbox"
+                                    id="other"
+                                    formControlName="isOther"
+                                />
+                                <label class="checkbox_label" for="other"
+                                    >{{ page.data.form.other }}
+                                    <svg
+                                        class="icon"
+                                        width="12"
+                                        height="10"
+                                        viewBox="0 0 12 10"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <path
+                                            d="M4.14414 9.24276L0.431641 5.53026L1.49214 4.46976L4.14527 7.11989L4.14414 7.12101L10.5079 0.757263L11.5684 1.81776L5.20464 8.18226L4.14489 9.24201L4.14414 9.24276Z"
+                                        />
+                                    </svg>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </pc-input>
+        </div>
+
+        <div class="form-item step2">
+            <pc-input [withErrors]="false">
+                <div class="label" for="check">
+                    {{ page.data.form.step2Question2
+                    }}<app-form-prompt
+                        [icon]="icon"
+                        [dropdownText]="page.data.form.requireText"
+                    ></app-form-prompt>
+                    <div
+                        class="errors"
+                        *ngIf="
+                            hasError(control('hasMlmExperience')) &&
+                            errors('hasMlmExperience').length
+                        "
+                    >
+                        <p *ngFor="let error of errors('hasMlmExperience')">
+                            {{
+                                pageErrors.data[
+                                    error === "required" ? "requiredOne" : error
+                                ]
+                            }}
+                        </p>
+                    </div>
+                </div>
+                <div class="radio">
+                    <div class="radio_item">
+                        <input
+                            type="radio"
+                            name="invest"
+                            id="yes"
+                            [value]="true"
+                            formControlName="hasMlmExperience"
+                        />
+                        <label
+                            class="radio_label"
+                            for="yes"
+                            [innerHTML]="page.data.form.yes"
+                        ></label>
+                    </div>
+                    <div class="radio_item">
+                        <input
+                            type="radio"
+                            name="invest"
+                            id="no"
+                            [value]="false"
+                            formControlName="hasMlmExperience"
+                        />
+                        <label
+                            class="radio_label"
+                            for="no"
+                            [innerHTML]="page.data.form.no"
+                        ></label>
+                    </div>
+                </div>
+            </pc-input>
+        </div>
+    </div>
+    <div class="buttons step2">
+        <button
+            (click)="clickPrevStep()"
+            class="btn prev"
+            type="button"
+            [innerHTML]="page.data.form.btnBack"
+        ></button>
+        <button
+            type="submit"
+            class="btn next"
+            [innerHTML]="page.data.form.btnSubmit"
+        ></button>
+    </div>
+</form>

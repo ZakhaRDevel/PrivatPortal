@@ -1,0 +1,189 @@
+<main class="wrapper">
+    <div class="header">
+        <div class="header__inner">
+            <a routerLink="{{ homeLink }}" class="logo">
+                <img
+                    src="assets/img/pages/questionare/logo-dark.svg"
+                    alt="logo"
+                    loadImg
+                />
+            </a>
+            <p class="sub-title" [innerHTML]="page.data.title"></p>
+            <button (click)="logout()" class="btn" type="button">
+                <img src="assets/img/icons/exit.svg" alt="exit-logo" />
+                <span class="text">{{ page.data.btnQuit }}</span>
+            </button>
+        </div>
+    </div>
+    <div class="mobile__header">
+        <div class="mobile__header-inner">
+            <a routerLink="/" class="logo">
+                <img
+                    src="assets/img/pages/questionare/logo-dark.svg"
+                    alt="logo"
+                    loadImg
+                />
+            </a>
+            <button (click)="logout()" class="btn" type="button">
+                <img
+                    class="btn-icon"
+                    src="assets/img/icons/exit.svg"
+                    alt="exit-logo"
+                />
+                {{ page.data.btnQuit }}
+            </button>
+        </div>
+        <h3 class="sub-title" [innerHTML]="page.data.title"></h3>
+    </div>
+    <section class="fullscreen">
+        <div class="fullscreen__body">
+            <div class="fullscreen__body-advantage">
+                <div class="h5" [innerHTML]="page.data.advantageTitle"></div>
+
+                <div class="list">
+                    <div class="list__item">
+                        <div class="icon">
+                            <img
+                                src="assets/img/pages/questionare/icon-1.svg"
+                                alt="alt"
+                                loadImg
+                            />
+                        </div>
+                        <p
+                            class="text"
+                            [innerHTML]="page.data.advantageNft"
+                        ></p>
+                    </div>
+
+                    <div class="list__item">
+                        <div class="icon">
+                            <img
+                                src="assets/img/pages/questionare/icon-2.svg"
+                                alt="alt"
+                                loadImg
+                            />
+                        </div>
+                        <p
+                            class="text"
+                            [innerHTML]="page.data.advantageMembershib"
+                        ></p>
+                    </div>
+
+                    <div class="list__item">
+                        <div class="icon">
+                            <img
+                                class="margin"
+                                src="assets/img/pages/questionare/icon-3.svg"
+                                alt="alt"
+                                loadImg
+                            />
+                        </div>
+                        <p
+                            class="text"
+                            [innerHTML]="page.data.advantageDraws"
+                        ></p>
+                    </div>
+
+                    <div class="list__item">
+                        <div class="icon">
+                            <img
+                                src="assets/img/pages/questionare/icon-4.svg"
+                                alt="alt"
+                                loadImg
+                            />
+                        </div>
+
+                        <p
+                            class="text"
+                            [innerHTML]="page.data.advantageEarn"
+                        ></p>
+                    </div>
+
+                    <div class="list__item">
+                        <div class="icon">
+                            <img
+                                src="assets/img/pages/questionare/icon-5.svg"
+                                alt="alt"
+                                loadImg
+                            />
+                        </div>
+                        <p
+                            class="text"
+                            [innerHTML]="page.data.advantageOthers"
+                        ></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="fullscreen__body-container">
+                <div class="quest">
+                    <div class="steps">
+                        <div class="description">
+                            <img
+                                src="assets/img/pages/questionare/step_img.png"
+                                alt=""
+                                class="img"
+                                loadImg
+                            />
+                            <h2
+                                class="title"
+                                [innerHTML]="page.data.questTitle"
+                            ></h2>
+                            <p
+                                class="text"
+                                [innerHTML]="page.data.questDesc"
+                            ></p>
+                        </div>
+                        <div class="step">
+                            <div
+                                class="name"
+                                [innerHTML]="
+                                    page.data.questStep
+                                        | replace : { step: step }
+                                "
+                            ></div>
+                            <div class="wrap">
+                                <div
+                                    class="item"
+                                    [class.passed]="step > 0"
+                                ></div>
+                                <div
+                                    class="item"
+                                    [class.passed]="step > 1"
+                                ></div>
+                                <div
+                                    class="item"
+                                    [class.passed]="step > 2"
+                                ></div>
+                                <div
+                                    class="item"
+                                    [class.passed]="step > 3"
+                                ></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-wrapper" #formWrapper>
+                        <router-outlet></router-outlet>
+                    </div>
+
+                    <div class="mobile-step">
+                        <div
+                            class="name"
+                            [innerHTML]="page.data.title"
+                            [innerHTML]="
+                                page.data.questStep | replace : { step: step }
+                            "
+                        ></div>
+                        <div class="wrap">
+                            <div class="item" [class.passed]="step > 0"></div>
+                            <div class="item" [class.passed]="step > 1"></div>
+                            <div class="item" [class.passed]="step > 2"></div>
+                            <div class="item" [class.passed]="step > 3"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

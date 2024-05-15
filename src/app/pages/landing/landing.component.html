@@ -1,0 +1,482 @@
+<main class="main">
+    <app-landing-header [page]="page" [user]="user"></app-landing-header>
+
+    <section class="hero">
+        <div class="abstract_bg abstract_bg-0">
+            <img src="assets/img/pages/bg-radar.svg" alt="" />
+        </div>
+
+        <div class="row">
+            <div class="hero__container">
+                <div class="title">
+                    <img
+                        loading="lazy"
+                        src="assets/img/icons/logo.svg"
+                        alt=""
+                    />
+                </div>
+
+                <p class="sub-title" [innerHTML]="page.data.main.heroDesc"></p>
+
+                <div class="buttons">
+                    <a
+                        routerLink="/acc"
+                        [queryParams]="{ u: user.id ? user.uplineId : '' }"
+                        class="btn-empty"
+                    >
+                        <span class="icon-left">
+                            <img src="assets/img/icons/icon-user.svg" alt="" />
+                        </span>
+
+                        {{ page.data.main.heroBtnAccount }}
+                    </a>
+
+                    <a
+                        routerLink="/register"
+                        [queryParams]="{ u: user.id ? user.uplineId : '' }"
+                        class="btn-aqua"
+                        [innerHTML]="page.data.main.heroBtnRegister"
+                        *ngIf="!is_login"
+                    >
+                    </a>
+
+                    <button
+                        class="btn-logout btn-aqua"
+                        type="button"
+                        (click)="logout()"
+                        *ngIf="is_login"
+                    >
+                        {{ page.data.header.logout }}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="start">
+        <div class="abstract_bg abstract_bg-1">
+            <img
+                loading="lazy"
+                src="assets/img/pages/home-page/abstract-1.png"
+                alt=""
+            />
+        </div>
+        <div class="row">
+            <div class="block">
+                <div class="block__poster poster-1">
+                    <img
+                        loading="lazy"
+                        src="assets/img/pages/home-page/picture-1.png"
+                        srcset="
+                            assets/img/pages/home-page/picture-1.png    1x,
+                            assets/img/pages/home-page/picture-1@2x.png 2x
+                        "
+                        alt=""
+                    />
+                </div>
+                <div class="block__content">
+                    <h2 class="h2" [innerHTML]="page.data.main.startTitle"></h2>
+
+                    <p class="text" [innerHTML]="page.data.main.startDesc"></p>
+
+                    <a
+                        [href]="
+                            accountUrl +
+                            '/register?u=' +
+                            (user.uplineId ? user.uplineId : '')
+                        "
+                        class="btn-aqua"
+                        [innerHTML]="page.data.main.startBtn"
+                    >
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="idea">
+        <div class="row">
+            <div class="idea__container">
+                <h2 class="h2" [innerHTML]="page.data.main.ideaTitle"></h2>
+                <p class="text" [innerHTML]="page.data.main.ideaDesc"></p>
+            </div>
+        </div>
+    </section>
+
+    <section class="mission" #missionBlock>
+        <div class="row">
+            <div class="block">
+                <div class="block__poster poster-2">
+                    <div class="abstract_bg abstract_bg-2">
+                        <img
+                            src="assets/img/pages/home-page/abstract-2.svg"
+                            alt=""
+                        />
+                    </div>
+                    <img
+                        loading="lazy"
+                        src="assets/img/pages/home-page/picture-2.png"
+                        srcset="
+                            assets/img/pages/home-page/picture-2.png    1x,
+                            assets/img/pages/home-page/picture-2@2x.png 2x
+                        "
+                        alt=""
+                    />
+                </div>
+                <div class="block__content" [class.en]="isEnLang">
+                    <div
+                        class="tag"
+                        [innerHTML]="page.data.main.missionTitle"
+                    ></div>
+
+                    <h2
+                        class="h2"
+                        [innerHTML]="page.data.main.missionSubTitle"
+                    ></h2>
+
+                    <p
+                        class="text"
+                        [innerHTML]="page.data.main.missionDesc"
+                    ></p>
+
+                    <a
+                        [href]="
+                            accountUrl +
+                            '/register?u=' +
+                            (user.uplineId ? user.uplineId : '')
+                        "
+                        class="btn-link"
+                    >
+                        {{ page.data.main.missionBtn }}
+
+                        <span class="icon-right arrow">
+                            <svg
+                                width="8"
+                                height="12"
+                                viewBox="0 0 8 12"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <path
+                                    fill-rule="evenodd"
+                                    clip-rule="evenodd"
+                                    d="M0.749781 11.6484C0.524816 11.4234 0.398438 11.1182 0.398438 10.8C0.398438 10.4818 0.524816 10.1767 0.749781 9.95162L4.70138 6.00002L0.749781 2.04842C0.531192 1.8221 0.410238 1.51898 0.412972 1.20434C0.415706 0.889707 0.541909 0.588732 0.764399 0.366243C0.986889 0.143753 1.28786 0.01755 1.6025 0.0148159C1.91714 0.0120818 2.22026 0.133036 2.44658 0.351625L7.24658 5.15162C7.47155 5.37666 7.59792 5.68183 7.59792 6.00002C7.59792 6.31822 7.47155 6.62339 7.24658 6.84842L2.44658 11.6484C2.22155 11.8734 1.91638 11.9998 1.59818 11.9998C1.27998 11.9998 0.974815 11.8734 0.749781 11.6484Z"
+                                />
+                            </svg>
+                        </span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="airdrop">
+        <div class="row">
+            <div class="block right">
+                <div class="block__content">
+                    <div
+                        class="tag"
+                        [innerHTML]="page.data.main.airdropTitle"
+                    ></div>
+
+                    <h2
+                        class="h2"
+                        [innerHTML]="page.data.main.airdropSubTitle"
+                    ></h2>
+
+                    <p
+                        class="text"
+                        [innerHTML]="page.data.main.airdropDesc"
+                    ></p>
+
+                    <a
+                        [href]="
+                            accountUrl +
+                            '/login?u=' +
+                            (user.uplineId ? user.uplineId : '')
+                        "
+                        class="btn-link"
+                    >
+                        {{ page.data.main.airdropBtn }}
+
+                        <span class="icon-right arrow">
+                            <svg
+                                width="8"
+                                height="12"
+                                viewBox="0 0 8 12"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <path
+                                    fill-rule="evenodd"
+                                    clip-rule="evenodd"
+                                    d="M0.749781 11.6484C0.524816 11.4234 0.398438 11.1182 0.398438 10.8C0.398438 10.4818 0.524816 10.1767 0.749781 9.95162L4.70138 6.00002L0.749781 2.04842C0.531192 1.8221 0.410238 1.51898 0.412972 1.20434C0.415706 0.889707 0.541909 0.588732 0.764399 0.366243C0.986889 0.143753 1.28786 0.01755 1.6025 0.0148159C1.91714 0.0120818 2.22026 0.133036 2.44658 0.351625L7.24658 5.15162C7.47155 5.37666 7.59792 5.68183 7.59792 6.00002C7.59792 6.31822 7.47155 6.62339 7.24658 6.84842L2.44658 11.6484C2.22155 11.8734 1.91638 11.9998 1.59818 11.9998C1.27998 11.9998 0.974815 11.8734 0.749781 11.6484Z"
+                                />
+                            </svg>
+                        </span>
+                    </a>
+                </div>
+                <div class="block__poster poster-3">
+                    <img
+                        class="radar"
+                        src="assets/img/pages/home-page/picture-3-radar.svg"
+                        alt=""
+                    />
+
+                    <img
+                        loading="lazy"
+                        class="card"
+                        src="assets/img/pages/home-page/picture-3.png"
+                        srcset="
+                            assets/img/pages/home-page/picture-3.png    1x,
+                            assets/img/pages/home-page/picture-3@2x.png 2x
+                        "
+                        alt=""
+                    />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="giveaway">
+        <div class="abstract_bg abstract_bg-3">
+            <img
+                loading="lazy"
+                src="assets/img/pages/home-page/abstract-3.svg"
+                alt=""
+            />
+        </div>
+        <div class="row">
+            <div class="block">
+                <div class="block__poster poster-4">
+                    <img
+                        loading="lazy"
+                        src="assets/img/pages/home-page/picture-5.png"
+                        srcset="
+                            assets/img/pages/home-page/picture-5.png    1x,
+                            assets/img/pages/home-page/picture-5@2x.png 2x
+                        "
+                        alt=""
+                    />
+                </div>
+                <div class="block__content">
+                    <div
+                        class="tag"
+                        [innerHTML]="page.data.main.giveawayTitle"
+                    ></div>
+
+                    <h2
+                        class="h2"
+                        [innerHTML]="page.data.main.giveawaySubTitle"
+                    ></h2>
+
+                    <p
+                        class="text"
+                        [innerHTML]="page.data.main.giveawayDesc"
+                    ></p>
+
+                    <a
+                        [href]="
+                            accountUrl +
+                            '/login?u=' +
+                            (user.uplineId ? user.uplineId : '')
+                        "
+                        class="btn-link"
+                    >
+                        {{ page.data.main.giveawayBtn }}
+
+                        <span class="icon-right arrow">
+                            <svg
+                                width="8"
+                                height="12"
+                                viewBox="0 0 8 12"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <path
+                                    fill-rule="evenodd"
+                                    clip-rule="evenodd"
+                                    d="M0.749781 11.6484C0.524816 11.4234 0.398438 11.1182 0.398438 10.8C0.398438 10.4818 0.524816 10.1767 0.749781 9.95162L4.70138 6.00002L0.749781 2.04842C0.531192 1.8221 0.410238 1.51898 0.412972 1.20434C0.415706 0.889707 0.541909 0.588732 0.764399 0.366243C0.986889 0.143753 1.28786 0.01755 1.6025 0.0148159C1.91714 0.0120818 2.22026 0.133036 2.44658 0.351625L7.24658 5.15162C7.47155 5.37666 7.59792 5.68183 7.59792 6.00002C7.59792 6.31822 7.47155 6.62339 7.24658 6.84842L2.44658 11.6484C2.22155 11.8734 1.91638 11.9998 1.59818 11.9998C1.27998 11.9998 0.974815 11.8734 0.749781 11.6484Z"
+                                />
+                            </svg>
+                        </span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="referral">
+        <div class="row">
+            <div class="block right">
+                <div class="block__content">
+                    <div
+                        class="tag"
+                        [innerHTML]="page.data.main.referralTitle"
+                    ></div>
+
+                    <h2
+                        class="h2"
+                        [innerHTML]="page.data.main.referralSubTitle"
+                    ></h2>
+
+                    <p
+                        class="text"
+                        [innerHTML]="page.data.main.referralDesc"
+                    ></p>
+
+                    <a
+                        [href]="
+                            accountUrl +
+                            '/register?u=' +
+                            (user.uplineId ? user.uplineId : '')
+                        "
+                        class="btn-link"
+                    >
+                        {{ page.data.main.referralBtn }}
+
+                        <span class="icon-right arrow">
+                            <svg
+                                width="8"
+                                height="12"
+                                viewBox="0 0 8 12"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <path
+                                    fill-rule="evenodd"
+                                    clip-rule="evenodd"
+                                    d="M0.749781 11.6484C0.524816 11.4234 0.398438 11.1182 0.398438 10.8C0.398438 10.4818 0.524816 10.1767 0.749781 9.95162L4.70138 6.00002L0.749781 2.04842C0.531192 1.8221 0.410238 1.51898 0.412972 1.20434C0.415706 0.889707 0.541909 0.588732 0.764399 0.366243C0.986889 0.143753 1.28786 0.01755 1.6025 0.0148159C1.91714 0.0120818 2.22026 0.133036 2.44658 0.351625L7.24658 5.15162C7.47155 5.37666 7.59792 5.68183 7.59792 6.00002C7.59792 6.31822 7.47155 6.62339 7.24658 6.84842L2.44658 11.6484C2.22155 11.8734 1.91638 11.9998 1.59818 11.9998C1.27998 11.9998 0.974815 11.8734 0.749781 11.6484Z"
+                                />
+                            </svg>
+                        </span>
+                    </a>
+                </div>
+                <div class="block__poster poster-5">
+                    <img
+                        class="radar"
+                        src="assets/img/pages/home-page/picture-3-radar.svg"
+                        alt=""
+                    />
+
+                    <img
+                        loading="lazy"
+                        class="phone desctop"
+                        src="assets/img/pages/home-page/picture-4.png"
+                        srcset="
+                            assets/img/pages/home-page/picture-4.png    1x,
+                            assets/img/pages/home-page/picture-4@2x.png 2x
+                        "
+                        alt=""
+                    />
+
+                    <img
+                        loading="lazy"
+                        class="phone mobile"
+                        src="assets/img/pages/home-page/picture-4-mob.png"
+                    />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="store">
+        <div class="row">
+            <div class="block">
+                <div class="block__poster poster-6">
+                    <div class="abstract_bg abstract_bg-4">
+                        <img
+                            src="assets/img/pages/home-page/abstract-4.svg"
+                            alt=""
+                        />
+                    </div>
+                    <img
+                        loading="lazy"
+                        src="assets/img/pages/home-page/picture-6.png"
+                        srcset="
+                            assets/img/pages/home-page/picture-6.png    1x,
+                            assets/img/pages/home-page/picture-6@2x.png 2x
+                        "
+                        alt=""
+                    />
+                </div>
+                <div class="block__content">
+                    <div
+                        class="tag"
+                        [innerHTML]="page.data.main.storeTitle"
+                    ></div>
+
+                    <h2
+                        class="h2"
+                        [innerHTML]="page.data.main.storeSubTitle"
+                    ></h2>
+
+                    <p class="text" [innerHTML]="page.data.main.storeDesc"></p>
+
+                    <a
+                        [href]="
+                            accountUrl +
+                            '/login?u=' +
+                            (user.uplineId ? user.uplineId : '')
+                        "
+                        class="btn-link"
+                    >
+                        {{ page.data.main.storeBtn }}
+
+                        <span class="icon-right arrow">
+                            <svg
+                                width="8"
+                                height="12"
+                                viewBox="0 0 8 12"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <path
+                                    fill-rule="evenodd"
+                                    clip-rule="evenodd"
+                                    d="M0.749781 11.6484C0.524816 11.4234 0.398438 11.1182 0.398438 10.8C0.398438 10.4818 0.524816 10.1767 0.749781 9.95162L4.70138 6.00002L0.749781 2.04842C0.531192 1.8221 0.410238 1.51898 0.412972 1.20434C0.415706 0.889707 0.541909 0.588732 0.764399 0.366243C0.986889 0.143753 1.28786 0.01755 1.6025 0.0148159C1.91714 0.0120818 2.22026 0.133036 2.44658 0.351625L7.24658 5.15162C7.47155 5.37666 7.59792 5.68183 7.59792 6.00002C7.59792 6.31822 7.47155 6.62339 7.24658 6.84842L2.44658 11.6484C2.22155 11.8734 1.91638 11.9998 1.59818 11.9998C1.27998 11.9998 0.974815 11.8734 0.749781 11.6484Z"
+                                />
+                            </svg>
+                        </span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="club">
+        <div class="row">
+            <div class="club__container">
+                <div class="club__logo">
+                    <img
+                        loading="lazy"
+                        src="assets/img/icons/logo-club.png"
+                        srcset="
+                            assets/img/icons/logo-club.png    1x,
+                            assets/img/icons/logo-club@2x.png 2x
+                        "
+                        alt=""
+                    />
+                </div>
+                <div class="club__content">
+                    <h4 class="h4" [innerHTML]="page.data.main.clubTitle"></h4>
+                    <p class="text" [innerHTML]="page.data.main.clubDesc"></p>
+                </div>
+                <a
+                    [href]="
+                        accountUrl +
+                        '/register?u=' +
+                        (user.uplineId ? user.uplineId : '')
+                    "
+                    class="btn-aqua"
+                    [innerHTML]="page.data.main.clubBtn"
+                >
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <app-landing-footer [page]="page" [user]="user"></app-landing-footer>
+</main>
+
+<app-scroll-up [showScrollBtn]="showScrollBtn"></app-scroll-up>

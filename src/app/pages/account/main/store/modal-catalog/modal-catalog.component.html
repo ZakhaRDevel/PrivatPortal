@@ -1,0 +1,121 @@
+<div class="modal" [@ModalAnimate]>
+    <div class="modal__content">
+        <div class="modal__block">
+            <div class="modal__head">
+                <button class="btn-close" (click)="closeModal()">
+                    <img
+                        src="assets/img/pages/store/icon-close.svg"
+                        alt="alt"
+                    />
+                </button>
+            </div>
+
+            <div class="modal__body">
+                <div class="catalog">
+                    <ul class="list">
+                        <li
+                            class="list__item"
+                            *ngFor="let category of categories; let i = index"
+                        >
+                            <button
+                                class="btn-type"
+                                [class.active]="
+                                    selectedCategory?.slug === category?.slug
+                                "
+                                (click)="selectCategory(category)"
+                            >
+                                {{ category.title }}
+                                <span class="icon-right">
+                                    <img
+                                        class="minus"
+                                        src="assets/img/pages/store/minus.svg"
+                                        alt="alt"
+                                    />
+
+                                    <img
+                                        class="plus"
+                                        src="assets/img/pages/store/plus.svg"
+                                        alt="alt"
+                                    />
+                                </span>
+                            </button>
+
+                            <ul
+                                class="list level-2"
+                                [@toggle]="
+                                    selectedCategory?.slug === category?.slug
+                                        ? 'shown'
+                                        : 'hidden'
+                                "
+                            >
+                                <li
+                                    class="list__item"
+                                    *ngFor="
+                                        let type of category?.productTypes
+                                            | sort : 'id'
+                                    "
+                                >
+                                    <button
+                                        class="btn-type"
+                                        [class.active]="
+                                            selectedType?.slug === type.slug
+                                        "
+                                        (click)="selectType(type)"
+                                    >
+                                        {{ type.title }}
+                                        <span
+                                            class="icon-right"
+                                            *ngIf="type.productSeries?.length"
+                                        >
+                                            <img
+                                                class="minus"
+                                                src="assets/img/pages/store/minus.svg"
+                                                alt="alt"
+                                            />
+
+                                            <img
+                                                class="plus"
+                                                src="assets/img/pages/store/plus.svg"
+                                                alt="alt"
+                                            />
+                                        </span>
+                                    </button>
+
+                                    <ul
+                                        class="list level-3"
+                                        [@toggle]="
+                                            selectedType?.slug === type.slug
+                                                ? 'shown'
+                                                : 'hidden'
+                                        "
+                                    >
+                                        <li
+                                            class="list__item b-b-n"
+                                            *ngFor="
+                                                let serie of type.productSeries
+                                                    | sort : 'id'
+                                            "
+                                        >
+                                            <button
+                                                class="btn-product"
+                                                (click)="selectSerie(serie)"
+                                            >
+                                                {{ serie.title }}
+                                                <span class="icon-right">
+                                                    <img
+                                                        src="assets/img/pages/store/chevron-right-green-2.svg"
+                                                        alt="alt"
+                                                    />
+                                                </span>
+                                            </button>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

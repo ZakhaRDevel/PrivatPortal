@@ -1,0 +1,164 @@
+<div class="modal" [@ModalAnimate]>
+    <div class="modal__content">
+        <div class="modal__block">
+            <div class="modal__head">
+                <div class="modal__head-btn">
+                    <button class="btn-close" (click)="modalClose()"></button>
+                    <button class="arrow-close" (click)="modalClose()">
+                        <img src="assets/img/icons/back.svg" alt="alt" />
+                    </button>
+                </div>
+
+                <div class="icon-soc desctop" *ngIf="img">
+                    <img
+                        src="assets/img/pages/settings/soc/{{ img }}.svg"
+                        alt="{{ img }}"
+                    />
+                </div>
+
+                <h4
+                    class="title"
+                    *ngIf="data.value?.length > 0"
+                    [innerHTML]="
+                        data.page.data.modalEdit.editData
+                            | replace : { name: social }
+                    "
+                >
+                    Редактировать {{ social }}
+                </h4>
+                <h4
+                    class="title"
+                    *ngIf="data.value?.length <= 0"
+                    [innerHTML]="
+                        data.page.data.modalEdit.addData
+                            | replace : { name: social }
+                    "
+                >
+                    Добавить {{ social }}
+                </h4>
+
+                <div class="icon-soc mobile" *ngIf="img">
+                    <img
+                        src="assets/img/pages/settings/soc/{{ img }}.svg"
+                        alt="{{ social }}"
+                    />
+                </div>
+            </div>
+
+            <div class="modal__body">
+                <div class="alert">
+                    <div class="icon-left">
+                        <img
+                            src="assets/img/icons/icon-info-orange.svg"
+                            alt="info"
+                        />
+                    </div>
+
+                    <div class="text">
+                        <ng-container *ngIf="data.name === 'nickname'">
+                            {{ data.page.data.modalEdit.nickDesc }}
+                        </ng-container>
+                        <ng-container *ngIf="data.name === 'fullName'">
+                            {{ data.page.data.modalEdit.nameDesc }}
+                        </ng-container>
+                        <ng-container *ngIf="data.name === 'telegram'">
+                            {{ data.page.data.modalEdit.tgDesc }}
+                        </ng-container>
+
+                        <ng-container *ngIf="img === 'twitter'">
+                            {{
+                                data.page.data.modalEdit[
+                                    (data.value?.length ? "edit" : "add") +
+                                        "Social"
+                                ] | replace : { social: "Twitter" }
+                            }}
+                        </ng-container>
+                        <ng-container *ngIf="img === 'instagram'">
+                            {{
+                                data.page.data.modalEdit[
+                                    (data.value?.length ? "edit" : "add") +
+                                        "Social"
+                                ] | replace : { social: "Instagram" }
+                            }}
+                        </ng-container>
+                        <ng-container *ngIf="img === 'facebook'">
+                            {{
+                                data.page.data.modalEdit[
+                                    (data.value?.length ? "edit" : "add") +
+                                        "Social"
+                                ] | replace : { social: "Facebook" }
+                            }}
+                        </ng-container>
+
+                        <ng-container *ngIf="img === 'linkedin'">
+                            {{
+                                data.page.data.modalEdit[
+                                    (data.value?.length ? "edit" : "add") +
+                                        "Social"
+                                ] | replace : { social: "LinkedIn" }
+                            }}
+                        </ng-container>
+                        <ng-container *ngIf="img === 'tiktok'">
+                            {{
+                                data.page.data.modalEdit[
+                                    (data.value?.length ? "edit" : "add") +
+                                        "Social"
+                                ] | replace : { social: "TikTok" }
+                            }}
+                        </ng-container>
+                    </div>
+                </div>
+
+                <form
+                    class="form"
+                    [formGroup]="formGroup"
+                    (ngSubmit)="submit()"
+                    [ngClass]="{
+                        error: hasError(control(data.name))
+                    }"
+                >
+                    <pc-input
+                        [errors]="errors(data.name)"
+                        [errorsTranslate]="data.pageErrors"
+                        [isInvalid]="hasError(control(data.name))"
+                        [replace]="{ social: socialForError }"
+                    >
+                        <p class="input-title">{{ label }}</p>
+                        <p class="input-label">
+                            <span
+                                *ngIf="data.name === 'telegram'"
+                                class="telegram_placeholder"
+                                >@</span
+                            >
+                            <input
+                                type="text"
+                                [formControl]="control(data.name)"
+                                [class.telegram]="data.name === 'telegram'"
+                            />
+                        </p>
+                    </pc-input>
+                </form>
+
+                <div class="buttons">
+                    <button
+                        type="button"
+                        class="btn-grey"
+                        (click)="modalClose()"
+                        [innerHTML]="data.page.data.cancel"
+                    >
+                        Отменить
+                    </button>
+                    <button class="btn-green" type="button" (click)="submit()">
+                        <span [class.hide]="isSubmitted">{{
+                            data.page.data.submit
+                        }}</span>
+                        <app-btn-loader
+                            [isSubmitted]="isSubmitted"
+                            [isAccount]="true"
+                        ></app-btn-loader>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
